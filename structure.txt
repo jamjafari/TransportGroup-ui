@@ -1,5 +1,5 @@
 Folder PATH listing
-Volume serial number is 00000183 7A08:AF2E
+Volume serial number is 000001B1 7A08:AF2E
 C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 |   App.css
 |   App.jsx
@@ -422,24 +422,94 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 |   |   |       layoutManager.js
 |   |   |       useBuilder.js
 |   |   |       
+|   |   +---config
+|   |   |       DashboardConfig.js
+|   |   |       DashboardDefaultLayout.js
+|   |   |       DashboardSections.js
+|   |   |       index.js
+|   |   |       
+|   |   +---empty
+|   |   |       DashboardEmpty.jsx
+|   |   |       DashboardEmpty.types.js
+|   |   |       EmptyCard.jsx
+|   |   |       EmptyChart.jsx
+|   |   |       EmptyStat.jsx
+|   |   |       EmptyTable.jsx
+|   |   |       index.js
+|   |   |       
 |   |   +---engine
 |   |   |       dashboardEngine.js
 |   |   |       layoutEngine.js
 |   |   |       widgetFactory.js
 |   |   |       
+|   |   +---error
+|   |   |       DashboardError.jsx
+|   |   |       DashboardError.types.js
+|   |   |       ErrorCard.jsx
+|   |   |       ErrorChart.jsx
+|   |   |       ErrorStat.jsx
+|   |   |       ErrorTable.jsx
+|   |   |       index.js
+|   |   |       
 |   |   +---hooks
 |   |   |       useDashboard.js
 |   |   |       
 |   |   +---layout
+|   |   |       DashboardBreakpoints.js
+|   |   |       DashboardColumn.jsx
+|   |   |       DashboardColumn.types.js
+|   |   |       DashboardContainer.jsx
+|   |   |       DashboardContainer.types.js
+|   |   |       DashboardDefaultLayout.js
+|   |   |       DashboardGrid.jsx
+|   |   |       DashboardGrid.types.js
 |   |   |       DashboardLayout.jsx
+|   |   |       DashboardLayout.types.js
+|   |   |       DashboardPage.jsx
+|   |   |       DashboardRow.jsx
+|   |   |       DashboardRow.types.js
+|   |   |       DashboardSection.jsx
+|   |   |       DashboardSection.types.js
+|   |   |       DashboardSpacing.js
+|   |   |       index.js
+|   |   |       
+|   |   +---permission
+|   |   |       DashboardPermission.jsx
+|   |   |       DashboardPermission.types.js
+|   |   |       index.js
+|   |   |       PermissionWrapper.jsx
+|   |   |       usePermission.js
+|   |   |       
+|   |   +---registry
+|   |   |       DashboardWidgets.js
+|   |   |       getWidget.js
+|   |   |       index.js
+|   |   |       registerWidget.js
+|   |   |       WidgetCategory.js
+|   |   |       WidgetRegistry.js
+|   |   |       WidgetTypes.js
 |   |   |       
 |   |   +---runtime
-|   |   |       DashboardRuntimeEngine.jsx
+|   |   |       DashboardRuntime.jsx
+|   |   |       DashboardRuntime.types.js
 |   |   |       dataBinder.js
 |   |   |       index.js
 |   |   |       widgetRegistry.js
 |   |   |       widgetRenderer.jsx
 |   |   |       widgetResolver.js
+|   |   |       
+|   |   +---skeleton
+|   |   |       CardSkeleton.jsx
+|   |   |       CardSkeleton.types.js
+|   |   |       ChartSkeleton.jsx
+|   |   |       ChartSkeleton.types.js
+|   |   |       DashboardSkeleton.jsx
+|   |   |       DashboardSkeleton.types.js
+|   |   |       index.js
+|   |   |       StatSkeleton.jsx
+|   |   |       StatSkeleton.types.js
+|   |   |       TableSkeleton.jsx
+|   |   |       TableSkeleton.types.js
 |   |   |       
 |   |   +---table
 |   |   |   +---DriverTable
@@ -480,7 +550,7 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 |   |   |   |       useMissionTable.js
 |   |   |   |       
 |   |   |   +---ServiceReminderTable
-|   |   |   |       insex.js
+|   |   |   |       index.js
 |   |   |   |       ServiceReminderTable.jsx
 |   |   |   |       ServiceReminderTable.types.js
 |   |   |   |       useServiceReminderTable.js
@@ -514,13 +584,13 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 |   |       |       TableCard.jsx
 |   |       |       
 |   |       +---chart
-|   |       |   +---BaseChardWidget
+|   |       |   +---BaseChartWidget
 |   |       |   |       BaseChartWidget.jsx
 |   |       |   |       BaseChartWidget.types.js
 |   |       |   |       
 |   |       |   +---BaseCircularChartWidget
+|   |       |   |       BaseCircularChartWidget.jsx
 |   |       |   |       BaseCircularChartWidget.types.js
-|   |       |   |       BaseCircularWidget.jsx
 |   |       |   |       index.js
 |   |       |   |       
 |   |       |   +---chartwidgets
@@ -592,17 +662,16 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 |   |       |           VehicleUsageChart.jsx
 |   |       |           VehicleUsageChart.types.js
 |   |       |           
-|   |       +---stat
-|   |       |       AppCircularStat.jsx
-|   |       |       AppLinearStat.jsx
-|   |       |       AppMiniStat.jsx
-|   |       |       AppStat.types.js
-|   |       |       AppStatCard.jsx
-|   |       |       AppStatGroup.jsx
-|   |       |       AppStatTrend.jsx
-|   |       |       index.js
-|   |       |       
-|   |       \---table
+|   |       \---stat
+|   |               AppCircularStat.jsx
+|   |               AppLinearStat.jsx
+|   |               AppMiniStat.jsx
+|   |               AppStat.types.js
+|   |               AppStatCard.jsx
+|   |               AppStatGroup.jsx
+|   |               AppStatTrend.jsx
+|   |               index.js
+|   |               
 |   +---forms
 |   |   +---async
 |   |   |       asyncFieldFactory.js

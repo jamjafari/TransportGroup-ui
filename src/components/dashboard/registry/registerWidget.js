@@ -7,8 +7,6 @@ const registerWidget = ({
 
   permission,
 
-  type,
-
   category,
 }) => {
   WidgetRegistry.set(id, {
@@ -17,8 +15,6 @@ const registerWidget = ({
     component,
 
     permission,
-
-    type,
 
     category,
   });
