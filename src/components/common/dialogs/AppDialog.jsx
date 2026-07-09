@@ -1,0 +1,96 @@
+import React, { memo } from 'react';
+
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  IconButton,
+  Typography,
+  CircularProgress,
+  Box,
+} from '@mui/material';
+
+import CloseIcon from '@mui/icons-material/Close';
+
+import { AppDialogPropTypes } from './AppDialog.types';
+
+const AppDialog = ({
+  open,
+
+  title,
+
+  children,
+
+  actions,
+
+  loading = false,
+
+  maxWidth = 'md',
+
+  fullWidth = true,
+
+  dividers = true,
+
+  onClose,
+}) => {
+  return (
+    <Dialog
+      open={open}
+
+      onClose={onClose}
+
+      maxWidth={maxWidth}
+
+      fullWidth={fullWidth}
+    >
+      {title && (
+        <DialogTitle>
+          <Box
+            display="flex"
+
+            justifyContent="space-between"
+
+            alignItems="center"
+          >
+            <Typography
+              variant="h6"
+
+              fontWeight={600}
+            >
+              {title}
+            </Typography>
+
+            {onClose && (
+              <IconButton onClick={onClose}>
+                <CloseIcon />
+              </IconButton>
+            )}
+          </Box>
+        </DialogTitle>
+      )}
+
+      <DialogContent dividers={dividers}>
+        {loading ? (
+          <Box
+            display="flex"
+
+            justifyContent="center"
+
+            py={5}
+          >
+            <CircularProgress />
+          </Box>
+        ) : (
+          children
+        )}
+      </DialogContent>
+
+      {actions && <DialogActions>{actions}</DialogActions>}
+    </Dialog>
+  );
+};
+
+AppDialog.propTypes = AppDialogPropTypes;
+
+export default memo(AppDialog);
