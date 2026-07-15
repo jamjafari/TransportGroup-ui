@@ -1,8 +1,10 @@
 import React from 'react';
 
-import { Box, Typography, Stack, Divider } from '@mui/material';
+import { Box, Typography, Divider } from '@mui/material';
 
-import BaseCard from '../../../common/cards/BaseCard';
+import Stack from '@mui/system/Stack';
+
+import { BaseCard } from '../../../common/cards/BaseCard';
 
 import { InfoCardPropTypes, InfoCardDefaultProps } from './DashboardCard.types';
 

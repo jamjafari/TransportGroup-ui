@@ -1,32 +1,43 @@
-import React, { memo } from 'react';
+// import React, { memo } from 'react';
 
-import { Stack } from '@mui/material';
+// import * as Mui from '@mui/material';
 
-import { AppStackPropTypes, AppStackDefaultProps } from './AppStack.types';
+// import Stack from '@mui/system/Stack';
 
-const AppStack = ({
-  children,
-  direction,
-  spacing,
-  alignItems,
-  justifyContent,
-  flexWrap,
-}) => {
-  return (
-    <Stack
-      direction={direction}
-      spacing={spacing}
-      alignItems={alignItems}
-      justifyContent={justifyContent}
-      flexWrap={flexWrap}
-    >
-      {children}
-    </Stack>
-  );
-};
+// import { AppStackPropTypes, AppStackDefaultProps } from './AppStack.types';
 
-AppStack.propTypes = AppStackPropTypes;
+// const AppStack = ({
+//   children,
+//   direction,
+//   spacing,
+//   alignItems,
+//   justifyContent,
+//   flexWrap,
+// }) => {
+//   return (
+//     <Stack
+//       direction={direction}
+//       spacing={spacing}
+//       alignItems={alignItems}
+//       justifyContent={justifyContent}
+//       flexWrap={flexWrap}
+//     >
+//       {children}
+//     </Stack>
+//   );
+// };
 
-AppStack.defaultProps = AppStackDefaultProps;
+// // console.log('Stack:', Mui.Stack);
+// // console.log('Grid:', Mui.Grid);
+// // console.log('Equal:', Mui.Stack === Mui.Grid);
 
-export default memo(AppStack);
+// AppStack.propTypes = AppStackPropTypes;
+
+// AppStack.defaultProps = AppStackDefaultProps;
+
+// export default memo(AppStack);
+export default function AppStack() {
+  console.log('AppStack NEW VERSION');
+
+  return <div>APP STACK</div>;
+}

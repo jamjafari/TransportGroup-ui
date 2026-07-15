@@ -1,1 +1,1 @@
-export { default } from './AreaChartWidget';
+export { default as AreaChartWidget } from './AreaChartWidget';

@@ -2,12 +2,12 @@ import React, { memo } from 'react';
 
 import { DashboardTable } from '../widgets';
 
-import useServiceReminderTable from './useServiceReminderTable';
+import useLatestActivitiesTable from './useLatestActivitiesTable';
 
-const ServiceReminderTable = () => {
-  const table = useServiceReminderTable();
+const LatestActivitiesTable = () => {
+  const table = useLatestActivitiesTable();
 
   return <DashboardTable {...table} />;
 };
 
-export default memo(ServiceReminderTable);
+export default memo(LatestActivitiesTable);

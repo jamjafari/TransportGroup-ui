@@ -2,8 +2,8 @@ import React, { memo } from 'react';
 
 import { Box } from '@mui/material';
 
-import AppContainer from '../AppContainer';
-import AppContent from '../AppContent';
+import AppContainer from '../AppContainer/AppContainer';
+import AppContent from '../AppContent/AppContent';
 
 import { AppPagePropTypes, AppPageDefaultProps } from './AppPage.types';
 

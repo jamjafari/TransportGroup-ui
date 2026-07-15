@@ -1,4 +1,4 @@
-export const fuelConsumptionMock = [
+export const FuelConsumptionMock = [
   {
     day: '1',
 
@@ -133,7 +133,7 @@ export const VehicleUsageMock = [
   },
 ];
 
-export const MissionMock = [
+export const MissionTrendMock = [
   { day: '1', count: 18 },
   { day: '5', count: 22 },
   { day: '10', count: 25 },

@@ -1,6 +1,8 @@
 import React, { memo } from 'react';
 
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+
+import Stack from '@mui/system/Stack';
 
 import DashboardSpacing from './DashboardSpacing';
 

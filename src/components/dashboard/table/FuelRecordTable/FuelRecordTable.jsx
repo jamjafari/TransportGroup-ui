@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 import { DashboardTable } from '../widgets';
 
-import useFuelRecordrTable from './useFuelRecordrTable';
+import useFuelRecordTable from './useFuelRecordTable';
 
 const FuelRecordrTable = () => {
   const table = useFuelRecordrTable();

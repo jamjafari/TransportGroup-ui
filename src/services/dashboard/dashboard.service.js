@@ -1,57 +1,113 @@
-import { createService } from '../serviceFactory';
+import {
+  VehicleMock,
+  DriversMock,
+  FuelRecordMock,
+  ExpenseMock,
+  MissionMock,
+  MissionTrendMock,
+  FuelConsumptionMock,
+  ExpensesMock,
+  MonthlyDistanceMock,
+  VehicleUsageMock,
+  DriverPerformanceMock,
+  LatestActivitiesMock,
+  InsurancesMock,
+  ServiceReminderMock,
+} from './dashboard.mock';
 
-const service = createService('/dashboard');
+const delay = (data, ms = 150) =>
+  new Promise((resolve) => setTimeout(() => resolve(data), ms));
 
 const dashboardService = {
-  getSummary() {
-    return service.get('/summary');
+  async getDashboard() {
+    return delay({
+      summary: await this.getSummary(),
+
+      charts: {
+        fuelConsumption: await this.getFuelConsumption(),
+        vehicleStatus: await this.getVehicleStatus(),
+        vehicleUsage: await this.getVehicleUsage(),
+        fuelCost: await this.getFuelCost(),
+        monthlyDistance: await this.getMonthlyDistance(),
+        driverPerformance: await this.getDriverPerformance(),
+      },
+
+      tables: {
+        latestActivities: await this.getLatestActivities(),
+        vehicles: await this.getVehicles(),
+        drivers: await this.getDrivers(),
+        fuelRecords: await this.getFuelRecords(),
+        expenses: await this.getExpenses(),
+        missions: await this.getMissions(),
+        insurances: await this.getInsurances(),
+        serviceReminders: await this.getServiceReminders(),
+      },
+    });
   },
 
-  getFuelConsumption() {
-    return service.get('/fuel-consumption');
+  async getSummary() {
+    return delay({
+      vehicleCount: VehicleMock.length,
+      driverCount: DriversMock.length,
+      missionCount: MissionMock.length,
+      expenseCount: ExpenseMock.length,
+    });
   },
 
-  getVehicleStatus() {
-    return service.get('/vehicle-status');
+  async getFuelConsumption() {
+    return delay(FuelConsumptionMock);
   },
-  getVehicleUsage() {
-    return service.get('/vehicle-usage');
+
+  async getVehicleStatus() {
+    return delay(VehicleUsageMock);
   },
-  getMonthlyDistance() {
-    return service.get('/monthly-distance');
+
+  async getVehicleUsage() {
+    return delay(VehicleUsageMock);
   },
-  getExpenses() {
-    return service.get('/expenses');
+
+  async getFuelCost() {
+    return delay(ExpensesMock);
   },
-  getMissions() {
-    return service.get('/missions');
+
+  async getMonthlyDistance() {
+    return delay(MonthlyDistanceMock);
   },
-  getDriverPerformance() {
-    return service.get('/driver-performance');
+
+  async getExpenses() {
+    return delay(ExpenseMock);
   },
-  getLatestActivities() {
-    return service.get('/latest-activities');
+
+  async getMissions() {
+    return delay(MissionMock);
   },
-  getVehicles() {
-    return service.get('/vehicles/dashboard');
+
+  async getDriverPerformance() {
+    return delay(DriverPerformanceMock);
   },
-  getDrivers() {
-    return service.get('/drivers/dashboard');
+
+  async getLatestActivities() {
+    return delay(LatestActivitiesMock);
   },
-  getFuelRecords() {
-    return service.get('/fuel-records/dashboard');
+
+  async getVehicles() {
+    return delay(VehicleMock);
   },
-  getExpenses() {
-    return service.get('/expenses/dashboard');
+
+  async getDrivers() {
+    return delay(DriversMock);
   },
-  getMissions() {
-    return service.get('/missions/dashboard');
+
+  async getFuelRecords() {
+    return delay(FuelRecordMock);
   },
-  getInsurances() {
-    return service.get('/insurances/dashboard');
+
+  async getInsurances() {
+    return delay(InsurancesMock);
   },
-  getServiceReminders() {
-    return service.get('/service-reminders/dashboard');
+
+  async getServiceReminders() {
+    return delay(ServiceReminderMock);
   },
 };
 

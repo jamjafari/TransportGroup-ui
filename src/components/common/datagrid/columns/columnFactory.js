@@ -1,4 +1,4 @@
-import { COLUMN_TYPES } from './columnTypes';
+import COLUMN_TYPES from './columnTypes';
 
 export const createColumn = (config) => {
   return {

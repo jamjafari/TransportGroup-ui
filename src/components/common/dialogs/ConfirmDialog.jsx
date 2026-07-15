@@ -4,7 +4,7 @@ import { Alert, Stack } from '@mui/material';
 
 import AppDialog from './AppDialog';
 
-import { AppButton } from '../../buttons';
+import { AppButton } from '@/components';
 
 import { ConfirmDialogPropTypes } from './ConfirmDialog.types';
 

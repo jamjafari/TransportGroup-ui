@@ -1,5 +1,9 @@
+export { default as ViewsSelector } from './ViewsSelector';
+
 export { default as useSavedViews } from './useSavedViews';
 
-export { createView, updateView, deleteView } from './viewManager';
+export { default as viewManager } from './viewManager';
 
-export { getViews, saveViews } from './viewStorage';
+export { default as viewStorage } from './viewStorage';
+
+export { default as VIEW_TYPES } from './viewTypes';

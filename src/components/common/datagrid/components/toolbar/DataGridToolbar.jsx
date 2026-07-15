@@ -8,7 +8,7 @@ import ToolbarFilters from './toolbarFilters';
 
 import ToolbarActions from './toolbarActions';
 
-import ViewsSelector from './views/ViewsSelector';
+import ViewsSelector from '../../views/ViewsSelector';
 
 const DataGridToolbar = ({
   search,

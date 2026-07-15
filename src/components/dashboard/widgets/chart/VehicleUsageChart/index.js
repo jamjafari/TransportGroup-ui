@@ -1,1 +1,1 @@
-export { default } from './VehicleUsageChart';
+export { default as VehicleUsageChart } from './VehicleUsageChart';

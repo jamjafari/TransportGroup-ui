@@ -4,12 +4,12 @@ import {
   Card,
   CardContent,
   Typography,
-  Stack,
   Avatar,
   Box,
   Skeleton,
   Chip,
 } from '@mui/material';
+import Stack from '@mui/system/Stack';
 
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 

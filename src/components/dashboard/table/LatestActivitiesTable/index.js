@@ -1,1 +1,3 @@
-export { default } from './LatestActivitiesTable';
+export { default as LatestActivitiesTable } from './LatestActivitiesTable';
+
+export { default as useLatestActivitiesTable } from './useLatestActivitiesTable';

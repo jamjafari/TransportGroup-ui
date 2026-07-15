@@ -1,1 +1,1 @@
-export { default } from './ExpenseChart';
+export { default as ExpenseChart } from './ExpenseChart';

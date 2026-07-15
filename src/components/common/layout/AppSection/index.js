@@ -1,1 +1,1 @@
-export { default } from './AppSection';
+export { default as AppSection } from './AppSection';

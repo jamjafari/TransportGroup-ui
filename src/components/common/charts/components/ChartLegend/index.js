@@ -1,1 +1,1 @@
-export { default } from './ChartLegend';
+export { default as ChartLegend } from './ChartLegent';

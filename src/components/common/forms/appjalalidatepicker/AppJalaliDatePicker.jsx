@@ -1,8 +1,12 @@
 import React, { memo } from 'react';
 
-import { TextField } from '@mui/material';
+import TextField from '@mui/material/TextField';
 
-import moment from 'jalali-moment';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+
+import { AdapterDateFnsJalali } from '@mui/x-date-pickers/AdapterDateFnsJalali';
+
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import {
   AppJalaliDatePickerPropTypes,
@@ -10,52 +14,30 @@ import {
 } from './AppJalaliDatePicker.types';
 
 const AppJalaliDatePicker = ({
-  name,
   label,
   value,
   onChange,
-  helperText,
-  error,
   disabled,
-  required,
   fullWidth,
+  format,
+  ...props
 }) => {
-  const handleChange = (e) => {
-    const gregorian = moment(e.target.value, 'jYYYY/jMM/jDD').format(
-      'YYYY-MM-DD',
-    );
-
-    onChange(gregorian);
-  };
-
-  const displayValue = value
-    ? moment(value, 'YYYY-MM-DD').format('jYYYY/jMM/jDD')
-    : '';
-
   return (
-    <TextField
-      name={name}
-
-      label={label}
-
-      type="text"
-
-      value={displayValue}
-
-      onChange={handleChange}
-
-      helperText={helperText}
-
-      error={error}
-
-      disabled={disabled}
-
-      required={required}
-
-      fullWidth={fullWidth}
-
-      placeholder="1402/01/01"
-    />
+    <LocalizationProvider dateAdapter={AdapterDateFnsJalali}>
+      <DatePicker
+        label={label}
+        value={value}
+        onChange={onChange}
+        disabled={disabled}
+        format={format}
+        slotProps={{
+          textField: {
+            fullWidth,
+          },
+        }}
+        {...props}
+      />
+    </LocalizationProvider>
   );
 };
 

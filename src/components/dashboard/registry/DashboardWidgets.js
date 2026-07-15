@@ -1,17 +1,15 @@
 import registerWidget from './registerWidget';
 
-import WidgetTypes from './WidgetTypes';
-
 import WidgetCategory from './WidgetCategory';
 
 /* ========================= */
 /* Charts */
 /* ========================= */
 
-import FuelConsumptionChart from '../chart/FuelConsumptionChart';
-import VehicleStatusChart from '../chart/VehicleStatusChart';
-import ExpensePieChart from '../chart/ExpensePieChart';
-import MonthlyCostChart from '../chart/MonthlyCostChart';
+import FuelConsumptionChart from '../widgets/chart/FuelConsumptionChart';
+import VehicleStatusChart from '../widgets/chart/VehicleStatusChart';
+import ExpenseChart from '../widgets/chart/ExpenseChart';
+import MonthlyDistanceChart from '../widgets//chart/MonthlyDistanceChart';
 
 /* ========================= */
 /* Tables */
@@ -61,7 +59,7 @@ const DashboardWidgets = () => {
   registerWidget({
     id: 'expense.chart',
 
-    component: ExpensePieChart,
+    component: ExpenseChart,
 
     permission: 'Dashboard.Expense.Chart.View',
 
@@ -73,7 +71,7 @@ const DashboardWidgets = () => {
   registerWidget({
     id: 'monthly.chart',
 
-    component: MonthlyCostChart,
+    component: MonthlyDistancetChart,
 
     permission: 'Dashboard.Monthly.Chart.View',
 

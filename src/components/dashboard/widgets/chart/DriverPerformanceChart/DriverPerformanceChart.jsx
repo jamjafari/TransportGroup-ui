@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import BarChartWidget from '../chartwidgets/BarChartWidget';
+import { BarChartWidget } from '../chartwidgets/BarChartWidget';
 
 import useDriverPerformanceChart from './useDriverPerformanceChart';
 

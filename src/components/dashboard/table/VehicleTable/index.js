@@ -1,1 +1,1 @@
-export { default } from './VehicleTable';
+export { default as VehicleTable } from './VehicleTable';

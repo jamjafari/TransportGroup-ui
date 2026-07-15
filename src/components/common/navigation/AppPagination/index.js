@@ -1,1 +1,1 @@
-export { default } from './AppPagination';
+export { default as AppPagination } from './AppPagination';

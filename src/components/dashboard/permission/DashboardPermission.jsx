@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import usePermission from '../../../hooks/usePermission';
+import usePermission from './usePermission';
 
 import {
   DashboardPermissionPropTypes,

@@ -1,1 +1,1 @@
-export { default } from './AppStepper';
+export { default as AppStepper } from './AppStepper';

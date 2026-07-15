@@ -1,16 +1,18 @@
 import { useMemo } from 'react';
 
-import dashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
+import DashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
 
-import useDashboardWidget from '../../hooks/useDashboardWidget';
+import useDashboard from '../../hooks/useDashboard';
+
+import DriverStatusCell from './DriverStatusCell';
 
 const useDriverTable = () => {
-  const widget = useDashboardWidget({
+  const widget = useDashboard({
     title: 'رانندگان',
 
     subtitle: 'وضعیت رانندگان',
 
-    fetcher: dashboardRepository.getDrivers,
+    fetcher: DashboardRepository.getDrivers,
   });
 
   const columns = useMemo(
@@ -45,7 +47,7 @@ const useDriverTable = () => {
         headerName: 'وضعیت',
         width: 140,
 
-        renderCell: ({ value }) => <StatusChip status={value} />,
+        renderCell: DriverStatusCell,
       },
     ],
     [],

@@ -1,6 +1,8 @@
 import React, { memo } from 'react';
 
-import { Paper, Stack, Typography, Divider, Box } from '@mui/material';
+import { Paper, Typography, Divider, Box } from '@mui/material';
+
+import Stack from '@mui/system/Stack';
 
 import { PageToolbarPropTypes } from './PageToolbar.types';
 

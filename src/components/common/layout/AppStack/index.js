@@ -1,1 +1,1 @@
-export { default } from './AppStack';
+export { default as AppStack } from './AppStack';

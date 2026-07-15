@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 import { Drawer } from '@mui/material';
 
-import AppSidebar from '../AppSidebar';
+import AppSidebar from '../AppSidebar/AppSidebar';
 
 import { AppDrawerPropTypes, AppDrawerDefaultProps } from './AppDrawer.types';
 

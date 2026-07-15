@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 import { Grid } from '@mui/material';
 
-import { AppCard, AppLoader } from '../../';
+import { AppCard, AppLoader } from '../cards/AppCard';
 
 import { StatisticsPanelPropTypes } from './StatisticsPanel.types';
 

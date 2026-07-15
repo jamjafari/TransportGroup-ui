@@ -1,1 +1,1 @@
-export { default } from './FuelRecordTable';
+export { default as FuelRecordTable } from './FuelRecordTable';

@@ -1,16 +1,16 @@
 import { useMemo } from 'react';
 
-import dashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
+import DashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
 
-import useDashboardWidget from '../../hooks/useDashboardWidget';
+import useDashboard from '../../hooks/useDashboard';
 
 const useLatestActivitiesTable = () => {
-  const widget = useDashboardWidget({
+  const widget = useDashboard({
     title: 'آخرین فعالیت‌ها',
 
     subtitle: 'آخرین عملیات انجام شده',
 
-    fetcher: dashboardRepository.getLatestActivities,
+    fetcher: DashboardRepository.getLatestActivities,
   });
 
   const columns = useMemo(
@@ -58,5 +58,4 @@ const useLatestActivitiesTable = () => {
     rows: widget.rows,
   };
 };
-
 export default useLatestActivitiesTable;

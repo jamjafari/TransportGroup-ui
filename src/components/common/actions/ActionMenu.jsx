@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-import { AppMenu } from '@/components';
+import { AppMenu } from '@/components/common/navigation/AppMenu';
 
 import {
   ActionMenuPropTypes,

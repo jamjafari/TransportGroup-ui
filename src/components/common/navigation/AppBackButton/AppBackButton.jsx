@@ -23,6 +23,7 @@ const AppBackButton = ({
   ...rest
 }) => {
   const navigate = useNavigate();
+  const renderedIcon = icon ?? <ArrowBackIcon />;
 
   const handleClick = () => {
     if (onClick) {
@@ -45,7 +46,7 @@ const AppBackButton = ({
 
         {...rest}
       >
-        {icon}
+        {icon || <ArrowBackIcon />}
       </IconButton>
     </Tooltip>
   );

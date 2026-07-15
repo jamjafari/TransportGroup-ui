@@ -1,6 +1,6 @@
 import React from 'react';
 
-import BaseCard from '../../common/cards/BaseCard';
+import { BaseCard } from '@/components/common/cards/BaseCard';
 
 const SummaryCard = (props) => {
   return <BaseCard {...props} />;

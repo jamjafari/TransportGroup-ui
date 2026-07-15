@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 
-import { Card, CardContent, Stack, Skeleton, Box } from '@mui/material';
+import { Card, CardContent, Skeleton, Box } from '@mui/material';
+import Stack from '@mui/system/Stack';
 
 import {
   StatSkeletonPropTypes,

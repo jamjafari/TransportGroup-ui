@@ -1,31 +1,29 @@
 import PropTypes from 'prop-types';
 
 export const AppJalaliDatePickerPropTypes = {
-  name: PropTypes.string,
-
   label: PropTypes.string,
 
-  value: PropTypes.string,
+  value: PropTypes.any,
 
   onChange: PropTypes.func,
 
-  helperText: PropTypes.node,
-
-  error: PropTypes.bool,
-
   disabled: PropTypes.bool,
 
-  required: PropTypes.bool,
-
   fullWidth: PropTypes.bool,
+
+  format: PropTypes.string,
 };
 
 export const AppJalaliDatePickerDefaultProps = {
-  error: false,
+  label: '',
+
+  value: null,
+
+  onChange: () => {},
 
   disabled: false,
 
-  required: false,
-
   fullWidth: true,
+
+  format: 'yyyy/MM/dd',
 };

@@ -1,1 +1,1 @@
-export { default } from './MonthlyDistanceChart';
+export { default as MonthlyDistanceChart } from './MonthlyDistanceChart';

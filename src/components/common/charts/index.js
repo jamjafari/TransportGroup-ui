@@ -1,8 +1,23 @@
+/* Base Components */
+
 export { default as AppChartCard } from './AppChartCard';
-export { default as ChartLoading } from './ChartLoading';
+
 export { default as ChartEmpty } from './ChartEmpty';
-export { default as LineChart } from './LineChart';
-export { default as AreaChart } from './AreaChart';
-export { default as BarChart } from './BarChart';
-export { default as PieChart } from './PieChart';
-export { default as DonutChart } from './DonutChart';
+
+export { default as ChartLoading } from './ChartLoading';
+
+/* Charts */
+
+export * from './AreaChart';
+
+export * from './BarChart';
+
+export * from './DonutChart';
+
+export * from './LineChart';
+
+export * from './PieChart';
+
+/* Shared Components */
+
+export * from './components/ChartLegend';

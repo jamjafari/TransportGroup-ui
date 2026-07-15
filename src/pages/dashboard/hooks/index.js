@@ -1,1 +1,3 @@
-export { default as useDashboard } from './useDashboard';
+export { default as useDashboardPage } from './useDashboardPage';
+
+export { default as useDashboardStatistics } from './useDashboardStatistics';

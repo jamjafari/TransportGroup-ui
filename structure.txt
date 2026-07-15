@@ -1,5 +1,5 @@
 Folder PATH listing
-Volume serial number is 000001B1 7A08:AF2E
+Volume serial number is 00000191 7A08:AF2E
 C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 |   App.css
 |   App.jsx
@@ -49,7 +49,7 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 |   |   |       
 |   |   +---buttons
 |   |   |       AppButton.jsx
-|   |   |       AppButton.type.js
+|   |   |       AppButton.types.js
 |   |   |       DeleteButton.jsx
 |   |   |       DeleteButton.types.js
 |   |   |       index.js
@@ -114,7 +114,7 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 |   |   +---chips
 |   |   |       index.js
 |   |   |       StatusChip.jsx
-|   |   |       StatusChip.type.js
+|   |   |       StatusChip.types.js
 |   |   |       
 |   |   +---datagrid
 |   |   |   |   AppDataGrid.jsx
@@ -132,7 +132,7 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 |   |   |   |   |   GridBody.jsx
 |   |   |   |   |   GridBody.types.js
 |   |   |   |   |   GridCell.jsx
-|   |   |   |   |   GridCell.type.js
+|   |   |   |   |   GridCell.types.js
 |   |   |   |   |   GridEmpty.jsx
 |   |   |   |   |   GridEmpty.types.js
 |   |   |   |   |   GridHeader.jsx
@@ -167,12 +167,12 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 |   |   |   |       
 |   |   |   +---hooks
 |   |   |   |       useDataGrid.js
+|   |   |   |       useGridColumns.js
 |   |   |   |       UseGridFiltering.js
 |   |   |   |       useGridPagination.js
 |   |   |   |       useGridSearching.js
-|   |   |   |       userGridColumns.js
-|   |   |   |       userGridSelection.js
-|   |   |   |       userGridSorting.js
+|   |   |   |       useGridSelection.js
+|   |   |   |       useGridSorting.js
 |   |   |   |       
 |   |   |   +---server
 |   |   |   |       buildQuery.js
@@ -185,7 +185,7 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 |   |   |           index.js
 |   |   |           useSavedViews.js
 |   |   |           viewManager.js
-|   |   |           ViewSelector.js
+|   |   |           ViewsSelector.jsx
 |   |   |           viewStorage.js
 |   |   |           viewTypes.js
 |   |   |           
@@ -345,14 +345,19 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 |   |   |   |       AppStepper.types.js
 |   |   |   |       index.js
 |   |   |   |       
-|   |   |   \---AppTabs
-|   |   |           AppTabs.jsx
-|   |   |           AppTabs.types.js
+|   |   |   +---AppTabs
+|   |   |   |       AppTabs.jsx
+|   |   |   |       AppTabs.types.js
+|   |   |   |       index.js
+|   |   |   |       
+|   |   |   \---ItemMenu
 |   |   |           index.js
+|   |   |           ItemMenu.jsx
+|   |   |           ItemMenu.types.js
 |   |   |           
 |   |   +---pagination
+|   |   |       AppPagination.jsx
 |   |   |       AppPagination.types.js
-|   |   |       AppPegination.jsx
 |   |   |       index.js
 |   |   |       
 |   |   +---permissions
@@ -379,9 +384,9 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 |   |   |       AppSelect.types.js
 |   |   |       index.js
 |   |   |       
-|   |   +---snakbar
-|   |   |       AppSnakbar.jsx
-|   |   |       AppSnakbar.types.js
+|   |   +---snackbar
+|   |   |       AppSnackbar.jsx
+|   |   |       AppSnackbar.types.js
 |   |   |       index.js
 |   |   |       
 |   |   +---statistics
@@ -396,7 +401,7 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 |   |   |       
 |   |   +---tables
 |   |   |       AppTable.jsx
-|   |   |       AppTable.tyoes.js
+|   |   |       AppTable.types.js
 |   |   |       index.js
 |   |   |       
 |   |   +---timeline
@@ -424,8 +429,6 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 |   |   |       
 |   |   +---config
 |   |   |       DashboardConfig.js
-|   |   |       DashboardDefaultLayout.js
-|   |   |       DashboardSections.js
 |   |   |       index.js
 |   |   |       
 |   |   +---empty
@@ -487,16 +490,11 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 |   |   |       registerWidget.js
 |   |   |       WidgetCategory.js
 |   |   |       WidgetRegistry.js
-|   |   |       WidgetTypes.js
 |   |   |       
 |   |   +---runtime
 |   |   |       DashboardRuntime.jsx
 |   |   |       DashboardRuntime.types.js
-|   |   |       dataBinder.js
 |   |   |       index.js
-|   |   |       widgetRegistry.js
-|   |   |       widgetRenderer.jsx
-|   |   |       widgetResolver.js
 |   |   |       
 |   |   +---skeleton
 |   |   |       CardSkeleton.jsx
@@ -512,7 +510,10 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 |   |   |       TableSkeleton.types.js
 |   |   |       
 |   |   +---table
+|   |   |   |   index.js
+|   |   |   |   
 |   |   |   +---DriverTable
+|   |   |   |       DriverStatusCell.jsx
 |   |   |   |       DriverTable.jsx
 |   |   |   |       DriverTable.types.js
 |   |   |   |       index.js
@@ -530,7 +531,6 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 |   |   |   |       index.js
 |   |   |   |       useFuelRecordTable.js
 |   |   |   |       
-|   |   |   +---hooks
 |   |   |   +---InsuranceTable
 |   |   |   |       index.js
 |   |   |   |       InsuranceTable.jsx
@@ -587,6 +587,7 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 |   |       |   +---BaseChartWidget
 |   |       |   |       BaseChartWidget.jsx
 |   |       |   |       BaseChartWidget.types.js
+|   |       |   |       index.js
 |   |       |   |       
 |   |       |   +---BaseCircularChartWidget
 |   |       |   |       BaseCircularChartWidget.jsx
@@ -790,28 +791,51 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 |   |       Login.jsx
 |   |       
 |   \---dashboard
-|       |   Dashboard.jsx
 |       |   Dashboard.types.js
+|       |   DashboardPage.jsx
 |       |   index.js
 |       |   
 |       +---components
-|       |       DashboardAlerts.jsx
-|       |       DashboardAlerts.types.js
-|       |       DashboardCharts.jsx
-|       |       DashboardCharts.types.js
-|       |       DashboardHeader.jsx
-|       |       DashboardHeader.types.js
-|       |       DashboardKpiCards.jsx
-|       |       DashboardKpiCards.types.js
-|       |       DashboardTimeline.jsx
-|       |       DashboardTimeline.types.js
-|       |       DashboardTrips.jsx
-|       |       DashboardTrips.types.js
-|       |       index.js
-|       |       
+|       |   |   DashboardAlerts.jsx
+|       |   |   DashboardAlerts.types.js
+|       |   |   DashboardCharts.jsx
+|       |   |   DashboardCharts.types.js
+|       |   |   DashboardKpiCards.jsx
+|       |   |   DashboardKpiCards.types.js
+|       |   |   DashboardTimeline.jsx
+|       |   |   DashboardTimeline.types.js
+|       |   |   DashboardTrips.jsx
+|       |   |   DashboardTrips.types.js
+|       |   |   
+|       |   +---DashboardCharts
+|       |   |       DashboardCharts.jsx
+|       |   |       DashboardCharts.types.js
+|       |   |       index.js
+|       |   |       
+|       |   +---dashboardHeader
+|       |   |       DashboardHeader.jsx
+|       |   |       DashboardHeader.types.js
+|       |   |       DashboardHeaderActions.jsx
+|       |   |       DashboardHeaderInfo.jsx
+|       |   |       DashboardHeaderTitle.jsx
+|       |   |       DashboardRefreshButton.jsx
+|       |   |       index.js
+|       |   |       
+|       |   +---DashboardStatistics
+|       |   |       DashboardStatistics.jsx
+|       |   |       DashboardStatistics.types.js
+|       |   |       DashboardStatisticsItem.jsx
+|       |   |       index.js
+|       |   |       
+|       |   \---DashboardTables
+|       |           DashboardTables.jsx
+|       |           DashboardTables.types.js
+|       |           index.js
+|       |           
 |       \---hooks
 |               index.js
-|               useDashboard.js
+|               useDashboardPage.js
+|               useDashboardStatistics.js
 |               
 +---repositories
 |   |   BaseRepository.js

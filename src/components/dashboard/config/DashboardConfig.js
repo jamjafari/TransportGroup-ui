@@ -1,6 +1,6 @@
-import DashboardSections from './DashboardSections';
+import DashboardSection from '../layout/DashboardSection';
 
-import DashboardDefaultLayout from './DashboardDefaultLayout';
+import DashboardDefaultLayout from '../layout/DashboardDefaultLayout';
 
 const DashboardConfig = {
   title: 'Fleet Management Dashboard',
@@ -10,11 +10,11 @@ const DashboardConfig = {
   defaultLayout: DashboardDefaultLayout,
 
   sections: [
-    DashboardSections.Statistics,
+    DashboardSection.Statistics,
 
-    DashboardSections.Charts,
+    DashboardSection.Charts,
 
-    DashboardSections.Tables,
+    DashboardSection.Tables,
   ],
 };
 

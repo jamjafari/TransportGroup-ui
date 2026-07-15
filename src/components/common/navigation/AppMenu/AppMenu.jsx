@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 import { List } from '@mui/material';
 
-import MenuItem from './MenuItem';
+import ItemMenu from '../ItemMenu/ItemMenu';
 
 import { AppMenuPropTypes, AppMenuDefaultProps } from './AppMenu.types';
 

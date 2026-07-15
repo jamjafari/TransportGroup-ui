@@ -1,16 +1,16 @@
-import dashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
+import DashboardRepository from '@/repositories/dashboard/dashboard.repository';
 
-import useDashboardWidget from '../../hooks/useDashboardWidget';
+import useDashboard from '../../../hooks/useDashboard';
 
 import useChartSeries from '../../../../common/charts/hooks/useChartSeries';
 
 const useVehicleUsageChart = () => {
-  const widget = useDashboardWidget({
+  const widget = useDashboard({
     title: 'استفاده از ناوگان',
 
     subtitle: '30 روز اخیر',
 
-    fetcher: dashboardRepository.getVehicleUsage,
+    fetcher: DashboardRepository.getVehicleUsage,
   });
 
   const chart = useChartSeries(

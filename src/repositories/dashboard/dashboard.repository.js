@@ -47,12 +47,7 @@ class DashboardRepository extends BaseRepository {
   async getFuelRecords() {
     return this.service.getFuelRecords();
   }
-  async getExpenses() {
-    return this.service.getExpenses();
-  }
-  async getMissions() {
-    return this.service.getMissions();
-  }
+
   async getInsurances() {
     return this.service.getInsurances();
   }

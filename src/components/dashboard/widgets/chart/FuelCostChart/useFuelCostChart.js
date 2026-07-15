@@ -1,16 +1,16 @@
-import dashboardRepository from '../../../repositories/dashboard/dashboard.repository';
+import DashboardRepository from '@/repositories/dashboard/dashboard.repository';
 
-import useDashboardWidget from '../../hooks/useDashboardWidget';
+import useDashboard from '../../../hooks/useDashboard';
 
-import useChartSeries from '../../../common/charts/hooks/useChartSeries';
+import useChartSeries from '@/components/common/charts/hooks/useChartSeries';
 
 const useFuelCostChart = () => {
-  const widget = useDashboardWidget({
+  const widget = useDashboard({
     title: 'هزینه سوخت',
 
     subtitle: '30 روز اخیر',
 
-    fetcher: dashboardRepository.getFuelCost,
+    fetcher: DashboardRepository.getFuelCost,
   });
 
   const chart = useChartSeries(

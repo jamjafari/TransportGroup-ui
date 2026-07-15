@@ -1,1 +1,1 @@
-export { default } from './InsuranceTable';
+export { default as InsuranceTable } from './InsuranceTable';

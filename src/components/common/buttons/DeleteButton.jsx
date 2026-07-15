@@ -2,9 +2,9 @@ import React, { memo } from 'react';
 
 import { IconButton, Tooltip, CircularProgress } from '@mui/material';
 
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutlined';
 
-import { PermissionGate } from '../../permissions';
+import PermissionGate from '../permissions/PermissionGate';
 
 import { DeleteButtonPropTypes } from './DeleteButton.types';
 

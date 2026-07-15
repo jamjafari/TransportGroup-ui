@@ -6,7 +6,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 import ClearIcon from '@mui/icons-material/Clear';
 
-import { AppTextField } from '../../inputs';
+import AppTextField from '../forms/inputs/ApptextField';
 
 import { SearchBoxPropTypes } from './SearchBox.types';
 

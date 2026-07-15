@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 
-import { createDashboard } from './dashboardEngine';
+import { createDashboard } from '../engine/dashboardEngine';
 
 const useDashboard = (initialDashboard) => {
   const [dashboard, setDashboard] = useState(

@@ -1,8 +1,10 @@
 import React from 'react';
 
-import { Box, Chip, Typography, Stack } from '@mui/material';
+import { Box, Chip, Typography } from '@mui/material';
 
-import BaseCard from '../../../common/cards/BaseCard';
+import Stack from '@mui/system/Stack';
+
+import { BaseCard } from '../../../common/cards/BaseCard';
 
 import {
   StatusCardPropTypes,

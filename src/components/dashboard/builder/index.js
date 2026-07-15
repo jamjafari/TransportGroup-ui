@@ -1,7 +1,5 @@
 export { default as DashboardBuilder } from './DashboardBuilder';
 
-export { default as useBuilder } from './useBuilder';
+export { default as BuilderCanvas } from './BuilderCanvas';
 
-export { createDragEngine } from './dragEngine';
-
-export { updateLayoutItem } from './layoutManager';
+export { default as BuilderToolbar } from './BuilderToolbar';

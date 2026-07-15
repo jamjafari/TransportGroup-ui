@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 
-import dashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
+import DashboardRepository from '@/repositories/dashboard/dashboard.repository';
 
-import useDashboardWidget from '../../hooks/useDashboardWidget';
+import useDashboard from '../../../hooks/useDashboard';
 
 const COLORS = [
   '#2e7d32',
@@ -14,12 +14,12 @@ const COLORS = [
 ];
 
 const useVehicleStatusChart = () => {
-  const widget = useDashboardWidget({
+  const widget = useDashboard({
     title: 'وضعیت ناوگان',
 
     subtitle: 'وضعیت فعلی خودروها',
 
-    fetcher: dashboardRepository.getVehicleStatus,
+    fetcher: DashboardRepository.getVehicleStatus,
   });
 
   const chartData = useMemo(() => {

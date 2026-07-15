@@ -1,1 +1,1 @@
-export { default } from './BarChartWidget';
+export { default as BarChartWidget } from './BarChartWidget';

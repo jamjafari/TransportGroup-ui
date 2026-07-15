@@ -2,8 +2,8 @@ import React, { memo } from 'react';
 
 import { TableCell, Typography } from '@mui/material';
 
-import { StatusChip } from './status/StatusChip';
-import { ActionMenu } from './action/ActtionMenu';
+import StatusChip from '../../status/StatusChip';
+import { ActionMenu } from '@/components';
 
 import { GridCellPropTypes } from './GridCell.types';
 

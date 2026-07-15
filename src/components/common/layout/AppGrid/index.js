@@ -1,1 +1,1 @@
-export { default } from './AppGrid';
+export { default as AppGrid } from './AppGrid';

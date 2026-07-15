@@ -6,9 +6,10 @@ import {
   FormControl,
   MenuItem,
   Select,
-  Stack,
   Typography,
 } from '@mui/material';
+
+import Stack from '@mui/system/Stack';
 
 import {
   AppPaginationPropTypes,

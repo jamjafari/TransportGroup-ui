@@ -1,16 +1,16 @@
 import { useMemo } from 'react';
 
-import dashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
+import DashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
 
-import useDashboardWidget from '../../hooks/useDashboardWidget';
+import useDashboard from '../../hooks/useDashboard';
 
 const useServiceReminderTable = () => {
-  const widget = useDashboardWidget({
+  const widget = useDashboard({
     title: 'سرویس های دوره ای',
 
     subtitle: 'سرویس های نزدیک به موعد',
 
-    fetcher: dashboardRepository.getServiceReminders,
+    fetcher: DashboardRepository.getServiceReminders,
   });
 
   const columns = useMemo(

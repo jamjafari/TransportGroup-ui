@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { Stack } from '@mui/material';
+import Stack from '@mui/system/Stack';
 
 import { AppCard, Alerts } from '@/components';
 

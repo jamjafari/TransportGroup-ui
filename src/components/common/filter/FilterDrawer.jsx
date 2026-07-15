@@ -1,21 +1,16 @@
 import React, { memo } from 'react';
 
-import {
-  Drawer,
-  Box,
-  Stack,
-  Typography,
-  Divider,
-  IconButton,
-} from '@mui/material';
+import { Drawer, Box, Typography, Divider, IconButton } from '@mui/material';
+
+import Stack from '@mui/system/Stack';
 
 import CloseIcon from '@mui/icons-material/Close';
 
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
-import { AppButton } from '../../buttons';
+import AppButton from '../buttons/AppButton';
 
-import { AppLoader } from '../../loading';
+import AppLoader from '../loading/AppLoader';
 
 import { FilterDrawerPropTypes } from './FilterDrawer.types';
 

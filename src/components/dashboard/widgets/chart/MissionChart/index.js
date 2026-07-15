@@ -1,1 +1,1 @@
-export { default } from './MissionChart';
+export { default as MissionChart } from './MissionChart';

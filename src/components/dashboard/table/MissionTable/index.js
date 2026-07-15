@@ -1,1 +1,1 @@
-export { default } from './MissionTable';
+export { default as MissionTable } from './MissionTable';

@@ -1,1 +1,1 @@
-export { default } from './DriverPerformanceChart';
+export { default as DriverPerformanceChart } from './DriverPerformanceChart';

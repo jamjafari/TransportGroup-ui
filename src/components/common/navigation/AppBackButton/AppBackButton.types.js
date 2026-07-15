@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types';
 
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-
 export const AppBackButtonPropTypes = {
   fallback: PropTypes.string,
 
@@ -16,8 +14,6 @@ export const AppBackButtonDefaultProps = {
   fallback: '/',
 
   tooltip: 'بازگشت',
-
-  icon: <ArrowBackIcon />,
 
   onClick: null,
 };

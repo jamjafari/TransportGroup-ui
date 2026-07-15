@@ -1,8 +1,8 @@
 import React, { memo } from 'react';
 
-import AreaChart from '../../../../../common/charts/AreaChart';
+import { AreaChart } from '@/components/common/charts/AreaChart';
 
-import BaseChartWidget from '../../BaseChartWidget';
+import { BaseChartWidget } from '../../BaseChartWidget';
 
 const AreaChartWidget = (props) => {
   return (

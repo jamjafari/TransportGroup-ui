@@ -1,1 +1,1 @@
-export { default } from './BaseCircularChartWidget';
+export { default as BaseCircularChartWidget } from './BaseCircularChartWidget';

@@ -1,16 +1,16 @@
 import { useMemo } from 'react';
 
-import dashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
+import DashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
 
-import useDashboardWidget from '../../hooks/useDashboardWidget';
+import useDashboard from '../../hooks/useDashboard';
 
 const useVehicleTable = () => {
-  const widget = useDashboardWidget({
+  const widget = useDashboard({
     title: 'وضعیت خودروها',
 
     subtitle: 'ناوگان فعال',
 
-    fetcher: dashboardRepository.getVehicles,
+    fetcher: DashboardRepository.getVehicles,
   });
 
   const columns = useMemo(

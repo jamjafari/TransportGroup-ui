@@ -6,3 +6,4 @@ const COLUMN_TYPES = {
   ACTION: 'action',
   CUSTOM: 'custom',
 };
+export default COLUMN_TYPES;

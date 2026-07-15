@@ -6,9 +6,10 @@ import {
   CardContent,
   Divider,
   Skeleton,
-  Stack,
   Box,
 } from '@mui/material';
+
+import Stack from '@mui/system/Stack';
 
 import {
   TableSkeletonPropTypes,

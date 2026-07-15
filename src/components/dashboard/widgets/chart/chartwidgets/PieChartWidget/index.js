@@ -1,1 +1,1 @@
-export { default } from './PieChartWidget';
+export { default as PieChartWidget } from './PieChartWidget';

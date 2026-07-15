@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Box, Typography } from '@mui/material';
 
-import BaseCard from '../../../common/cards/BaseCard';
+import { BaseCard } from '@/components';
 
 import {
   ChartCardPropTypes,

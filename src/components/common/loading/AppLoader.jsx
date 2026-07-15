@@ -1,12 +1,8 @@
 import React, { memo } from 'react';
 
-import {
-  Box,
-  CircularProgress,
-  Typography,
-  Backdrop,
-  Stack,
-} from '@mui/material';
+import { Box, CircularProgress, Typography, Backdrop } from '@mui/material';
+
+import Stack from '@mui/system/Stack';
 
 import { AppLoaderPropTypes } from './AppLoader.types';
 

@@ -1,8 +1,10 @@
 import React, { memo } from 'react';
 
-import { Box, Button, Stack, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import Stack from '@mui/system/Stack';
+
+import ErrorIcon from '@mui/icons-material/Error';
 
 import RefreshIcon from '@mui/icons-material/Refresh';
 

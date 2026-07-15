@@ -1,16 +1,16 @@
 import { useMemo } from 'react';
 
-import dashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
+import DashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
 
-import useDashboardWidget from '../../hooks/useDashboardWidget';
+import useDashboard from '../../hooks/useDashboard';
 
 const useMissionTable = () => {
-  const widget = useDashboardWidget({
+  const widget = useDashboard({
     title: 'آخرین ماموریت ها',
 
     subtitle: 'آخرین ماموریت های ثبت شده',
 
-    fetcher: dashboardRepository.getMissions,
+    fetcher: DashboardRepository.getMissions,
   });
 
   const columns = useMemo(

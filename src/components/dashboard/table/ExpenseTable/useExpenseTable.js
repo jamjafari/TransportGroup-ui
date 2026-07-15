@@ -1,16 +1,16 @@
 import { useMemo } from 'react';
 
-import dashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
+import DashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
 
-import useDashboardWidget from '../../hooks/useDashboardWidget';
+import useDashboard from '../../hooks/useDashboard';
 
 const useExpenseTable = () => {
-  const widget = useDashboardWidget({
+  const widget = useDashboard({
     title: 'آخرین هزینه ها',
 
     subtitle: 'آخرین هزینه های ثبت شده',
 
-    fetcher: dashboardRepository.getExpenses,
+    fetcher: DashboardRepository.getExpenses,
   });
 
   const columns = useMemo(

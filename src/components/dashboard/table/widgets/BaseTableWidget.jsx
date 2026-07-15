@@ -6,13 +6,14 @@ import {
   CardContent,
   CardActions,
   Divider,
-  Stack,
   Typography,
   IconButton,
   Box,
   Alert,
   CircularProgress,
 } from '@mui/material';
+
+import Stack from '@mui/system/Stack';
 
 import RefreshIcon from '@mui/icons-material/Refresh';
 

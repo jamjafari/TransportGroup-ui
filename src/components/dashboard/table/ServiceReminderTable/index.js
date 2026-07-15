@@ -1,1 +1,1 @@
-export { default } from './ServiceReminderTable';
+export { default as ServiceReminderTable } from './ServiceReminderTable';

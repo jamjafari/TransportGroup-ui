@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import LineChartWidget from '../chartwidgets/LineChartWidget';
+import { LineChartWidget } from '../chartwidgets/LineChartWidget';
 
 import useExpenseChart from './useExpenseChart';
 

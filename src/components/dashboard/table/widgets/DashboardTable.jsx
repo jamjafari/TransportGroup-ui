@@ -1,8 +1,8 @@
 import React, { memo, useMemo } from 'react';
 
-import AppDataGrid from '../../../../common/datagrid/AppDataGrid';
+import AppDataGrid from '@/components/common/datagrid/AppDataGrid';
 
-import StatusChip from '../../../../common/chips/StatusChip';
+import StatusChip from '@/components/common/chips/StatusChip';
 
 import BaseTableWidget from './BaseTableWidget';
 

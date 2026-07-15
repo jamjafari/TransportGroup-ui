@@ -1,1 +1,1 @@
-export { default } from './FuelCostChart';
+export { default as FuelCostChart } from './FuelCostChart';

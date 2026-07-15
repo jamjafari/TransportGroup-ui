@@ -1,10 +1,10 @@
 import React, { memo } from 'react';
 
-import PieChart from '../../../../common/charts/PieChart';
+import { PieChart } from '@/components/common/charts/PieChart';
 
-import BaseChartWidget from '../../BaseChartWidget';
+import { BaseChartWidget } from '../../BaseChartWidget';
 
-const BarChartWidget = (props) => {
+const PieChartWidget = (props) => {
   return (
     <BaseChartWidget
       {...props}

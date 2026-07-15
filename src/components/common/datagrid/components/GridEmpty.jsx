@@ -1,13 +1,8 @@
 import React, { memo } from 'react';
 
-import {
-  TableBody,
-  TableRow,
-  TableCell,
-  Stack,
-  Typography,
-  Box,
-} from '@mui/material';
+import { TableBody, TableRow, TableCell, Typography, Box } from '@mui/material';
+
+import Stack from '@mui/system/Stack';
 
 import InboxOutlinedIcon from '@mui/icons-material/InboxOutlined';
 

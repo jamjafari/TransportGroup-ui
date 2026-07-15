@@ -12,9 +12,9 @@ import GridLoading from './components/GridLoading';
 
 import GridEmpty from './components/GridEmpty';
 
-import DataGridToolbar from './components/toolbar';
+import DataGridToolbar from './components/toolbar/DataGridToolbar';
 
-import AppPagination from '../pagination/AppPagination';
+import { AppPagination } from '@/components/common/navigation';
 
 import { applyFilters } from './filters';
 

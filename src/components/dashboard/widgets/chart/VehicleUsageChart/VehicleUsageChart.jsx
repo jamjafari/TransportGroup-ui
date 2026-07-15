@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import AreaChartWidget from '../widgets/AreaChartWidget';
+import { AreaChartWidget } from '../chartwidgets/AreaChartWidget';
 
 import useVehicleUsageChart from './useVehicleUsageChart';
 

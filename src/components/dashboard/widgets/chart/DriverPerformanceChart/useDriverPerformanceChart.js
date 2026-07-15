@@ -1,16 +1,16 @@
-import dashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
+import DashboardRepository from '@/repositories/dashboard/dashboard.repository';
 
-import useDashboardWidget from '../../hooks/useDashboardWidget';
+import useDashboard from '../../../hooks/useDashboard';
 
 import useChartSeries from '../../../../common/charts/hooks/useChartSeries';
 
 const useDriverPerformanceChart = () => {
-  const widget = useDashboardWidget({
+  const widget = useDashboard({
     title: 'عملکرد رانندگان',
 
     subtitle: '10 راننده برتر',
 
-    fetcher: dashboardRepository.getDriverPerformance,
+    fetcher: DashboardRepository.getDriverPerformance,
   });
 
   const chart = useChartSeries(

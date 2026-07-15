@@ -2,13 +2,9 @@ import React, { memo } from 'react';
 
 import { Controller, useFormContext } from 'react-hook-form';
 
-import {
-  Button,
-  FormControl,
-  FormHelperText,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Button, FormControl, FormHelperText, Typography } from '@mui/material';
+
+import Stack from '@mui/system/Stack';
 
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 

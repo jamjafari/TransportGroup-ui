@@ -1,8 +1,9 @@
 import React from 'react';
 
-import { Stack, Alert, AlertTitle } from '@mui/material';
+import { Alert, AlertTitle } from '@mui/material';
+import Stack from '@mui/system/Stack';
 
-import BaseCard from '../../../common/cards/BaseCard';
+import { BaseCard } from '../../../common/cards/BaseCard';
 
 import {
   AlertCardPropTypes,

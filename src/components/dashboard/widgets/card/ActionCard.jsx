@@ -1,8 +1,10 @@
 import React from 'react';
 
-import { Stack, Button, Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 
-import BaseCard from '../../../common/cards/BaseCard';
+import Stack from '@mui/system/Stack';
+
+import { BaseCard } from '../../../common/cards/BaseCard';
 
 import {
   ActionCardPropTypes,

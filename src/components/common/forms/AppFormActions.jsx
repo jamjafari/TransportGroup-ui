@@ -1,6 +1,8 @@
 import React, { memo } from 'react';
 
-import { Box, Stack } from '@mui/material';
+import { Box } from '@mui/material';
+
+import Stack from '@mui/system/Stack';
 
 import {
   AppFormActionsPropTypes,

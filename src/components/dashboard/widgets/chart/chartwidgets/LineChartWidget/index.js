@@ -1,1 +1,1 @@
-export { default } from './LineChartWidget';
+export { default as LineChartWidget } from './LineChartWidget';

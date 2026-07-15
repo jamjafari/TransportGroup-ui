@@ -1,1 +1,1 @@
-export { default } from './DonutChartWidget';
+export { default as DonutChartWidget } from './DonutChartWidget';

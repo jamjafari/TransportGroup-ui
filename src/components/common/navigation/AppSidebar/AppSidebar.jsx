@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 import { Box, Toolbar } from '@mui/material';
 
-import AppMenu from '../AppMenu';
+import AppMenu from '../AppMenu/AppMenu';
 
 import {
   AppSidebarPropTypes,
