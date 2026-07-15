@@ -56,7 +56,7 @@ const AppDataGrid = ({
   onRowClick,
   onRowDoubleClick,
 }) => {
-  const viewsManager = useSavedViews();
+  //const viewsManager = useSavedViews();
   const grid = useDataGrid({
     rows,
     columns,

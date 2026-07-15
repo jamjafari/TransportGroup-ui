@@ -24,17 +24,17 @@ const DashboardColumn = ({
 }) => {
   return (
     <Grid
-      item
+      size={{
+        xs: xs ?? DashboardBreakpoints.xs,
 
-      xs={xs ?? DashboardBreakpoints.xs}
+        sm: sm ?? DashboardBreakpoints.sm,
 
-      sm={sm ?? DashboardBreakpoints.sm}
+        md: md ?? DashboardBreakpoints.md,
 
-      md={md ?? DashboardBreakpoints.md}
+        lg: lg ?? DashboardBreakpoints.lg,
 
-      lg={lg ?? DashboardBreakpoints.lg}
-
-      xl={xl ?? DashboardBreakpoints.xl}
+        xl: xl ?? DashboardBreakpoints.xl,
+      }}
     >
       {children}
     </Grid>

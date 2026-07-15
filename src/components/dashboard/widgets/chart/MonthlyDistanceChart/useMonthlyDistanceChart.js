@@ -10,7 +10,7 @@ const useMonthlyDistanceChart = () => {
 
     subtitle: '30 روز اخیر',
 
-    fetcher: dashboardRepository.getMonthlyDistance,
+    fetcher: DashboardRepository.getMonthlyDistance,
   });
 
   const chart = useChartSeries(

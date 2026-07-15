@@ -28,7 +28,7 @@ const DashboardSkeleton = ({
 
       <Grid container spacing={2}>
         {[...Array(statCount)].map((_, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index}>
+          <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
             <StatSkeleton />
           </Grid>
         ))}
@@ -40,7 +40,7 @@ const DashboardSkeleton = ({
 
       <Grid container spacing={2}>
         {[...Array(chartCount)].map((_, index) => (
-          <Grid item xs={12} md={6} key={index}>
+          <Grid size={{ xs: 12, md: 6 }} key={index}>
             <ChartSkeleton />
           </Grid>
         ))}
@@ -52,7 +52,7 @@ const DashboardSkeleton = ({
 
       <Grid container spacing={2}>
         {[...Array(tableCount)].map((_, index) => (
-          <Grid item xs={12} key={index}>
+          <Grid size={{ xs: 12 }} key={index}>
             <TableSkeleton />
           </Grid>
         ))}

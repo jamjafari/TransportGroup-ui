@@ -1,3 +1,21 @@
+export const DashboardSummaryMock = {
+  vehicleCount: 28,
+  driverCount: 34,
+  missionCount: 182,
+  expenseCount: 56,
+
+  activeVehicles: 24,
+
+  inactiveVehicles: 4,
+
+  runningMissions: 18,
+
+  completedMissions: 164,
+
+  monthlyExpense: 485000000,
+
+  monthlyFuelCost: 212000000,
+};
 export const FuelConsumptionMock = [
   {
     day: '1',

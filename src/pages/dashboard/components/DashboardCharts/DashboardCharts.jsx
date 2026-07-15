@@ -9,7 +9,7 @@ import { MonthlyDistanceChart } from '@/components';
 import { VehicleUsageChart } from '@/components';
 import { MissionChart } from '@/components';
 import { DriverPerformanceChart } from '@/components';
-import { ExpenseChart } from '@/components';
+import { ExpenseChart } from '@/components/dashboard/widgets/chart/ExpenseChart';
 
 const DashboardCharts = () => {
   return (
@@ -20,7 +20,7 @@ const DashboardCharts = () => {
         </DashboardColumn>
 
         <DashboardColumn md={6}>
-          <ExpensesChart />
+          <ExpenseChart />
         </DashboardColumn>
 
         <DashboardColumn md={6}>

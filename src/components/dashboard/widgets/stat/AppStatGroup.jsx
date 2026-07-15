@@ -42,7 +42,7 @@ const AppStatGroup = ({
   return (
     <Grid container spacing={spacing}>
       {items.map((item) => (
-        <Grid item xs={12} sm={6} md={gridSize} key={item.id}>
+        <Grid size={{ xs: 12, sm: 6, md: gridSize }} key={item.id}>
           <AppMiniStat {...item} />
         </Grid>
       ))}

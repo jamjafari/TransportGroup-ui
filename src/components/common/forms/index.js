@@ -36,7 +36,7 @@ export { default as FormHelperText } from './FormHelperText';
 
 /* Jalali */
 
-export { default as AppJalaliDatePicker } from './appjalalidatepicker/AppJalaliDatePicker';
+// export { default as AppJalaliDatePicker } from './appjalalidatepicker/AppJalaliDatePicker';
 
 /* Text */
 

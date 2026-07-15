@@ -3,13 +3,13 @@ import { useCallback, useEffect, useState } from 'react';
 import dashboardService from '@/services/dashboard';
 
 const initialState = {
-  statistics: null,
+  summary: null,
   charts: null,
   tables: null,
 };
 
 const useDashboardPage = () => {
-  const [dashboard, setDashboard] = useState(initialState);
+  const [data, setData] = useState(initialState);
 
   const [loading, setLoading] = useState(true);
 
@@ -18,13 +18,13 @@ const useDashboardPage = () => {
   const loadDashboard = useCallback(async () => {
     try {
       setLoading(true);
-
       setError(null);
 
-      const data = await dashboardService.getDashboard();
+      const dashboard = await dashboardService.getDashboard();
 
-      setDashboard(data);
+      setData(dashboard);
     } catch (err) {
+      console.error(err);
       setError(err);
     } finally {
       setLoading(false);
@@ -36,13 +36,9 @@ const useDashboardPage = () => {
   }, [loadDashboard]);
 
   return {
+    data,
     loading,
     error,
-
-    statistics: dashboard.statistics,
-    charts: dashboard.charts,
-    tables: dashboard.tables,
-
     refresh: loadDashboard,
   };
 };

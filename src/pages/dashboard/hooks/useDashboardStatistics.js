@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import useDashboardPage from './useDashboardPage';
 
 const useDashboardStatistics = () => {
-  const { data, loading, error, refresh } = useDashboard();
+  const { data, loading, error, refresh } = useDashboardPage();
 
   const statistics = useMemo(() => {
     if (!data?.summary) {

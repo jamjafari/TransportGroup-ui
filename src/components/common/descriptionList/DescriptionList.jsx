@@ -17,7 +17,7 @@ const DescriptionList = ({
   return (
     <Grid container spacing={2}>
       {items.map((item, index) => (
-        <Grid item xs={12} md={12 / columns} key={item.key || index}>
+        <Grid size={{ xs: 12, md: 12 / columns }} key={item.key || index}>
           <Box display="flex" alignItems="flex-start" gap={1}>
             <Typography
               variant="body2"

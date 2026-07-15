@@ -5,7 +5,7 @@ import { DashboardTable } from '../widgets';
 import useFuelRecordTable from './useFuelRecordTable';
 
 const FuelRecordrTable = () => {
-  const table = useFuelRecordrTable();
+  const table = useFuelRecordTable();
 
   return <DashboardTable {...table} />;
 };

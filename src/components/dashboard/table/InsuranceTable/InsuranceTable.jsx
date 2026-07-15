@@ -5,7 +5,7 @@ import { DashboardTable } from '../widgets';
 import useInsuranceTable from './useInsuranceTable';
 
 const insuranceTable = () => {
-  const table = useinsuranceTable();
+  const table = useInsuranceTable();
 
   return <DashboardTable {...table} />;
 };
