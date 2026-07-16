@@ -62,7 +62,7 @@ const BarChart = ({
     <Box
       width="100%"
 
-      height={height}
+      height={320}
     >
       <ResponsiveContainer>
         <RechartsBarChart data={chartData}>

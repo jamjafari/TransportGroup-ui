@@ -1,11 +1,11 @@
 import DashboardRepository from '@/repositories/dashboard/dashboard.repository';
 
-import useDashboard from '../../../hooks/useDashboard';
+import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
 
 import useChartSeries from '@/components/common/charts/hooks/useChartSeries';
 
 const useFuelCostChart = () => {
-  const widget = useDashboard({
+  const widget = useDashboardWidget({
     title: 'هزینه سوخت',
 
     subtitle: '30 روز اخیر',

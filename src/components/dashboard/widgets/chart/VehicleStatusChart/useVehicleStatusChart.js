@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import DashboardRepository from '@/repositories/dashboard/dashboard.repository';
 
-import useDashboard from '../../../hooks/useDashboard';
+import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
 
 const COLORS = [
   '#2e7d32',
@@ -14,7 +14,7 @@ const COLORS = [
 ];
 
 const useVehicleStatusChart = () => {
-  const widget = useDashboard({
+  const widget = useDashboardWidget({
     title: 'وضعیت ناوگان',
 
     subtitle: 'وضعیت فعلی خودروها',

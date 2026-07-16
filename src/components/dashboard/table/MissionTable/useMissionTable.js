@@ -2,10 +2,10 @@ import { useMemo } from 'react';
 
 import DashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
 
-import useDashboard from '../../hooks/useDashboard';
+import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
 
 const useMissionTable = () => {
-  const widget = useDashboard({
+  const widget = useDashboardWidget({
     title: 'آخرین ماموریت ها',
 
     subtitle: 'آخرین ماموریت های ثبت شده',

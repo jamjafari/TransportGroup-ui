@@ -3,7 +3,7 @@ import ResponseModel from '../models/ResponseModel';
 const apiClient = {
   async get(url, params = {}) {
     try {
-      console.log(url);
+      // console.log(url);
 
       return new ResponseModel({
         success: true,

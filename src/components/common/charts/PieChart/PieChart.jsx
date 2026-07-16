@@ -52,7 +52,7 @@ const PieChart = ({
     <Box
       width="100%"
 
-      height={height}
+      height={320}
     >
       <ResponsiveContainer>
         <RechartsPieChart>

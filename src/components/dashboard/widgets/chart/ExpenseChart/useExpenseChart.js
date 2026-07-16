@@ -1,16 +1,13 @@
 import DashboardRepository from '@/repositories/dashboard/dashboard.repository';
 
-import useDashboard from '../../../hooks/useDashboard';
-
+import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
 import useChartSeries from '../../../../common/charts/hooks/useChartSeries';
 
 const useExpenseChart = () => {
-  const widget = useDashboard({
+  const widget = useDashboardWidget({
     title: 'روند هزینه‌ها',
-
     subtitle: '30 روز اخیر',
-
-    fetcher: DashboardRepository.getExpenses,
+    fetcher: DashboardRepository.getExpense,
   });
 
   const chart = useChartSeries(
@@ -30,7 +27,11 @@ const useExpenseChart = () => {
       ],
     },
   );
+  // console.log(widget.rows);
 
+  // console.log(chart.categories);
+
+  // console.log(chart.series);
   return {
     ...widget,
 

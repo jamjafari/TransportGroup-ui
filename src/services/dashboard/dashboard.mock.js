@@ -60,7 +60,7 @@ export const FuelConsumptionMock = [
   },
 ];
 
-export const ExpensesMock = [
+export const ExpenseMock = [
   {
     day: '1',
     amount: 18000000,
@@ -285,7 +285,7 @@ export const FuelRecordMock = [
     stationName: 'جایگاه بعثت',
   },
 ];
-export const ExpenseMock = [
+export const ExpensesMock = [
   {
     id: 1,
     expenseDate: '1405/04/18',

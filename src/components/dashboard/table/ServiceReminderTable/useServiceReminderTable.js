@@ -2,10 +2,10 @@ import { useMemo } from 'react';
 
 import DashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
 
-import useDashboard from '../../hooks/useDashboard';
+import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
 
 const useServiceReminderTable = () => {
-  const widget = useDashboard({
+  const widget = useDashboardWidget({
     title: 'سرویس های دوره ای',
 
     subtitle: 'سرویس های نزدیک به موعد',

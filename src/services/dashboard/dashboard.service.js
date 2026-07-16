@@ -30,6 +30,8 @@ const dashboardService = {
         fuelCost: await this.getFuelCost(),
         monthlyDistance: await this.getMonthlyDistance(),
         driverPerformance: await this.getDriverPerformance(),
+        misiontrend: await this.getMissionTrend(),
+        misiontrend: await this.getExpense(),
       },
 
       tables: {
@@ -50,12 +52,15 @@ const dashboardService = {
       vehicleCount: VehicleMock.length,
       driverCount: DriversMock.length,
       missionCount: MissionMock.length,
-      expenseCount: ExpenseMock.length,
+      expenseCount: ExpensesMock.length,
     });
   },
 
   async getFuelConsumption() {
     return delay(FuelConsumptionMock);
+  },
+  async getExpense() {
+    return delay(ExpenseMock);
   },
 
   async getVehicleStatus() {
@@ -75,11 +80,14 @@ const dashboardService = {
   },
 
   async getExpenses() {
-    return delay(ExpenseMock);
+    return delay(ExpensesMock);
   },
 
   async getMissions() {
     return delay(MissionMock);
+  },
+  async getMissionTrend() {
+    return delay(MissionTrendMock);
   },
 
   async getDriverPerformance() {
@@ -110,5 +118,7 @@ const dashboardService = {
     return delay(ServiceReminderMock);
   },
 };
+// console.log('Service Called');
 
+// console.log(FuelConsumptionMock);
 export default dashboardService;

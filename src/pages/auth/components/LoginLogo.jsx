@@ -6,8 +6,8 @@ import { Avatar, Typography } from '@mui/material';
 import DirectionsCarFilledIcon from '@mui/icons-material/DirectionsCarFilled';
 
 const LoginLogo = () => {
-  console.log('LoginLogo Loaded');
-  console.log(Stack);
+  // console.log('LoginLogo Loaded');
+  // console.log(Stack);
   return (
     <Stack spacing={2} alignItems="center">
       <Avatar

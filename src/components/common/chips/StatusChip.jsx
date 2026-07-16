@@ -8,8 +8,7 @@ import BuildCircleIcon from '@mui/icons-material/BuildCircle';
 
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
-import HelpOutlinedIcon from '@mui/icons-material/HelpOutlined';
-
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { StatusChipPropTypes } from './StatusChip.types';
 
 const statusMap = {

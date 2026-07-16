@@ -1,11 +1,11 @@
 import DashboardRepository from '@/repositories/dashboard/dashboard.repository';
 
-import useDashboard from '../../../hooks/useDashboard';
+import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
 
 import useChartSeries from '../../../../common/charts/hooks/useChartSeries';
 
 const useMonthlyDistanceChart = () => {
-  const widget = useDashboard({
+  const widget = useDashboardWidget({
     title: 'مسافت طی شده',
 
     subtitle: '30 روز اخیر',

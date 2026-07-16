@@ -2,10 +2,10 @@ import { useMemo } from 'react';
 
 import DashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
 
-import useDashboard from '../../hooks/useDashboard';
+import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
 
 const useLatestActivitiesTable = () => {
-  const widget = useDashboard({
+  const widget = useDashboardWidget({
     title: 'آخرین فعالیت‌ها',
 
     subtitle: 'آخرین عملیات انجام شده',

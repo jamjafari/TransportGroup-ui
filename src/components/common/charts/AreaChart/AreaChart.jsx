@@ -57,12 +57,16 @@ const AreaChart = ({
       }),
     [categories, series],
   );
+  // console.log('categories in v u ch', categories);
 
+  // console.log('series', series);
+
+  // console.log('height', height);
   return (
     <Box
       width="100%"
 
-      height={height}
+      height={320}
     >
       <ResponsiveContainer>
         <RechartsAreaChart data={chartData}>

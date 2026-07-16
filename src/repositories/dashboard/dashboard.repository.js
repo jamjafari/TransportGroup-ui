@@ -7,53 +7,60 @@ class DashboardRepository extends BaseRepository {
     super(dashboardService);
   }
 
-  async getFuelConsumption() {
+  getFuelConsumption = async () => {
+    // console.log('Repository Called');
     return this.service.getFuelConsumption();
-  }
+  };
 
-  async getVehicleStatus() {
+  getVehicleStatus = async () => {
     return this.service.getVehicleStatus();
-  }
-  async getVehicleUsage() {
+  };
+  getVehicleUsage = async () => {
     return this.service.getVehicleUsage();
-  }
-  async getSummary() {
+  };
+  getSummary = async () => {
     return this.service.getSummary();
-  }
-  async getFuelCost() {
+  };
+  getFuelCost = async () => {
     return this.service.getFuelCost();
-  }
-  async getMonthlyDistance() {
+  };
+  getMonthlyDistance = async () => {
     return this.service.getMonthlyDistance();
-  }
-  async getExpenses() {
+  };
+  getExpenses = async () => {
     return this.service.getExpenses();
-  }
-  async getMissions() {
+  };
+  getExpense = async () => {
+    return this.service.getExpense();
+  };
+  getMissions = async () => {
     return this.service.getMissions();
-  }
-  async getDriverPerformance() {
+  };
+  getMissionTrend = async () => {
+    return this.service.getMissionTrend();
+  };
+  getDriverPerformance = async () => {
     return this.service.getDriverPerformance();
-  }
-  async getLatestActivities() {
+  };
+  getLatestActivities = async () => {
     return this.service.getLatestActivities();
-  }
-  async getVehicles() {
+  };
+  getVehicles = async () => {
     return this.service.getVehicles();
-  }
-  async getDrivers() {
+  };
+  getDrivers = async () => {
     return this.service.getDrivers();
-  }
-  async getFuelRecords() {
+  };
+  getFuelRecords = async () => {
     return this.service.getFuelRecords();
-  }
+  };
 
-  async getInsurances() {
+  getInsurances = async () => {
     return this.service.getInsurances();
-  }
-  async getServiceReminders() {
+  };
+  getServiceReminders = async () => {
     return this.service.getServiceReminders();
-  }
+  };
 }
 
 export default new DashboardRepository();

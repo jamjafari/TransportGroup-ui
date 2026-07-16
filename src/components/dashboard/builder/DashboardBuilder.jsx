@@ -16,7 +16,7 @@ const DashboardBuilder = ({ initialDashboard, apiClient }) => {
         onAddTable={() => {}}
         onAddStat={() => {}}
         onSave={() => {
-          console.log(builder.dashboard);
+          // console.log(builder.dashboard);
         }}
       />
 

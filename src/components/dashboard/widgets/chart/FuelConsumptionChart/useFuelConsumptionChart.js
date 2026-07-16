@@ -1,34 +1,45 @@
-import { useMemo } from 'react';
+import DashboardRepository from '@/repositories/dashboard/dashboard.repository';
+
+import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
+
+import useChartSeries from '@/components/common/charts/hooks/useChartSeries';
 
 const useFuelConsumptionChart = () => {
-  return useMemo(
-    () => ({
-      categories: ['1', '5', '10', '15', '20', '25', '30'],
+  const widget = useDashboardWidget({
+    title: 'مصرف سوخت',
+
+    subtitle: ' 30 روز اخیر',
+
+    fetcher: DashboardRepository.getFuelConsumption,
+  });
+
+  const chart = useChartSeries(
+    widget.rows,
+
+    {
+      categoryField: 'day',
 
       series: [
         {
-          name: 'مصرف سوخت',
+          field: 'fuel',
 
-          data: [
-            320,
+          name: 'مصرف',
 
-            410,
-
-            280,
-
-            500,
-
-            360,
-
-            430,
-
-            390,
-          ],
+          color: '#7d2e44',
         },
       ],
-    }),
-    [],
+    },
   );
+  console.log(widget.rows);
+
+  // console.log(chart.categories);
+
+  console.log('series:', chart.series);
+  return {
+    ...widget,
+
+    ...chart,
+  };
 };
 
 export default useFuelConsumptionChart;

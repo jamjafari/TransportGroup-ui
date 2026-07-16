@@ -41,7 +41,7 @@ const LineChart = ({
   });
 
   return (
-    <Box width="100%" height={height}>
+    <Box width="100%" height={320}>
       <ResponsiveContainer>
         <ReLineChart data={data}>
           {grid && <CartesianGrid strokeDasharray="3 3" />}
