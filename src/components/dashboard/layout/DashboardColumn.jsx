@@ -3,6 +3,7 @@ import React, { memo } from 'react';
 import { Grid } from '@mui/material';
 
 import DashboardBreakpoints from './DashboardBreakpoints';
+import DashboardSpacing from './DashboardSpacing';
 
 import {
   DashboardColumnPropTypes,
@@ -24,6 +25,11 @@ const DashboardColumn = ({
 }) => {
   return (
     <Grid
+      container
+      spacing={DashboardSpacing.column}
+      sx={{
+        width: '100%',
+      }}
       size={{
         xs: xs ?? DashboardBreakpoints.xs,
 

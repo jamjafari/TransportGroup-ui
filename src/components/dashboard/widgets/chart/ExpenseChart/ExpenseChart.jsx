@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { LineChartWidget } from '../chartwidgets/LineChartWidget';
+import { AreaChartWidget } from '../chartwidgets/AreaChartWidget';
 
 import useExpenseChart from './useExpenseChart';
 
@@ -19,7 +19,7 @@ const ExpenseChart = ({
   const chart = useExpenseChart();
 
   return (
-    <LineChartWidget
+    <AreaChartWidget
       title={title || chart.title}
 
       subtitle={subtitle || chart.subtitle}

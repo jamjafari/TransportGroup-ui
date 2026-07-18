@@ -67,6 +67,7 @@ const AreaChart = ({
       width="100%"
 
       height={320}
+      sx={{ direction: 'ltr' }}
     >
       <ResponsiveContainer>
         <RechartsAreaChart data={chartData}>

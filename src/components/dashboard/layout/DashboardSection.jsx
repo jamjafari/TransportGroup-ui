@@ -23,7 +23,11 @@ const DashboardSection = ({
   spacing,
 }) => {
   return (
-    <Box>
+    <Box
+      sx={{
+        width: '100%',
+      }}
+    >
       {(title || subtitle) && (
         <Stack
           spacing={0.5}
@@ -34,9 +38,14 @@ const DashboardSection = ({
 
           {subtitle && (
             <Typography
-              variant="body2"
+              variant="h6"
 
               color="text.secondary"
+
+              sx={{
+                textAlign: 'right',
+                width: '100%',
+              }}
             >
               {subtitle}
             </Typography>

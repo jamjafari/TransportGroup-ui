@@ -32,6 +32,7 @@ const BaseCard = ({
       sx={{
         borderRadius: 3,
         height: '100%',
+        width: '100%',
       }}
     >
       {(title || subtitle || icon || action) && (

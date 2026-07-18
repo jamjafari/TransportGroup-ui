@@ -15,6 +15,10 @@ const DashboardGrid = ({ children }) => {
       container
 
       spacing={DashboardSpacing.column}
+
+      sx={{
+        width: '100%',
+      }}
     >
       {children}
     </Grid>

@@ -13,7 +13,7 @@ import { ExpenseChart } from '@/components/dashboard/widgets/chart/ExpenseChart'
 
 const DashboardCharts = () => {
   return (
-    <DashboardSection title="Analytics">
+    <DashboardSection title="آنالیز ها">
       <DashboardGrid>
         <DashboardColumn md={6}>
           <FuelConsumptionChart />

@@ -63,6 +63,8 @@ const BarChart = ({
       width="100%"
 
       height={320}
+
+      sx={{ direction: 'ltr' }}
     >
       <ResponsiveContainer>
         <RechartsBarChart data={chartData}>

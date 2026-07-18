@@ -404,3 +404,32 @@ export const ServiceReminderMock = [
     status: 'Active',
   },
 ];
+export const AlertsMock = [
+  {
+    id: 1,
+    severity: 'error',
+    title: 'Vehicle Insurance',
+    description: 'Insurance has expired.',
+  },
+
+  {
+    id: 2,
+    severity: 'warning',
+    title: 'Vehicle Service',
+    description: '3 vehicles need service.',
+  },
+
+  {
+    id: 3,
+    severity: 'warning',
+    title: 'Expenses',
+    description: '5 expenses are waiting approval.',
+  },
+
+  {
+    id: 4,
+    severity: 'info',
+    title: 'Mission',
+    description: '12 missions registered today.',
+  },
+];

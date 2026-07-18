@@ -42,6 +42,7 @@ const AppChartCard = ({
         display: 'flex',
 
         flexDirection: 'column',
+        direction: 'ltr',
       }}
     >
       <CardHeader

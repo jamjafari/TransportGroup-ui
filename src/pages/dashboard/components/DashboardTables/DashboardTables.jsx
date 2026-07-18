@@ -12,48 +12,55 @@ import { ExpenseTable } from '@/components';
 import { MissionTable } from '@/components';
 import { InsuranceTable } from '@/components';
 import { ServiceReminderTable } from '@/components';
+import { Grid } from '@mui/material';
 
 const DashboardTables = () => {
   return (
     <>
-      <DashboardSection title="Latest Activities">
-        <LatestActivitiesTable />
+      <DashboardSection title=" آخرین فعالیت ها و هزینه ها">
+        <DashboardGrid>
+          <DashboardColumn xl={6}>
+            <LatestActivitiesTable />
+          </DashboardColumn>
+          <DashboardColumn xl={6}>
+            <ExpenseTable />
+          </DashboardColumn>
+        </DashboardGrid>
       </DashboardSection>
 
-      <DashboardSection title="Fleet Information">
+      <DashboardSection title="اطلاعات ناوگان">
         <DashboardGrid>
-          <DashboardColumn lg={6}>
+          <DashboardColumn xl={6}>
             <VehicleTable />
           </DashboardColumn>
 
-          <DashboardColumn lg={6}>
+          <DashboardColumn xl={6}>
             <DriverTable />
           </DashboardColumn>
         </DashboardGrid>
       </DashboardSection>
 
-      <DashboardSection title="Operations">
+      <DashboardSection title="ماموریت ها">
         <DashboardGrid>
-          <DashboardColumn lg={6}>
+          <DashboardColumn xl={6}>
             <MissionTable />
           </DashboardColumn>
 
-          <DashboardColumn lg={6}>
+          <DashboardColumn xl={6}>
             <FuelRecordTable />
           </DashboardColumn>
         </DashboardGrid>
       </DashboardSection>
 
-      <DashboardSection title="Expenses">
-        <ExpenseTable />
-      </DashboardSection>
-
-      <DashboardSection title="Insurance Reminder">
-        <InsuranceTable />
-      </DashboardSection>
-
-      <DashboardSection title="Service Reminder">
-        <ServiceReminderTable />
+      <DashboardSection title="یادآوری بیمه و سرویس">
+        <DashboardGrid>
+          <DashboardColumn xl={6}>
+            <InsuranceTable />
+          </DashboardColumn>
+          <DashboardColumn xl={6}>
+            <ServiceReminderTable />
+          </DashboardColumn>
+        </DashboardGrid>
       </DashboardSection>
     </>
   );

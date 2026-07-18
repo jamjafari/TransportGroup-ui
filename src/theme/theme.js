@@ -5,6 +5,7 @@ import typography from './typography';
 import components from './components';
 
 const theme = createTheme({
+  direction: 'rtl',
   palette: {
     mode: 'light',
 

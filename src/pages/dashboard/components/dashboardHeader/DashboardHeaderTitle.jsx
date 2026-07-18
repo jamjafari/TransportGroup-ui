@@ -6,11 +6,11 @@ const DashboardHeaderTitle = () => {
   return (
     <Stack spacing={0.5}>
       <Typography variant="h4" fontWeight={700}>
-        Dashboard
+        داشبورد
       </Typography>
 
       <Typography variant="body2" color="text.secondary">
-        Fleet Management System
+        سامانه مدیریت نقلیه
       </Typography>
     </Stack>
   );

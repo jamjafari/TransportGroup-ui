@@ -22,11 +22,11 @@ const DashboardStatistics = () => {
   const statistics = useDashboardStatistics();
 
   return (
-    <DashboardSection title="Statistics">
+    <DashboardSection title="آمار ناوگان">
       <DashboardGrid>
-        <DashboardColumn>
+        <DashboardColumn xl={3}>
           <AppMiniStat
-            title="Vehicles"
+            title="خودروها"
 
             value={statistics.vehicleCount}
 
@@ -36,9 +36,9 @@ const DashboardStatistics = () => {
           />
         </DashboardColumn>
 
-        <DashboardColumn>
+        <DashboardColumn xl={3}>
           <AppMiniStat
-            title="Drivers"
+            title="راننده ها"
 
             value={statistics.driverCount}
 
@@ -48,9 +48,9 @@ const DashboardStatistics = () => {
           />
         </DashboardColumn>
 
-        <DashboardColumn>
+        <DashboardColumn xl={3}>
           <AppMiniStat
-            title="Missions"
+            title="ماموریت "
 
             value={statistics.missionCount}
 
@@ -60,9 +60,9 @@ const DashboardStatistics = () => {
           />
         </DashboardColumn>
 
-        <DashboardColumn>
+        <DashboardColumn xl={3}>
           <AppMiniStat
-            title="Expenses"
+            title="هزینه ها"
 
             value={statistics.expenseCount}
 

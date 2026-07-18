@@ -13,6 +13,7 @@ import {
   LatestActivitiesMock,
   InsurancesMock,
   ServiceReminderMock,
+  AlertsMock,
 } from './dashboard.mock';
 
 const delay = (data, ms = 150) =>
@@ -53,12 +54,16 @@ const dashboardService = {
       driverCount: DriversMock.length,
       missionCount: MissionMock.length,
       expenseCount: ExpensesMock.length,
+      alerts: await this.getAlerts(),
     });
   },
-
+  async getAlerts() {
+    return delay(AlertsMock);
+  },
   async getFuelConsumption() {
     return delay(FuelConsumptionMock);
   },
+
   async getExpense() {
     return delay(ExpenseMock);
   },

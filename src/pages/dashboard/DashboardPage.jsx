@@ -10,6 +10,7 @@ import { DashboardHeader } from './components/DashboardHeader';
 import { DashboardStatistics } from './components/DashboardStatistics';
 import { DashboardCharts } from './components/DashboardCharts';
 import { DashboardTables } from './components/DashboardTables';
+import { DashboardAlerts } from './components/DashboardAlerts';
 
 import useDashboardPage from './hooks/useDashboardPage';
 
@@ -29,7 +30,7 @@ const DashboardPage = () => {
       <DashboardHeader loading={loading} onRefresh={refresh} />
 
       <DashboardStatistics />
-
+      <DashboardAlerts />
       <DashboardCharts />
 
       <DashboardTables />

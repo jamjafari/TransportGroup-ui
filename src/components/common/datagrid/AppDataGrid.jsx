@@ -161,6 +161,9 @@ const AppDataGrid = ({
 
               onRowClick={onRowClick}
               onRowDoubleClick={onRowDoubleClick}
+              sx={{
+                direction: 'rtl',
+              }}
             />
           )}
         </Table>

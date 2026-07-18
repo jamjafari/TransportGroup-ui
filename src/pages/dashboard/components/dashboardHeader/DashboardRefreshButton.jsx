@@ -5,7 +5,7 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 const DashboardRefreshButton = ({ onRefresh }) => {
   return (
     <Button variant="contained" startIcon={<RefreshIcon />} onClick={onRefresh}>
-      Refresh
+      بروزرسانی
     </Button>
   );
 };

@@ -61,6 +61,9 @@ class DashboardRepository extends BaseRepository {
   getServiceReminders = async () => {
     return this.service.getServiceReminders();
   };
+  getAlerts = async () => {
+    return this.service.getAlerts();
+  };
 }
 
 export default new DashboardRepository();

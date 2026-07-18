@@ -11,9 +11,16 @@ const AppMiniStat = ({ title, value, icon, loading }) => {
       sx={{
         p: 2,
         borderRadius: 2,
+
+        width: '100%',
       }}
     >
-      <Box display="flex" alignItems="center" justifyContent="space-between">
+      <Box
+        display="flex"
+        flexDirection="row-reverse"
+        alignItems="center"
+        justifyContent="space-between"
+      >
         <Box>
           <Typography variant="caption" color="text.secondary">
             {title}

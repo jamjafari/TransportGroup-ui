@@ -16,7 +16,7 @@ const DashboardContainer = ({
 }) => {
   return (
     <Container
-      maxWidth={maxWidth}
+      maxWidth={false}
 
       sx={{
         py: DashboardSpacing.page,

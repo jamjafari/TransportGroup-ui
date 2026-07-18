@@ -14,7 +14,7 @@ const DashboardHeaderActions = ({ loading, onRefresh, onFilter, onExport }) => {
         startIcon={<FileDownloadIcon />}
         onClick={onExport}
       >
-        Export
+        گزارش
       </Button>
 
       <Button
@@ -22,7 +22,7 @@ const DashboardHeaderActions = ({ loading, onRefresh, onFilter, onExport }) => {
         startIcon={<FilterAltIcon />}
         onClick={onFilter}
       >
-        Filter
+        جستجو
       </Button>
 
       <Button
@@ -31,7 +31,7 @@ const DashboardHeaderActions = ({ loading, onRefresh, onFilter, onExport }) => {
         disabled={loading}
         onClick={onRefresh}
       >
-        Refresh
+        بروزرسانی
       </Button>
     </Stack>
   );

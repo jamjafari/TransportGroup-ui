@@ -2,12 +2,12 @@ import { useMemo } from 'react';
 
 import DashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
 
-import useDashboard from '../../hooks/useDashboard';
+import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
 
 import DriverStatusCell from './DriverStatusCell';
 
 const useDriverTable = () => {
-  const widget = useDashboard({
+  const widget = useDashboardWidget({
     title: 'رانندگان',
 
     subtitle: 'وضعیت رانندگان',
