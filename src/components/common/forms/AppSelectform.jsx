@@ -8,9 +8,12 @@ import {
   FormHelperText,
 } from '@mui/material';
 
-import { AppSelectPropTypes, AppSelectDefaultProps } from './AppSelect.types';
+import {
+  AppSelectPropTypes,
+  AppSelectDefaultProps,
+} from './AppSelectform.types';
 
-const AppSelect = ({
+const AppSelectform = ({
   id,
   name,
   label,
@@ -105,8 +108,8 @@ const AppSelect = ({
   );
 };
 
-AppSelect.propTypes = AppSelectPropTypes;
+AppSelectform.propTypes = AppSelectPropTypes;
 
-AppSelect.defaultProps = AppSelectDefaultProps;
+AppSelectform.defaultProps = AppSelectDefaultProps;
 
-export default memo(AppSelect);
+export default memo(AppSelectform);

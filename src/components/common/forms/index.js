@@ -8,7 +8,7 @@ export { default as AppFormActions } from './AppFormActions';
 
 /* Inputs */
 
-export { default as AppAutocomplete } from './AppAutocomplete';
+export { default as AppAutocompleteform } from './AppAutocompleteform';
 
 export { default as AppCheckbox } from './AppCheckbox';
 
@@ -20,7 +20,7 @@ export { default as AppFileUpload } from './AppFileUpload';
 
 export { default as AppRadioGroup } from './AppRadioGroup';
 
-export { default as AppSelect } from './AppSelect';
+export { default as AppSelectform } from './AppSelectform';
 
 export { default as AppSwitch } from './AppSwitch';
 
@@ -36,7 +36,7 @@ export { default as FormHelperText } from './FormHelperText';
 
 /* Jalali */
 
-// export { default as AppJalaliDatePicker } from './appjalalidatepicker/AppJalaliDatePicker';
+//export * from './appjalalidatepicker';
 
 /* Text */
 

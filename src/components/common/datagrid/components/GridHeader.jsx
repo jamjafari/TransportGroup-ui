@@ -51,7 +51,7 @@ const GridHeader = ({
             padding="checkbox"
 
             sx={{
-              width: 56,
+              width: 'auto',
 
               position: stickyHeader ? 'sticky' : 'static',
 
@@ -60,6 +60,14 @@ const GridHeader = ({
               zIndex: 5,
 
               bgcolor: 'background.paper',
+              '& .MuiDataGrid-columnHeaderTitle': {
+                width: '100%',
+                textAlign: 'right',
+              },
+
+              '& .MuiDataGrid-columnHeader': {
+                justifyContent: 'flex-end',
+              },
             }}
           >
             <Checkbox
@@ -111,6 +119,16 @@ const GridHeader = ({
                 justifyContent="space-between"
 
                 gap={1}
+                sx={{
+                  '& .MuiDataGrid-columnHeaderTitle': {
+                    width: '100%',
+                    textAlign: 'right',
+                  },
+
+                  '& .MuiDataGrid-columnHeader': {
+                    justifyContent: 'flex-end',
+                  },
+                }}
               >
                 {sortable && column.sortable !== false ? (
                   <TableSortLabel
@@ -142,6 +160,16 @@ const GridHeader = ({
                   display="flex"
 
                   alignItems="center"
+                  sx={{
+                    '& .MuiDataGrid-columnHeaderTitle': {
+                      width: '100%',
+                      textAlign: 'right',
+                    },
+
+                    '& .MuiDataGrid-columnHeader': {
+                      justifyContent: 'flex-end',
+                    },
+                  }}
                 >
                   {column.filterable && (
                     <FilterAltOutlinedIcon

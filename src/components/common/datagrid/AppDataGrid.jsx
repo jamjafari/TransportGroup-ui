@@ -162,7 +162,16 @@ const AppDataGrid = ({
               onRowClick={onRowClick}
               onRowDoubleClick={onRowDoubleClick}
               sx={{
-                direction: 'rtl',
+                direction: 'ltr',
+
+                '& .MuiDataGrid-columnHeaderTitle': {
+                  width: '100%',
+                  textAlign: 'right',
+                },
+
+                '& .MuiDataGrid-cell': {
+                  textAlign: 'right',
+                },
               }}
             />
           )}

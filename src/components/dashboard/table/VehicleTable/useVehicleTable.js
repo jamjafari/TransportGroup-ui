@@ -18,7 +18,7 @@ const useVehicleTable = () => {
       {
         field: 'plateNumber',
         headerName: 'پلاک',
-        width: 130,
+        flex: 1,
       },
 
       {
@@ -36,14 +36,15 @@ const useVehicleTable = () => {
       {
         field: 'odometer',
         headerName: 'کارکرد',
-        width: 120,
+        flex: 1,
         align: 'right',
       },
 
       {
         field: 'status',
         headerName: 'وضعیت',
-        width: 130,
+        flex: 1,
+        align: 'right',
       },
     ],
     [],

@@ -51,6 +51,9 @@ const GridBody = ({
             onClick={() => onRowClick?.(row)}
 
             onDoubleClick={() => onRowDoubleClick?.(row)}
+
+            disableColumnResize
+            sx={{ width: 'auto' }}
           />
         );
       })}

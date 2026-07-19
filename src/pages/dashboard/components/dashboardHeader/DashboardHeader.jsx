@@ -1,12 +1,12 @@
-import { Stack, Box } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 
 import DashboardHeaderTitle from './DashboardHeaderTitle';
 import DashboardHeaderInfo from './DashboardHeaderInfo';
 import DashboardHeaderActions from './DashboardHeaderActions';
 
 const DashboardHeader = ({
-  lastUpdate,
-  loading,
+  loading = false,
+  lastUpdate = null,
   onRefresh,
   onFilter,
   onExport,
@@ -20,19 +20,27 @@ const DashboardHeader = ({
         spacing={2}
         sx={{
           direction: 'rtl',
+
           mb: 4,
+
           px: 4,
           py: 3,
+
           borderRadius: 3,
-          bgcolor: 'grey.50',
+
+          bgcolor: 'grey.100',
+
           border: '1px solid',
           borderColor: 'divider',
         }}
       >
+        {/* عنوان داشبورد */}
         <DashboardHeaderTitle />
 
+        {/* زمان آخرین بروزرسانی */}
         <DashboardHeaderInfo lastUpdate={lastUpdate} />
 
+        {/* عملیات داشبورد */}
         <DashboardHeaderActions
           loading={loading}
           onRefresh={onRefresh}

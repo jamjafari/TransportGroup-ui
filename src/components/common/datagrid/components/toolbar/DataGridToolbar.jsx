@@ -30,6 +30,7 @@ const DataGridToolbar = ({
       justifyContent="space-between"
       alignItems="center"
       p={2}
+      dir="rtl"
     >
       <Box display="flex" gap={2}>
         <ToolbarSearch

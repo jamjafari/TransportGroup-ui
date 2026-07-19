@@ -34,7 +34,7 @@ const useFuelConsumptionChart = () => {
 
   // console.log(chart.categories);
 
-  console.log('series:', chart.series);
+  // console.log('series:', chart.series);
   return {
     ...widget,
 

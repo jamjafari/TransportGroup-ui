@@ -5,9 +5,9 @@ import { Autocomplete, TextField } from '@mui/material';
 import {
   AppAutocompletePropTypes,
   AppAutocompleteDefaultProps,
-} from './AppAutocomplete.types';
+} from './AppAutocompleteform.types';
 
-const AppAutocomplete = ({
+const AppAutocompleteform = ({
   id,
   name,
   label,
@@ -80,8 +80,8 @@ const AppAutocomplete = ({
   );
 };
 
-AppAutocomplete.propTypes = AppAutocompletePropTypes;
+AppAutocompleteform.propTypes = AppAutocompletePropTypes;
 
-AppAutocomplete.defaultProps = AppAutocompleteDefaultProps;
+AppAutocompleteform.defaultProps = AppAutocompleteDefaultProps;
 
-export default memo(AppAutocomplete);
+export default memo(AppAutocompleteform);

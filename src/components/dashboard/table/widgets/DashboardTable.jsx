@@ -60,8 +60,8 @@ const DashboardTable = ({
 
     [columns],
   );
-  console.log('dashboardTable column:', columns);
-  console.log('dashboardTable row:', rows);
+  // console.log('dashboardTable column:', columns);
+  // console.log('dashboardTable row:', rows);
   return (
     <BaseTableWidget
       title={title}

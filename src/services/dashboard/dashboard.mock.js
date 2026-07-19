@@ -414,7 +414,7 @@ export const AlertsMock = [
 
   {
     id: 2,
-    severity: 'warning',
+    severity: 'هشدار',
     title: 'Vehicle Service',
     description: '3 vehicles need service.',
   },

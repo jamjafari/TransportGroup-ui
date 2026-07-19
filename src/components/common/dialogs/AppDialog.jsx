@@ -70,14 +70,20 @@ const AppDialog = ({
         </DialogTitle>
       )}
 
-      <DialogContent dividers={dividers}>
+      <DialogContent
+        dividers={dividers}
+        sx={{
+          direction: 'rtl',
+        }}
+      >
         {loading ? (
           <Box
             display="flex"
-
-            justifyContent="center"
-
-            py={5}
+            justifyContent="space-between"
+            alignItems="center"
+            sx={{
+              direction: 'rtl',
+            }}
           >
             <CircularProgress />
           </Box>
@@ -86,7 +92,15 @@ const AppDialog = ({
         )}
       </DialogContent>
 
-      {actions && <DialogActions>{actions}</DialogActions>}
+      {actions && (
+        <DialogActions
+          sx={{
+            direction: 'rtl',
+          }}
+        >
+          {actions}
+        </DialogActions>
+      )}
     </Dialog>
   );
 };

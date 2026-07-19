@@ -18,6 +18,7 @@ const DashboardGrid = ({ children }) => {
 
       sx={{
         width: '100%',
+        flex: 1,
       }}
     >
       {children}

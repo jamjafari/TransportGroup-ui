@@ -30,26 +30,27 @@ const useInsuranceTable = () => {
       {
         field: 'policyNumber',
         headerName: 'شماره بیمه',
-        width: 150,
+        flex: 1,
       },
 
       {
         field: 'expireDate',
         headerName: 'تاریخ انقضا',
-        width: 120,
+        flex: 1,
       },
 
       {
         field: 'remainDays',
         headerName: 'روز مانده',
-        width: 110,
+        flex: 1,
         align: 'center',
       },
 
       {
         field: 'status',
         headerName: 'وضعیت',
-        width: 130,
+        flex: 1,
+        align: 'right',
       },
     ],
     [],

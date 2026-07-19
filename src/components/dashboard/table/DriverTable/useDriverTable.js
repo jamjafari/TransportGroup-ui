@@ -20,32 +20,32 @@ const useDriverTable = () => {
       {
         field: 'fullName',
         headerName: 'نام راننده',
-        flex: 1.5,
+        flex: 1,
       },
 
       {
         field: 'nationalCode',
         headerName: 'کد ملی',
-        width: 120,
+        flex: 1,
       },
 
       {
         field: 'phoneNumber',
         headerName: 'موبایل',
-        width: 130,
+        flex: 1,
       },
 
       {
         field: 'missionCount',
         headerName: 'ماموریت',
-        width: 100,
-        align: 'center',
+        flex: 1,
       },
 
       {
         field: 'status',
         headerName: 'وضعیت',
-        width: 140,
+        flex: 1,
+        align: 'right',
 
         renderCell: DriverStatusCell,
       },

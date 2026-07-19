@@ -18,7 +18,7 @@ const useFuelRecordTable = () => {
       {
         field: 'fuelDate',
         headerName: 'تاریخ',
-        width: 110,
+        flex: 1,
       },
 
       {
@@ -36,14 +36,14 @@ const useFuelRecordTable = () => {
       {
         field: 'fuelAmount',
         headerName: 'لیتر',
-        width: 90,
+        flex: 1,
         align: 'right',
       },
 
       {
         field: 'totalCost',
         headerName: 'هزینه',
-        width: 130,
+        flex: 1,
         align: 'right',
       },
 
@@ -55,7 +55,7 @@ const useFuelRecordTable = () => {
     ],
     [],
   );
-  console.log('fuel record:', columns);
+  // console.log('fuel record:', columns);
   return {
     ...widget,
 

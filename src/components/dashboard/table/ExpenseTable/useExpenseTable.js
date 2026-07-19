@@ -18,7 +18,7 @@ const useExpenseTable = () => {
       {
         field: 'expenseDate',
         headerName: 'تاریخ',
-        width: 110,
+        flex: 1,
       },
 
       {
@@ -42,14 +42,14 @@ const useExpenseTable = () => {
       {
         field: 'amount',
         headerName: 'مبلغ',
-        width: 140,
-        align: 'right',
+        flex: 1,
       },
 
       {
         field: 'status',
         headerName: 'وضعیت',
-        width: 130,
+        flex: 1,
+        align: 'right',
       },
     ],
     [],

@@ -20,7 +20,7 @@ const useLatestActivitiesTable = () => {
 
         headerName: 'فعالیت',
 
-        flex: 2,
+        flex: 1,
       },
 
       {
@@ -44,7 +44,7 @@ const useLatestActivitiesTable = () => {
 
         headerName: 'ساعت',
 
-        width: 90,
+        flex: 1,
       },
     ],
     [],

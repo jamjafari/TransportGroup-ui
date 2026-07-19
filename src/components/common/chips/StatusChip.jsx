@@ -86,6 +86,16 @@ const StatusChip = ({
       icon={item.icon}
 
       variant="filled"
+      sx={{
+        '& .MuiDataGrid-columnHeaderTitle': {
+          width: '100%',
+          textAlign: 'right',
+        },
+
+        '& .MuiDataGrid-columnHeader': {
+          justifyContent: 'flex-end',
+        },
+      }}
     />
   );
 };

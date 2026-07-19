@@ -49,11 +49,7 @@ const GridCell = ({
 
       default:
         return (
-          <Typography
-            variant="body2"
-
-            noWrap
-          >
+          <Typography variant="body2" headeralign="right" align="right" noWrap>
             {value ?? '-'}
           </Typography>
         );
@@ -66,6 +62,7 @@ const GridCell = ({
 
       sx={{
         whiteSpace: 'nowrap',
+        align: 'right',
       }}
     >
       {renderValue()}

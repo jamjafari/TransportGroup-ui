@@ -70,5 +70,5 @@ export * from './timeline';
 /* Tooltip */
 export * from './toolbar';
 
-/* Typography */
-//export * from './typography';
+/* inputs */
+export * from './inputs';

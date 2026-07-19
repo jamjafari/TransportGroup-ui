@@ -30,28 +30,29 @@ const useServiceReminderTable = () => {
       {
         field: 'currentKm',
         headerName: 'کارکرد فعلی',
-        width: 120,
+        flex: 1,
         align: 'right',
       },
 
       {
         field: 'serviceKm',
         headerName: 'سرویس در',
-        width: 120,
+        flex: 1,
         align: 'right',
       },
 
       {
         field: 'remainKm',
         headerName: 'باقیمانده',
-        width: 110,
+        flex: 1,
         align: 'right',
       },
 
       {
         field: 'status',
         headerName: 'وضعیت',
-        width: 130,
+        flex: 1,
+        align: 'right',
       },
     ],
     [],

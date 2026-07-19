@@ -18,7 +18,7 @@ const useMissionTable = () => {
       {
         field: 'missionNumber',
         headerName: 'شماره',
-        width: 90,
+        flex: 1,
       },
 
       {
@@ -48,13 +48,14 @@ const useMissionTable = () => {
       {
         field: 'missionDate',
         headerName: 'تاریخ',
-        width: 120,
+        flex: 1,
       },
 
       {
         field: 'status',
         headerName: 'وضعیت',
-        width: 130,
+        flex: 1,
+        align: 'right',
       },
     ],
     [],
