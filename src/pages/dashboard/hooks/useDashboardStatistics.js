@@ -2,10 +2,10 @@ import { useMemo } from 'react';
 
 import useDashboardPage from './useDashboardPage';
 
-const useDashboardStatistics = () => {
+const useDashboardStatistics = (filters = {}) => {
   const { data, loading, error, refresh } = useDashboardPage();
 
-  const statistics = useMemo(() => {
+  const filteredStatistics = useMemo(() => {
     if (!data?.summary) {
       return {
         vehicleCount: 0,
@@ -15,18 +15,41 @@ const useDashboardStatistics = () => {
       };
     }
 
-    return {
+    let summary = {
       vehicleCount: data.summary.vehicleCount,
       driverCount: data.summary.driverCount,
       missionCount: data.summary.missionCount,
       expenseCount: data.summary.expenseCount,
     };
-  }, [data]);
+
+    /*
+        Search Filters
+    */
+    if (filters.vehicleId) {
+      summary.vehicleCount = 1;
+    }
+
+    if (filters.driverId) {
+      summary.driverCount = 1;
+    }
+
+    if (filters.missionId) {
+      summary.missionCount = 1;
+    }
+
+    if (filters.expenseType) {
+      summary.expenseCount = 1;
+    }
+
+    return summary;
+  }, [data, filters]);
 
   return {
-    ...statistics,
+    ...filteredStatistics,
+
     loading,
     error,
+
     refresh,
   };
 };

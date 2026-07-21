@@ -15,14 +15,14 @@ const AppDateRangePicker = ({ label, value, disabled, onChange }) => {
   const handleFromDate = (event) => {
     onChange({
       ...value,
-      fromDate: event.target.value,
+      from: event.target.value,
     });
   };
 
   const handleToDate = (event) => {
     onChange({
       ...value,
-      toDate: event.target.value,
+      to: event.target.value,
     });
   };
 
@@ -46,14 +46,14 @@ const AppDateRangePicker = ({ label, value, disabled, onChange }) => {
 
         <AppDatePicker
           label="از تاریخ"
-          value={value?.fromDate}
+          value={value?.from}
           disabled={disabled}
           onChange={handleFromDate}
         />
 
         <AppDatePicker
           label="تا تاریخ"
-          value={value?.toDate}
+          value={value?.to}
           disabled={disabled}
           onChange={handleToDate}
         />

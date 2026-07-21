@@ -3,7 +3,7 @@ import { Box, Stack } from '@mui/material';
 import DashboardHeaderTitle from './DashboardHeaderTitle';
 import DashboardHeaderInfo from './DashboardHeaderInfo';
 import DashboardHeaderActions from './DashboardHeaderActions';
-
+import DashboardSearchSummary from '../DashboardSearchSummary';
 const DashboardHeader = ({
   loading = false,
   lastUpdate = null,
@@ -47,6 +47,7 @@ const DashboardHeader = ({
           onFilter={onFilter}
           onExport={onExport}
         />
+        <DashboardSearchSummary />
       </Stack>
     </Box>
   );

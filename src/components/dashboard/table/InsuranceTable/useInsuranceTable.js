@@ -3,14 +3,16 @@ import { useMemo } from 'react';
 import DashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
 
 import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
+import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
 
 const useInsuranceTable = () => {
+  const { filters } = useDashboardSearch();
   const widget = useDashboardWidget({
     title: 'بیمه نامه ها',
 
     subtitle: 'بیمه های نزدیک به انقضا',
 
-    fetcher: DashboardRepository.getInsurances,
+    fetcher: () => DashboardRepository.getInsurances(filters),
   });
 
   const columns = useMemo(

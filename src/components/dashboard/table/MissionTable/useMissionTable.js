@@ -3,14 +3,17 @@ import { useMemo } from 'react';
 import DashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
 
 import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
+import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
 
 const useMissionTable = () => {
+  const { filters } = useDashboardSearch();
+
   const widget = useDashboardWidget({
     title: 'آخرین ماموریت ها',
 
     subtitle: 'آخرین ماموریت های ثبت شده',
 
-    fetcher: DashboardRepository.getMissions,
+    fetcher: () => DashboardRepository.getMissions(filters),
   });
 
   const columns = useMemo(

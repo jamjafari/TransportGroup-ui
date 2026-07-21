@@ -3,14 +3,17 @@ import { useMemo } from 'react';
 import DashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
 
 import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
+import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
 
 const useVehicleTable = () => {
+  const { filters } = useDashboardSearch();
+
   const widget = useDashboardWidget({
     title: 'وضعیت خودروها',
 
     subtitle: 'ناوگان فعال',
 
-    fetcher: DashboardRepository.getVehicles,
+    fetcher: () => DashboardRepository.getVehicles(filters),
   });
 
   const columns = useMemo(

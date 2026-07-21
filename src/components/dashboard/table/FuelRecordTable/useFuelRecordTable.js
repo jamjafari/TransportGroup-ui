@@ -3,14 +3,17 @@ import { useMemo } from 'react';
 import DashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
 
 import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
+import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
 
 const useFuelRecordTable = () => {
+  const { filters } = useDashboardSearch();
+
   const widget = useDashboardWidget({
     title: 'آخرین سوخت گیری',
 
     subtitle: 'آخرین تراکنش های سوخت',
 
-    fetcher: DashboardRepository.getFuelRecords,
+    fetcher: () => DashboardRepository.getFuelRecords(filters),
   });
 
   const columns = useMemo(

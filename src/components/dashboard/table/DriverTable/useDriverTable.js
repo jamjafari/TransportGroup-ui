@@ -3,16 +3,19 @@ import { useMemo } from 'react';
 import DashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
 
 import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
+import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
 
 import DriverStatusCell from './DriverStatusCell';
 
 const useDriverTable = () => {
+  const { filters } = useDashboardSearch();
+
   const widget = useDashboardWidget({
     title: 'رانندگان',
 
     subtitle: 'وضعیت رانندگان',
 
-    fetcher: DashboardRepository.getDrivers,
+    fetcher: () => DashboardRepository.getDrivers(filters),
   });
 
   const columns = useMemo(

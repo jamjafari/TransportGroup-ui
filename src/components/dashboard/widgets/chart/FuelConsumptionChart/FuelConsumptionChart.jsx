@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { AreaChartWidget } from '../chartwidgets/AreaChartWidget';
+import { BarChartWidget } from '../chartwidgets/BarChartWidget';
 
 import useFuelConsumptionChart from './useFuelConsumptionChart';
 
@@ -8,7 +8,7 @@ const FuelConsumptionChart = () => {
   const chart = useFuelConsumptionChart();
 
   return (
-    <AreaChartWidget
+    <BarChartWidget
       title={chart.title}
 
       subtitle={chart.subtitle}

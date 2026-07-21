@@ -3,14 +3,17 @@ import { useMemo } from 'react';
 import DashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
 
 import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
+import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
 
 const useExpenseTable = () => {
+  const { filters } = useDashboardSearch();
+
   const widget = useDashboardWidget({
     title: 'آخرین هزینه ها',
 
     subtitle: 'آخرین هزینه های ثبت شده',
 
-    fetcher: DashboardRepository.getExpenses,
+    fetcher: () => DashboardRepository.getExpenses(filters),
   });
 
   const columns = useMemo(

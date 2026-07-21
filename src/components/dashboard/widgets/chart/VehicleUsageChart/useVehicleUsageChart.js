@@ -4,13 +4,16 @@ import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
 
 import useChartSeries from '../../../../common/charts/hooks/useChartSeries';
 
+import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
+
 const useVehicleUsageChart = () => {
+  const { filters } = useDashboardSearch();
   const widget = useDashboardWidget({
     title: 'استفاده از ناوگان',
 
     subtitle: '30 روز اخیر',
 
-    fetcher: DashboardRepository.getVehicleUsage,
+    fetcher: () => DashboardRepository.getVehicleUsage(filters),
   });
 
   const chart = useChartSeries(
@@ -30,11 +33,7 @@ const useVehicleUsageChart = () => {
       ],
     },
   );
-  console.log(widget.rows);
 
-  console.log(chart.categories);
-
-  console.log(chart.series);
   return {
     ...widget,
 

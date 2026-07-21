@@ -3,25 +3,28 @@ import DashboardRepository from '@/repositories/dashboard/dashboard.repository';
 import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
 
 import useChartSeries from '../../../../common/charts/hooks/useChartSeries';
+import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
 
 const useMissionChart = () => {
+  const { filters } = useDashboardSearch();
+
   const widget = useDashboardWidget({
-    title: 'مأموریت‌ها',
+    title: 'ماموریت ها',
 
-    subtitle: '30 روز اخیر',
+    subtitle: 'تعداد ماموریت ها در 12 ماه گذشته',
 
-    fetcher: DashboardRepository.getMissionTrend,
+    fetcher: () => DashboardRepository.getMissionTrend(filters),
   });
 
   const chart = useChartSeries(
     widget.rows,
 
     {
-      categoryField: 'day',
+      categoryField: 'month',
 
       series: [
         {
-          field: 'count',
+          field: 'missionCount',
 
           name: 'تعداد مأموریت',
 

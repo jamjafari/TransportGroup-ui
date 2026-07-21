@@ -16,10 +16,13 @@ import RouteIcon from '@mui/icons-material/Route';
 
 import PaymentsIcon from '@mui/icons-material/Payments';
 
+import useDashboardSearch from '../../hooks/useDashboardSearch';
 import useDashboardStatistics from '../../hooks/useDashboardStatistics';
 
 const DashboardStatistics = () => {
-  const statistics = useDashboardStatistics();
+  const { filters } = useDashboardSearch();
+
+  const statistics = useDashboardStatistics(filters);
 
   return (
     <DashboardSection title="آمار ناوگان">

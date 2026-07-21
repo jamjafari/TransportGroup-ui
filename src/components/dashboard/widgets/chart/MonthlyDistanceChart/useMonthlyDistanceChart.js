@@ -4,24 +4,28 @@ import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
 
 import useChartSeries from '../../../../common/charts/hooks/useChartSeries';
 
+import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
+
 const useMonthlyDistanceChart = () => {
+  const { filters } = useDashboardSearch();
+
   const widget = useDashboardWidget({
     title: 'مسافت طی شده',
 
-    subtitle: '30 روز اخیر',
+    subtitle: 'مسافت طی شده در 12 ماه گذشته',
 
-    fetcher: DashboardRepository.getMonthlyDistance,
+    fetcher: () => DashboardRepository.getMonthlyDistance(filters),
   });
 
   const chart = useChartSeries(
     widget.rows,
 
     {
-      categoryField: 'day',
+      categoryField: 'month',
 
       series: [
         {
-          field: 'distance',
+          field: 'distanceKm',
 
           name: 'کیلومتر',
 

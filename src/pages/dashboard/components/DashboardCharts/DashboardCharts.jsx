@@ -27,17 +27,17 @@ const DashboardCharts = () => {
           <MonthlyDistanceChart />
         </DashboardColumn>
 
-        <DashboardColumn md={6}>
+        {/* <DashboardColumn md={6}>
           <VehicleUsageChart />
-        </DashboardColumn>
+        </DashboardColumn> */}
 
         <DashboardColumn md={6}>
           <MissionChart />
         </DashboardColumn>
 
-        <DashboardColumn md={6}>
+        {/* <DashboardColumn md={6}>
           <DriverPerformanceChart />
-        </DashboardColumn>
+        </DashboardColumn> */}
       </DashboardGrid>
     </DashboardSection>
   );

@@ -3,14 +3,16 @@ import { useMemo } from 'react';
 import DashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
 
 import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
+import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
 
 const useServiceReminderTable = () => {
+  const { filters } = useDashboardSearch();
   const widget = useDashboardWidget({
     title: 'سرویس های دوره ای',
 
     subtitle: 'سرویس های نزدیک به موعد',
 
-    fetcher: DashboardRepository.getServiceReminders,
+    fetcher: () => DashboardRepository.getServiceReminders(filters),
   });
 
   const columns = useMemo(

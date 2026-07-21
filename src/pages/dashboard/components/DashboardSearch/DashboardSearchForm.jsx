@@ -24,7 +24,10 @@ const DashboardSearchForm = () => {
 
     updateFilters,
   } = useDashboardSearch();
-
+  // console.log('searchform fuelType:', fuelTypes);
+  // console.log(expenseTypes);
+  // console.log(insuranceStatusOptions);
+  // console.log(serviceStatusOptions);
   return (
     <Stack spacing={3}>
       {/* Row 1 */}
@@ -76,13 +79,14 @@ const DashboardSearchForm = () => {
         <DashboardColumn md={6}>
           <AppSelect
             label="نوع هزینه"
-            value={filters.expenseType}
+            value={filters.expenseTypeId}
             items={expenseTypes}
-            onChange={(value) =>
+
+            onChange={(value) => {
               updateFilters({
-                expenseType: value,
-              })
-            }
+                expenseTypeId: value,
+              });
+            }}
           />
         </DashboardColumn>
       </DashboardGrid>
@@ -93,11 +97,11 @@ const DashboardSearchForm = () => {
         <DashboardColumn md={6}>
           <AppSelect
             label="نوع سوخت"
-            value={filters.fuelType}
+            value={filters.fuelTypeId}
             items={fuelTypes}
             onChange={(value) =>
               updateFilters({
-                fuelType: value,
+                fuelTypeId: value,
               })
             }
           />
@@ -137,11 +141,13 @@ const DashboardSearchForm = () => {
           <AppDateRangePicker
             label="بازه زمانی"
             value={filters.dateRange}
-            onChange={(value) =>
+            onChange={(value) => {
+              console.log('DateRange', value);
+
               updateFilters({
                 dateRange: value,
-              })
-            }
+              });
+            }}
           />
         </DashboardColumn>
       </DashboardGrid>

@@ -6,7 +6,7 @@ import useDashboardSearch from '../../hooks/useDashboardSearch';
 
 import useDashboardRefresh from '../../hooks/useDashboardRefresh';
 const DashboardSearchActions = ({ onClose }) => {
-  const { clearFilters, applyFilters } = useDashboardSearch();
+  const { applyFilters, clearFilters, hasActiveFilters } = useDashboardSearch();
   const { refreshDashboard } = useDashboardRefresh();
   const handleApplyFilters = () => {
     applyFilters();
@@ -21,6 +21,9 @@ const DashboardSearchActions = ({ onClose }) => {
 
     refreshDashboard();
   };
+  const handleCancel = () => {
+    onClose?.();
+  };
   return (
     <Stack
       direction="row"
@@ -29,12 +32,17 @@ const DashboardSearchActions = ({ onClose }) => {
         mt: 3,
       }}
     >
-      <AppButton color="error" onClick={handleClearFilters}>
+      <AppButton
+        variant="outlined"
+        color="inherit"
+        disabled={!hasActiveFilters()}
+        onClick={handleClearFilters}
+      >
         حذف فیلترها
       </AppButton>
 
       <Stack direction="row" spacing={1}>
-        <AppButton variant="outlined" onClick={onClose}>
+        <AppButton variant="outlined" onClick={handleCancel}>
           انصراف
         </AppButton>
 

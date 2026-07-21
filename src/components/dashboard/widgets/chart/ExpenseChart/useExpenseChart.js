@@ -2,19 +2,22 @@ import DashboardRepository from '@/repositories/dashboard/dashboard.repository';
 
 import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
 import useChartSeries from '../../../../common/charts/hooks/useChartSeries';
+import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
 
 const useExpenseChart = () => {
+  const { filters } = useDashboardSearch();
   const widget = useDashboardWidget({
-    title: 'روند هزینه‌ها',
-    subtitle: '30 روز اخیر',
-    fetcher: DashboardRepository.getExpense,
+    title: 'هزینه‌های ماهیانه',
+
+    subtitle: 'هزینه‌های ۱۲ ماه گذشته',
+    fetcher: () => DashboardRepository.getExpense(filters),
   });
 
   const chart = useChartSeries(
     widget.rows,
 
     {
-      categoryField: 'day',
+      categoryField: 'month',
 
       series: [
         {

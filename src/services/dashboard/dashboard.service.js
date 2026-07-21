@@ -4,7 +4,6 @@ import {
   FuelRecordMock,
   ExpenseMock,
   MissionMock,
-  MissionTrendMock,
   FuelConsumptionMock,
   ExpensesMock,
   MonthlyDistanceMock,
@@ -32,7 +31,6 @@ const dashboardService = {
         monthlyDistance: await this.getMonthlyDistance(),
         driverPerformance: await this.getDriverPerformance(),
         misiontrend: await this.getMissionTrend(),
-        misiontrend: await this.getExpense(),
       },
 
       tables: {
@@ -60,6 +58,7 @@ const dashboardService = {
   async getAlerts() {
     return delay(AlertsMock);
   },
+
   async getFuelConsumption() {
     return delay(FuelConsumptionMock);
   },
@@ -92,7 +91,7 @@ const dashboardService = {
     return delay(MissionMock);
   },
   async getMissionTrend() {
-    return delay(MissionTrendMock);
+    return delay(MissionMock);
   },
 
   async getDriverPerformance() {
