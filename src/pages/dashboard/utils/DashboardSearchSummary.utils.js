@@ -11,6 +11,12 @@ const getDateRangeTitle = (dateRange) => {
 
   return `${from} - ${to}`;
 };
+const statusColorLabels = {
+  success: 'سبز',
+  warning: 'زرد',
+  error: 'قرمز',
+  primary: 'آبی',
+};
 
 export const buildDashboardSearchSummary = (
   filters,
@@ -18,6 +24,7 @@ export const buildDashboardSearchSummary = (
     vehicleOptions = [],
     driverOptions = [],
     missionOptions = [],
+    statusColorOptions = [],
 
     fuelTypes = [],
     expenseTypes = [],
@@ -34,7 +41,12 @@ export const buildDashboardSearchSummary = (
       value: getOptionTitle(filters.vehicleId, vehicleOptions),
     });
   }
-
+  if (filters.statusColor) {
+    summary.push({
+      label: 'وضعیت',
+      value: getOptionTitle(filters.statusColor, statusColorOptions),
+    });
+  }
   if (filters.driverId) {
     summary.push({
       label: 'راننده',

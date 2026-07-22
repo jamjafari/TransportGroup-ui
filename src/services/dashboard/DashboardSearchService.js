@@ -105,6 +105,26 @@ class DashboardSearchService {
       },
     ];
   }
+  async getStatusColors() {
+    return [
+      {
+        id: 'success',
+        title: 'سبز',
+      },
+      {
+        id: 'warning',
+        title: 'زرد',
+      },
+      {
+        id: 'error',
+        title: 'قرمز',
+      },
+      {
+        id: 'primary',
+        title: 'آبی',
+      },
+    ];
+  }
 }
 
 export default new DashboardSearchService();

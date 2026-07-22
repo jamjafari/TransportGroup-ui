@@ -84,7 +84,7 @@ class DashboardRepository extends BaseRepository {
     return dashboardSearchFilter(
       expense,
       filters,
-      ['vehicleId', 'expenseTypeId', 'dateRange'],
+      ['vehicleId', 'expenseTypeId', 'dateRange', 'statusColor'],
       {
         dateField: 'expenseDate',
       },
@@ -121,7 +121,7 @@ class DashboardRepository extends BaseRepository {
     return dashboardSearchFilter(
       data,
       filters,
-      ['vehicleId', 'driverId', 'missionId', 'dateRange'],
+      ['vehicleId', 'driverId', 'missionId', 'dateRange', 'statusColor'],
       {
         dateField: 'missionDate',
       },
@@ -170,12 +170,16 @@ class DashboardRepository extends BaseRepository {
   getVehicles = async (filters = {}) => {
     const data = await this.service.getVehicles();
 
-    return dashboardSearchFilter(data, filters, ['vehicleId', 'driverId']);
+    return dashboardSearchFilter(data, filters, [
+      'vehicleId',
+      'driverId',
+      'statusColor',
+    ]);
   };
   getDrivers = async (filters = {}) => {
     const data = await this.service.getDrivers();
 
-    return dashboardSearchFilter(data, filters, ['driverId']);
+    return dashboardSearchFilter(data, filters, ['driverId', 'statusColor']);
   };
   getFuelRecords = async (filters = {}) => {
     const data = await this.service.getFuelRecords();
@@ -191,13 +195,18 @@ class DashboardRepository extends BaseRepository {
 
   getInsurances = async (filters = {}) => {
     const data = await this.service.getInsurances();
-    return dashboardSearchFilter(data, filters, ['vehicleId', 'dateRange'], {
-      dateField: 'expireDate',
-    });
+    return dashboardSearchFilter(
+      data,
+      filters,
+      ['vehicleId', 'dateRange', 'statusColor'],
+      {
+        dateField: 'expireDate',
+      },
+    );
   };
   getServiceReminders = async (filters = {}) => {
     const data = await this.service.getServiceReminders();
-    return dashboardSearchFilter(data, filters, ['vehicleId']);
+    return dashboardSearchFilter(data, filters, ['vehicleId', 'statusColor']);
   };
 
   getAlerts = async (filters = {}) => {

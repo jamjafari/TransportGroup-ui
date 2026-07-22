@@ -5,14 +5,28 @@ import Stack from '@mui/material/Stack';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import AssessmentIcon from '@mui/icons-material/Assessment';
 
-const DashboardHeaderActions = ({ loading, onRefresh, onFilter, onExport }) => {
+const DashboardHeaderActions = ({
+  loading,
+  onRefresh,
+  onFilter,
+  onExport,
+  onReports,
+}) => {
   return (
     <Stack direction="row" spacing={1}>
+      <Button variant="outlined" onClick={onReports}>
+        <Stack direction="row" spacing={0.75}>
+          <AssessmentIcon fontSize="small" />
+          <span>گزارش ها</span>
+        </Stack>
+      </Button>
+
       <Button variant="outlined" onClick={onExport}>
         <Stack direction="row" spacing={0.75} alignItems="center">
           <FileDownloadIcon fontSize="small" />
-          <span>گزارش</span>
+          <span>خروجی</span>
         </Stack>
       </Button>
 

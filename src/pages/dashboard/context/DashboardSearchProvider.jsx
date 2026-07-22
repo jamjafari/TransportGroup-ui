@@ -13,6 +13,7 @@ const initialFilters = {
 
   insuranceStatus: '',
   serviceStatus: '',
+  statusColor: '',
 
   dateRange: {
     from: null,
@@ -24,7 +25,7 @@ const DashboardSearchProvider = ({ children }) => {
   const [filters, setFilters] = useState(initialFilters);
   const [searchKey, setSearchKey] = useState(0);
   // options
-
+  const [statusColorOptions, setStatusColorOptions] = useState([]);
   const [vehicleOptions, setVehicleOptions] = useState([]);
   const [driverOptions, setDriverOptions] = useState([]);
   const [missionOptions, setMissionOptions] = useState([]);
@@ -45,6 +46,7 @@ const DashboardSearchProvider = ({ children }) => {
         expenses,
         insuranceStatuses,
         serviceStatuses,
+        statusColors,
       ] = await Promise.all([
         DashboardSearchService.getVehicles(),
         DashboardSearchService.getDrivers(),
@@ -53,6 +55,7 @@ const DashboardSearchProvider = ({ children }) => {
         DashboardSearchService.getExpenseTypes(),
         DashboardSearchService.getInsuranceStatuses(),
         DashboardSearchService.getServiceStatuses(),
+        DashboardSearchService.getStatusColors(),
       ]);
 
       setVehicleOptions(vehicles);
@@ -64,6 +67,7 @@ const DashboardSearchProvider = ({ children }) => {
 
       setInsuranceStatusOptions(insuranceStatuses);
       setServiceStatusOptions(serviceStatuses);
+      setStatusColorOptions(statusColors);
     } catch (error) {
       console.error('Dashboard Search Options Loading Error :', error);
     }
@@ -108,6 +112,7 @@ const DashboardSearchProvider = ({ children }) => {
 
         fuelTypes,
         expenseTypes,
+        statusColorOptions,
 
         insuranceStatusOptions,
         serviceStatusOptions,

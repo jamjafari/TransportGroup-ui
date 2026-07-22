@@ -3,62 +3,130 @@ import React, { memo } from 'react';
 import { Chip } from '@mui/material';
 
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-
 import BuildCircleIcon from '@mui/icons-material/BuildCircle';
-
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import EngineeringIcon from '@mui/icons-material/Engineering';
+import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices';
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
+import PendingActionsIcon from '@mui/icons-material/PendingActions';
+import CancelIcon from '@mui/icons-material/Cancel';
 import { StatusChipPropTypes } from './StatusChip.types';
 
 const statusMap = {
-  Active: {
-    label: 'Active',
-
+  Approved: {
+    label: 'تایید شده',
     color: 'success',
+    icon: <CheckCircleIcon />,
+  },
 
+  Pending: {
+    label: 'در انتظار تایید',
+    color: 'warning',
+    icon: <PendingActionsIcon />,
+  },
+
+  Rejected: {
+    label: 'رد شده',
+    color: 'error',
+    icon: <CancelIcon />,
+  },
+  Active: {
+    label: 'فعال',
+    color: 'success',
     icon: <CheckCircleIcon />,
   },
 
   Inactive: {
-    label: 'Inactive',
-
+    label: 'غیرفعال',
     color: 'default',
-
     icon: <HighlightOffIcon />,
   },
 
-  InRepair: {
-    label: 'In Repair',
+  Running: {
+    label: 'در حال انجام',
+    color: 'primary',
+    icon: <LocalShippingIcon />,
+  },
 
+  Completed: {
+    label: 'تکمیل شده',
+    color: 'success',
+    icon: <TaskAltIcon />,
+  },
+
+  Mission: {
+    label: 'در مأموریت',
+    color: 'primary',
+    icon: <LocalShippingIcon />,
+  },
+
+  Repaier: {
+    label: 'در تعمیرگاه',
     color: 'warning',
+    icon: <EngineeringIcon />,
+  },
 
+  Cancelled: {
+    label: 'لغو شده',
+    color: 'error',
+    icon: <HighlightOffIcon />,
+  },
+
+  Warning: {
+    label: 'هشدار',
+    color: 'warning',
+    icon: <WarningAmberIcon />,
+  },
+
+  Critical: {
+    label: 'هشدار آخر',
+    color: 'error',
+    icon: <WarningAmberIcon />,
+  },
+
+  Expired: {
+    label: 'منقضی شده',
+    color: 'error',
+    icon: <HighlightOffIcon />,
+  },
+
+  Required: {
+    label: 'نیازمند سرویس',
+    color: 'warning',
     icon: <BuildCircleIcon />,
   },
 
-  1: {
-    label: 'Active',
-
+  ServiceCompleted: {
+    label: 'انجام شده',
     color: 'success',
-
+    icon: <MiscellaneousServicesIcon />,
+  },
+  success: {
+    label: 'تایید شده',
+    color: 'success',
     icon: <CheckCircleIcon />,
   },
 
-  2: {
-    label: 'Inactive',
+  warning: {
+    label: 'هشدار',
+    color: 'warning',
+    icon: <BuildCircleIcon />,
+  },
 
-    color: 'default',
-
+  error: {
+    label: 'هشدار جدی',
+    color: 'error',
     icon: <HighlightOffIcon />,
   },
 
-  3: {
-    label: 'In Repair',
-
-    color: 'warning',
-
-    icon: <BuildCircleIcon />,
+  primary: {
+    label: 'در عملیات',
+    color: 'primary',
+    icon: <LocalShippingIcon />,
   },
 };
 
@@ -87,13 +155,25 @@ const StatusChip = ({
 
       variant="filled"
       sx={{
-        '& .MuiDataGrid-columnHeaderTitle': {
+        minWidth: 130,
+        marginLeft: 'auto', // قرار گرفتن Chip در سمت راست
+
+        '& .MuiChip-label': {
           width: '100%',
-          textAlign: 'right',
+          textAlign: 'center',
+          paddingLeft: 1,
+          paddingRight: 0,
         },
 
-        '& .MuiDataGrid-columnHeader': {
-          justifyContent: 'flex-end',
+        '& .MuiChip-icon': {
+          marginLeft: 0,
+          marginRight: 2,
+        },
+
+        '& .MuiChip-labelWrapper': {
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         },
       }}
     />

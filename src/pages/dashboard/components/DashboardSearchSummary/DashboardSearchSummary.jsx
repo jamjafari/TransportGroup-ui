@@ -13,6 +13,7 @@ const DashboardSearchSummary = () => {
     vehicleOptions,
     driverOptions,
     missionOptions,
+    statusColorOptions,
 
     fuelTypes,
     expenseTypes,
@@ -28,6 +29,7 @@ const DashboardSearchSummary = () => {
 
     fuelTypes,
     expenseTypes,
+    statusColorOptions,
 
     insuranceStatusOptions,
     serviceStatusOptions,

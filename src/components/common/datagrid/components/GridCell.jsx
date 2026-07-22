@@ -16,7 +16,11 @@ const GridCell = ({
 
   const renderValue = () => {
     if (column.renderCell) {
-      return column.renderCell(row);
+      return column.renderCell({
+        row,
+        value,
+        column,
+      });
     }
 
     switch (column.type) {

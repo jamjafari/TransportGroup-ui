@@ -567,7 +567,7 @@ export const VehicleMock = [
     vehicleName: 'ولوو FH500',
     driverName: 'احمد احمدی',
     odometer: 245630,
-    status: 'فعال',
+    status: 'Active',
   },
   {
     id: 2,
@@ -577,7 +577,7 @@ export const VehicleMock = [
     vehicleName: 'اسکانیا R450',
     driverName: 'رضا محمدی',
     odometer: 182450,
-    status: 'در مأموریت',
+    status: 'Mission',
   },
   {
     id: 3,
@@ -587,7 +587,7 @@ export const VehicleMock = [
     vehicleName: 'ایسوزو NPR',
     driverName: 'علی کریمی',
     odometer: 96450,
-    status: 'تعمیرگاه',
+    status: 'Repaier',
   },
 ];
 export const DriversMock = [
@@ -598,7 +598,7 @@ export const DriversMock = [
     nationalCode: '1234567890',
     phoneNumber: '09121234567',
     missionCount: 18,
-    isActive: 'true',
+    status: 'Active',
   },
   {
     id: 2,
@@ -607,7 +607,7 @@ export const DriversMock = [
     nationalCode: '2234567890',
     phoneNumber: '09123334444',
     missionCount: 22,
-    isActive: 'true',
+    status: 'Active',
   },
   {
     id: 3,
@@ -616,7 +616,7 @@ export const DriversMock = [
     nationalCode: '3234567890',
     phoneNumber: '09125556666',
     missionCount: 14,
-    isActive: 'false',
+    status: 'Inactive',
   },
 ];
 export const FuelRecordMock = [
@@ -841,7 +841,7 @@ export const MissionMock = [
     origin: 'مشهد',
     destination: 'یزد',
     missionDate: '2026-07-17',
-    status: 'Cancelled',
+    status: 'Running',
   },
   {
     id: 10,
@@ -855,6 +855,45 @@ export const MissionMock = [
     destination: 'یزد',
     missionDate: '2026-06-17',
     status: 'Cancelled',
+  },
+  {
+    id: 11,
+    vehicleId: 3,
+    driverId: 1,
+    missionId: 3,
+    missionNumber: 'M-1003',
+    vehicleName: 'ایسوزو NPR',
+    driverName: 'علی کریمی',
+    origin: 'مشهد',
+    destination: 'یزد',
+    missionDate: '2026-08-17',
+    status: 'Running',
+  },
+  {
+    id: 12,
+    vehicleId: 3,
+    driverId: 1,
+    missionId: 3,
+    missionNumber: 'M-1003',
+    vehicleName: 'ایسوزو NPR',
+    driverName: 'علی کریمی',
+    origin: 'مشهد',
+    destination: 'یزد',
+    missionDate: '2026-07-17',
+    status: 'Cancelled',
+  },
+  {
+    id: 13,
+    vehicleId: 3,
+    driverId: 1,
+    missionId: 2,
+    missionNumber: 'M-1003',
+    vehicleName: 'ایسوزو NPR',
+    driverName: 'علی کریمی',
+    origin: 'مشهد',
+    destination: 'یزد',
+    missionDate: '2026-06-17',
+    status: 'Running',
   },
 ];
 export const InsurancesMock = [

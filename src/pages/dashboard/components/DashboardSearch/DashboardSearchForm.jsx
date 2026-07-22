@@ -21,6 +21,7 @@ const DashboardSearchForm = () => {
 
     insuranceStatusOptions,
     serviceStatusOptions,
+    statusColorOptions,
 
     updateFilters,
   } = useDashboardSearch();
@@ -78,22 +79,22 @@ const DashboardSearchForm = () => {
 
         <DashboardColumn md={6}>
           <AppSelect
-            label="نوع هزینه"
-            value={filters.expenseTypeId}
-            items={expenseTypes}
-
-            onChange={(value) => {
+            label="وضعیت"
+            value={filters.statusColor}
+            items={statusColorOptions}
+            renderAsStatus={true}
+            onChange={(value) =>
               updateFilters({
-                expenseTypeId: value,
-              });
-            }}
+                statusColor: value,
+              })
+            }
           />
         </DashboardColumn>
       </DashboardGrid>
 
       {/* Row 3 */}
 
-      <DashboardGrid>
+      {/* <DashboardGrid>
         <DashboardColumn md={6}>
           <AppSelect
             label="نوع سوخت"
@@ -119,13 +120,13 @@ const DashboardSearchForm = () => {
             }
           />
         </DashboardColumn>
-      </DashboardGrid>
+      </DashboardGrid> */}
 
       {/* Row 4 */}
 
       <DashboardGrid>
         <DashboardColumn md={6}>
-          <AppSelect
+          {/* <AppSelect
             label="وضعیت سرویس"
             value={filters.serviceStatus}
             items={serviceStatusOptions}
@@ -134,7 +135,7 @@ const DashboardSearchForm = () => {
                 serviceStatus: value,
               })
             }
-          />
+          /> */}
         </DashboardColumn>
 
         <DashboardColumn md={6}>

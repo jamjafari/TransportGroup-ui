@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-
+import { StatusChip } from '@/components';
 import {
   FormControl,
   InputLabel,
@@ -20,6 +20,7 @@ const AppSelect = ({
   disabled,
   fullWidth,
   onChange,
+  renderAsStatus = false,
 }) => {
   return (
     <Box
@@ -41,6 +42,15 @@ const AppSelect = ({
           value={value ?? ''}
           label={label}
           onChange={(event) => onChange(event.target.value)}
+          renderValue={(selected) => {
+            if (!renderAsStatus) {
+              const item = items.find((x) => x.id === selected);
+
+              return item?.title ?? '';
+            }
+
+            return <StatusChip status={selected} />;
+          }}
         >
           {loading ? (
             <MenuItem disabled>
@@ -49,7 +59,7 @@ const AppSelect = ({
           ) : (
             items.map((item) => (
               <MenuItem key={item.id} value={item.id}>
-                {item.title}
+                {renderAsStatus ? <StatusChip status={item.id} /> : item.title}
               </MenuItem>
             ))
           )}

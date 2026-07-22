@@ -60,14 +60,6 @@ const GridHeader = ({
               zIndex: 5,
 
               bgcolor: 'background.paper',
-              '& .MuiDataGrid-columnHeaderTitle': {
-                width: '100%',
-                textAlign: 'right',
-              },
-
-              '& .MuiDataGrid-columnHeader': {
-                justifyContent: 'flex-end',
-              },
             }}
           >
             <Checkbox

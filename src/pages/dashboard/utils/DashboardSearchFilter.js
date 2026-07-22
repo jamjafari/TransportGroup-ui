@@ -8,6 +8,11 @@ const dashboardSearchFilter = (
 
   //-------------------------
 
+  if (allowedFilters.includes('statusColor')) {
+    result = filterByStatusColor(result, filters.statusColor);
+  }
+  //-------------------------
+
   if (allowedFilters.includes('vehicleId')) {
     result = filterByVehicle(result, filters.vehicleId);
   }
@@ -39,7 +44,11 @@ const dashboardSearchFilter = (
   }
   return result;
 };
+const filterByStatusColor = (data, value) => {
+  if (!value) return data;
 
+  return data.filter((item) => statusColorMap[item.status] === value);
+};
 const filterByVehicle = (data, value) => {
   if (!value) return data;
 
@@ -84,6 +93,24 @@ const filterByDateRange = (data, value, fieldName) => {
     // console.log('item ....', item);
     return itemDate >= fromDate && itemDate <= toDate;
   });
+};
+const statusColorMap = {
+  Active: 'success',
+  Completed: 'success',
+  Approved: 'success',
+  ServiceCompleted: 'success',
+
+  Warning: 'warning',
+  Required: 'warning',
+  Repair: 'warning',
+
+  Critical: 'error',
+  Expired: 'error',
+  Rejected: 'error',
+  Cancelled: 'error',
+
+  Mission: 'primary',
+  Running: 'primary',
 };
 
 export default dashboardSearchFilter;
