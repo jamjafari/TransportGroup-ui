@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import LoginPage from '@/pages/auth/LoginPage';
 import DashboardPage from '@/pages/dashboard/DashboardPage';
+import MissionReportPage from '@/pages/dashboard/reports/pages/missions';
 
 import ProtectedRoute from './ProtectedRoute';
 import GuestRoute from './GuestRoute';
@@ -20,6 +21,7 @@ const AppRouter = () => {
         </Route>
 
         <Route path="*" element={<LoginPage />} />
+        <Route path="/reports/missions" element={<MissionReportPage />} />
       </Routes>
     </BrowserRouter>
   );

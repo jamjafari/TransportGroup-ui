@@ -1,4 +1,4 @@
-import { use } from 'react';
+import { useState } from 'react';
 
 const useReportDialog = () => {
   const [open, setOpen] = useState(false);
