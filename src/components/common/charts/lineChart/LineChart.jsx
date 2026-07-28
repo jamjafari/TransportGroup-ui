@@ -41,15 +41,21 @@ const LineChart = ({
   });
 
   return (
-    <Box width="100%" height={320}>
-      <ResponsiveContainer>
+    <Box width="100%" height={380} sx={{ direction: 'ltr' }}>
+      <ResponsiveContainer width="100%" height="100%">
         <ReLineChart data={data}>
           {grid && <CartesianGrid strokeDasharray="3 3" />}
 
           <XAxis dataKey="category" />
 
-          <YAxis />
-
+          <YAxis
+            orientation="left"
+            mirror={false}
+            width={60}
+            tickMargin={15}
+            axisLine={true}
+            tickLine={true}
+          />
           {tooltip && <Tooltip />}
 
           {legend && <Legend />}

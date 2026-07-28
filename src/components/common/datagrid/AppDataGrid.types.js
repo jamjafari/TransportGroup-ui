@@ -10,6 +10,9 @@ export const AppDataGridPropTypes = {
   rows: PropTypes.array.isRequired,
 
   columns: PropTypes.array.isRequired,
+  field: PropTypes.string,
+  headerName: PropTypes.string,
+  width: PropTypes.number,
 
   rowKey: PropTypes.string,
 

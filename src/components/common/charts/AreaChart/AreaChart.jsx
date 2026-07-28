@@ -66,10 +66,10 @@ const AreaChart = ({
     <Box
       width="100%"
 
-      height={320}
+      height={380}
       sx={{ direction: 'ltr' }}
     >
-      <ResponsiveContainer>
+      <ResponsiveContainer width="100%" height="100%">
         <RechartsAreaChart data={chartData}>
           {grid && <CartesianGrid strokeDasharray="3 3" />}
 

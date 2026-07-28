@@ -2,13 +2,15 @@ import React from 'react';
 
 import { AppDataGrid } from '@/components';
 
-import DashboardRepository from '@/repositories/dashboard/dashboard.repository';
+import useMissionReport from './hooks/useMissionReport';
 
 const MissionReportTable = () => {
+  const { data, loading } = useMissionReport();
+
   const columns = [
     {
       field: 'missionNumber',
-      headerName: 'شماره مأموریت',
+      headerName: 'شماره ماموریت',
       flex: 1,
     },
     {
@@ -23,7 +25,7 @@ const MissionReportTable = () => {
     },
     {
       field: 'origin',
-      headerName: 'مبدأ',
+      headerName: 'مبدا',
       flex: 1,
     },
     {
@@ -44,9 +46,7 @@ const MissionReportTable = () => {
     },
   ];
 
-  return (
-    <AppDataGrid rows={DashboardRepository.getMissions()} columns={columns} />
-  );
+  return <AppDataGrid rows={data} columns={columns} loading={loading} />;
 };
 
 export default MissionReportTable;

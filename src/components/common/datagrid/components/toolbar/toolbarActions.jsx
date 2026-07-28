@@ -1,23 +1,56 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-import { Box, Button } from '@mui/material';
+import { Stack, Button, Chip } from '@mui/material';
 
-const ToolbarActions = ({ selectedCount, onClearSelection, onExport }) => {
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import ClearAllIcon from '@mui/icons-material/ClearAll';
+
+const ToolbarActions = ({
+  selectedCount,
+
+  onClearSelection,
+
+  onExport,
+
+  onExportPdf,
+}) => {
   return (
-    <Box display="flex" gap={1}>
+    <Stack direction="row" spacing={1} alignItems="center">
+      {selectedCount > 0 && (
+        <>
+          <Chip color="primary" label={`${selectedCount} انتخاب شده`} />
+
+          <Button
+            size="small"
+            startIcon={<ClearAllIcon />}
+            onClick={onClearSelection}
+          >
+            لغو انتخاب
+          </Button>
+        </>
+      )}
+
       <Button
         size="small"
-        disabled={selectedCount === 0}
-        onClick={onClearSelection}
+        variant="outlined"
+        startIcon={<FileDownloadIcon />}
+        onClick={onExport}
       >
-        Clear Selection
+        Excel
       </Button>
 
-      <Button size="small" variant="outlined" onClick={onExport}>
-        Export
+      <Button
+        size="small"
+        variant="outlined"
+        color="error"
+        startIcon={<PictureAsPdfIcon />}
+        onClick={onExportPdf}
+      >
+        PDF
       </Button>
-    </Box>
+    </Stack>
   );
 };
 
-export default ToolbarActions;
+export default memo(ToolbarActions);

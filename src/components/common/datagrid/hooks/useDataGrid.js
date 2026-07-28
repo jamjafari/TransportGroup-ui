@@ -1,197 +1,212 @@
-import { useMemo } from 'react';
-
-import useGridSorting from './useGridSorting';
-
-import useGridFiltering from './useGridFiltering';
-
-import useGridSearching from './useGridSearching';
-
-import useGridPagination from './useGridPagination';
-
-import useGridSelection from './useGridSelection';
+import { useMemo, useState } from 'react';
 
 const useDataGrid = ({
   rows = [],
-
   columns = [],
-
   rowKey = 'id',
 
   initialSortField = '',
-
   initialSortDirection = 'asc',
 
   initialPage = 1,
-
   initialPageSize = 10,
 }) => {
-  /*
-    ----------------------------------------
-    Sorting
-    ----------------------------------------
-    */
+  const [search, setSearch] = useState('');
 
-  const sorting = useGridSorting(
+  const [filters, setFilters] = useState({});
+
+  const [sortField, setSortField] = useState(initialSortField);
+
+  const [sortDirection, setSortDirection] = useState(initialSortDirection);
+
+  const [page, setPage] = useState(initialPage);
+
+  const [pageSize, setPageSize] = useState(initialPageSize);
+
+  const [selectedRows, setSelectedRows] = useState([]);
+
+  //--------------------------------------------------
+
+  const filteredRows = useMemo(() => {
+    let result = [...rows];
+
+    //---------------- Search ----------------
+
+    if (search.trim() !== '') {
+      const keyword = search.toLowerCase();
+
+      result = result.filter((row) =>
+        columns.some((column) => {
+          const value = row[column.field];
+
+          if (value == null) return false;
+
+          return String(value).toLowerCase().includes(keyword);
+        }),
+      );
+    }
+
+    //---------------- Filters ----------------
+
+    Object.keys(filters).forEach((key) => {
+      const value = filters[key];
+
+      if (value !== undefined && value !== null && value !== '') {
+        result = result.filter((row) => row[key] === value);
+      }
+    });
+
+    return result;
+  }, [rows, columns, search, filters]);
+
+  //--------------------------------------------------
+
+  const sortedRows = useMemo(() => {
+    if (!sortField) return filteredRows;
+
+    return [...filteredRows].sort((a, b) => {
+      let first = a[sortField];
+
+      let second = b[sortField];
+
+      if (first == null) first = '';
+
+      if (second == null) second = '';
+
+      if (typeof first === 'string') {
+        first = first.toLowerCase();
+      }
+
+      if (typeof second === 'string') {
+        second = second.toLowerCase();
+      }
+
+      if (first < second) return sortDirection === 'asc' ? -1 : 1;
+
+      if (first > second) return sortDirection === 'asc' ? 1 : -1;
+
+      return 0;
+    });
+  }, [filteredRows, sortField, sortDirection]);
+
+  //--------------------------------------------------
+
+  const visibleRows = useMemo(() => {
+    const start = (page - 1) * pageSize;
+
+    const end = start + pageSize;
+
+    return sortedRows.slice(start, end);
+  }, [sortedRows, page, pageSize]);
+
+  //--------------------------------------------------
+
+  const handleSort = (field) => {
+    if (sortField === field) {
+      setSortDirection((prev) => (prev === 'asc' ? 'desc' : 'asc'));
+    } else {
+      setSortField(field);
+
+      setSortDirection('asc');
+    }
+  };
+
+  //--------------------------------------------------
+
+  const toggleRow = (row) => {
+    const id = row[rowKey];
+
+    setSelectedRows((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
+    );
+  };
+
+  //--------------------------------------------------
+
+  const toggleAll = () => {
+    if (selectedRows.length === filteredRows.length) {
+      setSelectedRows([]);
+    } else {
+      setSelectedRows(filteredRows.map((x) => x[rowKey]));
+    }
+  };
+
+  //--------------------------------------------------
+
+  const isSelected = (id) => selectedRows.includes(id);
+
+  //--------------------------------------------------
+
+  const clearSelection = () => setSelectedRows([]);
+
+  //--------------------------------------------------
+
+  const clearSearch = () => setSearch('');
+
+  //--------------------------------------------------
+
+  const setFilter = (field, value) => {
+    setFilters((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  //--------------------------------------------------
+
+  return {
     rows,
 
-    initialSortField,
+    filteredRows,
 
-    initialSortDirection,
-  );
+    sortedRows,
 
-  /*
-    ----------------------------------------
-    Filtering
-    ----------------------------------------
-    */
+    visibleRows,
 
-  const filtering = useGridFiltering(sorting.rows);
+    search,
 
-  /*
-    ----------------------------------------
-    Searching
-    ----------------------------------------
-    */
+    setSearch,
 
-  const searching = useGridSearching(
-    filtering.rows,
+    clearSearch,
 
-    columns,
-  );
+    filters,
 
-  /*
-    ----------------------------------------
-    Pagination
-    ----------------------------------------
-    */
+    setFilter,
 
-  const pagination = useGridPagination(
-    searching.rows,
+    sortField,
 
-    initialPage,
+    sortDirection,
 
-    initialPageSize,
-  );
+    handleSort,
 
-  /*
-    ----------------------------------------
-    Selection
-    ----------------------------------------
-    */
+    page,
 
-  const selection = useGridSelection(
-    pagination.rows,
+    pageSize,
 
-    rowKey,
-  );
+    setPage,
 
-  /*
-    ----------------------------------------
-    Grid
-    ----------------------------------------
-    */
+    setPageSize,
 
-  return useMemo(
-    () => ({
-      /*
-            -----------------------------
-            Final Rows
-            -----------------------------
-            */
+    selectedRows,
 
-      rows: pagination.rows,
+    selectedCount: selectedRows.length,
 
-      /*
-            -----------------------------
-            Sorting
-            -----------------------------
-            */
+    isSelected,
 
-      sortField: sorting.sortField,
+    toggleRow,
 
-      sortDirection: sorting.sortDirection,
+    toggleAll,
 
-      handleSort: sorting.handleSort,
+    clearSelection,
 
-      clearSorting: sorting.clearSorting,
+    totalCount: filteredRows.length,
 
-      /*
-            -----------------------------
-            Filtering
-            -----------------------------
-            */
+    allSelected:
+      filteredRows.length > 0 && selectedRows.length === filteredRows.length,
 
-      filters: filtering.filters,
-
-      setFilter: filtering.setFilter,
-
-      removeFilter: filtering.removeFilter,
-
-      clearFilters: filtering.clearFilters,
-
-      /*
-            -----------------------------
-            Searching
-            -----------------------------
-            */
-
-      search: searching.search,
-
-      setSearch: searching.setSearch,
-
-      clearSearch: searching.clearSearch,
-
-      /*
-            -----------------------------
-            Pagination
-            -----------------------------
-            */
-
-      page: pagination.page,
-
-      pageSize: pagination.pageSize,
-
-      totalCount: pagination.totalCount,
-
-      totalPages: pagination.totalPages,
-
-      setPage: pagination.setPage,
-
-      nextPage: pagination.nextPage,
-
-      previousPage: pagination.previousPage,
-
-      setPageSize: pagination.setPageSize,
-
-      /*
-            -----------------------------
-            Selection
-            -----------------------------
-            */
-
-      selectedRows: selection.selectedRows,
-
-      selectedObjects: selection.selectedObjects,
-
-      selectedCount: selection.selectedCount,
-
-      isSelected: selection.isSelected,
-
-      toggleRow: selection.toggleRow,
-
-      selectRow: selection.selectRow,
-
-      unselectRow: selection.unselectRow,
-
-      selectAll: selection.selectAll,
-
-      toggleAll: selection.toggleAll,
-
-      clearSelection: selection.clearSelection,
-    }),
-
-    [sorting, filtering, searching, pagination, selection],
-  );
+    indeterminate:
+      selectedRows.length > 0 && selectedRows.length < filteredRows.length,
+  };
 };
 
 export default useDataGrid;

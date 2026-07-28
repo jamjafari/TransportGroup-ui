@@ -5,13 +5,7 @@ import { TableCell, Typography } from '@mui/material';
 import StatusChip from '../../status/StatusChip';
 import { ActionMenu } from '@/components';
 
-import { GridCellPropTypes } from './GridCell.types';
-
-const GridCell = ({
-  column,
-
-  row,
-}) => {
+const GridCell = ({ row, column }) => {
   const value = row[column.field];
 
   const renderValue = () => {
@@ -28,13 +22,7 @@ const GridCell = ({
         return <StatusChip status={value} />;
 
       case 'actions':
-        return (
-          <ActionMenu
-            row={row}
-
-            actions={column.actions ?? []}
-          />
-        );
+        return <ActionMenu row={row} actions={column.actions ?? []} />;
 
       case 'currency':
         return Number(value ?? 0).toLocaleString();
@@ -49,11 +37,19 @@ const GridCell = ({
         return value ? new Date(value).toLocaleString() : '-';
 
       case 'boolean':
-        return value ? 'Yes' : 'No';
+        return value ? 'بله' : 'خیر';
 
       default:
         return (
-          <Typography variant="body2" headeralign="right" align="right" noWrap>
+          <Typography
+            variant="body2"
+            noWrap
+            // sx={{
+            //   textAlign: 'center',
+            //   width: '100%',
+            //   fontWeight: 600,
+            // }}
+          >
             {value ?? '-'}
           </Typography>
         );
@@ -62,18 +58,28 @@ const GridCell = ({
 
   return (
     <TableCell
-      align={column.align ?? 'left'}
+      align={column.align}
 
       sx={{
+        width: column.width,
+
+        minWidth: column.minWidth,
+
+        maxWidth: column.maxWidth,
+
         whiteSpace: 'nowrap',
-        align: 'right',
+
+        overflow: 'hidden',
+
+        textOverflow: 'ellipsis',
+
+        px: 2,
+        textAlign: 'right',
       }}
     >
       {renderValue()}
     </TableCell>
   );
 };
-
-GridCell.propTypes = GridCellPropTypes;
 
 export default memo(GridCell);

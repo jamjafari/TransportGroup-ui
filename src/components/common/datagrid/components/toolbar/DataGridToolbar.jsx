@@ -8,7 +8,7 @@ import ToolbarFilters from './toolbarFilters';
 
 import ToolbarActions from './toolbarActions';
 
-import ViewsSelector from '../../views/ViewsSelector';
+// import ViewsSelector from '../../views/ViewsSelector';
 
 const DataGridToolbar = ({
   search,
@@ -23,6 +23,8 @@ const DataGridToolbar = ({
   clearSelection,
 
   onExport,
+  onExportPdf,
+  views = [],
 }) => {
   return (
     <Box
@@ -50,14 +52,15 @@ const DataGridToolbar = ({
         selectedCount={selectedCount}
         onClearSelection={clearSelection}
         onExport={onExport}
+        onExportPdf={onExportPdf}
       />
-      <ViewsSelector
+      {/* <ViewsSelector
         views={views}
         activeView={activeView}
         onSave={onSaveView}
         onLoad={onLoadView}
         onDelete={onDeleteView}
-      />
+      /> */}
     </Box>
   );
 };

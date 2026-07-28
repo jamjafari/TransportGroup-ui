@@ -25,7 +25,6 @@ const DashboardColumn = ({
 }) => {
   return (
     <Grid
-      container
       spacing={DashboardSpacing.column}
       sx={{
         width: '100%',

@@ -13,7 +13,7 @@ import {
 
 import { PieChartPropTypes, PieChartDefaultProps } from './PieChart.types';
 
-const DEFAULT_COLORS = [
+const COLORS = [
   '#1976d2',
 
   '#2e7d32',
@@ -52,33 +52,49 @@ const PieChart = ({
     <Box
       width="100%"
 
-      height={320}
+      height={380}
     >
-      <ResponsiveContainer>
+      <ResponsiveContainer width="100%" height="100%">
         <RechartsPieChart>
           <Pie
             data={data}
-
             dataKey="value"
-
             nameKey="name"
+            cx="50%"
+            cy="50%"
+            outerRadius={90}
+            labelLine={true}
+            label={({ name, percent, cx, cy, midAngle, outerRadius }) => {
+              const RADIAN = Math.PI / 180;
 
-            outerRadius="80%"
+              const x = cx + (outerRadius + 80) * Math.cos(-midAngle * RADIAN);
 
-            label
+              const y = cy + (outerRadius + 40) * Math.sin(-midAngle * RADIAN);
+
+              return (
+                <text
+                  x={x}
+                  y={y}
+                  fill="#333"
+                  textAnchor={x > cx ? 'start' : 'end'}
+                  dominantBaseline="central"
+                  fontSize={12}
+                >
+                  {`${name} (${(percent * 100).toFixed(0)}%)`}
+                </text>
+              );
+            }}
           >
-            {data.map((_, index) => (
-              <Cell
-                key={index}
-
-                fill={DEFAULT_COLORS[index % DEFAULT_COLORS.length]}
-              />
+            {data.map((entry, index) => (
+              <Cell key={index} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
 
           {tooltip && <Tooltip />}
 
-          {legend && <Legend />}
+          {legend && (
+            <Legend layout="horizontal" verticalAlign="bottom" align="center" />
+          )}
         </RechartsPieChart>
       </ResponsiveContainer>
     </Box>

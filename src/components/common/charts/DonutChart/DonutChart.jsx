@@ -47,9 +47,9 @@ const DonutChart = ({
     <Box
       width="100%"
 
-      height={320}
+      height={380}
     >
-      <ResponsiveContainer>
+      <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie
             data={data}

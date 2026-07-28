@@ -1,19 +1,21 @@
 import React, { memo } from 'react';
 
-import { TableRow } from '@mui/material';
+import { TableRow, TableCell, Checkbox } from '@mui/material';
 
 import GridCell from './GridCell';
-
-import { GridRowPropTypes } from './GridRow.types';
 
 const GridRow = ({
   row,
 
   columns,
 
-  hover = true,
+  rowKey = 'id',
+
+  rowSelection = false,
 
   selected = false,
+
+  onToggle,
 
   onClick,
 
@@ -21,37 +23,37 @@ const GridRow = ({
 }) => {
   return (
     <TableRow
-      hover={hover}
-
+      hover
       selected={selected}
-
       onClick={() => onClick?.(row)}
-
       onDoubleClick={() => onDoubleClick?.(row)}
-
       sx={{
         cursor: onClick ? 'pointer' : 'default',
-
-        transition: 'background-color .2s',
 
         '&:hover': {
           backgroundColor: 'action.hover',
         },
       }}
     >
+      {rowSelection && (
+        <TableCell
+          padding="checkbox"
+          sx={{
+            width: 50,
+            minWidth: 50,
+            maxWidth: 50,
+            boxSizing: 'border-box',
+          }}
+        >
+          <Checkbox checked={selected} onChange={() => onToggle?.(row)} />
+        </TableCell>
+      )}
+
       {columns.map((column) => (
-        <GridCell
-          key={column.field}
-
-          row={row}
-
-          column={column}
-        />
+        <GridCell key={column.field} row={row} column={column} />
       ))}
     </TableRow>
   );
 };
-
-GridRow.propTypes = GridRowPropTypes;
 
 export default memo(GridRow);

@@ -4,3 +4,5 @@ export { default as useDashboardStatistics } from './useDashboardStatistics';
 
 export { default as useDashboardWidget } from './useDashboardWidget';
 export { default as useDashboardSearch } from './useDashboardSearch';
+
+export { default as useAsyncData } from './useAsyncData';

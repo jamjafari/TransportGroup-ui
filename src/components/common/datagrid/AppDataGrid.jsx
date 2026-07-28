@@ -1,62 +1,56 @@
 import React, { memo, useMemo } from 'react';
 
-import { Paper, Table, TableContainer } from '@mui/material';
-
-import useDataGrid from './hooks/useDataGrid';
-
-import GridHeader from './components/GridHeader';
-
-import GridBody from './components/GridBody';
-
-import GridLoading from './components/GridLoading';
-
-import GridEmpty from './components/GridEmpty';
+import { Paper } from '@mui/material';
 
 import DataGridToolbar from './components/toolbar/DataGridToolbar';
 
+import GridHeader from './components/GridHeader';
+import GridBody from './components/GridBody';
+import GridLoading from './components/GridLoading';
+import GridEmpty from './components/GridEmpty';
+
 import { AppPagination } from '@/components/common/navigation';
 
-import { applyFilters } from './filters';
+import useDataGrid from './hooks/useDataGrid';
 
 import { exportToExcel, exportToPdf } from './export';
-
-import { resolveCellRender, resolveCellValue } from './columns';
-
+import { normalizeColumns } from './utils/columnManager';
+import useColumnResize from './hooks/useColumnResize';
 import {
   AppDataGridPropTypes,
   AppDataGridDefaultProps,
 } from './AppDataGrid.types';
 
 const AppDataGrid = ({
-  rows,
-  columns,
-  rowKey,
+  rows = [],
+  columns = [],
+  rowKey = 'id',
 
   loading,
 
   toolbar,
 
-  emptyTitle,
-  emptyDescription,
-  emptyIcon,
-  emptyAction,
+  pagination,
+
+  rowSelection,
+
+  sortable,
+
+  stickyHeader,
 
   initialSortField,
   initialSortDirection,
   initialPage,
   initialPageSize,
 
-  rowSelection,
-  sortable,
-  searchable,
-  filterable,
-  pagination,
-  stickyHeader,
+  emptyTitle,
+  emptyDescription,
+  emptyIcon,
+  emptyAction,
 
   onRowClick,
   onRowDoubleClick,
 }) => {
-  //const viewsManager = useSavedViews();
   const grid = useDataGrid({
     rows,
     columns,
@@ -67,30 +61,26 @@ const AppDataGrid = ({
     initialPageSize,
   });
 
-  const filteredRows = useMemo(() => {
-    return applyFilters(grid.rows, grid.filters, columns);
-  }, [grid.rows, grid.filters, columns]);
-
   const handleExportExcel = () => {
     exportToExcel({
-      rows: filteredRows,
+      rows: grid.visibleRows,
       columns,
     });
   };
 
   const handleExportPdf = () => {
     exportToPdf({
-      rows: filteredRows,
+      rows: grid.visibleRows,
       columns,
     });
   };
-
+  const normalizedColumns = useMemo(() => normalizeColumns(columns), [columns]);
   return (
     <Paper
       elevation={0}
       sx={{
-        borderRadius: 3,
         overflow: 'hidden',
+        borderRadius: 2,
       }}
     >
       {toolbar && (
@@ -98,91 +88,73 @@ const AppDataGrid = ({
           search={grid.search}
           onSearch={grid.setSearch}
           clearSearch={grid.clearSearch}
-
           filters={grid.filters}
+          columns={columns}
           onFilterChange={grid.setFilter}
-
           selectedCount={grid.selectedCount}
-
           clearSelection={grid.clearSelection}
-
           onExport={handleExportExcel}
           onExportPdf={handleExportPdf}
+          views={[]}
         />
       )}
 
-      <TableContainer>
-        <Table stickyHeader={stickyHeader}>
-          <GridHeader
-            columns={columns}
-            sortable={sortable}
-            stickyHeader={stickyHeader}
-            rowSelection={rowSelection}
+      <table
+        style={{
+          width: '100%',
+          tableLayout: 'fixed',
+          borderCollapse: 'collapse',
+        }}
+        stickyHeader={stickyHeader}
+        sx={{
+          tableLayout: 'fixed',
+          direction: 'rtl',
+          width: '100%',
+        }}
+      >
+        <GridHeader
+          columns={columns}
+          rowSelection={rowSelection}
+          sortable={sortable}
+          stickyHeader={stickyHeader}
+          sortField={grid.sortField}
+          sortDirection={grid.sortDirection}
+          onSort={grid.handleSort}
+          allSelected={grid.allSelected}
+          indeterminate={grid.indeterminate}
+          onSelectAll={grid.toggleAll}
+        />
 
-            sortField={grid.sortField}
-            sortDirection={grid.sortDirection}
-
-            onSort={grid.handleSort}
-
-            allSelected={
-              grid.selectedCount > 0 &&
-              grid.selectedCount === filteredRows.length
-            }
-
-            indeterminate={
-              grid.selectedCount > 0 && grid.selectedCount < filteredRows.length
-            }
-
-            onSelectAll={grid.toggleAll}
+        {loading ? (
+          <GridLoading columns={columns.length + (rowSelection ? 1 : 0)} />
+        ) : grid.visibleRows.length === 0 ? (
+          <GridEmpty
+            colSpan={columns.length + (rowSelection ? 1 : 0)}
+            title={emptyTitle}
+            description={emptyDescription}
+            icon={emptyIcon}
+            action={emptyAction}
           />
-
-          {loading ? (
-            <GridLoading columns={columns.length + (rowSelection ? 1 : 0)} />
-          ) : filteredRows.length === 0 ? (
-            <GridEmpty
-              colSpan={columns.length + (rowSelection ? 1 : 0)}
-              title={emptyTitle}
-              description={emptyDescription}
-              icon={emptyIcon}
-              action={emptyAction}
-            />
-          ) : (
-            <GridBody
-              rows={filteredRows}
-              columns={columns}
-              rowKey={rowKey}
-              rowSelection={rowSelection}
-
-              selectedRows={grid.selectedRows}
-
-              isSelected={grid.isSelected}
-
-              onToggleRow={grid.toggleRow}
-
-              onRowClick={onRowClick}
-              onRowDoubleClick={onRowDoubleClick}
-              sx={{
-                direction: 'ltr',
-
-                '& .MuiDataGrid-columnHeaderTitle': {
-                  width: '100%',
-                  textAlign: 'right',
-                },
-
-                '& .MuiDataGrid-cell': {
-                  textAlign: 'right',
-                },
-              }}
-            />
-          )}
-        </Table>
-      </TableContainer>
+        ) : (
+          <GridBody
+            rows={grid.visibleRows}
+            columns={columns}
+            rowKey={rowKey}
+            rowSelection={rowSelection}
+            selectedRows={grid.selectedRows}
+            isSelected={grid.isSelected}
+            onToggleRow={grid.toggleRow}
+            onRowClick={onRowClick}
+            onRowDoubleClick={onRowDoubleClick}
+          />
+        )}
+      </table>
 
       {pagination && (
         <AppPagination
           page={grid.page}
           pageSize={grid.pageSize}
-          totalCount={grid.totalCount}
+          total={grid.filteredRows.length}
           onPageChange={grid.setPage}
           onPageSizeChange={grid.setPageSize}
         />
@@ -192,7 +164,6 @@ const AppDataGrid = ({
 };
 
 AppDataGrid.propTypes = AppDataGridPropTypes;
-
 AppDataGrid.defaultProps = AppDataGridDefaultProps;
 
 export default memo(AppDataGrid);

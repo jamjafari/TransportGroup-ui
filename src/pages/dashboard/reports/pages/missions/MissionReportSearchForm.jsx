@@ -2,12 +2,12 @@ import React from 'react';
 
 import { Stack } from '@mui/material';
 
-import DashboardSearchForm from '@/pages/dashboard/components/DashboardSearch/DashboardSearchForm';
+import DashboardSearchShortForm from '@/pages/dashboard/components/DashboardSearch/DashboardSearchShortForm';
 
 const MissionReportSearchForm = () => {
   return (
     <Stack>
-      <DashboardSearchForm />
+      <DashboardSearchShortForm />
     </Stack>
   );
 };

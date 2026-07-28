@@ -14,6 +14,7 @@ const DashboardHeaderActions = ({
   onExport,
   onReports,
 }) => {
+  console.log('onFilter :', onFilter);
   return (
     <Stack direction="row" spacing={1}>
       <Button variant="outlined" onClick={onReports}>

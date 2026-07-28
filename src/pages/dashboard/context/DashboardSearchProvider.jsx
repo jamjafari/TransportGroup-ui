@@ -23,6 +23,7 @@ const initialFilters = {
 
 const DashboardSearchProvider = ({ children }) => {
   const [filters, setFilters] = useState(initialFilters);
+  const [appliedFilters, setAppliedFilters] = useState(initialFilters);
   const [searchKey, setSearchKey] = useState(0);
   // options
   const [statusColorOptions, setStatusColorOptions] = useState([]);
@@ -76,6 +77,8 @@ const DashboardSearchProvider = ({ children }) => {
   //   console.log('provider vehicle options:', vehicleOptions);
   // }, [vehicleOptions]);
   useEffect(() => {
+    console.log('Provider Mounted');
+
     loadSearchOptions();
   }, []);
   // handlers
@@ -85,14 +88,24 @@ const DashboardSearchProvider = ({ children }) => {
       ...prev,
       ...values,
     }));
+
+    setAppliedFilters((prev) => ({
+      ...prev,
+      ...values,
+    }));
   };
 
   const applyFilters = () => {
+    console.log('filters in provider:', filters);
+    setAppliedFilters(filters);
+
     setSearchKey((prev) => prev + 1);
   };
 
   const clearFilters = () => {
     setFilters(initialFilters);
+
+    setAppliedFilters(initialFilters);
 
     setSearchKey((prev) => prev + 1);
   };
@@ -105,7 +118,8 @@ const DashboardSearchProvider = ({ children }) => {
     <DashboardSearchContext.Provider
       value={{
         filters,
-
+        searchKey,
+        appliedFilters,
         vehicleOptions,
         driverOptions,
         missionOptions,

@@ -62,11 +62,11 @@ const BarChart = ({
     <Box
       width="100%"
 
-      height={320}
+      height={380}
 
       sx={{ direction: 'ltr' }}
     >
-      <ResponsiveContainer>
+      <ResponsiveContainer width="100%" height="100%">
         <RechartsBarChart data={chartData}>
           {grid && <CartesianGrid strokeDasharray="3 3" />}
 

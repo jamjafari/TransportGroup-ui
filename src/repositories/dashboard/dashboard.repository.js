@@ -47,6 +47,21 @@ class DashboardRepository extends BaseRepository {
       dateField: 'Date',
     });
   };
+  getVehicleSummary = async (filters = {}) => {
+    const vehicles = await this.getVehicles();
+
+    return {
+      total: vehicles.length,
+
+      active: vehicles.filter((x) => x.status === 'Active').length,
+
+      mission: vehicles.filter((x) => x.status === 'Mission').length,
+
+      inactive: vehicles.filter((x) => x.status === 'Inactive').length,
+
+      repair: vehicles.filter((x) => x.status === 'Repair').length,
+    };
+  };
   getSummary = async () => {
     return this.service.getSummary();
   };
@@ -127,6 +142,19 @@ class DashboardRepository extends BaseRepository {
       },
     );
   };
+  getMissionSummary = async (filters = {}) => {
+    const missions = await this.getMissions();
+
+    return {
+      total: missions.length,
+
+      completed: missions.filter((x) => x.status === 'Completed').length,
+
+      running: missions.filter((x) => x.status === 'Running').length,
+
+      cancelled: missions.filter((x) => x.status === 'Cancelled').length,
+    };
+  };
   getMissionTrend = async (filters = {}) => {
     const data = await this.service.getMissionTrend();
 
@@ -167,6 +195,23 @@ class DashboardRepository extends BaseRepository {
       },
     );
   };
+  getLatestActivitiesSummary = async (filters = {}) => {
+    const latestactivity = await this.getLatestActivities();
+
+    return {
+      total: latestactivity.length,
+
+      mission: latestactivity.filter((x) => x.type === 'Mission').length,
+
+      expense: latestactivity.filter((x) => x.type === 'Expense').length,
+
+      fuel: latestactivity.filter((x) => x.type === 'Fuel').length,
+
+      service: latestactivity.filter((x) => x.type === 'Service').length,
+
+      insurance: latestactivity.filter((x) => x.type === 'Insurance').length,
+    };
+  };
   getVehicles = async (filters = {}) => {
     const data = await this.service.getVehicles();
 
@@ -180,6 +225,21 @@ class DashboardRepository extends BaseRepository {
     const data = await this.service.getDrivers();
 
     return dashboardSearchFilter(data, filters, ['driverId', 'statusColor']);
+  };
+  getDriverSummary = async (filters = {}) => {
+    const drivers = await this.getDrivers();
+
+    return {
+      total: drivers.length,
+
+      active: drivers.filter((x) => x.status === 'Active').length,
+
+      mission: drivers.filter((x) => x.status === 'Mission').length,
+
+      inactive: drivers.filter((x) => x.status === 'Inactive').length,
+
+      repair: drivers.filter((x) => x.status === 'Repair').length,
+    };
   };
   getFuelRecords = async (filters = {}) => {
     const data = await this.service.getFuelRecords();
@@ -217,6 +277,23 @@ class DashboardRepository extends BaseRepository {
       'driverId',
       'missionId',
     ]);
+  };
+  getFleet = async (filters = {}) => {
+    return await this.service.getFleet();
+  };
+  getFinancial = async (filters = {}) => {
+    return await this.service.getFinancial();
+  };
+  getFinancialByVehicle = async (filters = {}) => {
+    return await this.service.getFinancialByVehicle();
+  };
+  getFuelCost = async (filters = {}) => {
+    return await this.service.getFuelCost();
+  };
+  getInsuranceReport = async (filters = {}) => {
+    const result = await this.service.getInsuranceReport();
+    console.log('Repository Result:', result);
+    return result;
   };
 }
 

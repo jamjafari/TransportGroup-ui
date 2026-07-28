@@ -11,3 +11,4 @@ export { default as DashboardGrid } from './DashboardGrid';
 export { default as DashboardSection } from './DashboardSection';
 
 export { default as DashboardDefaultLayout } from './DashboardDefaultLayout';
+export { default as DashboardCard } from './DashboardCard';

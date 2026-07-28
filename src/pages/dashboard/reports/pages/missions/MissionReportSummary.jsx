@@ -1,27 +1,33 @@
 import React from 'react';
-import { DashboardGrid, DashboardColumn } from '@/components';
+
 import { Paper, Stack, Typography } from '@mui/material';
 
-const summaryItems = [
-  {
-    title: 'کل مأموریت‌ها',
-    value: 250,
-  },
-  {
-    title: 'انجام شده',
-    value: 190,
-  },
-  {
-    title: 'در حال انجام',
-    value: 45,
-  },
-  {
-    title: 'لغو شده',
-    value: 15,
-  },
-];
+import { DashboardGrid, DashboardColumn } from '@/components';
+
+import useMissionSummary from './hooks/useMissionSummary';
 
 const MissionReportSummary = () => {
+  const { data } = useMissionSummary();
+
+  const summaryItems = [
+    {
+      title: 'کل مأموریت‌ها',
+      value: data?.total ?? 0,
+    },
+    {
+      title: 'انجام شده',
+      value: data?.completed ?? 0,
+    },
+    {
+      title: 'در حال انجام',
+      value: data?.running ?? 0,
+    },
+    {
+      title: 'لغو شده',
+      value: data?.cancelled ?? 0,
+    },
+  ];
+
   return (
     <DashboardGrid>
       {summaryItems.map((item) => (

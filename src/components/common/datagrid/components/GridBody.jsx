@@ -13,8 +13,6 @@ const GridBody = ({
 
   rowSelection = false,
 
-  selectedRows = [],
-
   isSelected,
 
   onToggleRow,
@@ -28,32 +26,17 @@ const GridBody = ({
       {rows.map((row) => {
         const id = row[rowKey];
 
-        const selected = isSelected
-          ? isSelected(id)
-          : selectedRows.includes(id);
-
         return (
           <GridRow
             key={id}
-
             row={row}
-
             columns={columns}
-
             rowKey={rowKey}
-
             rowSelection={rowSelection}
-
-            selected={selected}
-
-            onToggle={() => onToggleRow?.(row)}
-
-            onClick={() => onRowClick?.(row)}
-
-            onDoubleClick={() => onRowDoubleClick?.(row)}
-
-            disableColumnResize
-            sx={{ width: 'auto' }}
+            selected={isSelected(id)}
+            onToggle={onToggleRow}
+            onClick={onRowClick}
+            onDoubleClick={onRowDoubleClick}
           />
         );
       })}

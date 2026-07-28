@@ -119,225 +119,209 @@ export const FuelConsumptionMock = [
 export const ExpenseMock = [
   {
     id: 1,
+
     vehicleId: 1,
+
+    vehicleName: 'ولوو FH500',
+
     expenseTypeId: 1,
+
+    expenseType: 'سوخت',
+
     vendorId: 1,
+
     fuelRecordId: null,
+
     expenseDate: '2026-01-10',
+
     amount: 150,
+
     invoiceNumber: 'EXP001',
-    description: '....',
+
+    status: 'Success',
+
+    description: 'ثبت هزینه سوخت',
   },
 
   {
     id: 2,
+
     vehicleId: 1,
+
+    vehicleName: 'ولوو FH500',
+
     expenseTypeId: 2,
+
+    expenseType: 'تعمیرات',
+
     vendorId: null,
+
     fuelRecordId: null,
+
     expenseDate: '2026-02-14',
+
     amount: 350,
+
     invoiceNumber: 'EXP002',
-    description: '....',
-  },
-  {
-    id: 3,
-    vehicleId: 3,
-    expenseTypeId: 1,
-    vendorId: 2,
-    fuelRecordId: null,
-    expenseDate: '2026-04-10',
-    amount: 170,
-    invoiceNumber: 'EXP001',
-    description: '....',
-  },
-  {
-    id: 4,
-    vehicleId: 1,
-    expenseTypeId: 2,
-    vendorId: 1,
-    fuelRecordId: null,
-    expenseDate: '2026-02-10',
-    amount: 250,
-    invoiceNumber: 'EXP001',
-    description: '....',
-  },
-  {
-    id: 5,
-    vehicleId: 2,
-    expenseTypeId: 2,
-    vendorId: 1,
-    fuelRecordId: null,
-    expenseDate: '2026-04-10',
-    amount: 151,
-    invoiceNumber: 'EXP001',
-    description: '....',
-  },
-  {
-    id: 6,
-    vehicleId: 2,
-    expenseTypeId: 3,
-    vendorId: 1,
-    fuelRecordId: null,
-    expenseDate: '2026-02-10',
-    amount: 350,
-    invoiceNumber: 'EXP001',
-    description: '....',
-  },
-  {
-    id: 7,
-    vehicleId: 1,
-    expenseTypeId: 2,
-    vendorId: 1,
-    fuelRecordId: null,
-    expenseDate: '2026-05-10',
-    amount: 150,
-    invoiceNumber: 'EXP001',
-    description: '....',
-  },
-  {
-    id: 8,
-    vehicleId: 1,
-    expenseTypeId: 1,
-    vendorId: 1,
-    fuelRecordId: null,
-    expenseDate: '2026-08-10',
-    amount: 190,
-    invoiceNumber: 'EXP001',
-    description: '....',
-  },
-  {
-    id: 9,
-    vehicleId: 1,
-    expenseTypeId: 3,
-    vendorId: 1,
-    fuelRecordId: null,
-    expenseDate: '2026-11-10',
-    amount: 220,
-    invoiceNumber: 'EXP001',
-    description: '....',
-  },
-  {
-    id: 10,
-    vehicleId: 2,
-    expenseTypeId: 1,
-    vendorId: 1,
-    fuelRecordId: null,
-    expenseDate: '2026-12-10',
-    amount: 150,
-    invoiceNumber: 'EXP001',
-    description: '....',
-  },
-  {
-    id: 11,
-    vehicleId: 1,
-    expenseTypeId: 1,
-    vendorId: 1,
-    fuelRecordId: null,
-    expenseDate: '2026-01-15',
-    amount: 150,
-    invoiceNumber: 'EXP001',
-    description: '....',
+
+    status: 'Pending',
+
+    description: 'تعویض لنت',
   },
 
   {
-    id: 12,
-    vehicleId: 1,
-    expenseTypeId: 2,
-    vendorId: null,
-    fuelRecordId: null,
-    expenseDate: '2026-02-24',
-    amount: 350,
-    invoiceNumber: 'EXP002',
-    description: '....',
-  },
-  {
-    id: 13,
+    id: 3,
+
     vehicleId: 3,
+
+    vehicleName: 'اسکانیا R450',
+
     expenseTypeId: 1,
+
+    expenseType: 'سوخت',
+
     vendorId: 2,
+
     fuelRecordId: null,
-    expenseDate: '2026-04-16',
+
+    expenseDate: '2026-04-10',
+
     amount: 170,
-    invoiceNumber: 'EXP001',
-    description: '....',
+
+    invoiceNumber: 'EXP003',
+
+    status: 'Success',
+
+    description: 'ثبت هزینه سوخت',
   },
+
   {
-    id: 14,
-    vehicleId: 1,
-    expenseTypeId: 2,
+    id: 4,
+
+    vehicleId: 2,
+
+    vehicleName: 'بنز آکتروس',
+
+    expenseTypeId: 4,
+
+    expenseType: ' لاستیک',
+
     vendorId: 1,
+
     fuelRecordId: null,
-    expenseDate: '2026-02-02',
+
+    expenseDate: '2026-02-10',
+
     amount: 250,
-    invoiceNumber: 'EXP001',
-    description: '....',
+
+    invoiceNumber: 'EXP004',
+
+    status: 'Canceled',
+
+    description: 'تمدید بیمه',
   },
   {
-    id: 15,
-    vehicleId: 2,
-    expenseTypeId: 2,
+    id: 5,
+
+    vehicleId: 1,
+
+    vehicleName: 'ولوو FH500',
+
+    expenseTypeId: 5,
+
+    expenseType: 'مالیات',
+
     vendorId: 1,
+
     fuelRecordId: null,
-    expenseDate: '2026-04-20',
-    amount: 151,
+
+    expenseDate: '2026-11-10',
+
+    amount: 150,
+
     invoiceNumber: 'EXP001',
-    description: '....',
+
+    status: 'Success',
+
+    description: 'ثبت هزینه سوخت',
   },
+
   {
-    id: 16,
-    vehicleId: 2,
-    expenseTypeId: 3,
-    vendorId: 1,
+    id: 6,
+
+    vehicleId: 1,
+
+    vehicleName: 'ولوو FH500',
+
+    expenseTypeId: 6,
+
+    expenseType: 'معاینه فنی',
+
+    vendorId: null,
+
     fuelRecordId: null,
-    expenseDate: '2026-02-29',
+
+    expenseDate: '2026-01-14',
+
     amount: 350,
-    invoiceNumber: 'EXP001',
-    description: '....',
+
+    invoiceNumber: 'EXP002',
+
+    status: 'Pending',
+
+    description: 'تعویض لنت',
   },
+
   {
-    id: 17,
-    vehicleId: 1,
-    expenseTypeId: 2,
-    vendorId: 1,
+    id: 7,
+
+    vehicleId: 3,
+
+    vehicleName: 'اسکانیا R450',
+
+    expenseTypeId: 7,
+
+    expenseType: 'تعویض روغن',
+
+    vendorId: 2,
+
     fuelRecordId: null,
-    expenseDate: '2026-05-04',
-    amount: 150,
-    invoiceNumber: 'EXP001',
-    description: '....',
+
+    expenseDate: '2026-09-10',
+
+    amount: 170,
+
+    invoiceNumber: 'EXP003',
+
+    status: 'Success',
+
+    description: 'ثبت هزینه سوخت',
   },
+
   {
-    id: 18,
-    vehicleId: 1,
-    expenseTypeId: 1,
-    vendorId: 1,
-    fuelRecordId: null,
-    expenseDate: '2026-08-22',
-    amount: 190,
-    invoiceNumber: 'EXP001',
-    description: '....',
-  },
-  {
-    id: 19,
-    vehicleId: 1,
-    expenseTypeId: 3,
-    vendorId: 1,
-    fuelRecordId: null,
-    expenseDate: '2026-11-01',
-    amount: 220,
-    invoiceNumber: 'EXP001',
-    description: '....',
-  },
-  {
-    id: 20,
+    id: 8,
+
     vehicleId: 2,
-    expenseTypeId: 1,
+
+    vehicleName: 'بنز آکتروس',
+
+    expenseTypeId: 3,
+
+    expenseType: 'بیمه',
+
     vendorId: 1,
+
     fuelRecordId: null,
-    expenseDate: '2026-12-26',
-    amount: 150,
-    invoiceNumber: 'EXP001',
-    description: '....',
+
+    expenseDate: '2026-06-10',
+
+    amount: 250,
+
+    invoiceNumber: 'EXP004',
+
+    status: 'Canceled',
+
+    description: 'تمدید بیمه',
   },
 ];
 export const MonthlyDistanceMock = [
@@ -523,39 +507,119 @@ export const DriverPerformanceMock = [
 export const LatestActivitiesMock = [
   {
     id: 1,
-    driverId: 1,
-    vehicleId: 2,
-    activity: 'ثبت سوخت',
+    type: 'Fuel',
+    title: 'ثبت سوخت',
+    description: 'ثبت ۳۲۰ لیتر گازوئیل',
     user: 'احمدی',
-    date: '2026-04-18',
-    time: '08:35',
+    driverId: 1,
+    driverName: 'علی احمدی',
+    vehicleId: 1,
+    vehicleName: 'کامیون ولوو FH500',
+    missionId: 1,
+    missionNumber: 'MIS-001',
+    status: 'Completed',
+    activityDate: '2026-04-18',
+    activityTime: '08:35',
   },
+
   {
     id: 2,
+    type: 'Mission',
+    title: 'ایجاد مأموریت',
+    description: 'ثبت مأموریت تهران - تبریز',
+    user: 'مدیر عملیات',
     driverId: 2,
+    driverName: 'محمد رضایی',
     vehicleId: 2,
-    activity: 'ثبت مأموریت',
-    user: 'محمدی',
-    date: '2026-06-18',
-    time: '09:20',
+    vehicleName: 'اسکانیا R450',
+    missionId: 2,
+    missionNumber: 'MIS-002',
+    status: 'Running',
+    activityDate: '2026-04-18',
+    activityTime: '09:10',
   },
+
   {
     id: 3,
-    driverId: 3,
-    vehicleId: 2,
-    activity: 'ثبت هزینه تعمیر',
+    type: 'Expense',
+    title: 'ثبت هزینه',
+    description: 'هزینه تعویض لاستیک',
     user: 'کریمی',
-    date: '1405-04-18',
-    time: '10:15',
+    driverId: null,
+    driverName: null,
+    vehicleId: 3,
+    vehicleName: 'بنز Actros',
+    missionId: null,
+    missionNumber: null,
+    status: 'Approved',
+    activityDate: '2026-04-18',
+    activityTime: '10:15',
   },
+
   {
     id: 4,
-    driverId: 1,
+    type: 'Insurance',
+    title: 'تمدید بیمه',
+    description: 'تمدید بیمه شخص ثالث خودرو',
+    user: 'احمدی',
+    driverId: null,
+    vehicleId: 1,
+    vehicleName: 'کامیون ولوو FH500',
+    status: 'Active',
+    activityDate: '2026-04-18',
+    activityTime: '11:00',
+  },
+
+  {
+    id: 5,
+    type: 'Service',
+    title: 'ثبت سرویس',
+    description: 'سرویس دوره‌ای ۲۰ هزار کیلومتر',
+    user: 'واحد تعمیرات',
+    vehicleId: 2,
+    vehicleName: 'اسکانیا R450',
+    status: 'ServiceCompleted',
+    activityDate: '2026-04-18',
+    activityTime: '13:20',
+  },
+
+  {
+    id: 6,
+    type: 'Driver',
+    title: 'تغییر وضعیت راننده',
+    description: 'راننده در مأموریت قرار گرفت',
+    user: 'مدیر عملیات',
+    driverId: 3,
+    driverName: 'مهدی کریمی',
+    status: 'Mission',
+    activityDate: '2026-04-18',
+    activityTime: '14:05',
+  },
+
+  {
+    id: 7,
+    type: 'Vehicle',
+    title: 'ورود به تعمیرگاه',
+    description: 'خودرو جهت تعمیر موتور متوقف شد',
+    user: 'واحد تعمیرات',
     vehicleId: 3,
-    activity: 'پایان مأموریت',
-    user: 'حسینی',
-    date: '2026-04-18',
-    time: '11:40',
+    vehicleName: 'بنز Actros',
+    status: 'Repaier',
+    activityDate: '2026-04-18',
+    activityTime: '15:30',
+  },
+
+  {
+    id: 8,
+    type: 'Mission',
+    title: 'اتمام مأموریت',
+    description: 'مأموریت تهران - بندرعباس با موفقیت پایان یافت',
+    user: 'مدیر عملیات',
+    missionId: 3,
+    missionNumber: 'MIS-003',
+    status: 'Completed',
+    activityDate: '2026-04-18',
+    activityTime: '17:45',
   },
 ];
 export const VehicleMock = [
@@ -587,7 +651,17 @@ export const VehicleMock = [
     vehicleName: 'ایسوزو NPR',
     driverName: 'علی کریمی',
     odometer: 96450,
-    status: 'Repaier',
+    status: 'Repair',
+  },
+  {
+    id: 4,
+    driverId: 2,
+    vehicleId: 2,
+    plateNumber: '54ج789-11',
+    vehicleName: 'ایسوزو NPR',
+    driverName: 'علی کریمی',
+    odometer: 96450,
+    status: 'Repair',
   },
 ];
 export const DriversMock = [
@@ -597,6 +671,7 @@ export const DriversMock = [
     fullName: 'احمد احمدی',
     nationalCode: '1234567890',
     phoneNumber: '09121234567',
+    licenseNumber: 'DL-1001',
     missionCount: 18,
     status: 'Active',
   },
@@ -606,6 +681,7 @@ export const DriversMock = [
     fullName: 'رضا محمدی',
     nationalCode: '2234567890',
     phoneNumber: '09123334444',
+    licenseNumber: 'DL-1001',
     missionCount: 22,
     status: 'Active',
   },
@@ -615,8 +691,48 @@ export const DriversMock = [
     fullName: 'علی کریمی',
     nationalCode: '3234567890',
     phoneNumber: '09125556666',
+    licenseNumber: 'DL-1001',
     missionCount: 14,
     status: 'Inactive',
+  },
+  {
+    id: 4,
+    fullName: 'احمد احمدی',
+    nationalCode: '1234567890',
+    phoneNumber: '09121234567',
+    licenseNumber: 'DL-1001',
+    missionCount: 15,
+    status: 'Active',
+  },
+
+  {
+    id: 5,
+    fullName: 'رضا محمدی',
+    nationalCode: '2234567890',
+    phoneNumber: '09121234568',
+    licenseNumber: 'DL-1002',
+    missionCount: 8,
+    status: 'Mission',
+  },
+
+  {
+    id: 6,
+    fullName: 'مهدی کریمی',
+    nationalCode: '3234567890',
+    phoneNumber: '09121234569',
+    licenseNumber: 'DL-1003',
+    missionCount: 3,
+    status: 'Inactive',
+  },
+
+  {
+    id: 7,
+    fullName: 'علی رضایی',
+    nationalCode: '4234567890',
+    phoneNumber: '09121234570',
+    licenseNumber: 'DL-1004',
+    missionCount: 11,
+    status: 'Repair',
   },
 ];
 export const FuelRecordMock = [
@@ -629,6 +745,9 @@ export const FuelRecordMock = [
     driverName: 'احمدی',
     fuelAmount: 320,
     totalCost: 10800,
+    odometerKM: 1450,
+    unitCost: 1000,
+
     stationName: 'جایگاه آزادی',
   },
   {
@@ -640,6 +759,9 @@ export const FuelRecordMock = [
     driverName: 'محمدی',
     fuelAmount: 285,
     totalCost: 9640,
+    odometerKM: 1850,
+    unitCost: 3000,
+
     stationName: 'جایگاه بعثت',
   },
   {
@@ -651,6 +773,9 @@ export const FuelRecordMock = [
     driverName: 'محمدی',
     fuelAmount: 285,
     totalCost: 9640,
+    odometerKM: 2150,
+    unitCost: 5000,
+
     stationName: 'جایگاه بعثت',
   },
   {
@@ -662,6 +787,10 @@ export const FuelRecordMock = [
     driverName: 'محمدی',
     fuelAmount: 285,
     totalCost: 9640,
+
+    odometerKM: 2650,
+    unitCost: 1000,
+
     stationName: 'جایگاه بعثت',
   },
   {
@@ -673,6 +802,9 @@ export const FuelRecordMock = [
     driverName: 'محمدی',
     fuelAmount: 285,
     totalCost: 9640,
+    odometerKM: 1750,
+    unitCost: 1000,
+
     stationName: 'جایگاه بعثت',
   },
   {
@@ -684,6 +816,8 @@ export const FuelRecordMock = [
     driverName: 'محمدی',
     fuelAmount: 285,
     totalCost: 9640,
+    odometerKM: 2850,
+    unitCost: 1000,
     stationName: 'جایگاه بعثت',
   },
 ];
@@ -901,19 +1035,23 @@ export const InsurancesMock = [
     id: 1,
     vehicleId: 1,
     vehicleName: 'ولوو FH500',
+    insuranceType: 'بیمه شخص ثالث',
     insuranceCompany: 'بیمه ایران',
     policyNumber: 'IR-145632',
     expireDate: '2026-05-12',
-    remainDays: 25,
-    status: 'Warning',
+    startDate: '2026-04-01',
+    amount: 19500000,
   },
   {
     id: 2,
     vehicleId: 2,
     vehicleName: 'اسکانیا R450',
     insuranceCompany: 'آسیا',
+    insuranceType: 'بیمه شخص ثالث',
     policyNumber: 'AS-245781',
     expireDate: '2026-04-22',
+    startDate: '2026-04-01',
+    amount: 19500000,
     remainDays: 5,
     status: 'Critical',
   },
@@ -922,10 +1060,78 @@ export const InsurancesMock = [
     vehicleId: 3,
     vehicleName: 'ایسوزو NPR',
     insuranceCompany: 'البرز',
+    insuranceType: 'بیمه شخص ثالث',
     policyNumber: 'AL-852147',
     expireDate: '2026-09-18',
+    startDate: '2026-04-01',
+    amount: 19500000,
     remainDays: 145,
     status: 'Active',
+  },
+  {
+    id: 4,
+    vehicleId: 1,
+    vehicleName: 'ایسوزو NPR',
+
+    insuranceType: 'بیمه شخص ثالث',
+    insuranceCompany: 'ایران',
+    startDate: '2026-01-01',
+    expireDate: '2026-08-20',
+    amount: 18000000,
+    remainDays: 25,
+    status: 'Warning',
+  },
+  {
+    id: 5,
+    vehicleId: 2,
+    vehicleName: 'ایسوزو NPR',
+
+    insuranceType: 'بیمه بدنه',
+    insuranceCompany: 'آسیا',
+    startDate: '2026-02-15',
+    expireDate: '2026-07-30',
+    amount: 25000000,
+    remainDays: 25,
+    status: 'Critical',
+  },
+  {
+    id: 6,
+    vehicleId: 3,
+    vehicleName: 'ولوو FH500',
+
+    insuranceType: 'بیمه شخص ثالث',
+    insuranceCompany: 'البرز',
+    startDate: '2026-03-01',
+    expireDate: '2026-07-25',
+    amount: 21000000,
+    remainDays: 25,
+    status: 'Warning',
+  },
+  {
+    id: 7,
+    vehicleId: 4,
+    vehicleName: 'ایسوزو NPR',
+
+    insuranceType: 'بیمه بدنه',
+    insuranceCompany: 'دانا',
+    startDate: '2026-01-15',
+    expireDate: '2026-09-18',
+    amount: 23000000,
+    remainDays: 25,
+    status: 'Critical',
+  },
+  {
+    id: 8,
+    vehicleId: 5,
+    vehicleName: 'ولوو FH500',
+
+    insuranceType: 'بیمه شخص ثالث',
+    insuranceCompany: 'کوثر',
+    expireDate: '2026-07-22',
+    startDate: '2026-04-01',
+    amount: 19500000,
+    remainDays: 25,
+    status: 'Warning',
   },
 ];
 export const ServiceReminderMock = [
@@ -958,6 +1164,183 @@ export const ServiceReminderMock = [
     serviceKm: 10,
     remainKm: 5000,
     status: 'Active',
+  },
+];
+export const VehicleServicesMock = [
+  {
+    id: 1,
+    vehicleId: 1,
+    vehicleName: 'ولوو FH500',
+
+    serviceType: 'تعویض روغن',
+
+    serviceDate: '2026-04-15',
+
+    odometerKm: 250000,
+
+    nextServiceKm: 260000,
+
+    amount: 12000000,
+
+    workshop: 'تعمیرگاه مرکزی',
+
+    description: 'تعویض روغن موتور و فیلترها',
+
+    status: 'ServiceCompleted',
+  },
+
+  {
+    id: 2,
+    vehicleId: 1,
+    vehicleName: 'ولوو FH500',
+
+    serviceType: 'تعویض لاستیک',
+
+    serviceDate: '2026-02-10',
+
+    odometerKm: 235000,
+
+    nextServiceKm: 285000,
+
+    amount: 85000000,
+
+    workshop: 'لاستیک فروشی البرز',
+
+    description: 'تعویض دو حلقه لاستیک جلو',
+
+    status: 'ServiceCompleted',
+  },
+
+  {
+    id: 3,
+    vehicleId: 2,
+    vehicleName: 'اسکانیا R450',
+
+    serviceType: 'سرویس دوره‌ای',
+
+    serviceDate: '2026-05-01',
+
+    odometerKm: 180000,
+
+    nextServiceKm: 190000,
+
+    amount: 18000000,
+
+    workshop: 'تعمیرگاه مرکزی',
+
+    description: 'بازدید کامل موتور و گیربکس',
+
+    status: 'ServiceCompleted',
+  },
+
+  {
+    id: 4,
+    vehicleId: 3,
+    vehicleName: 'بنز Actros',
+
+    serviceType: 'تعمیر موتور',
+
+    serviceDate: '2026-03-20',
+
+    odometerKm: 320000,
+
+    nextServiceKm: 340000,
+
+    amount: 240000000,
+
+    workshop: 'تعمیرگاه تخصصی بنز',
+
+    description: 'تعویض واشر سرسیلندر و تعمیر موتور',
+
+    status: 'ServiceCompleted',
+  },
+
+  {
+    id: 5,
+    vehicleId: 4,
+    vehicleName: 'مان TGX',
+
+    serviceType: 'تعویض لنت ترمز',
+
+    serviceDate: '2026-04-05',
+
+    odometerKm: 145000,
+
+    nextServiceKm: 165000,
+
+    amount: 15000000,
+
+    workshop: 'نمایندگی مان',
+
+    description: 'تعویض لنت‌های جلو و عقب',
+
+    status: 'ServiceCompleted',
+  },
+
+  {
+    id: 6,
+    vehicleId: 5,
+    vehicleName: 'ولوو FMX',
+
+    serviceType: 'تنظیم جلوبندی',
+
+    serviceDate: '2026-01-28',
+
+    odometerKm: 98000,
+
+    nextServiceKm: 118000,
+
+    amount: 7000000,
+
+    workshop: 'جلوبندی آزادی',
+
+    description: 'تنظیم کامل جلوبندی و فرمان',
+
+    status: 'ServiceCompleted',
+  },
+
+  {
+    id: 7,
+    vehicleId: 6,
+    vehicleName: 'ایسوزو NPR',
+
+    serviceType: 'تعویض باتری',
+
+    serviceDate: '2026-06-01',
+
+    odometerKm: 87000,
+
+    nextServiceKm: null,
+
+    amount: 9000000,
+
+    workshop: 'برق خودرو تهران',
+
+    description: 'نصب باتری جدید 100 آمپر',
+
+    status: 'ServiceCompleted',
+  },
+
+  {
+    id: 8,
+    vehicleId: 7,
+    vehicleName: 'داف XF',
+
+    serviceType: 'تعمیر سیستم خنک‌کننده',
+
+    serviceDate: '2026-05-15',
+
+    odometerKm: 275000,
+
+    nextServiceKm: 295000,
+
+    amount: 32000000,
+
+    workshop: 'تعمیرگاه تخصصی داف',
+
+    description: 'تعویض رادیاتور و شیلنگ‌ها',
+
+    status: 'ServiceCompleted',
   },
 ];
 export const AlertsMock = [
@@ -1008,5 +1391,82 @@ export const AlertsMock = [
     severity: 'info',
     title: 'Mission',
     description: '12 missions registered today.',
+  },
+];
+export const financialByVehicle = [
+  {
+    vehicleId: 1,
+    vehicleName: 'ولوو FH500',
+
+    fuelCost: 12500,
+    expenseCost: 3400,
+
+    totalCost: 15900,
+
+    missionCount: 18,
+  },
+
+  {
+    vehicleId: 2,
+    vehicleName: 'اسکانیا R450',
+
+    fuelCost: 9800,
+    expenseCost: 2100,
+
+    totalCost: 11900,
+
+    missionCount: 11,
+  },
+  {
+    vehicleId: 3,
+    vehicleName: 'اسکانیا D450',
+
+    fuelCost: 1800,
+    expenseCost: 1100,
+
+    totalCost: 10900,
+
+    missionCount: 11,
+  },
+  {
+    vehicleId: 4,
+    vehicleName: 'اسکانیا R350',
+
+    fuelCost: 9200,
+    expenseCost: 3100,
+
+    totalCost: 13900,
+
+    missionCount: 11,
+  },
+];
+export const ExpenseTypeMock = [
+  {
+    id: 1,
+    title: 'سوخت',
+  },
+  {
+    id: 2,
+    title: 'بیمه',
+  },
+  {
+    id: 3,
+    title: 'تعمیرات',
+  },
+  {
+    id: 4,
+    title: ' لاستیک',
+  },
+  {
+    id: 5,
+    title: 'مالیات',
+  },
+  {
+    id: 6,
+    title: 'معاینه فنی',
+  },
+  {
+    id: 7,
+    title: 'روغن موتور',
   },
 ];

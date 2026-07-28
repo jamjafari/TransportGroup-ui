@@ -8,7 +8,7 @@ const reportCategories = [
       { id: 'drivers', title: 'گزارش رانندگان' },
       { id: 'vehicles', title: 'گزارش خودروها' },
       { id: 'fleet', title: 'گزارش ناوگان' },
-      { id: 'activities', title: 'گزارش فعالیت‌ها' },
+      { id: 'latest-activities', title: 'گزارش فعالیت‌ها' },
     ],
   },
 
@@ -17,9 +17,9 @@ const reportCategories = [
     title: 'مالی',
     icon: '💰',
     items: [
-      { id: 'expenses', title: 'گزارش هزینه‌ها' },
-      { id: 'fuel-cost', title: 'گزارش سوخت' },
-      { id: 'vehicle-cost', title: 'هزینه هر خودرو' },
+      { id: 'financial', title: 'گزارش هزینه‌ها' },
+      { id: 'fuelcost', title: 'گزارش سوخت' },
+      { id: 'fbv', title: 'هزینه هر خودرو' },
     ],
   },
 
@@ -39,7 +39,7 @@ const reportCategories = [
     title: 'بیمه و سرویس',
     icon: '🛡️',
     items: [
-      { id: 'insurance-expire', title: 'بیمه‌های منقضی' },
+      { id: 'insurance', title: 'بیمه‌های منقضی' },
       { id: 'services', title: 'سرویس‌های عقب افتاده' },
     ],
   },
