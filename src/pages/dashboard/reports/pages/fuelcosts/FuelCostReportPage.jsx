@@ -38,7 +38,9 @@ const FuelCostReportPage = () => {
   return (
     <ReportLayout title="گزارش مالی سوخت" subtitle="گزارش کامل مالی سوخت">
       {/* Summary */}
-      <FuelCostReportSummary summary={data?.summary} />
+      <DashboardSection title="خلاصه">
+        <FuelCostReportSummary summary={data?.summary} />
+      </DashboardSection>
 
       {/* KPI */}
       {/* <FinancialReportKPI kpi={data.kpi} /> */}
@@ -59,13 +61,14 @@ const FuelCostReportPage = () => {
           </DashboardColumn> */}
         </DashboardGrid>
       </DashboardSection>
-
-      <DashboardCard
-        title="هزینه‌های سوخت"
-        subtitle="  تراکنش های سوخت در جایگاههای مختلف و کیلومتر هر خودرو "
-      >
-        <FuelCostReportTable rows={data.table} loading={loading} />
-      </DashboardCard>
+      <DashboardSection title="جداول">
+        <DashboardCard
+          title="هزینه‌های سوخت"
+          subtitle="  تراکنش های سوخت در جایگاههای مختلف و کیلومتر هر خودرو "
+        >
+          <FuelCostReportTable rows={data.table} loading={loading} />
+        </DashboardCard>
+      </DashboardSection>
     </ReportLayout>
   );
 };

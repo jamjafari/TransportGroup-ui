@@ -14,13 +14,13 @@ import ReportLayout from '../../components/ReportLayout';
 import useInsuranceReport from './hooks/useInsuranceReport';
 
 import InsuranceReportSummary from './InsuranceReportSummary';
-// import InsuranceReportKPI from './InsuranceReportKPI';
+import InsuranceReportKPI from './InsuranceReportKPI';
 
-// import InsuranceStatusChart from './InsuranceStatusChart';
-// import InsuranceCompanyChart from './InsuranceCompanyChart';
-// import InsuranceExpireChart from './InsuranceExpireChart';
+import InsuranceStatusChart from './InsuranceStatusChart';
+import InsuranceCompanyChart from './InsuranceCompanyChart';
+import InsuranceExpireChart from './InsuranceExpireChart';
 
-// import InsuranceReportTable from './InsuranceReportTable';
+import InsuranceReportTable from './InsuranceReportTable';
 
 const InsuranceReportPage = () => {
   const { data, loading, error } = useInsuranceReport();
@@ -40,44 +40,50 @@ const InsuranceReportPage = () => {
   return (
     <ReportLayout title="گزارش بیمه" subtitle="گزارش بیمه‌های ناوگان">
       {/* Summary */}
-      <InsuranceReportSummary summary={data.summary} />
+      <DashboardSection title="خلاصه">
+        <InsuranceReportSummary summary={data?.summary} />
+      </DashboardSection>
 
       {/* KPI */}
-      {/* <InsuranceReportKPI kpi={data.kpi} /> */}
+      <DashboardSection title="شاخص‌ها">
+        <InsuranceReportKPI kpi={data?.kpi} />
+      </DashboardSection>
 
       {/* Charts */}
-      {/* <DashboardSection>
+      <DashboardSection title="نمودارها">
         <DashboardGrid>
           <DashboardColumn xs={12} md={6} lg={4}>
             <InsuranceStatusChart
-              labels={data.charts.insuranceStatus.labels}
-              series={data.charts.insuranceStatus.series}
+              labels={data?.charts?.insuranceStatus?.labels}
+              series={data?.charts?.insuranceStatus?.series}
             />
           </DashboardColumn>
 
           <DashboardColumn xs={12} md={6} lg={4}>
             <InsuranceCompanyChart
-              categories={data.charts.insuranceCompany.categories}
-              series={data.charts.insuranceCompany.series}
+              categories={data?.charts?.insuranceCompany?.categories}
+              series={data?.charts?.insuranceCompany?.series}
             />
           </DashboardColumn>
 
           <DashboardColumn xs={12} md={12} lg={4}>
             <InsuranceExpireChart
-              categories={data.charts.insuranceExpireByMonth.categories}
-              series={data.charts.insuranceExpireByMonth.series}
+              categories={data?.charts?.insuranceExpireByMonth?.categories}
+              series={data?.charts?.insuranceExpireByMonth?.series}
             />
           </DashboardColumn>
         </DashboardGrid>
-      </DashboardSection> */}
+      </DashboardSection>
 
       {/* Table */}
-      {/* <DashboardCard
-        title="فهرست بیمه‌ها"
-        subtitle="وضعیت تمامی بیمه‌های ناوگان"
-      >
-        <InsuranceReportTable rows={data.table} loading={loading} />
-      </DashboardCard> */}
+      <DashboardSection title="جداول">
+        <DashboardCard
+          title="فهرست بیمه‌ها"
+          subtitle="وضعیت تمامی بیمه‌های ناوگان"
+        >
+          <InsuranceReportTable rows={data?.table} loading={loading} />
+        </DashboardCard>
+      </DashboardSection>
     </ReportLayout>
   );
 };

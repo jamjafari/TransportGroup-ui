@@ -1,65 +1,26 @@
-import React, { memo } from 'react';
+import { Paper, Typography, Stack } from '@mui/material';
 
-import { Box, Typography } from '@mui/material';
-
-import Stack from '@mui/system/Stack';
-
-import DashboardSpacing from './DashboardSpacing';
-
-import DashboardRow from './DashboardRow';
-
-import {
-  DashboardSectionPropTypes,
-  DashboardSectionDefaultProps,
-} from './DashboardSection.types';
-
-const DashboardSection = ({
-  title,
-
-  subtitle,
-
-  children,
-
-  spacing,
-}) => {
+const DashboardSection = ({ title, children }) => {
   return (
-    <Box
+    <Paper
+      elevation={1}
       sx={{
-        width: '100%',
+        p: 3,
+        mb: 3,
+        borderRadius: 3,
+        border: '1px solid',
+        borderColor: 'divider',
       }}
     >
-      {(title || subtitle) && (
-        <Stack
-          spacing={0.5}
-
-          mb={DashboardSpacing.section}
-        >
-          {title && <Typography variant="h6">{title}</Typography>}
-
-          {subtitle && (
-            <Typography
-              variant="h6"
-
-              color="text.secondary"
-
-              sx={{
-                textAlign: 'right',
-                width: '100%',
-              }}
-            >
-              {subtitle}
-            </Typography>
-          )}
-        </Stack>
+      {title && (
+        <Typography variant="h6" fontWeight={700} sx={{ mb: 2 }}>
+          {title}
+        </Typography>
       )}
 
-      <DashboardRow spacing={spacing}>{children}</DashboardRow>
-    </Box>
+      <Stack spacing={2}>{children}</Stack>
+    </Paper>
   );
 };
 
-DashboardSection.propTypes = DashboardSectionPropTypes;
-
-DashboardSection.defaultProps = DashboardSectionDefaultProps;
-
-export default memo(DashboardSection);
+export default DashboardSection;

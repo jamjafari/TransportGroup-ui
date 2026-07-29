@@ -46,7 +46,8 @@ const GridHeader = ({
               minWidth: 50,
               maxWidth: 50,
               boxSizing: 'border-box',
-
+              fontSize: '1rem',
+              fontWeight: 700,
               position: stickyHeader ? 'sticky' : 'static',
               top: 0,
               left: 0,
@@ -85,8 +86,8 @@ const GridHeader = ({
                 whiteSpace: 'nowrap',
 
                 px: 1.5,
-
-                fontWeight: 700,
+                fontSize: '1.3rem',
+                fontWeight: 800,
 
                 position: stickyHeader ? 'sticky' : 'static',
 

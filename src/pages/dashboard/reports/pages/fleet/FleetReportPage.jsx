@@ -35,16 +35,24 @@ const FleetReportPage = () => {
   return (
     <ReportLayout title="گزارش  ناوگاه" subtitle="گزارش کامل  ناوگان">
       {/* Summary */}
-      <FleetSummary summary={data?.summary} />
+      <DashboardSection title="خلاصه">
+        <FleetSummary summary={data?.summary} />
+      </DashboardSection>
 
       {/* KPI */}
-      <FleetKPI kpi={data.kpi} />
+      <DashboardSection title="شاخص‌ها">
+        <FleetKPI kpi={data.kpi} />
+      </DashboardSection>
 
       {/* Financial */}
-      <FleetFinancial financial={data?.financial} />
+      <DashboardSection title="">
+        <FleetFinancial financial={data?.financial} />
+      </DashboardSection>
 
       {/* Alerts */}
-      <FleetAlerts alerts={data?.alerts} />
+      <DashboardSection title="هشدارها">
+        <FleetAlerts alerts={data?.alerts} />
+      </DashboardSection>
 
       {/* Charts */}
       <DashboardSection>

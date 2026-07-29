@@ -1,64 +1,70 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-import { Paper, Stack, Typography } from '@mui/material';
-
-import { DashboardGrid, DashboardColumn } from '@/components';
+import { DashboardGrid, DashboardColumn, KpiCard } from '@/components';
 
 import useLatestActivitiesSummary from './hooks/useLatestActivitiesSummary';
 
 const LatestActivitiesReportSummary = () => {
-  const { data } = useLatestActivitiesSummary();
+  const { data = {} } = useLatestActivitiesSummary();
 
   const summaryItems = [
     {
-      title: 'کل فعالیت ها ',
-      value: data.total,
+      title: 'کل فعالیت‌ها',
+      value: Number(data.total ?? 0).toLocaleString('en-US'),
+      color: 'primary',
+      icon: 'report',
     },
+
     {
-      title: 'فعالیتهای ماموریت',
-      value: data.mission,
+      title: 'فعالیت‌های مأموریت',
+      value: Number(data.mission ?? 0).toLocaleString('en-US'),
+      color: 'info',
+      icon: 'report',
     },
+
     {
-      title: 'فعالیتهای سوخت ',
-      value: data.fuel,
+      title: 'فعالیت‌های سوخت',
+      value: Number(data.fuel ?? 0).toLocaleString('en-US'),
+      color: 'warning',
+      icon: 'fuel',
     },
+
     {
-      title: 'فعالیتهای هزینه',
-      value: data.expense,
+      title: 'فعالیت‌های هزینه',
+      value: Number(data.expense ?? 0).toLocaleString('en-US'),
+      color: 'secondary',
+      icon: 'money',
     },
+
     {
-      title: 'فعالیتهای بیمه',
-      value: data.insurance,
+      title: 'فعالیت‌های بیمه',
+      value: Number(data.insurance ?? 0).toLocaleString('en-US'),
+      color: 'success',
+      icon: 'insurance',
     },
+
     {
-      title: 'فعالیتهای سرویس',
-      value: data.service,
+      title: 'فعالیت‌های سرویس',
+      value: Number(data.service ?? 0).toLocaleString('en-US'),
+      color: 'error',
+      icon: 'service',
     },
   ];
+
   return (
     <DashboardGrid>
       {summaryItems.map((item) => (
-        <DashboardColumn key={item.title} md={3}>
-          <Paper
-            sx={{
-              p: 2,
-              borderRadius: 2,
-            }}
-          >
-            <Stack spacing={1}>
-              <Typography color="text.secondary" variant="body2">
-                {item.title}
-              </Typography>
-
-              <Typography variant="h4" fontWeight={700}>
-                {item.value}
-              </Typography>
-            </Stack>
-          </Paper>
+        <DashboardColumn key={item.title} xs={12} md={6} lg={4}>
+          <KpiCard
+            title={item.title}
+            value={item.value}
+            color={item.color}
+            icon={item.icon}
+          />
         </DashboardColumn>
       ))}
     </DashboardGrid>
   );
 };
 
-export default LatestActivitiesReportSummary;
+export default memo(LatestActivitiesReportSummary);

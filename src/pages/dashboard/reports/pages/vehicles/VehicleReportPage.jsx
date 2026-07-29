@@ -11,11 +11,17 @@ const MissionReportPage = () => {
   return (
     <DashboardSearchProvider>
       <ReportLayout title="گزارش خودروها" subtitle="گزارش کامل خودروها">
-        <VehicleReportSearchForm />
+        <DashboardSection title="جستجو بر اساس بازه زمانی">
+          <VehicleReportSearchForm />
+        </DashboardSection>
 
-        <VehicleReportSummary />
+        <DashboardSection title="خلاصه">
+          <VehicleReportSummary />
+        </DashboardSection>
 
-        <VehicleReportTable />
+        <DashboardSection title="جداول">
+          <VehicleReportTable />
+        </DashboardSection>
       </ReportLayout>
     </DashboardSearchProvider>
   );

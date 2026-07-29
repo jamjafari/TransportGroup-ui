@@ -1,60 +1,78 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-import { Paper, Stack, Typography } from '@mui/material';
-
-import { DashboardGrid, DashboardColumn } from '@/components';
+import { DashboardGrid, DashboardColumn, KpiCard } from '@/components';
 
 import useDriverSummary from './hooks/useDriverSummary';
 
 const DriverReportSummary = () => {
-  const { data } = useDriverSummary();
+  const { data = {} } = useDriverSummary();
 
   const summaryItems = [
     {
       title: 'کل رانندگان',
-      value: data.total,
+
+      value: Number(data.total ?? 0).toLocaleString('en-US'),
+
+      color: 'primary',
+
+      icon: 'vehicle',
     },
+
     {
       title: 'فعال',
-      value: data.active,
+
+      value: Number(data.active ?? 0).toLocaleString('en-US'),
+
+      color: 'success',
+
+      icon: 'check',
     },
+
     {
       title: 'در مأموریت',
-      value: data.mission,
+
+      value: Number(data.mission ?? 0).toLocaleString('en-US'),
+
+      color: 'info',
+
+      icon: 'report',
     },
+
     {
       title: 'غیرفعال',
-      value: data.inactive,
+
+      value: Number(data.inactive ?? 0).toLocaleString('en-US'),
+
+      color: 'secondary',
+
+      icon: 'expired',
     },
+
     {
       title: 'در تعمیرگاه',
-      value: data.repair,
+
+      value: Number(data.repair ?? 0).toLocaleString('en-US'),
+
+      color: 'warning',
+
+      icon: 'service',
     },
   ];
+
   return (
     <DashboardGrid>
       {summaryItems.map((item) => (
-        <DashboardColumn key={item.title} md={3}>
-          <Paper
-            sx={{
-              p: 2,
-              borderRadius: 2,
-            }}
-          >
-            <Stack spacing={1}>
-              <Typography color="text.secondary" variant="body2">
-                {item.title}
-              </Typography>
-
-              <Typography variant="h4" fontWeight={700}>
-                {item.value}
-              </Typography>
-            </Stack>
-          </Paper>
+        <DashboardColumn key={item.title} xs={12} md={6} lg={2.4}>
+          <KpiCard
+            title={item.title}
+            value={item.value}
+            color={item.color}
+            icon={item.icon}
+          />
         </DashboardColumn>
       ))}
     </DashboardGrid>
   );
 };
 
-export default DriverReportSummary;
+export default memo(DriverReportSummary);

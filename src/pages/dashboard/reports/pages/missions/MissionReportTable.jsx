@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AppDataGrid } from '@/components';
+import { AppDataGrid, StatusChip } from '@/components';
 
 import useMissionReport from './hooks/useMissionReport';
 
@@ -41,7 +41,7 @@ const MissionReportTable = () => {
     {
       field: 'status',
       headerName: 'وضعیت',
-      type: 'status',
+      renderCell: ({ value }) => <StatusChip status={value} />,
       flex: 1,
     },
   ];

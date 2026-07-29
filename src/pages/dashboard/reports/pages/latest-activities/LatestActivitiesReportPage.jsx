@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ReportLayout from '../../components/ReportLayout';
-
+import { DashboardSection } from '@/components';
 import MissionReportSearchForm from '../missions/MissionReportSearchForm';
 import LatestActivitiesReportSummary from './LatestActivitiesReportSummary';
 import LatestActivitiesReportTable from './LatestActivitiesReportTable';
@@ -14,11 +14,15 @@ const LatestActivitiesReportPage = () => {
         title="گزارش  آخرین فعالیت ها"
         subtitle="گزارش کامل آخرین فعالیت ها "
       >
-        <MissionReportSearchForm />
-
-        <LatestActivitiesReportSummary />
-
-        <LatestActivitiesReportTable />
+        <DashboardSection title="خلاصه">
+          <LatestActivitiesReportSummary />
+        </DashboardSection>
+        <DashboardSection title="جستجو بر اساس بازه زمانی">
+          <MissionReportSearchForm />
+        </DashboardSection>
+        <DashboardSection title="جداول">
+          <LatestActivitiesReportTable />
+        </DashboardSection>
       </ReportLayout>
     </DashboardSearchProvider>
   );

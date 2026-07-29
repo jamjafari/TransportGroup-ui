@@ -1,54 +1,74 @@
-import { Paper, Stack, Typography } from '@mui/material';
+import React, { memo } from 'react';
 
-import { DashboardGrid, DashboardColumn } from '@/components';
+import { DashboardGrid, DashboardColumn, KpiCard } from '@/components';
 
 const FuelCostReportSummary = ({ summary = {} }) => {
   const items = [
     {
-      title: '  کل سوخت مصرف شده',
-      value: summary.totalFuel ?? 0,
-    },
-    {
-      title: '  کل پرداختی های سوخت',
-      value: summary.totalFuelCost ?? 0,
-    },
-    {
-      title: '    میانگین مصرف سوخت در هر ماه ',
-      value: summary.averageFuel ?? 0,
+      title: 'کل سوخت مصرف شده',
+
+      value: Number(summary.totalFuel ?? 0).toLocaleString('en-US'),
+
+      color: 'primary',
+
+      icon: 'fuel',
     },
 
     {
-      title: ' میانگین هزینه های سوخت در هر ماه ',
-      value: summary.averageCost ?? 0,
+      title: 'کل پرداختی‌های سوخت',
+
+      value: Number(summary.totalFuelCost ?? 0).toLocaleString('en-US'),
+
+      color: 'warning',
+
+      icon: 'money',
     },
 
     {
-      title: ' تعداد تراکنش های سوخت ',
-      value: summary.transactionCount ?? 0,
+      title: 'میانگین مصرف سوخت در هر ماه',
+
+      value: Number(summary.averageFuel ?? 0).toFixed(2),
+
+      color: 'info',
+
+      icon: 'fuel',
+    },
+
+    {
+      title: 'میانگین هزینه سوخت در هر ماه',
+
+      value: Number(summary.averageCost ?? 0).toLocaleString('en-US'),
+
+      color: 'secondary',
+
+      icon: 'report',
+    },
+
+    {
+      title: 'تعداد تراکنش‌های سوخت',
+
+      value: Number(summary.transactionCount ?? 0).toLocaleString('en-US'),
+
+      color: 'success',
+
+      icon: 'report',
     },
   ];
+
   return (
     <DashboardGrid>
       {items.map((item) => (
-        <DashboardColumn key={item.title} md={2.4}>
-          <Paper
-            sx={{
-              p: 2,
-              borderRadius: 2,
-            }}
-          >
-            <Stack spacing={1}>
-              <Typography variant="body2">{item.title}</Typography>
-
-              <Typography variant="h4" fontWeight={700}>
-                {item.value}
-              </Typography>
-            </Stack>
-          </Paper>
+        <DashboardColumn key={item.title} xs={12} md={6} lg={2.4}>
+          <KpiCard
+            title={item.title}
+            value={item.value}
+            color={item.color}
+            icon={item.icon}
+          />
         </DashboardColumn>
       ))}
     </DashboardGrid>
   );
 };
 
-export default FuelCostReportSummary;
+export default memo(FuelCostReportSummary);

@@ -30,9 +30,9 @@ const DEFAULT_COLORS = [
 ];
 
 const BarChart = ({
-  categories,
+  categories = [],
 
-  series,
+  series = [],
 
   height,
 

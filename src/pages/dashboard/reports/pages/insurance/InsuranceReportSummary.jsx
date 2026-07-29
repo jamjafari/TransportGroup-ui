@@ -1,29 +1,54 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-import { DashboardGrid, DashboardColumn, SummaryCard } from '@/components';
+import { DashboardGrid, DashboardColumn, KpiCard } from '@/components';
 
-const InsuranceReportSummary = ({ summary }) => {
+const InsuranceReportSummary = ({ summary = {} }) => {
+  const items = [
+    {
+      title: 'کل بیمه‌ها',
+
+      value: Number(summary.totalInsurances ?? 0).toLocaleString('en-US'),
+
+      color: 'primary',
+
+      icon: 'insurance',
+    },
+
+    {
+      title: 'کل هزینه بیمه',
+
+      value: Number(summary.totalInsuranceCost ?? 0).toLocaleString('en-US'),
+
+      color: 'warning',
+
+      icon: 'money',
+    },
+
+    {
+      title: 'میانگین هزینه',
+
+      value: Number(summary.averageInsuranceCost ?? 0).toLocaleString('en-US'),
+
+      color: 'info',
+
+      icon: 'report',
+    },
+  ];
+
   return (
     <DashboardGrid>
-      <DashboardColumn xs={12} md={6} lg={4}>
-        <SummaryCard title="کل بیمه‌ها" value={summary.totalInsurances} />
-      </DashboardColumn>
-
-      <DashboardColumn xs={12} md={6} lg={4}>
-        <SummaryCard
-          title="کل هزینه بیمه"
-          value={summary.totalInsuranceCost.toLocaleString()}
-        />
-      </DashboardColumn>
-
-      <DashboardColumn xs={12} md={6} lg={4}>
-        <SummaryCard
-          title="میانگین هزینه"
-          value={summary.averageInsuranceCost.toLocaleString()}
-        />
-      </DashboardColumn>
+      {items.map((item) => (
+        <DashboardColumn key={item.title} xs={12} md={6} lg={4}>
+          <KpiCard
+            title={item.title}
+            value={item.value}
+            color={item.color}
+            icon={item.icon}
+          />
+        </DashboardColumn>
+      ))}
     </DashboardGrid>
   );
 };
 
-export default InsuranceReportSummary;
+export default memo(InsuranceReportSummary);

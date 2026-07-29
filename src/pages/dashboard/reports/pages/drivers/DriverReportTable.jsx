@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AppDataGrid } from '@/components';
+import { AppDataGrid, StatusChip } from '@/components';
 
 import useDriverReport from './hooks/useDriverReport';
 
@@ -36,12 +36,20 @@ const DriverReportTable = () => {
     {
       field: 'status',
       headerName: 'وضعیت',
-      type: 'status',
+      renderCell: ({ value }) => <StatusChip status={value} />,
       flex: 1,
     },
   ];
 
-  return <AppDataGrid rows={data} columns={columns} loading={loading} />;
+  return (
+    <AppDataGrid
+      toolbar
+      pagination
+      rows={data}
+      columns={columns}
+      loading={loading}
+    />
+  );
 };
 
 export default DriverReportTable;

@@ -32,9 +32,9 @@ const COLORS = [
 ];
 
 const PieChart = ({
-  labels,
+  labels = [],
 
-  series,
+  series = [],
 
   height,
 

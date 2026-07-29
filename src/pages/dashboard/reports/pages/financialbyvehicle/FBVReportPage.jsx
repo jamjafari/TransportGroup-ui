@@ -39,10 +39,14 @@ const FBVReportPage = () => {
   return (
     <ReportLayout title="گزارش  مالی بر اساس خودرو" subtitle="گزارش کامل  مالی">
       {/* Summary */}
-      <FBVReportSummary summary={data?.summary} />
+      <DashboardSection title="خلاصه">
+        <FBVReportSummary summary={data?.summary} />
+      </DashboardSection>
 
       {/* KPI */}
-      <FBVReportKPI kpi={data.kpi} />
+      <DashboardSection title="شاخص‌ها">
+        <FBVReportKPI kpi={data?.kpi} />
+      </DashboardSection>
 
       {/* Charts */}
       <DashboardSection>
@@ -60,18 +64,20 @@ const FBVReportPage = () => {
           </DashboardColumn>
         </DashboardGrid>
       </DashboardSection>
-      <DashboardCard
-        title="هزینه‌های سرویس و سوخت"
-        subtitle="  مقایسه هزینه سرویس ها به سوخت هر خودرو"
-      >
-        <FBVReportTable rows={data.financialByVehicle} loading={loading} />
-      </DashboardCard>
-      <DashboardCard
-        title="   تراکنش ها"
-        subtitle="   هزینه  خودروهای موجود در نقلیه"
-      >
-        <FinancialTransactionsTable rows={data.table} loading={loading} />
-      </DashboardCard>
+      <DashboardSection title="جداول">
+        <DashboardCard
+          title="هزینه‌های سرویس و سوخت"
+          subtitle="  مقایسه هزینه سرویس ها به سوخت هر خودرو"
+        >
+          <FBVReportTable rows={data.financialByVehicle} loading={loading} />
+        </DashboardCard>
+        <DashboardCard
+          title="   تراکنش ها"
+          subtitle="   هزینه  خودروهای موجود در نقلیه"
+        >
+          <FinancialTransactionsTable rows={data.table} loading={loading} />
+        </DashboardCard>
+      </DashboardSection>
     </ReportLayout>
   );
 };

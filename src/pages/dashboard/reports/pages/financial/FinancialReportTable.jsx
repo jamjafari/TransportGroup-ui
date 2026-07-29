@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AppDataGrid } from '@/components';
+import { AppDataGrid, StatusChip } from '@/components';
 
 import useFinancialReport from './hooks/useFinancialReport';
 
@@ -34,7 +34,7 @@ const FinancialReportTable = ({ rows = [], loading }) => {
     {
       field: 'status',
       headerName: 'وضعیت',
-      type: 'status',
+      renderCell: ({ value }) => <StatusChip status={value} />,
       flex: 1,
     },
   ];

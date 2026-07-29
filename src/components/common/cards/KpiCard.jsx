@@ -4,137 +4,123 @@ import {
   Card,
   CardContent,
   Typography,
+  Stack,
   Avatar,
   Box,
-  Skeleton,
-  Chip,
 } from '@mui/material';
-import Stack from '@mui/system/Stack';
 
-import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import ErrorIcon from '@mui/icons-material/Error';
+import EventBusyIcon from '@mui/icons-material/EventBusy';
+import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
+import BuildIcon from '@mui/icons-material/Build';
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import SecurityIcon from '@mui/icons-material/Security';
 
-import TrendingDownIcon from '@mui/icons-material/TrendingDown';
+const ICONS = {
+  check: CheckCircleIcon,
 
-import { KpiCardPropTypes } from './KpiCard.types';
+  warning: WarningAmberIcon,
+
+  error: ErrorIcon,
+
+  expired: EventBusyIcon,
+
+  fuel: LocalGasStationIcon,
+
+  service: BuildIcon,
+
+  vehicle: DirectionsCarIcon,
+
+  money: AttachMoneyIcon,
+
+  report: AssignmentIcon,
+
+  insurance: SecurityIcon,
+};
+
+const ICON_BY_COLOR = {
+  success: CheckCircleIcon,
+
+  warning: WarningAmberIcon,
+
+  error: ErrorIcon,
+
+  secondary: EventBusyIcon,
+
+  primary: DirectionsCarIcon,
+
+  info: AssignmentIcon,
+};
 
 const KpiCard = ({
   title,
 
   value,
 
-  subtitle,
+  color = 'primary',
 
   icon,
-
-  color = 'primary.main',
-
-  trend,
-
-  loading = false,
-
-  onClick,
-
-  sx,
 }) => {
+  const IconComponent =
+    icon && ICONS[icon] ? ICONS[icon] : ICON_BY_COLOR[color] || AssignmentIcon;
+
   return (
     <Card
-      onClick={onClick}
-
+      elevation={1}
       sx={{
-        cursor: onClick ? 'pointer' : 'default',
+        borderRadius: 2,
 
         height: '100%',
-
-        ...sx,
       }}
     >
       <CardContent>
-        {loading ? (
-          <>
-            <Skeleton width="60%" />
+        <Stack
+          direction="row"
 
-            <Skeleton
-              width="40%"
+          justifyContent="space-between"
 
-              height={45}
-            />
-          </>
-        ) : (
-          <>
-            <Stack
-              direction="row"
-
-              justifyContent="space-between"
-
-              alignItems="center"
+          alignItems="center"
+        >
+          <Box>
+            <Typography
+              variant="body2"
+              fontSize={18}
+              fontWeight={800}
+              color="text.secondary"
             >
-              <Box>
-                <Typography
-                  variant="body2"
+              {title}
+            </Typography>
 
-                  color="text.secondary"
-                >
-                  {title}
-                </Typography>
+            <Typography
+              variant="h4"
 
-                <Typography
-                  variant="h4"
+              fontWeight={700}
+            >
+              {value}
+            </Typography>
+          </Box>
 
-                  fontWeight={700}
+          <Avatar
+            sx={{
+              bgcolor: `${color}.light`,
 
-                  mt={1}
-                >
-                  {value}
-                </Typography>
-              </Box>
+              color: `${color}.main`,
 
-              <Avatar
-                sx={{
-                  bgcolor: color,
+              width: 56,
 
-                  width: 56,
-
-                  height: 56,
-                }}
-              >
-                {icon}
-              </Avatar>
-            </Stack>
-
-            {subtitle && (
-              <Typography
-                variant="body2"
-
-                color="text.secondary"
-
-                mt={2}
-              >
-                {subtitle}
-              </Typography>
-            )}
-
-            {trend !== undefined && (
-              <Chip
-                sx={{
-                  mt: 2,
-                }}
-
-                size="small"
-
-                color={trend >= 0 ? 'success' : 'error'}
-
-                icon={trend >= 0 ? <TrendingUpIcon /> : <TrendingDownIcon />}
-
-                label={`${trend}%`}
-              />
-            )}
-          </>
-        )}
+              height: 56,
+            }}
+          >
+            <IconComponent />
+          </Avatar>
+        </Stack>
       </CardContent>
     </Card>
   );
 };
-
-KpiCard.propTypes = KpiCardPropTypes;
 
 export default memo(KpiCard);

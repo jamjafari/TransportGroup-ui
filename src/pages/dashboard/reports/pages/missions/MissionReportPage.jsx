@@ -11,11 +11,15 @@ const MissionReportPage = () => {
   return (
     <DashboardSearchProvider>
       <ReportLayout title="گزارش مأموریت‌ها" subtitle="گزارش کامل مأموریت‌ها">
-        <MissionReportSearchForm />
-
-        <MissionReportSummary />
-
-        <MissionReportTable />
+        <DashboardSection title="خلاصه">
+          <MissionReportSummary />
+        </DashboardSection>
+        <DashboardSection title="جستجو بر اساس بازه زمانی">
+          <MissionReportSearchForm />
+        </DashboardSection>
+        <DashboardSection title="جداول">
+          <MissionReportTable />
+        </DashboardSection>
       </ReportLayout>
     </DashboardSearchProvider>
   );

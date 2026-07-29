@@ -1,6 +1,6 @@
-import { Paper, Stack, Typography } from '@mui/material';
+import React, { memo } from 'react';
 
-import { DashboardGrid, DashboardColumn } from '@/components';
+import { DashboardGrid, DashboardColumn, KpiCard } from '@/components';
 
 const FleetFinancial = ({
   financial = {
@@ -15,46 +15,48 @@ const FleetFinancial = ({
     {
       title: 'هزینه سوخت',
 
-      value: financial.totalFuel ?? 0,
+      value: Number(financial.totalFuel ?? 0).toLocaleString('en-US'),
+
+      color: 'warning',
+
+      icon: 'fuel',
     },
 
     {
       title: 'هزینه‌های جاری',
 
-      value: financial.totalExpense ?? 0,
+      value: Number(financial.totalExpense ?? 0).toLocaleString('en-US'),
+
+      color: 'info',
+
+      icon: 'money',
     },
 
     {
       title: 'هزینه هر خودرو',
 
-      value: financial.costPerVehicle ?? 0,
+      value: Number(financial.costPerVehicle ?? 0).toLocaleString('en-US'),
+
+      color: 'primary',
+
+      icon: 'vehicle',
     },
   ];
 
   return (
     <DashboardGrid>
       {items.map((item) => (
-        <DashboardColumn key={item.title} md={4}>
-          <Paper
-            sx={{
-              p: 2,
-              borderRadius: 2,
-            }}
-          >
-            <Stack>
-              <Typography variant="body2" color="text.secondary">
-                {item.title}
-              </Typography>
-
-              <Typography variant="h5" fontWeight={700}>
-                {item.value.toLocaleString()}
-              </Typography>
-            </Stack>
-          </Paper>
+        <DashboardColumn key={item.title} xs={12} md={4}>
+          <KpiCard
+            title={item.title}
+            value={item.value}
+            color={item.color}
+            icon={item.icon}
+          />
         </DashboardColumn>
       ))}
     </DashboardGrid>
   );
 };
 
-export default FleetFinancial;
+export default memo(FleetFinancial);

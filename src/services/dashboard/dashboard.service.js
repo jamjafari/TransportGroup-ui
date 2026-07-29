@@ -533,13 +533,13 @@ const dashboardService = {
 
       const days = Math.ceil((expire - today) / (1000 * 60 * 60 * 24));
 
-      if (days < 0) return 'منقضی شده';
+      if (days < 0) return 'Inactive';
 
-      if (days <= 7) return 'بحرانی';
+      if (days <= 7) return 'Critical';
 
-      if (days <= 30) return 'هشدار';
+      if (days <= 30) return 'Warinig';
 
-      return 'فعال';
+      return 'Active';
     };
     const getRemainingDays = (expireDate) => {
       const today = new Date();
@@ -548,7 +548,7 @@ const dashboardService = {
 
       return Math.ceil((expire - today) / (1000 * 60 * 60 * 24));
     };
-    const table = InsuranceMock.map((insurance) => {
+    const table = InsurancesMock.map((insurance) => {
       const vehicle = VehicleMock.find((v) => v.id === insurance.vehicleId);
 
       return {
@@ -556,7 +556,7 @@ const dashboardService = {
 
         plateNumber: vehicle.plateNumber,
 
-        vehicleName: vehicle.vehicleName,
+        vehicleName: insurance.vehicleName,
 
         insuranceType: insurance.insuranceType,
 
@@ -575,13 +575,13 @@ const dashboardService = {
     });
     const totalInsurances = table.length;
 
-    const expiredCount = table.filter((x) => x.status === 'منقضی شده').length;
+    const expiredCount = table.filter((x) => x.status === 'Inactive').length;
 
-    const warningCount = table.filter((x) => x.status === 'هشدار').length;
+    const warningCount = table.filter((x) => x.status === 'Warinig').length;
 
-    const criticalCount = table.filter((x) => x.status === 'بحرانی').length;
+    const criticalCount = table.filter((x) => x.status === 'Critical').length;
 
-    const activeCount = table.filter((x) => x.status === 'فعال').length;
+    const activeCount = table.filter((x) => x.status === 'Active').length;
 
     const totalInsuranceCost = table.reduce((sum, x) => sum + x.amount, 0);
 
@@ -615,24 +615,28 @@ const dashboardService = {
         title: 'فعال',
         value: activeCount,
         color: 'success',
+        icon: 'check',
       },
 
       {
         title: 'هشدار',
         value: warningCount,
         color: 'warning',
+        icon: 'warning',
       },
 
       {
         title: 'بحرانی',
         value: criticalCount,
         color: 'error',
+        icon: 'error',
       },
 
       {
         title: 'منقضی',
         value: expiredCount,
         color: 'secondary',
+        icon: 'expired',
       },
     ];
     const insuranceStatusChart = {

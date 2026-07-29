@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AppDataGrid } from '@/components';
+import { AppDataGrid, StatusChip } from '@/components';
 
 const FinancialTransactionsTable = ({ rows = [], loading }) => {
   const columns = [
@@ -42,7 +42,7 @@ const FinancialTransactionsTable = ({ rows = [], loading }) => {
     {
       field: 'status',
       headerName: 'وضعیت',
-      type: 'status',
+      renderCell: ({ value }) => <StatusChip status={value} />,
       width: 280,
       align: 'center',
       headerAlign: 'center',

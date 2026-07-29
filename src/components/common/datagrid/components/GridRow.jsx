@@ -43,6 +43,7 @@ const GridRow = ({
             minWidth: 50,
             maxWidth: 50,
             boxSizing: 'border-box',
+            fontSize: '1.2rem',
           }}
         >
           <Checkbox checked={selected} onChange={() => onToggle?.(row)} />

@@ -1041,6 +1041,8 @@ export const InsurancesMock = [
     expireDate: '2026-05-12',
     startDate: '2026-04-01',
     amount: 19500000,
+    remainDays: 5,
+    status: 'Critical',
   },
   {
     id: 2,
@@ -1122,7 +1124,7 @@ export const InsurancesMock = [
   },
   {
     id: 8,
-    vehicleId: 5,
+    vehicleId: 3,
     vehicleName: 'ولوو FH500',
 
     insuranceType: 'بیمه شخص ثالث',

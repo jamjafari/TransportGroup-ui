@@ -1,57 +1,68 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-import { Paper, Stack, Typography } from '@mui/material';
-
-import { DashboardGrid, DashboardColumn } from '@/components';
+import { DashboardGrid, DashboardColumn, KpiCard } from '@/components';
 
 import useMissionSummary from './hooks/useMissionSummary';
 
 const MissionReportSummary = () => {
-  const { data } = useMissionSummary();
+  const { data = {} } = useMissionSummary();
 
   const summaryItems = [
     {
       title: 'کل مأموریت‌ها',
-      value: data?.total ?? 0,
+
+      value: Number(data.total ?? 0).toLocaleString('en-US'),
+
+      color: 'primary',
+
+      icon: 'report',
     },
+
     {
       title: 'انجام شده',
-      value: data?.completed ?? 0,
+
+      value: Number(data.completed ?? 0).toLocaleString('en-US'),
+
+      color: 'success',
+
+      icon: 'check',
     },
+
     {
       title: 'در حال انجام',
-      value: data?.running ?? 0,
+
+      value: Number(data.running ?? 0).toLocaleString('en-US'),
+
+      color: 'info',
+
+      icon: 'vehicle',
     },
+
     {
       title: 'لغو شده',
-      value: data?.cancelled ?? 0,
+
+      value: Number(data.cancelled ?? 0).toLocaleString('en-US'),
+
+      color: 'error',
+
+      icon: 'expired',
     },
   ];
 
   return (
     <DashboardGrid>
       {summaryItems.map((item) => (
-        <DashboardColumn key={item.title} md={3}>
-          <Paper
-            sx={{
-              p: 2,
-              borderRadius: 2,
-            }}
-          >
-            <Stack spacing={1}>
-              <Typography color="text.secondary" variant="body2">
-                {item.title}
-              </Typography>
-
-              <Typography variant="h4" fontWeight={700}>
-                {item.value}
-              </Typography>
-            </Stack>
-          </Paper>
+        <DashboardColumn key={item.title} xs={12} md={6} lg={3}>
+          <KpiCard
+            title={item.title}
+            value={item.value}
+            color={item.color}
+            icon={item.icon}
+          />
         </DashboardColumn>
       ))}
     </DashboardGrid>
   );
 };
 
-export default MissionReportSummary;
+export default memo(MissionReportSummary);

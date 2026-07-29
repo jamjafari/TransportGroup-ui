@@ -16,9 +16,9 @@ import { Box } from '@mui/material';
 import { LineChartPropTypes, LineChartDefaultProps } from './LineChart.types';
 
 const LineChart = ({
-  categories,
+  categories = [],
 
-  series,
+  series = [],
 
   height,
 

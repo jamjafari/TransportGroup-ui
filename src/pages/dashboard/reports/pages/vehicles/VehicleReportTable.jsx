@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AppDataGrid } from '@/components';
+import { AppDataGrid, StatusChip } from '@/components';
 
 import useVehicleReport from './hooks/useVehicleReport';
 
@@ -32,7 +32,7 @@ const VehicleReportTable = () => {
     {
       field: 'status',
       headerName: 'وضعیت',
-      type: 'status',
+      renderCell: ({ value }) => <StatusChip status={value} />,
       flex: 1,
     },
   ];

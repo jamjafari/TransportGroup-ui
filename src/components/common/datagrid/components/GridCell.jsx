@@ -42,13 +42,10 @@ const GridCell = ({ row, column }) => {
       default:
         return (
           <Typography
+            sx={{ fontSize: '1rem', fontWeight: 600 }}
+            fontWeight={700}
             variant="body2"
             noWrap
-            // sx={{
-            //   textAlign: 'center',
-            //   width: '100%',
-            //   fontWeight: 600,
-            // }}
           >
             {value ?? '-'}
           </Typography>
@@ -69,8 +66,9 @@ const GridCell = ({ row, column }) => {
 
         whiteSpace: 'nowrap',
 
-        overflow: 'hidden',
-
+        overflow: 'auto',
+        fontSize: '0.95rem',
+        fontWeight: 700,
         textOverflow: 'ellipsis',
 
         px: 2,

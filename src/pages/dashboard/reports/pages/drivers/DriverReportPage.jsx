@@ -10,11 +10,13 @@ const DriverReportPage = () => {
   return (
     <DashboardSearchProvider>
       <ReportLayout title="گزارش راننده ها" subtitle="گزارش کامل راننده ها">
-        <MissionReportSearchForm />
+        <DashboardSection title="خلاصه">
+          <DriverReportSummary />
+        </DashboardSection>
 
-        <DriverReportSummary />
-
-        <DriverReportTable />
+        <DashboardSection title="جداول">
+          <DriverReportTable />
+        </DashboardSection>
       </ReportLayout>
     </DashboardSearchProvider>
   );

@@ -1,58 +1,50 @@
-import { Paper, Stack, Typography } from '@mui/material';
+import React, { memo } from 'react';
 
-import { DashboardGrid, DashboardColumn } from '@/components';
+import { DashboardGrid, DashboardColumn, AppAlert } from '@/components';
 
 const FleetAlerts = ({
-  alerts = { expiredInsurance: 0, requiredService: 0, criticalService: 0 },
+  alerts = {
+    expiredInsurance: 0,
+    requiredService: 0,
+    criticalService: 0,
+  },
 }) => {
   const items = [
     {
       title: 'بیمه منقضی',
-
       value: alerts.expiredInsurance,
-
-      color: '#d32f2f',
+      severity: 'error',
     },
 
     {
       title: 'سرویس ضروری',
-
       value: alerts.requiredService,
-
-      color: '#ed6c02',
+      severity: 'warning',
     },
 
     {
       title: 'سرویس بحرانی',
-
       value: alerts.criticalService,
-
-      color: '#b71c1c',
+      severity: 'error',
     },
   ];
 
   return (
     <DashboardGrid>
       {items.map((item) => (
-        <DashboardColumn key={item.title} md={4}>
-          <Paper
-            sx={{
-              p: 2,
-              borderLeft: `6px solid ${item.color}`,
-            }}
+        <DashboardColumn key={item.title} xs={12} md={4}>
+          <AppAlert
+            open={item.value > 0}
+            severity={item.severity}
+            variant="filled"
+            title={item.title}
           >
-            <Stack>
-              <Typography>{item.title}</Typography>
-
-              <Typography variant="h4" fontWeight={700} color={item.color}>
-                {item.value}
-              </Typography>
-            </Stack>
-          </Paper>
+            تعداد موارد: {item.value}
+          </AppAlert>
         </DashboardColumn>
       ))}
     </DashboardGrid>
   );
 };
 
-export default FleetAlerts;
+export default memo(FleetAlerts);

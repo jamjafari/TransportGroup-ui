@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AppDataGrid } from '@/components';
+import { AppDataGrid, StatusChip } from '@/components';
 
 const InsuranceReportTable = ({ rows = [], loading }) => {
   const columns = [
@@ -12,17 +12,17 @@ const InsuranceReportTable = ({ rows = [], loading }) => {
     {
       field: 'vehicleName',
       headerName: 'خودرو',
-      width: 180,
+      width: 140,
     },
     {
       field: 'insuranceType',
       headerName: 'نوع بیمه',
-      width: 170,
+      width: 140,
     },
     {
       field: 'company',
       headerName: 'شرکت بیمه',
-      width: 170,
+      width: 140,
     },
     {
       field: 'startDate',
@@ -40,19 +40,19 @@ const InsuranceReportTable = ({ rows = [], loading }) => {
       field: 'remainingDays',
       headerName: 'روز باقیمانده',
       type: 'number',
-      width: 120,
+      width: 100,
     },
     {
       field: 'amount',
       headerName: 'مبلغ',
       type: 'currency',
-      width: 160,
+      width: 100,
     },
     {
       field: 'status',
       headerName: 'وضعیت',
-      type: 'status',
-      width: 120,
+      renderCell: ({ value }) => <StatusChip status={value} />,
+      width: 100,
     },
   ];
 

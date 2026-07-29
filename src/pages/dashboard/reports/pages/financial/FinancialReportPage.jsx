@@ -33,10 +33,14 @@ const FinancialReportPage = () => {
   return (
     <ReportLayout title="گزارش  مالی" subtitle="گزارش کامل  مالی">
       {/* Summary */}
-      <FinancialReportSummary summary={data?.summary} />
+      <DashboardSection title="خلاصه">
+        <FinancialReportSummary summary={data?.summary} />
+      </DashboardSection>
 
       {/* KPI */}
-      <FinancialReportKPI kpi={data.kpi} />
+      <DashboardSection title="شاخص‌ها">
+        <FinancialReportKPI kpi={data.kpi} />
+      </DashboardSection>
 
       {/* Charts */}
       <DashboardSection>
@@ -54,7 +58,10 @@ const FinancialReportPage = () => {
           </DashboardColumn>
         </DashboardGrid>
       </DashboardSection>
-      <FinancialReportTable rows={data.table} loading={loading} />
+
+      <DashboardSection title="جداول">
+        <FinancialReportTable rows={data.table} loading={loading} />
+      </DashboardSection>
     </ReportLayout>
   );
 };
