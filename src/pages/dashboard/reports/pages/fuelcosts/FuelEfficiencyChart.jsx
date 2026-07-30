@@ -13,7 +13,12 @@ const FuelEfficiencyChart = ({
       title="بهره‌وری سوخت خودروها"
       subtitle="کیلومتر به ازای هر لیتر"
     >
-      <BarChart categories={data.categories} series={data.series} />
+      <BarChart
+        categories={data.categories}
+        series={data.series}
+        tooltip
+        legend
+      />
     </DashboardCard>
   );
 };

@@ -14,7 +14,12 @@ const FBVVehicleCostChart = ({
         هزینه های هر خودرو
       </Typography>
 
-      <BarChart categories={data.categories} series={data.series} />
+      <BarChart
+        categories={data.categories}
+        series={data.series}
+        tooltip
+        legend
+      />
     </Paper>
   );
 };

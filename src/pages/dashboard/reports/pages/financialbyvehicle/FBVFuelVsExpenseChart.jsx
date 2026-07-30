@@ -14,7 +14,7 @@ const FBVFuelVsExpenseChart = ({
         وضعیت هزینه به سوخت
       </Typography>
 
-      <PieChart labels={data.labels} series={data.series} />
+      <PieChart labels={data.labels} series={data.series} tooltip legend />
     </Paper>
   );
 };

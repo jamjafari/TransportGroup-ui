@@ -148,9 +148,9 @@ class DashboardRepository extends BaseRepository {
     return {
       total: missions.length,
 
-      completed: missions.filter((x) => x.status === 'Completed').length,
+      Completed: missions.filter((x) => x.status === 'Completed').length,
 
-      running: missions.filter((x) => x.status === 'Running').length,
+      Running: missions.filter((x) => x.status === 'Running').length,
 
       cancelled: missions.filter((x) => x.status === 'Cancelled').length,
     };
@@ -294,6 +294,25 @@ class DashboardRepository extends BaseRepository {
     const result = await this.service.getInsuranceReport();
     console.log('Repository Result:', result);
     return result;
+  };
+  getServiceReport = async (filters = {}) => {
+    return await this.service.getServiceReport();
+  };
+  getDateRangeFinancials = async (filters = {}) => {
+    return await this.service.getExpenses();
+  };
+  getDateRangeFinancialSummary = async (filters = {}) => {
+    const expenses = await this.service.getExpenses();
+
+    return {
+      total: expenses.length,
+
+      Approved: expenses.filter((x) => x.status === 'Approved').length,
+
+      Rejected: expenses.filter((x) => x.status === 'Rejected').length,
+
+      Pending: expenses.filter((x) => x.status === 'Pending').length,
+    };
   };
 }
 

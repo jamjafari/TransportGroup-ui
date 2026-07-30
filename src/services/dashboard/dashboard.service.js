@@ -707,6 +707,205 @@ const dashboardService = {
       table,
     };
   },
+  async getServiceReport() {
+    const getServiceStatus = (nextKm, currentKm) => {
+      const remaining = nextKm - currentKm;
+
+      if (remaining <= 0) return 'Overdue';
+
+      if (remaining <= 500) return 'Critical';
+
+      if (remaining <= 2000) return 'Required';
+
+      return 'ServiceCompleted';
+    };
+
+    const getRemainingKm = (nextKm, currentKm) => nextKm - currentKm;
+
+    const table = VehicleServicesMock.map((service) => {
+      const vehicle = VehicleMock.find((v) => v.id === service.vehicleId);
+
+      return {
+        id: service.id,
+
+        plateNumber: vehicle?.plateNumber,
+
+        vehicleName: vehicle?.vehicleName,
+
+        serviceType: service.serviceType,
+
+        serviceDate: service.serviceDate,
+
+        odometerKm: service.odometerKm,
+
+        nextServiceKm: service.nextServiceKm,
+
+        amount: service.amount,
+
+        remainingKm: getRemainingKm(
+          service.nextServiceKm,
+          vehicle?.currentKm ?? 0,
+        ),
+
+        status: getServiceStatus(
+          service.nextServiceKm,
+          vehicle?.currentKm ?? 0,
+        ),
+      };
+    });
+    const totalServices = table.length;
+
+    const totalServiceCost = table.reduce((sum, item) => sum + item.amount, 0);
+
+    const averageServiceCost = Number(
+      (totalServiceCost / totalServices).toFixed(2),
+    );
+
+    const activeCount = table.filter(
+      (x) => x.status === 'ServiceCompleted',
+    ).length;
+
+    const warningCount = table.filter((x) => x.status === 'Required').length;
+
+    const criticalCount = table.filter((x) => x.status === 'Critical').length;
+
+    const overdueCount = table.filter((x) => x.status === 'Overdue').length;
+
+    const summary = {
+      totalServices,
+
+      totalServiceCost,
+
+      averageServiceCost,
+
+      activeCount,
+
+      warningCount,
+
+      criticalCount,
+
+      overdueCount,
+    };
+    const mostExpensive = table.reduce(
+      (prev, current) => (prev.amount > current.amount ? prev : current),
+      table[0],
+    );
+
+    const kpi = {
+      mostExpensiveVehicle: mostExpensive?.vehicleName,
+
+      mostExpensiveCost: mostExpensive?.amount,
+
+      averageCostPerVehicle: Number(
+        (totalServiceCost / VehicleMock.length).toFixed(2),
+      ),
+
+      averageCostPerService: averageServiceCost,
+    };
+    const alerts = {
+      overdue: overdueCount,
+
+      critical: criticalCount,
+
+      warning: warningCount,
+    };
+    const serviceStatus = {
+      labels: ['فعال', 'هشدار', 'بحرانی', 'معوق'],
+
+      series: [activeCount, warningCount, criticalCount, overdueCount],
+    };
+    // console.log('service data', activeCount, criticalCount);
+    const serviceTypes = [...new Set(table.map((x) => x.serviceType))];
+    console.log('service data', serviceTypes);
+    const serviceTypeChart = {
+      categories: serviceTypes,
+
+      series: [
+        {
+          name: 'هزینه سرویس',
+
+          data: serviceTypes.map((type) =>
+            table
+              .filter((x) => x.serviceType === type)
+              .reduce((sum, item) => sum + item.amount, 0),
+          ),
+        },
+      ],
+    };
+    const months = [
+      'فروردین',
+      'اردیبهشت',
+      'خرداد',
+      'تیر',
+      'مرداد',
+      'شهریور',
+      'مهر',
+      'آبان',
+      'آذر',
+      'دی',
+      'بهمن',
+      'اسفند',
+    ];
+
+    const serviceCostByMonth = {
+      categories: months,
+
+      series: [
+        {
+          name: 'هزینه سرویس',
+
+          data: months.map((_, index) =>
+            table
+              .filter((x) => new Date(x.serviceDate).getMonth() === index)
+              .reduce((sum, item) => sum + item.amount, 0),
+          ),
+        },
+      ],
+    };
+    return {
+      summary,
+
+      kpi,
+
+      alerts,
+
+      charts: {
+        serviceStatus,
+
+        serviceTypeChart,
+
+        serviceCostByMonth,
+      },
+
+      table,
+    };
+  },
+  async getDateRangeFinancials() {
+    const totalFuel = ExpenseMock.filter(
+      (x) => x.expenseType === 'سوخت',
+    ).reduce((s, x) => s + x.amount, 0);
+
+    const totalService = ExpenseMock.filter(
+      (x) => x.expenseType === 'تعمیرات',
+    ).reduce((s, x) => s + x.amount, 0);
+
+    const totalInsurance = ExpenseMock.filter(
+      (x) => x.expenseType === 'بیمه',
+    ).reduce((s, x) => s + x.amount, 0);
+
+    const total = ExpenseMock.reduce((sum, item) => sum + item.amount, 0);
+    return {
+      summary: {
+        total,
+
+        totalFuel,
+        totalInsurance,
+        totalService,
+      },
+
+      table: ExpenseMock,
+    };
+  },
 };
 // یک نکته وجود دارد و آن اینکه اگر به ایصورت عمل می شود باید در دیتا بیس هزینه سوخت از هزینه جاری یا هزینه سرویس خودرو جدا شود
 

@@ -6,6 +6,8 @@ import FinancialReportPage from '../pages/financial/FinancialReportPage';
 import FBVReportPage from '../pages/financialbyvehicle/FBVReportPage';
 import FuelCostReportPage from '../pages/fuelcosts/FuelCostReportPage';
 import InsuranceReportPage from '../pages/insurance/InsuranceReportPage';
+import ServiceReportPage from '../pages/services/ServiceReportPage';
+import DateRangeFinancialReportPage from '../pages/daterange/DateRangeFinancialReportPage';
 
 import LatestActivitiesReportPage from '../pages/latest-activities/LatestActivitiesReportPage';
 
@@ -75,6 +77,22 @@ const reportRoutes = [
     title: 'گزارش   بیمه ',
 
     component: InsuranceReportPage,
+  },
+  {
+    id: 'service',
+
+    path: '/reports/service',
+    title: 'گزارش   سرویس ',
+
+    component: ServiceReportPage,
+  },
+  {
+    id: 'financial-date',
+
+    path: '/reports/financial-date',
+    title: 'گزارش  مالی',
+
+    component: DateRangeFinancialReportPage,
   },
 ];
 

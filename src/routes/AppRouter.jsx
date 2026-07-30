@@ -12,6 +12,8 @@ import FinancialReportPage from '@/pages/dashboard/reports/pages/financial';
 import FBVReportPage from '@/pages/dashboard/reports/pages/financialbyvehicle';
 import FuelCostReportPage from '@/pages/dashboard/reports/pages/fuelcosts';
 import InsuranceReportPage from '@/pages/dashboard/reports/pages/insurance';
+import ServiceReportPage from '@/pages/dashboard/reports/pages/services';
+import DateRangeFinancialReportPage from '@/pages/dashboard/reports/pages/daterange';
 
 import DashboardSearchProvider from '@/pages/dashboard/context/DashboardSearchProvider';
 
@@ -35,6 +37,10 @@ const AppRouter = () => {
         <Route
           path="/reports/latest-activities"
           element={<LatestActivitiesReportPage />}
+        />
+        <Route
+          path="/reports/financial-date"
+          element={<DateRangeFinancialReportPage />}
         />
         <Route
           path="/reports/fleet"
@@ -73,6 +79,14 @@ const AppRouter = () => {
           element={
             <DashboardSearchProvider>
               <InsuranceReportPage />
+            </DashboardSearchProvider>
+          }
+        />
+        <Route
+          path="/reports/service"
+          element={
+            <DashboardSearchProvider>
+              <ServiceReportPage />
             </DashboardSearchProvider>
           }
         />

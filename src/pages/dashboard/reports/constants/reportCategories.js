@@ -24,13 +24,13 @@ const reportCategories = [
   },
 
   {
-    id: 'fuel',
-    title: 'سوخت',
+    id: 'date',
+    title: 'بازه زمانی',
     icon: '⛽',
     items: [
-      { id: 'fuel-monthly', title: 'مصرف ماهانه' },
-      { id: 'fuel-vehicle', title: 'مصرف هر خودرو' },
-      { id: 'fuel-average', title: 'میانگین مصرف' },
+      { id: 'financial-date', title: 'گزارش هزینه‌ها' },
+      { id: 'fuelcost-date', title: 'گزارش سوخت' },
+      { id: 'fbv-date', title: 'هزینه هر خودرو' },
     ],
   },
 
@@ -40,7 +40,7 @@ const reportCategories = [
     icon: '🛡️',
     items: [
       { id: 'insurance', title: 'بیمه‌های منقضی' },
-      { id: 'services', title: 'سرویس‌های عقب افتاده' },
+      { id: 'service', title: 'سرویس‌های عقب افتاده' },
     ],
   },
 

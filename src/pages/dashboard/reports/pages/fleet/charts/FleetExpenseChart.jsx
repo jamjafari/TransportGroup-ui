@@ -14,7 +14,12 @@ const FleetExpenseChart = ({
         توزیع هزینه‌ها
       </Typography>
 
-      <BarChart categories={data.categories} series={data.series} />
+      <BarChart
+        categories={data.categories}
+        series={data.series}
+        tooltip
+        legend
+      />
     </Paper>
   );
 };

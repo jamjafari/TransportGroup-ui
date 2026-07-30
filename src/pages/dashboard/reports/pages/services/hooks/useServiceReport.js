@@ -6,14 +6,14 @@ import DashboardRepository from '@/repositories/dashboard/dashboard.repository';
 
 import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
 
-const useMissionReport = () => {
+const useServiceReport = () => {
   const { appliedFilters } = useDashboardSearch();
 
   return useAsyncData({
-    fetcher: () => DashboardRepository.getMissionSummary(appliedFilters),
+    fetcher: () => DashboardRepository.getServiceReport(appliedFilters),
 
     dependencies: [JSON.stringify(appliedFilters)],
   });
 };
 
-export default useMissionReport;
+export default useServiceReport;

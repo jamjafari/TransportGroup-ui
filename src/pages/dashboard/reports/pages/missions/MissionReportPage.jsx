@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ReportLayout from '../../components/ReportLayout';
-
+import { DashboardSection } from '@/components';
 import MissionReportSearchForm from './MissionReportSearchForm';
 import MissionReportSummary from './MissionReportSummary';
 import MissionReportTable from './MissionReportTable';

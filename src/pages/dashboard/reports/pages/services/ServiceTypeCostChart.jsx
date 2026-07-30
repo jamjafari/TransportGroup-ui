@@ -2,15 +2,15 @@ import React from 'react';
 
 import { DashboardCard, BarChart } from '@/components';
 
-const InsuranceCompanyChart = ({ categories, series }) => {
+const ServiceTypeCostChart = ({ categories, series }) => {
   return (
     <DashboardCard
-      title="هزینه بیمه بر اساس شرکت"
-      subtitle="مقایسه شرکت‌های بیمه"
+      title="هزینه بر اساس نوع سرویس"
+      subtitle="مقایسه هزینه انواع سرویس"
     >
       <BarChart categories={categories} series={series} tooltip legend />
     </DashboardCard>
   );
 };
 
-export default InsuranceCompanyChart;
+export default ServiceTypeCostChart;

@@ -14,7 +14,12 @@ const FleetFuelChart = ({
         روند مصرف سوخت
       </Typography>
 
-      <LineChart categories={data.categories} series={data.series} />
+      <LineChart
+        categories={data.categories}
+        series={data.series}
+        tooltip
+        legend
+      />
     </Paper>
   );
 };

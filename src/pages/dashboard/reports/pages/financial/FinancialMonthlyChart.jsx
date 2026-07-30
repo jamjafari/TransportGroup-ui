@@ -14,7 +14,12 @@ const FinancialMonthlyChart = ({
         هزینه های ماهانه
       </Typography>
 
-      <AreaChart categories={data.categories} series={data.series} />
+      <AreaChart
+        categories={data.categories}
+        series={data.series}
+        tooltip
+        legend
+      />
     </Paper>
   );
 };

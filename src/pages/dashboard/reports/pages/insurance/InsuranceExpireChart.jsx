@@ -8,7 +8,7 @@ const InsuranceExpireChart = ({ categories, series }) => {
       title="انقضای بیمه در ماه‌ها"
       subtitle="تعداد بیمه‌های پایان‌یافته در هر ماه"
     >
-      <BarChart categories={categories} series={series} />
+      <BarChart categories={categories} series={series} tooltip legend />
     </DashboardCard>
   );
 };

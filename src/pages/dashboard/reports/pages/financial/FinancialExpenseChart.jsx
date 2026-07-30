@@ -14,7 +14,7 @@ const FinancialExpenseChart = ({
         وضعیت هزینه ها
       </Typography>
 
-      <PieChart labels={data.labels} series={data.series} />
+      <PieChart labels={data.labels} series={data.series} tooltip legend />
     </Paper>
   );
 };

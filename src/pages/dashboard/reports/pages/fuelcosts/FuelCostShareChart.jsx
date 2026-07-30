@@ -13,7 +13,7 @@ const FuelCostShareChart = ({
       title="سهم هزینه سوخت خودروها"
       subtitle="درصد از کل هزینه سوخت ناوگان"
     >
-      <PieChart labels={data.labels} series={data.series} />
+      <PieChart labels={data.labels} series={data.series} tooltip legend />
     </DashboardCard>
   );
 };

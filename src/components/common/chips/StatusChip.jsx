@@ -64,18 +64,22 @@ const statusMap = {
     icon: <LocalShippingIcon />,
   },
 
-  Repaier: {
+  Repair: {
     label: 'در تعمیرگاه',
     color: 'warning',
     icon: <EngineeringIcon />,
   },
 
+  Canceled: {
+    label: 'لغو شده',
+    color: 'error',
+    icon: <HighlightOffIcon />,
+  },
   Cancelled: {
     label: 'لغو شده',
     color: 'error',
     icon: <HighlightOffIcon />,
   },
-
   Warning: {
     label: 'هشدار',
     color: 'warning',
@@ -99,13 +103,17 @@ const statusMap = {
     color: 'warning',
     icon: <BuildCircleIcon />,
   },
-
+  Overdue: {
+    label: ' معوق',
+    color: 'error',
+    icon: <MiscellaneousServicesIcon />,
+  },
   ServiceCompleted: {
     label: 'انجام شده',
     color: 'success',
-    icon: <MiscellaneousServicesIcon />,
+    icon: <CheckCircleIcon />,
   },
-  success: {
+  Success: {
     label: 'تایید شده',
     color: 'success',
     icon: <CheckCircleIcon />,

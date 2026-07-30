@@ -46,7 +46,15 @@ const MissionReportTable = () => {
     },
   ];
 
-  return <AppDataGrid rows={data} columns={columns} loading={loading} />;
+  return (
+    <AppDataGrid
+      rows={data}
+      columns={columns}
+      loading={loading}
+      toolbar
+      pagination
+    />
+  );
 };
 
 export default MissionReportTable;
