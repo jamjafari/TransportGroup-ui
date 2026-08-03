@@ -8,6 +8,7 @@ import FuelCostReportPage from '../pages/fuelcosts/FuelCostReportPage';
 import InsuranceReportPage from '../pages/insurance/InsuranceReportPage';
 import ServiceReportPage from '../pages/services/ServiceReportPage';
 import DateRangeFinancialReportPage from '../pages/daterange/DateRangeFinancialReportPage';
+import DateRangeFuelCostReportPage from '../pages/fuelcosts-date/DateRangeFuelCostReportPage';
 
 import LatestActivitiesReportPage from '../pages/latest-activities/LatestActivitiesReportPage';
 
@@ -93,6 +94,14 @@ const reportRoutes = [
     title: 'گزارش  مالی',
 
     component: DateRangeFinancialReportPage,
+  },
+  {
+    id: 'fuelcost-date',
+
+    path: '/reports/fuelcost-date',
+    title: 'گزارش  سوخت',
+
+    component: DateRangeFuelCostReportPage,
   },
 ];
 

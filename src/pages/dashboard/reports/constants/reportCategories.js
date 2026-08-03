@@ -24,13 +24,12 @@ const reportCategories = [
   },
 
   {
-    id: 'date',
+    id: 'daterange',
     title: 'بازه زمانی',
     icon: '⛽',
     items: [
       { id: 'financial-date', title: 'گزارش هزینه‌ها' },
       { id: 'fuelcost-date', title: 'گزارش سوخت' },
-      { id: 'fbv-date', title: 'هزینه هر خودرو' },
     ],
   },
 

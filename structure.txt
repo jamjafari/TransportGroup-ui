@@ -1,5 +1,5 @@
 Folder PATH listing
-Volume serial number is 000002B5 7A08:AF2E
+Volume serial number is 000001DC 7A08:AF2E
 C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 ¦   App.css
 ¦   App.jsx
@@ -25,6 +25,8 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 ¦   ¦   +---alerts
 ¦   ¦   ¦       AppAlert.jsx
 ¦   ¦   ¦       AppAlert.types.js
+¦   ¦   ¦       AppAlertItem.jsx
+¦   ¦   ¦       AppAlertItem.types.js
 ¦   ¦   ¦       ConfirmDialog.jsx
 ¦   ¦   ¦       ConfirmDialog.types.js
 ¦   ¦   ¦       index.js
@@ -117,7 +119,7 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 ¦   ¦   ¦   ¦       columnFactory.js
 ¦   ¦   ¦   ¦       columnResolver.js
 ¦   ¦   ¦   ¦       columnTypes.js
-¦   ¦   ¦   ¦       formatters.js
+¦   ¦   ¦   ¦       Fformatters.js
 ¦   ¦   ¦   ¦       index.js
 ¦   ¦   ¦   ¦       
 ¦   ¦   ¦   +---components
@@ -158,6 +160,7 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 ¦   ¦   ¦   ¦       index.js
 ¦   ¦   ¦   ¦       
 ¦   ¦   ¦   +---hooks
+¦   ¦   ¦   ¦       useColumnResize.js
 ¦   ¦   ¦   ¦       useDataGrid.js
 ¦   ¦   ¦   ¦       useGridColumns.js
 ¦   ¦   ¦   ¦       UseGridFiltering.js
@@ -172,6 +175,9 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 ¦   ¦   ¦   ¦       serverStateReducer.js
 ¦   ¦   ¦   ¦       syncAdapter.js
 ¦   ¦   ¦   ¦       useServerDataGrid.js
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---utils
+¦   ¦   ¦   ¦       columnManager.js
 ¦   ¦   ¦   ¦       
 ¦   ¦   ¦   +---views
 ¦   ¦   ¦           index.js
@@ -204,8 +210,8 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 ¦   ¦   ¦       index.js
 ¦   ¦   ¦       
 ¦   ¦   +---forms
-¦   ¦   ¦   ¦   AppAutocomplete.jsx
-¦   ¦   ¦   ¦   AppAutocomplete.types.js
+¦   ¦   ¦   ¦   AppAutocompleteform.jsx
+¦   ¦   ¦   ¦   AppAutocompleteform.types.js
 ¦   ¦   ¦   ¦   AppCheckbox.jsx
 ¦   ¦   ¦   ¦   AppCheckbox.types.js
 ¦   ¦   ¦   ¦   AppDatePicker.jsx
@@ -222,8 +228,8 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 ¦   ¦   ¦   ¦   AppFormSection.types.js
 ¦   ¦   ¦   ¦   AppRadioGroup.jsx
 ¦   ¦   ¦   ¦   AppRadioGroup.types.js
-¦   ¦   ¦   ¦   AppSelect.jsx
-¦   ¦   ¦   ¦   AppSelect.types.js
+¦   ¦   ¦   ¦   AppSelectform.jsx
+¦   ¦   ¦   ¦   AppSelectform.types.js
 ¦   ¦   ¦   ¦   AppSwitch.jsx
 ¦   ¦   ¦   ¦   AppSwitch.types.js
 ¦   ¦   ¦   ¦   AppTimePicker.jsx
@@ -244,6 +250,24 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 ¦   ¦   ¦   +---inputs
 ¦   ¦   ¦           AppTextField.jsx
 ¦   ¦   ¦           AppTextField.types.js
+¦   ¦   ¦           index.js
+¦   ¦   ¦           
+¦   ¦   +---inputs
+¦   ¦   ¦   ¦   index.js
+¦   ¦   ¦   ¦   
+¦   ¦   ¦   +---AppAutoComplete
+¦   ¦   ¦   ¦       AppAutoComplete.jsx
+¦   ¦   ¦   ¦       AppAutoComplete.types.js
+¦   ¦   ¦   ¦       index.js
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---AppDateRangePicker
+¦   ¦   ¦   ¦       AppDateRangePicker.jsx
+¦   ¦   ¦   ¦       AppDateRangePicker.types.js
+¦   ¦   ¦   ¦       index.js
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---AppSelect
+¦   ¦   ¦           AppSelect.jsx
+¦   ¦   ¦           AppSelect.types.js
 ¦   ¦   ¦           index.js
 ¦   ¦   ¦           
 ¦   ¦   +---keyValue
@@ -441,6 +465,7 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 ¦   ¦   ¦       
 ¦   ¦   +---layout
 ¦   ¦   ¦       DashboardBreakpoints.js
+¦   ¦   ¦       DashboardCard.jsx
 ¦   ¦   ¦       DashboardColumn.jsx
 ¦   ¦   ¦       DashboardColumn.types.js
 ¦   ¦   ¦       DashboardContainer.jsx
@@ -478,6 +503,9 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 ¦   ¦   ¦       index.js
 ¦   ¦   ¦       WidgetRenderer.jsx
 ¦   ¦   ¦       WidgetRenderer.types.js
+¦   ¦   ¦       
+¦   ¦   +---search
+¦   ¦   ¦       DashboardSearchButton.jsx
 ¦   ¦   ¦       
 ¦   ¦   +---skeleton
 ¦   ¦   ¦       CardSkeleton.jsx
@@ -791,6 +819,7 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 ¦               
 +---hooks
 ¦       index.js
+¦       useAsyncData.js
 ¦       useAuth.js
 ¦       
 +---layouts
@@ -805,7 +834,26 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 +---models
 ¦       ResponseModel.js
 ¦       
++---modules
+¦   +---drivers
+¦   +---fleet
+¦       +---vehicles
+¦           +---components
+¦           ¦       VehicleBasicInfo.jsx
+¦           ¦       VehicleDocuments.jsx
+¦           ¦       VehicleForm.jsx
+¦           ¦       VehicleTechnicalInfo.jsx
+¦           ¦       
+¦           +---pages
+¦           ¦       VehicleCreatePage.jsx
+¦           ¦       VehicleEditPage.jsx
+¦           ¦       
+¦           +---schemas
+¦                   vehicleSchema.js
+¦                   
 +---pages
+¦   ¦   index.js
+¦   ¦   
 ¦   +---auth
 ¦   ¦   ¦   index.js
 ¦   ¦   ¦   LoginPage.jsx
@@ -820,12 +868,11 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 ¦   ¦           
 ¦   +---dashboard
 ¦       ¦   Dashboard.types.js
+¦       ¦   DashboardContent.jsx
 ¦       ¦   DashboardPage.jsx
 ¦       ¦   index.js
 ¦       ¦   
 ¦       +---components
-¦       ¦   ¦   DashboardAlerts.jsx
-¦       ¦   ¦   DashboardAlerts.types.js
 ¦       ¦   ¦   DashboardKpiCards.jsx
 ¦       ¦   ¦   DashboardKpiCards.types.js
 ¦       ¦   ¦   DashboardTimeline.jsx
@@ -833,6 +880,12 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 ¦       ¦   ¦   DashboardTrips.jsx
 ¦       ¦   ¦   DashboardTrips.types.js
 ¦       ¦   ¦   
+¦       ¦   +---DashboardAlerts
+¦       ¦   ¦       DashboardAlerts.jsx
+¦       ¦   ¦       DashboardAlerts.types.js
+¦       ¦   ¦       DashboardAlertsSkeleton.jsx
+¦       ¦   ¦       index.js
+¦       ¦   ¦       
 ¦       ¦   +---DashboardCharts
 ¦       ¦   ¦       DashboardCharts.jsx
 ¦       ¦   ¦       DashboardCharts.types.js
@@ -847,6 +900,17 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 ¦       ¦   ¦       DashboardRefreshButton.jsx
 ¦       ¦   ¦       index.js
 ¦       ¦   ¦       
+¦       ¦   +---DashboardSearch
+¦       ¦   ¦       DashboardSearchActions.jsx
+¦       ¦   ¦       DashboardSearchDialog.jsx
+¦       ¦   ¦       DashboardSearchForm.jsx
+¦       ¦   ¦       DashboardSearchShortForm.jsx
+¦       ¦   ¦       index.js
+¦       ¦   ¦       
+¦       ¦   +---DashboardSearchSummary
+¦       ¦   ¦       DashboardSearchSummary.jsx
+¦       ¦   ¦       index.js
+¦       ¦   ¦       
 ¦       ¦   +---DashboardStatistics
 ¦       ¦   ¦       DashboardStatistics.jsx
 ¦       ¦   ¦       DashboardStatistics.types.js
@@ -858,11 +922,198 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 ¦       ¦           DashboardTables.types.js
 ¦       ¦           index.js
 ¦       ¦           
+¦       +---context
+¦       ¦       DashboardRefreshContext.jsx
+¦       ¦       DashboardRefreshProvider.jsx
+¦       ¦       DashboardSearchContext.jsx
+¦       ¦       DashboardSearchProvider.jsx
+¦       ¦       
 ¦       +---hooks
+¦       ¦       index.js
+¦       ¦       useDashboardAlerts.js
+¦       ¦       useDashboardPage.js
+¦       ¦       useDashboardRefresh.js
+¦       ¦       useDashboardSearch.js
+¦       ¦       useDashboardStatistics.js
+¦       ¦       useDashboardWidget.js
+¦       ¦       
+¦       +---reports
+¦       ¦   ¦   index.js
+¦       ¦   ¦   
+¦       ¦   +---components
+¦       ¦   ¦       ReportCategoryCard.jsx
+¦       ¦   ¦       ReportItem.jsx
+¦       ¦   ¦       ReportLayout.jsx
+¦       ¦   ¦       
+¦       ¦   +---constants
+¦       ¦   ¦       reportCategories.js
+¦       ¦   ¦       
+¦       ¦   +---dialogs
+¦       ¦   ¦       index.js
+¦       ¦   ¦       ReportDialog.jsx
+¦       ¦   ¦       
+¦       ¦   +---hooks
+¦       ¦   ¦       index.js
+¦       ¦   ¦       useReportDialog.js
+¦       ¦   ¦       
+¦       ¦   +---pages
+¦       ¦   ¦   ¦   index.js
+¦       ¦   ¦   ¦   
+¦       ¦   ¦   +---daterange
+¦       ¦   ¦   ¦   ¦   DateRangeFinancialReportPage.jsx
+¦       ¦   ¦   ¦   ¦   DateRangeFinancialSummary.jsx
+¦       ¦   ¦   ¦   ¦   DateRangeFinancialTable.jsx
+¦       ¦   ¦   ¦   ¦   index.js
+¦       ¦   ¦   ¦   ¦   
+¦       ¦   ¦   ¦   +---hooks
+¦       ¦   ¦   ¦           useDateRangeFinancialReport.js
+¦       ¦   ¦   ¦           useDateRangeFinancialSummary.js
+¦       ¦   ¦   ¦           
+¦       ¦   ¦   +---drivers
+¦       ¦   ¦   ¦   ¦   DriverReportPage.jsx
+¦       ¦   ¦   ¦   ¦   DriverReportSummary.jsx
+¦       ¦   ¦   ¦   ¦   DriverReportTable.jsx
+¦       ¦   ¦   ¦   ¦   index.js
+¦       ¦   ¦   ¦   ¦   
+¦       ¦   ¦   ¦   +---hooks
+¦       ¦   ¦   ¦           useDriverReport.js
+¦       ¦   ¦   ¦           useDriverSummary.js
+¦       ¦   ¦   ¦           
+¦       ¦   ¦   +---financial
+¦       ¦   ¦   ¦   ¦   FinancialExpenseChart.jsx
+¦       ¦   ¦   ¦   ¦   FinancialMonthlyChart.jsx
+¦       ¦   ¦   ¦   ¦   FinancialReportKPI.jsx
+¦       ¦   ¦   ¦   ¦   FinancialReportPage.jsx
+¦       ¦   ¦   ¦   ¦   FinancialReportSummary.jsx
+¦       ¦   ¦   ¦   ¦   FinancialReportTable.jsx
+¦       ¦   ¦   ¦   ¦   FinancialVehicleChart.jsx
+¦       ¦   ¦   ¦   ¦   index.js
+¦       ¦   ¦   ¦   ¦   
+¦       ¦   ¦   ¦   +---hooks
+¦       ¦   ¦   ¦           useFinancialReport.js
+¦       ¦   ¦   ¦           
+¦       ¦   ¦   +---financialbyvehicle
+¦       ¦   ¦   ¦   ¦   FBVExpenseTypeChart.jsx
+¦       ¦   ¦   ¦   ¦   FBVFuelVsExpenseChart.jsx
+¦       ¦   ¦   ¦   ¦   FBVReportKPI.jsx
+¦       ¦   ¦   ¦   ¦   FBVReportPage.jsx
+¦       ¦   ¦   ¦   ¦   FBVReportSummary.jsx
+¦       ¦   ¦   ¦   ¦   FBVReportTable.jsx
+¦       ¦   ¦   ¦   ¦   FBVVehicleCostChart.jsx
+¦       ¦   ¦   ¦   ¦   FinancialTransactionsTable.jsx
+¦       ¦   ¦   ¦   ¦   index.js
+¦       ¦   ¦   ¦   ¦   
+¦       ¦   ¦   ¦   +---hooks
+¦       ¦   ¦   ¦           useFinancialByVehicle.js
+¦       ¦   ¦   ¦           
+¦       ¦   ¦   +---fleet
+¦       ¦   ¦   ¦   ¦   FleetReportPage.jsx
+¦       ¦   ¦   ¦   ¦   index.js
+¦       ¦   ¦   ¦   ¦   
+¦       ¦   ¦   ¦   +---charts
+¦       ¦   ¦   ¦   ¦       FleetExpenseChart.jsx
+¦       ¦   ¦   ¦   ¦       FleetFuelChart.jsx
+¦       ¦   ¦   ¦   ¦       FleetStatusChart.jsx
+¦       ¦   ¦   ¦   ¦       
+¦       ¦   ¦   ¦   +---components
+¦       ¦   ¦   ¦   ¦       FleetAlerts.jsx
+¦       ¦   ¦   ¦   ¦       FleetFinancial.jsx
+¦       ¦   ¦   ¦   ¦       FleetKPI.jsx
+¦       ¦   ¦   ¦   ¦       FleetSummary.jsx
+¦       ¦   ¦   ¦   ¦       
+¦       ¦   ¦   ¦   +---hooks
+¦       ¦   ¦   ¦           useFleetReport.js
+¦       ¦   ¦   ¦           
+¦       ¦   ¦   +---fuelcosts
+¦       ¦   ¦   ¦   ¦   FuelCostReportPage.jsx
+¦       ¦   ¦   ¦   ¦   FuelCostReportSummary.jsx
+¦       ¦   ¦   ¦   ¦   FuelCostReportTable.jsx
+¦       ¦   ¦   ¦   ¦   FuelCostShareChart.jsx
+¦       ¦   ¦   ¦   ¦   FuelEfficiencyChart.jsx
+¦       ¦   ¦   ¦   ¦   index.js
+¦       ¦   ¦   ¦   ¦   
+¦       ¦   ¦   ¦   +---hooks
+¦       ¦   ¦   ¦           useFuelCostReport.js
+¦       ¦   ¦   ¦           
+¦       ¦   ¦   +---fuelcosts-date
+¦       ¦   ¦   ¦   ¦   DateRangeFuelCostReportPage.jsx
+¦       ¦   ¦   ¦   ¦   DateRangeFuelCostSummary.jsx
+¦       ¦   ¦   ¦   ¦   DateRangeFuelCostTable.jsx
+¦       ¦   ¦   ¦   ¦   index.js
+¦       ¦   ¦   ¦   ¦   
+¦       ¦   ¦   ¦   +---hooks
+¦       ¦   ¦   ¦           useDateRangeFuelCostReport.js
+¦       ¦   ¦   ¦           useDateRangeFuelCostSummary.js
+¦       ¦   ¦   ¦           
+¦       ¦   ¦   +---insurance
+¦       ¦   ¦   ¦   ¦   index.js
+¦       ¦   ¦   ¦   ¦   InsuranceCompanyChart.jsx
+¦       ¦   ¦   ¦   ¦   InsuranceExpireChart.jsx
+¦       ¦   ¦   ¦   ¦   InsuranceReportKPI.jsx
+¦       ¦   ¦   ¦   ¦   InsuranceReportPage.jsx
+¦       ¦   ¦   ¦   ¦   InsuranceReportSummary.jsx
+¦       ¦   ¦   ¦   ¦   InsuranceReportTable.jsx
+¦       ¦   ¦   ¦   ¦   InsuranceStatusChart.jsx
+¦       ¦   ¦   ¦   ¦   
+¦       ¦   ¦   ¦   +---hooks
+¦       ¦   ¦   ¦           useInsuranceReport.js
+¦       ¦   ¦   ¦           
+¦       ¦   ¦   +---latest-activities
+¦       ¦   ¦   ¦   ¦   index.js
+¦       ¦   ¦   ¦   ¦   LatestActivitiesReportPage.jsx
+¦       ¦   ¦   ¦   ¦   LatestActivitiesReportSummary.jsx
+¦       ¦   ¦   ¦   ¦   LatestActivitiesReportTable.jsx
+¦       ¦   ¦   ¦   ¦   
+¦       ¦   ¦   ¦   +---hooks
+¦       ¦   ¦   ¦           useLatestActivitiesReport.js
+¦       ¦   ¦   ¦           useLatestActivitiesSummary.js
+¦       ¦   ¦   ¦           
+¦       ¦   ¦   +---missions
+¦       ¦   ¦   ¦   ¦   index.js
+¦       ¦   ¦   ¦   ¦   MissionReportPage.jsx
+¦       ¦   ¦   ¦   ¦   MissionReportSearchForm.jsx
+¦       ¦   ¦   ¦   ¦   MissionReportSummary.jsx
+¦       ¦   ¦   ¦   ¦   MissionReportTable.jsx
+¦       ¦   ¦   ¦   ¦   
+¦       ¦   ¦   ¦   +---hooks
+¦       ¦   ¦   ¦           useMissionReport.js
+¦       ¦   ¦   ¦           useMissionSummary.js
+¦       ¦   ¦   ¦           
+¦       ¦   ¦   +---services
+¦       ¦   ¦   ¦   ¦   index.js
+¦       ¦   ¦   ¦   ¦   ServiceAlerts.jsx
+¦       ¦   ¦   ¦   ¦   ServiceCostByMonthChart.jsx
+¦       ¦   ¦   ¦   ¦   ServiceReportKPI.jsx
+¦       ¦   ¦   ¦   ¦   ServiceReportPage.jsx
+¦       ¦   ¦   ¦   ¦   ServiceReportSummary.jsx
+¦       ¦   ¦   ¦   ¦   ServiceReportTable.jsx
+¦       ¦   ¦   ¦   ¦   ServiceStatusChart.jsx
+¦       ¦   ¦   ¦   ¦   ServiceTransactionsTable.jsx
+¦       ¦   ¦   ¦   ¦   ServiceTypeCostChart.jsx
+¦       ¦   ¦   ¦   ¦   
+¦       ¦   ¦   ¦   +---hooks
+¦       ¦   ¦   ¦           useServiceReport.js
+¦       ¦   ¦   ¦           
+¦       ¦   ¦   +---vehicles
+¦       ¦   ¦       ¦   index.js
+¦       ¦   ¦       ¦   VehicleReportPage.jsx
+¦       ¦   ¦       ¦   VehicleReportSearchForm.jsx
+¦       ¦   ¦       ¦   VehicleReportSummary.jsx
+¦       ¦   ¦       ¦   VehicleReportTable.jsx
+¦       ¦   ¦       ¦   
+¦       ¦   ¦       +---hooks
+¦       ¦   ¦               useVehicleReport.js
+¦       ¦   ¦               useVehicleSummary.js
+¦       ¦   ¦               
+¦       ¦   +---routes
+¦       ¦           reportRoutes.js
+¦       ¦           
+¦       +---utils
+¦               DashboardSearchFilter.js
+¦               DashboardSearchSummary.utils.js
+¦               dashboardStatus.utils.js
 ¦               index.js
-¦               useDashboardPage.js
-¦               useDashboardStatistics.js
-¦               useDashboardWidget.js
+¦               serviceReminderBuilder.js
 ¦               
 +---repositories
 ¦   ¦   AuthRepository.js
@@ -890,15 +1141,18 @@ C:\USERS\JJIRANI\TRANSPORTGROUP-UI\SRC
 ¦           dashboard.mapper.js
 ¦           dashboard.mock.js
 ¦           dashboard.service.js
+¦           DashboardSearchService.js
 ¦           index.js
 ¦           
 +---theme
 ¦       colors.js
 ¦       components.js
+¦       index.js
 ¦       radius.js
 ¦       shadows.js
 ¦       spacing.js
 ¦       theme.js
+¦       ThemeProvider.jsx
 ¦       typography.js
 ¦       
 +---utils

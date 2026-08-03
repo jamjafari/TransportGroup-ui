@@ -1,4 +1,4 @@
-export const validateField = (
+const validateField = (
   value,
 
   rules = [],
@@ -13,3 +13,4 @@ export const validateField = (
 
   return null;
 };
+export default validateField;

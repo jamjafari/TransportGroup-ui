@@ -14,8 +14,16 @@ import FuelCostReportPage from '@/pages/dashboard/reports/pages/fuelcosts';
 import InsuranceReportPage from '@/pages/dashboard/reports/pages/insurance';
 import ServiceReportPage from '@/pages/dashboard/reports/pages/services';
 import DateRangeFinancialReportPage from '@/pages/dashboard/reports/pages/daterange';
+import DateRangeFuelCostReportPage from '@/pages/dashboard/reports/pages/fuelcosts-date';
 
 import DashboardSearchProvider from '@/pages/dashboard/context/DashboardSearchProvider';
+
+import VehicleProvider from '@/modules/fleet/vehicles/context/VehicleProvider';
+
+import VehicleListPage from '@/modules/fleet/vehicles/pages/VehicleListPage';
+import VehicleCreatePage from '@/modules/fleet/vehicles/pages/VehicleCreatePage';
+import VehicleEditPage from '@/modules/fleet/vehicles/pages/VehicleEditPage';
+//import VehicleDetailsPage from '@/modules/fleet/vehicles/pages/VehicleDetailsPage';
 
 import ProtectedRoute from './ProtectedRoute';
 import GuestRoute from './GuestRoute';
@@ -41,6 +49,10 @@ const AppRouter = () => {
         <Route
           path="/reports/financial-date"
           element={<DateRangeFinancialReportPage />}
+        />
+        <Route
+          path="/reports/fuelcost-date"
+          element={<DateRangeFuelCostReportPage />}
         />
         <Route
           path="/reports/fleet"
@@ -90,6 +102,41 @@ const AppRouter = () => {
             </DashboardSearchProvider>
           }
         />
+        <Route
+          path="/fleet/vehicles"
+          element={
+            <VehicleProvider>
+              <VehicleListPage />
+            </VehicleProvider>
+          }
+        />
+
+        <Route
+          path="/fleet/vehicles/create"
+          element={
+            <VehicleProvider>
+              <VehicleCreatePage />
+            </VehicleProvider>
+          }
+        />
+
+        <Route
+          path="/fleet/vehicles/edit/:Id"
+          element={
+            <VehicleProvider>
+              <VehicleEditPage />
+            </VehicleProvider>
+          }
+        />
+
+        {/* <Route
+          path="/fleet/vehicles/details/:id"
+          element={
+            <VehicleProvider>
+              <VehicleDetailsPage />
+            </VehicleProvider>
+          }
+        /> */}
       </Routes>
     </BrowserRouter>
   );

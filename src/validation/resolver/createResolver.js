@@ -1,4 +1,4 @@
-import { validateSchema } from './validateSchema';
+import validateSchema from './validateSchema';
 
 export const createResolver = (schema) => async (values) => {
   const validationErrors = validateSchema(values, schema);

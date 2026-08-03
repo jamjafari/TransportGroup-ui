@@ -299,7 +299,11 @@ class DashboardRepository extends BaseRepository {
     return await this.service.getServiceReport();
   };
   getDateRangeFinancials = async (filters = {}) => {
-    return await this.service.getExpenses();
+    console.log('Repository', filters);
+    const expense = await this.service.getExpenses();
+    return dashboardSearchFilter(expense, filters, ['dateRange'], {
+      dateField: 'expenseDate',
+    });
   };
   getDateRangeFinancialSummary = async (filters = {}) => {
     const expenses = await this.service.getExpenses();
@@ -313,6 +317,16 @@ class DashboardRepository extends BaseRepository {
 
       Pending: expenses.filter((x) => x.status === 'Pending').length,
     };
+  };
+  getDateRangeFuelCosts = async (filters = {}) => {
+    console.log('Repository', filters);
+    const fuelcost = await this.service.getFuelRecords();
+    return dashboardSearchFilter(fuelcost, filters, ['dateRange'], {
+      dateField: 'fuelDate',
+    });
+  };
+  getDateRangeFuelCostSummary = async (filters = {}) => {
+    return await this.service.getFuelCost();
   };
 }
 

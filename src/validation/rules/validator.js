@@ -3,7 +3,6 @@ export const validate = (schema, values) => {
 
   Object.keys(schema).forEach((field) => {
     const rules = schema[field];
-
     const value = values?.[field];
 
     for (let rule of rules) {
@@ -11,7 +10,6 @@ export const validate = (schema, values) => {
 
       if (error) {
         errors[field] = error;
-
         break;
       }
     }
@@ -23,3 +21,5 @@ export const validate = (schema, values) => {
 export const hasErrors = (errors) => {
   return Object.keys(errors).length > 0;
 };
+
+export default validate;

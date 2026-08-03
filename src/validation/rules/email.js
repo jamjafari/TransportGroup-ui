@@ -1,4 +1,4 @@
-export const email =
+const email =
   (message = 'Invalid email') =>
   (value) => {
     if (!value) return null;
@@ -7,3 +7,4 @@ export const email =
 
     return regex.test(value) ? null : message;
   };
+export default email;

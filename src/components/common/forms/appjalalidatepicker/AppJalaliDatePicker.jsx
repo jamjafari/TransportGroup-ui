@@ -2,16 +2,20 @@ import React, { memo } from 'react';
 
 import TextField from '@mui/material/TextField';
 
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-
-import { AdapterDateFnsJalali } from '@mui/x-date-pickers/AdapterDateFnsJalali';
-
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import * as RMDPNamespace from 'react-multi-date-picker';
+import * as PersianCalendarNamespace from 'react-date-object/calendars/persian';
+import * as PersianFaLocaleNamespace from 'react-date-object/locales/persian_fa';
 
 import {
   AppJalaliDatePickerPropTypes,
   AppJalaliDatePickerDefaultProps,
 } from './AppJalaliDatePicker.types';
+
+const DatePicker = RMDPNamespace.default?.default ?? RMDPNamespace.default;
+const persian =
+  PersianCalendarNamespace.default?.default ?? PersianCalendarNamespace.default;
+const persian_fa =
+  PersianFaLocaleNamespace.default?.default ?? PersianFaLocaleNamespace.default;
 
 const AppJalaliDatePicker = ({
   label,
@@ -19,30 +23,45 @@ const AppJalaliDatePicker = ({
   onChange,
   disabled,
   fullWidth,
-  format,
+  error,
+  helperText,
   ...props
 }) => {
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFnsJalali}>
-      <DatePicker
-        label={label}
-        value={value}
-        onChange={onChange}
-        disabled={disabled}
-        format={format}
-        slotProps={{
-          textField: {
-            fullWidth,
-          },
-        }}
-        {...props}
-      />
-    </LocalizationProvider>
+    <DatePicker
+      calendar={persian}
+      locale={persian_fa}
+      value={value}
+      onChange={(dateObject) => {
+        let converted = null;
+
+        if (dateObject) {
+          converted = dateObject.toDate();
+          converted.setHours(0, 0, 0, 0); // نرمالایز به نیمه‌شب local، جلوگیری از خطای لبه‌ای timezone
+        }
+
+        onChange?.(converted);
+      }}
+      disabled={disabled}
+      render={(inputValue, openCalendar) => (
+        <TextField
+          label={label}
+          value={inputValue}
+          onFocus={openCalendar}
+          onClick={openCalendar}
+          fullWidth={fullWidth}
+          error={error}
+          helperText={helperText}
+          disabled={disabled}
+          InputProps={{ readOnly: true }}
+        />
+      )}
+      {...props}
+    />
   );
 };
 
 AppJalaliDatePicker.propTypes = AppJalaliDatePickerPropTypes;
-
 AppJalaliDatePicker.defaultProps = AppJalaliDatePickerDefaultProps;
 
 export default memo(AppJalaliDatePicker);

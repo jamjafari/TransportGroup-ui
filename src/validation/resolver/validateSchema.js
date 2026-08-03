@@ -1,6 +1,6 @@
-import { validateField } from '../rules/validateField';
+import validationField from '../rules/validationField';
 
-export const validateSchema = (
+const validateSchema = (
   values,
 
   schema,
@@ -21,3 +21,4 @@ export const validateSchema = (
 
   return errors;
 };
+export default validateSchema;

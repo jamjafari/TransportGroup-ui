@@ -10,20 +10,16 @@ const useLogin = () => {
   const { login } = useAuth();
 
   const [username, setUsername] = useState('');
-
   const [password, setPassword] = useState('');
-
   const [rememberMe, setRememberMe] = useState(false);
-
   const [loading, setLoading] = useState(false);
-
   const [error, setError] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  // نکته: چون AppForm خودش preventDefault می‌زنه و به‌جای event مقدار
+  // "values" داخلی‌ش رو پاس می‌ده (که اینجا استفاده نمی‌کنیم چون فیلدها
+  // state خودشون رو دارن)، این تابع دیگه به یک "event" واقعی نیاز نداره.
+  const handleSubmit = async () => {
     setError('');
-
     setLoading(true);
 
     try {

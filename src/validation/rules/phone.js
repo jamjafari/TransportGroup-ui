@@ -1,4 +1,4 @@
-export const phone =
+const phone =
   (message = 'Invalid phone number') =>
   (value) => {
     if (!value) return null;
@@ -7,3 +7,4 @@ export const phone =
 
     return regex.test(value) ? null : message;
   };
+export default phone;

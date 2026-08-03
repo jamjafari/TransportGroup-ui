@@ -87,7 +87,7 @@ const dashboardService = {
   },
 
   async getExpenses() {
-    return delay(ExpensesMock);
+    return delay(ExpenseMock);
   },
 
   async getMissions() {
@@ -878,32 +878,6 @@ const dashboardService = {
       },
 
       table,
-    };
-  },
-  async getDateRangeFinancials() {
-    const totalFuel = ExpenseMock.filter(
-      (x) => x.expenseType === 'سوخت',
-    ).reduce((s, x) => s + x.amount, 0);
-
-    const totalService = ExpenseMock.filter(
-      (x) => x.expenseType === 'تعمیرات',
-    ).reduce((s, x) => s + x.amount, 0);
-
-    const totalInsurance = ExpenseMock.filter(
-      (x) => x.expenseType === 'بیمه',
-    ).reduce((s, x) => s + x.amount, 0);
-
-    const total = ExpenseMock.reduce((sum, item) => sum + item.amount, 0);
-    return {
-      summary: {
-        total,
-
-        totalFuel,
-        totalInsurance,
-        totalService,
-      },
-
-      table: ExpenseMock,
     };
   },
 };

@@ -104,13 +104,9 @@ const AppDataGrid = ({
           width: '100%',
           tableLayout: 'fixed',
           borderCollapse: 'collapse',
-        }}
-        stickyHeader={stickyHeader}
-        sx={{
-          tableLayout: 'fixed',
           direction: 'rtl',
-          width: '100%',
         }}
+        data-sticky-header={stickyHeader ? 'true' : undefined}
       >
         <GridHeader
           columns={columns}

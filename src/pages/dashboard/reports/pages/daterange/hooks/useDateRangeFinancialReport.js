@@ -5,12 +5,13 @@ import DashboardRepository from '@/repositories/dashboard/dashboard.repository';
 import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
 
 const useDateRangeFinancialReport = () => {
-  const { filters } = useDashboardSearch();
+  const { appliedFilters } = useDashboardSearch();
+  console.log('hooks:', appliedFilters);
 
   return useAsyncData({
-    fetcher: () => DashboardRepository.getDateRangeFinancials(filters),
+    fetcher: () => DashboardRepository.getDateRangeFinancials(appliedFilters),
 
-    dependencies: [JSON.stringify(filters)],
+    dependencies: [JSON.stringify(appliedFilters)],
   });
 };
 

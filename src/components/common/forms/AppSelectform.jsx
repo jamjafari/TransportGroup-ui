@@ -81,7 +81,7 @@ const AppSelectform = ({
           })
         }
 
-        onChange={onChange}
+        onChange={(event) => onChange?.(event.target.value, event)}
 
         onBlur={onBlur}
 

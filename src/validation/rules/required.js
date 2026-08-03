@@ -1,4 +1,4 @@
-export const required =
+const required =
   (message = 'Required') =>
   (value) => {
     if (value === undefined || value === null || value === '') {
@@ -7,3 +7,4 @@ export const required =
 
     return null;
   };
+export default required;

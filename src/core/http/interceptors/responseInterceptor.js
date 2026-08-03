@@ -51,8 +51,7 @@ const responseErrorInterceptor = async (error) => {
       refreshToken,
     });
 
-    const newToken = response.data.token;
-
+    const newToken = response.data.accessToken;
     TokenManager.setToken(newToken);
 
     originalRequest.headers.Authorization = `Bearer ${newToken}`;

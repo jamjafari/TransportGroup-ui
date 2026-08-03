@@ -10,7 +10,10 @@ import DashboardSearchProvider from '@/pages/dashboard/context/DashboardSearchPr
 const DateRangeFinancialReportPage = () => {
   return (
     <DashboardSearchProvider>
-      <ReportLayout title="گزارش خودروها" subtitle="گزارش کامل خودروها">
+      <ReportLayout
+        title="گزارش مالی"
+        subtitle="گزارش کامل مالی بر اساس بازه زمانی"
+      >
         <DashboardSection title="خلاصه">
           <DateRangeFinancialSummary />
         </DashboardSection>

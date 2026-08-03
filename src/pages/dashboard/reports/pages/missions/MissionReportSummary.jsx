@@ -21,7 +21,7 @@ const MissionReportSummary = () => {
     {
       title: 'انجام شده',
 
-      value: Number(data.Completed ?? 0).toLocaleString('en-US'),
+      value: Number(data.completed ?? 0).toLocaleString('en-US'),
 
       color: 'success',
 
@@ -31,7 +31,7 @@ const MissionReportSummary = () => {
     {
       title: 'در حال انجام',
 
-      value: Number(data.Running ?? 0).toLocaleString('en-US'),
+      value: Number(data.running ?? 0).toLocaleString('en-US'),
 
       color: 'info',
 
