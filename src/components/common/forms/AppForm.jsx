@@ -39,7 +39,8 @@ const AppForm = ({
   const handleSubmit = useCallback(
     (event) => {
       event.preventDefault();
-
+      console.log('AppForm submit');
+      console.log(values);
       onSubmit?.(values);
     },
     [onSubmit, values],

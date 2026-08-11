@@ -1,6 +1,7 @@
 import React, { memo, useMemo } from 'react';
 
 import { Box } from '@mui/material';
+import LtrScope from '@/components/common/utility/LtrScope';
 
 import {
   ResponsiveContainer,
@@ -63,12 +64,7 @@ const AreaChart = ({
 
   // console.log('height', height);
   return (
-    <Box
-      width="100%"
-
-      height={380}
-      sx={{ direction: 'ltr' }}
-    >
+    <LtrScope width="100%" height={380}>
       <ResponsiveContainer width="100%" height="100%">
         <RechartsAreaChart data={chartData}>
           {grid && <CartesianGrid strokeDasharray="3 3" />}
@@ -102,7 +98,7 @@ const AreaChart = ({
           ))}
         </RechartsAreaChart>
       </ResponsiveContainer>
-    </Box>
+    </LtrScope>
   );
 };
 

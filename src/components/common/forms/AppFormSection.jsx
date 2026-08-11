@@ -9,9 +9,9 @@ import {
 
 const AppFormSection = ({ title, subtitle, children, divider }) => {
   return (
-    <Box>
+    <Box direction="row-reverse">
       {(title || subtitle) && (
-        <Box mb={2}>
+        <Box mb={2} direction="row-reverse">
           {title && (
             <Typography variant="subtitle1" fontWeight={700}>
               {title}

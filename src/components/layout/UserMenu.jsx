@@ -1,83 +1,37 @@
-import {
- Avatar,
- Menu,
- MenuItem,
- IconButton
-}
-from "@mui/material";
+import { Avatar, Menu, MenuItem, IconButton } from '@mui/material';
 
-import {
- useState
-}
-from "react";
+import { useState } from 'react';
 
-import {
- useAuth
-}
-from "../../auth/AuthContext";
+import { useAuth } from '@/context';
 
-function UserMenu()
-{
-    const { user } =
-        useAuth();
+function UserMenu() {
+  const { user } = useAuth();
 
-    const [anchorEl,
-        setAnchorEl]
-            = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
-    const logout = () => {
+  const logout = () => {
+    localStorage.removeItem('token');
 
-        localStorage
-            .removeItem(
-                "token");
+    window.location.href = '/login';
+  };
 
-        window.location.href =
-            "/login";
-    };
+  return (
+    <>
+      <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
+        <Avatar>{user?.userName?.[0]}</Avatar>
+      </IconButton>
 
-    return (
+      <Menu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={() => setAnchorEl(null)}
+      >
+        <MenuItem>{user?.userName}</MenuItem>
 
-        <>
-
-            <IconButton
-                onClick={
-                    e =>
-                    setAnchorEl(
-                        e.currentTarget)
-                }
-            >
-
-                <Avatar>
-
-                    {user?.userName?.[0]}
-
-                </Avatar>
-
-            </IconButton>
-
-            <Menu
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={() =>
-                    setAnchorEl(null)}
-            >
-
-                <MenuItem>
-
-                    {user?.userName}
-
-                </MenuItem>
-
-                <MenuItem
-                    onClick={logout}
-                >
-                    Logout
-                </MenuItem>
-
-            </Menu>
-
-        </>
-    );
+        <MenuItem onClick={logout}>Logout</MenuItem>
+      </Menu>
+    </>
+  );
 }
 
 export default UserMenu;

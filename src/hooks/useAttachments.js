@@ -1,27 +1,30 @@
+// src/hooks/useAttachments.js
+
 import { useCallback, useEffect, useState } from 'react';
 
-import * as attachmentApi from '../api/attachmentApi';
-import { ATTACHMENT_OWNER_TYPE } from '../constants';
+import * as attachmentApi from '@/api/attachmentApi';
 
-const useVehicleAttachments = (vehicleId) => {
+/**
+ * هوک عمومی برای مدیریت مدارک هر نوع موجودیت (خودرو، راننده، و ...).
+ * @param {number} ownerType - یکی از مقادیر ATTACHMENT_OWNER_TYPE
+ * @param {number|string} ownerId
+ */
+const useAttachments = (ownerType, ownerId) => {
   const [attachments, setAttachments] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const loadAttachments = useCallback(async () => {
-    if (!vehicleId) return;
+    if (!ownerId) return;
 
     setLoading(true);
 
     try {
-      const data = await attachmentApi.getAttachments(
-        ATTACHMENT_OWNER_TYPE.VEHICLE,
-        vehicleId,
-      );
+      const data = await attachmentApi.getAttachments(ownerType, ownerId);
       setAttachments(data);
     } finally {
       setLoading(false);
     }
-  }, [vehicleId]);
+  }, [ownerType, ownerId]);
 
   useEffect(() => {
     loadAttachments();
@@ -30,17 +33,16 @@ const useVehicleAttachments = (vehicleId) => {
   const addAttachment = useCallback(
     async ({ category, issueDate, expiryDate, file }) => {
       await attachmentApi.uploadAttachment({
-        ownerType: ATTACHMENT_OWNER_TYPE.VEHICLE,
-        ownerId: vehicleId,
+        ownerType,
+        ownerId,
         category,
         issueDate,
         expiryDate,
         file,
       });
-
       await loadAttachments();
     },
-    [vehicleId, loadAttachments],
+    [ownerType, ownerId, loadAttachments],
   );
 
   const removeAttachment = useCallback(
@@ -54,4 +56,4 @@ const useVehicleAttachments = (vehicleId) => {
   return { attachments, loading, addAttachment, removeAttachment };
 };
 
-export default useVehicleAttachments;
+export default useAttachments;

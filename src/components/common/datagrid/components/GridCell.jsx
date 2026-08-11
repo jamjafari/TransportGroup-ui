@@ -72,7 +72,7 @@ const GridCell = ({ row, column }) => {
         textOverflow: 'ellipsis',
 
         px: 2,
-        textAlign: 'right',
+        textAlign: 'center',
       }}
     >
       {renderValue()}

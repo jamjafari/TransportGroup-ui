@@ -50,15 +50,15 @@ const colors = {
 
   background: '#F4F6F9',
 
-  paper: '#FFFFFF',
+  paper: '#ffffff',
 
-  sidebar: '#0F172A',
+  sidebar: '#a1a3a9',
 
-  sidebarHover: '#1E293B',
+  sidebarHover: '#124597',
 
   sidebarActive: '#2563EB',
 
-  border: '#E5E7EB',
+  border: '#ebeae5',
 
   textPrimary: '#1F2937',
 

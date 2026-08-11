@@ -18,7 +18,8 @@ import {
 } from '@/components';
 
 import { attachmentCategoryOptions } from '../constants';
-import useVehicleAttachments from '../hooks/useVehicleAttachments';
+import useAttachments from '@/hooks/useAttachments';
+import { ATTACHMENT_OWNER_TYPE } from '@/constants/attachmentTypes';
 
 const emptyDraft = {
   category: '',
@@ -29,7 +30,7 @@ const emptyDraft = {
 
 const DriverDocumentsSection = ({ driverId }) => {
   const { attachments, loading, addAttachment, removeAttachment } =
-    useVehicleAttachments(driverId);
+    useAttachments(ATTACHMENT_OWNER_TYPE.DRIVER, driverId);
 
   const [draft, setDraft] = useState(emptyDraft);
   const [submitting, setSubmitting] = useState(false);
@@ -71,7 +72,7 @@ const DriverDocumentsSection = ({ driverId }) => {
           />
         </Grid>
 
-        <Grid size={{ xs: 12, md: 3 }}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <AppJalaliDatePicker
             label="تاریخ صدور"
             value={draft.issueDate}
@@ -81,7 +82,7 @@ const DriverDocumentsSection = ({ driverId }) => {
           />
         </Grid>
 
-        <Grid size={{ xs: 12, md: 3 }}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <AppJalaliDatePicker
             label="تاریخ انقضا"
             value={draft.expiryDate}
@@ -91,7 +92,7 @@ const DriverDocumentsSection = ({ driverId }) => {
           />
         </Grid>
 
-        <Grid size={{ xs: 12, md: 2 }}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <AppFileUpload
             label="فایل"
             value={draft.file}

@@ -19,8 +19,8 @@ const VehicleCreatePage = () => {
   const handleSubmit = useCallback(
     async (values) => {
       try {
-        const created = await createVehicle(values);
-        navigate(`/fleet/vehicles/edit/${created.Id}`);
+        const createdId = await createVehicle(values);
+        navigate(`/fleet/vehicles/edit/${createdId}`);
       } catch (error) {
         console.error(error);
       }

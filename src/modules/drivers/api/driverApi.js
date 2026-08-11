@@ -2,7 +2,7 @@ import { apiClient } from '@/services';
 
 /*
 |--------------------------------------------------------------------------
-| Vehicle API Endpoints
+| Driver API Endpoints
 |--------------------------------------------------------------------------
 |
 | GET    /drivers
@@ -13,7 +13,7 @@ import { apiClient } from '@/services';
 |
 */
 
-const BASE_URL = '/drivers';
+const BASE_URL = '/driver';
 
 export const getDrivers = async (params = {}) => {
   const response = await apiClient.get(BASE_URL, {
@@ -23,26 +23,29 @@ export const getDrivers = async (params = {}) => {
   return response;
 };
 
-export const getDriverById = async (Id) => {
-  const response = await apiClient.get(`${BASE_URL}/${Id}`);
+export const getDriverById = async (id) => {
+  const response = await apiClient.get(`${BASE_URL}/${id}`);
 
   return response;
 };
 
-export const createDriver = async (vehicle) => {
-  const response = await apiClient.post(BASE_URL, vehicle);
+export const createDriver = async (driver) => {
+  console.log('api driver:', driver);
+  const response = await apiClient.post(BASE_URL, driver);
 
   return response;
 };
 
-export const updateDriver = async (Id, vehicle) => {
-  const response = await apiClient.put(`${BASE_URL}/${Id}`, vehicle);
+export const updateDriver = async (driver) => {
+  console.log('API UPDATE DRIVER:', driver);
+
+  const response = await apiClient.put(BASE_URL, driver);
 
   return response;
 };
 
-export const deleteDriver = async (Id) => {
-  const response = await apiClient.delete(`${BASE_URL}/${Id}`);
+export const deleteDriver = async (id) => {
+  const response = await apiClient.delete(`${BASE_URL}/${id}`);
 
   return response;
 };

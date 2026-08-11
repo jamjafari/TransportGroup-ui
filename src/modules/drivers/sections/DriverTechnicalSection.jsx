@@ -7,6 +7,7 @@ import {
   AppSelectform,
   AppTextField,
   AppJalaliDatePicker,
+  AppSwitch,
 } from '@/components';
 
 const DriverTechnicalSection = ({
@@ -21,13 +22,13 @@ const DriverTechnicalSection = ({
         <Grid size={{ xs: 12, md: 6 }}>
           <AppTextField
             fullWidth
-            required
+            requiredl
             label="شماره پرسنلی "
-            name="PerssonelCode"
-            value={values.PerssonelCode}
+            name="personnelCode"
+            value={values.personnelCode}
             onChange={onChange}
-            error={!!errors?.PerssonelCode}
-            helperText={errors?.PerssonelCode}
+            error={!!errors?.personnelCode}
+            helperText={errors?.personnelCode}
           />
         </Grid>
 
@@ -36,11 +37,11 @@ const DriverTechnicalSection = ({
             fullWidth
             required
             label="شماره گواهی نامه "
-            name="LicenseNumber"
-            value={values.LicenseNumber}
+            name="licenseNumber"
+            value={values.licenseNumber}
             onChange={onChange}
-            error={!!errors?.LicenseNumber}
-            helperText={errors?.LicenseNumber}
+            error={!!errors?.licenseNumber}
+            helperText={errors?.licenseNumber}
           />
         </Grid>
 
@@ -48,24 +49,22 @@ const DriverTechnicalSection = ({
           <AppJalaliDatePicker
             required
             label="تاریخ انقضاء"
-            name="LicenseExpireDate"
-            value={values.LicenseExpireDate}
-            onChange={(value) => setFieldValue('LicenseExpireDate', value)}
-            error={!!errors?.LicenseExpireDate}
-            helperText={errors?.LicenseExpireDate}
+            name="licenseExpireDate"
+            value={values.licenseExpireDate}
+            onChange={(value) => setFieldValue('licenseExpireDate', value)}
+            error={!!errors?.licenseExpireDate}
+            helperText={errors?.licenseExpireDate}
           />
         </Grid>
 
         <Grid size={{ xs: 12, md: 6 }}>
-          <AppTextField
-            fullWidth
-            type="number"
-            label="  وضعیت راننده"
-            name="IsActive"
-            value={values.IsActive}
-            onChange={onChange}
-            error={!!errors?.IsActive}
-            helperText={errors?.IsActive}
+          <AppSwitch
+            label="راننده فعال است"
+            name="isActive"
+            checked={values.isActive}
+            onChange={(event) =>
+              setFieldValue('isActive', event.target.checked)
+            }
           />
         </Grid>
       </Grid>

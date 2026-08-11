@@ -12,8 +12,10 @@ import {
 } from './AppJalaliDatePicker.types';
 
 const DatePicker = RMDPNamespace.default?.default ?? RMDPNamespace.default;
+
 const persian =
   PersianCalendarNamespace.default?.default ?? PersianCalendarNamespace.default;
+
 const persian_fa =
   PersianFaLocaleNamespace.default?.default ?? PersianFaLocaleNamespace.default;
 
@@ -22,22 +24,30 @@ const AppJalaliDatePicker = ({
   value,
   onChange,
   disabled,
-  fullWidth,
+  fullWidth = true,
   error,
   helperText,
+  size = 'medium',
+  required,
   ...props
 }) => {
   return (
     <DatePicker
       calendar={persian}
       locale={persian_fa}
+      containerStyle={{
+        width: '100%',
+      }}
+      style={{
+        width: '100%',
+      }}
       value={value}
       onChange={(dateObject) => {
         let converted = null;
 
         if (dateObject) {
           converted = dateObject.toDate();
-          converted.setHours(0, 0, 0, 0); // نرمالایز به نیمه‌شب local، جلوگیری از خطای لبه‌ای timezone
+          converted.setHours(0, 0, 0, 0);
         }
 
         onChange?.(converted);
@@ -46,14 +56,25 @@ const AppJalaliDatePicker = ({
       render={(inputValue, openCalendar) => (
         <TextField
           label={label}
-          value={inputValue}
+          value={inputValue || ''}
           onFocus={openCalendar}
           onClick={openCalendar}
-          fullWidth={fullWidth}
+          fullWidth
+          size="medium"
           error={error}
           helperText={helperText}
           disabled={disabled}
-          InputProps={{ readOnly: true }}
+          InputProps={{
+            readOnly: true,
+          }}
+          sx={{
+            width: '100%',
+
+            '& .MuiOutlinedInput-root': {
+              minHeight: 56,
+              boxSizing: 'border-box',
+            },
+          }}
         />
       )}
       {...props}
@@ -62,6 +83,7 @@ const AppJalaliDatePicker = ({
 };
 
 AppJalaliDatePicker.propTypes = AppJalaliDatePickerPropTypes;
+
 AppJalaliDatePicker.defaultProps = AppJalaliDatePickerDefaultProps;
 
 export default memo(AppJalaliDatePicker);

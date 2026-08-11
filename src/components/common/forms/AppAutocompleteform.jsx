@@ -32,7 +32,10 @@ const AppAutocompleteform = ({
   return (
     <Autocomplete
       id={id}
-
+      fullWidth
+      sx={{
+        width: '100%',
+      }}
       value={value}
 
       options={options}
@@ -69,7 +72,7 @@ const AppAutocompleteform = ({
 
           required={required}
 
-          fullWidth={fullWidth}
+          fullWidth
 
           size={size}
         />

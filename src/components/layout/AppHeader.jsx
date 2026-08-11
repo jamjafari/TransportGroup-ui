@@ -1,27 +1,28 @@
-import { AppBar, Toolbar, Typography, Box } from '@mui/material';
+import { AppBar, Toolbar, Typography, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
-import IconButton from '@mui/material/IconButton';
 import UserMenu from './UserMenu';
 
-function AppHeader({ sidebarOpen }) {
+import colors from '@/theme/colors';
+
+function AppHeader({ sidebarOpen, setSidebarOpen }) {
   return (
-    <AppBar position="fixed" color="primary">
+    <AppBar
+      position="fixed"
+      sx={{
+        bgcolor: colors.paper,
+        color: colors.textPrimary,
+        boxShadow: 'none',
+        borderBottom: `1px solid ${colors.border}`,
+      }}
+    >
       <Toolbar>
-        <IconButton
-          color="inherit"
-          onClick={() => setSidebarOpen(!sidebarOpen)}
-        >
+        <IconButton onClick={() => setSidebarOpen(!sidebarOpen)}>
           <MenuIcon />
         </IconButton>
 
-        <Typography
-          variant="h6"
-          sx={{
-            flexGrow: 1,
-          }}
-        >
-          Transport Group
+        <Typography variant="h6" sx={{ flexGrow: 1 }}>
+          گروه حمل‌ونقل
         </Typography>
 
         <UserMenu />

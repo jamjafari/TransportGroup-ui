@@ -30,16 +30,9 @@ export const fuelTypeOptions = [
   { value: FUEL_TYPE.HYBRID, label: 'دوگانه سوز' },
   { value: FUEL_TYPE.ELECTRIC, label: 'برقی' },
 ];
-export const ATTACHMENT_OWNER_TYPE = {
-  VEHICLE: 1,
-  DRIVER: 2,
-  EXPENSE: 3,
-  VEHICLE_SERVICE: 4,
-  FUEL_CARD: 5,
-  FUEL_RECORD: 6,
-  TIRE: 7,
-};
 
+// modules/fleet/vehicles/constants.js — فقط این خط اضافه/جایگزین بشه
+export { ATTACHMENT_OWNER_TYPE } from '@/constants/attachmentTypes';
 export const attachmentCategoryOptions = [
   { value: 1, label: 'بیمه‌نامه' },
   { value: 2, label: 'معاینه فنی' },
@@ -48,3 +41,18 @@ export const attachmentCategoryOptions = [
   { value: 5, label: 'عکس' },
   { value: 0, label: 'سایر' },
 ];
+
+export const vehicleStatusChipKey = (value) => {
+  switch (value) {
+    case VEHICLE_STATUS.ACTIVE:
+      return 'Active';
+    case VEHICLE_STATUS.IN_REPAIR:
+      return 'InRepair';
+    case VEHICLE_STATUS.INACTIVE:
+      return 'Inactive';
+    case VEHICLE_STATUS.SOLD:
+      return 'Sold';
+    default:
+      return null;
+  }
+};

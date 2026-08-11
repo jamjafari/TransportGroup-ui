@@ -5,5 +5,6 @@ export { default as number } from './number';
 export { default as phone } from './phone';
 export { default as required } from './required';
 export { validate, hasErrors } from './validator';
+export { default as nonNegative } from './nonNegative';
 
 export { default as validationField } from './validationField';

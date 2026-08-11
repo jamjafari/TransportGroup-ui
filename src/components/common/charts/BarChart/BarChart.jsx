@@ -1,6 +1,7 @@
 import React, { memo, useMemo } from 'react';
 
 import { Box } from '@mui/material';
+import LtrScope from '@/components/common/utility/LtrScope';
 
 import {
   ResponsiveContainer,
@@ -59,13 +60,7 @@ const BarChart = ({
   );
 
   return (
-    <Box
-      width="100%"
-
-      height={380}
-
-      sx={{ direction: 'ltr' }}
-    >
+    <LtrScope width="100%" height={380}>
       <ResponsiveContainer width="100%" height="100%">
         <RechartsBarChart data={chartData}>
           {grid && <CartesianGrid strokeDasharray="3 3" />}
@@ -91,7 +86,7 @@ const BarChart = ({
           ))}
         </RechartsBarChart>
       </ResponsiveContainer>
-    </Box>
+    </LtrScope>
   );
 };
 

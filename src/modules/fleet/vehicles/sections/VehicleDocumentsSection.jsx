@@ -18,7 +18,8 @@ import {
 } from '@/components';
 
 import { attachmentCategoryOptions } from '../constants';
-import useVehicleAttachments from '../hooks/useVehicleAttachments';
+import useAttachments from '@/hooks/useAttachments';
+import { ATTACHMENT_OWNER_TYPE } from '@/constants/attachmentTypes';
 
 const emptyDraft = {
   category: '',
@@ -29,7 +30,7 @@ const emptyDraft = {
 
 const VehicleDocumentsSection = ({ vehicleId }) => {
   const { attachments, loading, addAttachment, removeAttachment } =
-    useVehicleAttachments(vehicleId);
+    useAttachments(ATTACHMENT_OWNER_TYPE.VEHICLE, vehicleId);
 
   const [draft, setDraft] = useState(emptyDraft);
   const [submitting, setSubmitting] = useState(false);

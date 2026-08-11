@@ -37,33 +37,28 @@ const AppSelectform = ({
 
   return (
     <FormControl
-      fullWidth={fullWidth}
-
+      fullWidth
       error={error}
-
       disabled={disabled}
-
       required={required}
-
       size={size}
-
       variant={variant}
+      sx={{
+        width: '100%',
+      }}
     >
       {label && <InputLabel id={labelId}>{label}</InputLabel>}
 
       <Select
         id={id}
-
         name={name}
-
+        fullWidth
         labelId={labelId}
-
         value={value}
-
         label={label}
-
         displayEmpty
-
+        onChange={(event) => onChange?.(event.target.value, event)}
+        onBlur={onBlur}
         renderValue={
           renderValue ||
           ((selected) => {
@@ -80,11 +75,6 @@ const AppSelectform = ({
             return option ? option.label : selected;
           })
         }
-
-        onChange={(event) => onChange?.(event.target.value, event)}
-
-        onBlur={onBlur}
-
         {...rest}
       >
         {placeholder && <MenuItem value="">{placeholder}</MenuItem>}
@@ -93,9 +83,7 @@ const AppSelectform = ({
           options.map((option) => (
             <MenuItem
               key={option.value}
-
               value={option.value}
-
               disabled={option.disabled}
             >
               {option.label}

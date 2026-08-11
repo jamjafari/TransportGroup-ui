@@ -1,6 +1,4 @@
-// modules/fleet/vehicles/api/attachmentApi.js
-// نکته: چون Attachment حالا polymorphic و مشترک بین همه ماژول‌هاست،
-// پیشنهاد می‌کنم این فایل رو به یک مسیر مشترک‌تر (مثلاً src/api/attachmentApi.js) منتقل کنید.
+// src/api/attachmentApi.js
 
 import axiosClient from '@/core/http/axiosClient';
 
@@ -27,8 +25,10 @@ export const uploadAttachment = async ({
   formData.append('ownerId', ownerId);
   formData.append('category', category);
 
-  if (issueDate) formData.append('issueDate', issueDate);
-  if (expiryDate) formData.append('expiryDate', expiryDate);
+  if (issueDate)
+    formData.append('issueDate', new Date(issueDate).toISOString());
+  if (expiryDate)
+    formData.append('expiryDate', new Date(expiryDate).toISOString());
 
   formData.append('file', file);
 

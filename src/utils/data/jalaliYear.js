@@ -1,4 +1,4 @@
-// src/utils/date/jalaliYear.js
+// src/utils/date/jalaliYear.js — نسخه‌ی کامل با تابع جدید
 
 import DateObject from 'react-date-object';
 import persian from 'react-date-object/calendars/persian';
@@ -47,4 +47,20 @@ export const gregorianYearToJalali = (gregorianYear) => {
   });
 
   return date.convert(persian, persian_fa).year;
+};
+
+/**
+ * تبدیل یک تاریخ کامل میلادی (Date یا رشته‌ی ISO) به رشته‌ی شمسی خوانا (YYYY/MM/DD).
+ * برای نمایش تاریخ‌هایی مثل purchaseDate تو جدول‌ها و بخش‌های فقط-نمایشی.
+ */
+export const formatJalaliDate = (value) => {
+  if (!value) return '—';
+
+  const date = new DateObject({
+    date: new Date(value),
+    calendar: gregorian,
+    locale: gregorian_en,
+  }).convert(persian, persian_fa);
+
+  return date.format('YYYY/MM/DD');
 };

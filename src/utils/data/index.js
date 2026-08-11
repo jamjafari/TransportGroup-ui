@@ -1,1 +1,5 @@
-export { jalaliYearToGregorian, gregorianYearToJalali } from './jalaliYear';
+export {
+  jalaliYearToGregorian,
+  gregorianYearToJalali,
+  formatJalaliDate,
+} from './jalaliYear';

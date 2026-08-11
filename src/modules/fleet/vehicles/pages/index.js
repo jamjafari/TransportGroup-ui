@@ -4,4 +4,4 @@ export { default as VehicleEditPage } from './VehicleEditPage';
 
 export { default as VehicleListPage } from './VehicleListPage';
 
-export { default as VehicleDetailsPage } from './VehicleDetailsPage';
+//export { default as VehicleDetailsPage } from './VehicleDetailsPage';

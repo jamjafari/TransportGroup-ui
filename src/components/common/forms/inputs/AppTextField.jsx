@@ -15,18 +15,15 @@ const AppTextField = forwardRef(
   (
     {
       type = 'text',
-
       loading = false,
-
       startIcon,
-
       endIcon,
-
       readOnly = false,
-
       InputProps,
-
-      ...props
+      size = 'medium',
+      fullWidth = true,
+      sx,
+      ...restProps
     },
     ref,
   ) => {
@@ -36,17 +33,19 @@ const AppTextField = forwardRef(
 
     return (
       <TextField
+        {...restProps}
         ref={ref}
-
-        type={isPassword ? (showPassword ? 'text' : 'password') : type}
-
+        type={isPassword && showPassword ? 'text' : type}
+        size={size}
+        fullWidth={fullWidth}
         InputProps={{
           ...InputProps,
-
           readOnly,
 
-          startAdornment: startIcon && (
+          startAdornment: startIcon ? (
             <InputAdornment position="start">{startIcon}</InputAdornment>
+          ) : (
+            InputProps?.startAdornment
           ),
 
           endAdornment: (
@@ -56,8 +55,7 @@ const AppTextField = forwardRef(
               {isPassword && (
                 <IconButton
                   edge="end"
-
-                  onClick={() => setShowPassword(!showPassword)}
+                  onClick={() => setShowPassword((prev) => !prev)}
                 >
                   {showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
@@ -67,8 +65,16 @@ const AppTextField = forwardRef(
             </InputAdornment>
           ),
         }}
+        sx={{
+          width: '100%',
 
-        {...props}
+          '& .MuiOutlinedInput-root': {
+            minHeight: 56,
+            boxSizing: 'border-box',
+          },
+
+          ...sx,
+        }}
       />
     );
   },

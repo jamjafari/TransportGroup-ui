@@ -10,14 +10,13 @@ const AppMenu = ({ items, collapsed }) => {
   return (
     <List disablePadding>
       {items.map((item) => (
-        <MenuItem key={item.id} item={item} collapsed={collapsed} />
+        <ItemMenu key={item.id} item={item} collapsed={collapsed} />
       ))}
     </List>
   );
 };
 
 AppMenu.propTypes = AppMenuPropTypes;
-
 AppMenu.defaultProps = AppMenuDefaultProps;
 
 export default memo(AppMenu);

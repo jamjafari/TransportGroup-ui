@@ -71,7 +71,7 @@ const GridHeader = ({
           return (
             <TableCell
               key={column.field}
-              align={column.align || 'right'}
+              align={column.align || 'center'}
               sx={{
                 width: column.width,
 
@@ -83,7 +83,10 @@ const GridHeader = ({
 
                 overflow: 'hidden',
 
-                whiteSpace: 'nowrap',
+                whiteSpace: 'normal',
+                overflow: 'hidden',
+                wordBreak: 'normal',
+                overflowWrap: 'break-word',
 
                 px: 1.5,
                 fontSize: '1.3rem',
@@ -109,7 +112,7 @@ const GridHeader = ({
                   sx={{
                     flex: 1,
                     display: 'flex',
-                    justifyContent: 'right',
+                    justifyContent: 'center',
                   }}
                 >
                   <TableSortLabel

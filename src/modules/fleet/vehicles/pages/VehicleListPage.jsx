@@ -6,8 +6,12 @@ import { AppDataGrid } from '@/components';
 import { AppButton, ConfirmDialog, StatusChip } from '@/components';
 
 import useVehicle from '../hooks/useVehicle';
-import { vehicleStatusOptions, fuelTypeOptions } from '../constants';
-
+import {
+  vehicleStatusOptions,
+  fuelTypeOptions,
+  vehicleStatusChipKey,
+} from '../constants';
+import { gregorianYearToJalali, formatJalaliDate } from '@/utils';
 const VehicleListPage = () => {
   const navigate = useNavigate();
 
@@ -45,19 +49,30 @@ const VehicleListPage = () => {
       { field: 'plateNumber', headerName: 'شماره پلاک', width: 140 },
       { field: 'brand', headerName: 'برند', width: 120 },
       { field: 'model', headerName: 'مدل', width: 120 },
-      { field: 'productionYear', headerName: 'سال ساخت', width: 100 },
+      {
+        field: 'productionYear',
+        headerName: 'سال ساخت (شمسی)',
+        width: 130,
+        renderCell: ({ row }) => gregorianYearToJalali(row.productionYear),
+      },
+      {
+        field: 'purchaseDate',
+        headerName: 'تاریخ خرید',
+        width: 130,
+        renderCell: ({ row }) => formatJalaliDate(row.purchaseDate),
+      },
       {
         field: 'fuelType',
         headerName: 'نوع سوخت',
         width: 120,
-        renderCell: (row) => fuelTypeLabel(row.fuelType),
+        renderCell: ({ row }) => fuelTypeLabel(row.fuelType),
       },
       {
         field: 'status',
         headerName: 'وضعیت',
         width: 130,
-        renderCell: (row) => (
-          <StatusChip label={statusLabel(row.status)} status={row.status} />
+        renderCell: ({ row }) => (
+          <StatusChip status={vehicleStatusChipKey(row.status)} />
         ),
       },
       { field: 'currentKM', headerName: 'کارکرد (کیلومتر)', width: 140 },
@@ -65,13 +80,13 @@ const VehicleListPage = () => {
         field: 'actions',
         headerName: 'عملیات',
         width: 140,
-        renderCell: (row) => (
+        renderCell: ({ row }) => (
           <>
             <AppButton
               size="small"
               onClick={(event) => {
                 event.stopPropagation();
-                navigate(`/fleet/vehicles/${row.id}/edit`);
+                navigate(`/fleet/vehicles/edit/${row.id}`);
               }}
             >
               ویرایش
@@ -116,7 +131,10 @@ const VehicleListPage = () => {
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف خودرو"
-        description={`آیا از حذف خودروی «${deleteTarget?.plateNumber}» مطمئن هستید؟`}
+        message={`آیا از حذف خودروی «${deleteTarget?.plateNumber}» مطمئن هستید؟`}
+        confirmText="حذف"
+        cancelText="انصراف"
+        severity="error"
         onConfirm={handleDeleteConfirm}
         onCancel={() => setDeleteTarget(null)}
       />

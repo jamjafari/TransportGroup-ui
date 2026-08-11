@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import LtrScope from '@/components/common/utility/LtrScope';
 
 import {
   ResponsiveContainer,
@@ -41,7 +42,7 @@ const LineChart = ({
   });
 
   return (
-    <Box width="100%" height={380} sx={{ direction: 'ltr' }}>
+    <LtrScope width="100%" height={380}>
       <ResponsiveContainer width="100%" height="100%">
         <ReLineChart data={data}>
           {grid && <CartesianGrid strokeDasharray="3 3" />}
@@ -49,7 +50,7 @@ const LineChart = ({
           <XAxis dataKey="category" />
 
           <YAxis
-            orientation="left"
+            orientation="right"
             mirror={false}
             width={60}
             tickMargin={15}
@@ -86,7 +87,7 @@ const LineChart = ({
           ))}
         </ReLineChart>
       </ResponsiveContainer>
-    </Box>
+    </LtrScope>
   );
 };
 

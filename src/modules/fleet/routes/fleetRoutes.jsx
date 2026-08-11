@@ -2,8 +2,8 @@ import {
   VehicleListPage,
   VehicleCreatePage,
   VehicleEditPage,
-  VehicleDetailsPage,
-} from '../modules/fleet/vehicles';
+  // VehicleDetailsPage,
+} from '@/modules';
 
 const fleetRoutes = [
   {
@@ -21,10 +21,10 @@ const fleetRoutes = [
     element: <VehicleEditPage />,
   },
 
-  {
-    path: '/fleet/vehicles/:id',
-    element: <VehicleDetailsPage />,
-  },
+  // {
+  //   path: '/fleet/vehicles/:id',
+  //   element: <VehicleDetailsPage />,
+  // },
 ];
 
 export default fleetRoutes;

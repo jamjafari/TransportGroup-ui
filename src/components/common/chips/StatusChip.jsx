@@ -17,6 +17,17 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import { StatusChipPropTypes } from './StatusChip.types';
 
 const statusMap = {
+  TankFull: {
+    label: 'باک پر',
+    color: 'success',
+    icon: <CheckCircleIcon />,
+  },
+
+  TankNotFull: {
+    label: 'باک پر نیست',
+    color: 'warning',
+    icon: <WarningAmberIcon />,
+  },
   Approved: {
     label: 'تایید شده',
     color: 'success',
@@ -135,6 +146,17 @@ const statusMap = {
     label: 'در عملیات',
     color: 'primary',
     icon: <LocalShippingIcon />,
+  },
+  InRepair: {
+    label: 'در حال تعمیر',
+    color: 'warning',
+    icon: <EngineeringIcon />,
+  },
+
+  Sold: {
+    label: 'فروخته‌شده',
+    color: 'default',
+    icon: <HighlightOffIcon />,
   },
 };
 

@@ -18,11 +18,11 @@ const DriverGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
             fullWidth
             required
             label="نام "
-            name="FirstName"
-            value={values.FirstName}
+            name="firstName"
+            value={values.firstName}
             onChange={onChange}
-            error={!!errors?.FirstName}
-            helperText={errors?.FirstName}
+            error={!!errors?.firstName}
+            helperText={errors?.firstName}
           />
         </Grid>
 
@@ -31,11 +31,11 @@ const DriverGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
             fullWidth
             required
             label="نام خانوادگی"
-            name="LastName"
-            value={values.LastName}
+            name="lastName"
+            value={values.lastName}
             onChange={onChange}
-            error={!!errors?.LastName}
-            helperText={errors?.LastName}
+            error={!!errors?.lastName}
+            helperText={errors?.lastName}
           />
         </Grid>
 
@@ -44,11 +44,11 @@ const DriverGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
             fullWidth
             required
             label="کد ملی"
-            name="NationalCode"
-            value={values.NationalCode}
+            name="nationalCode"
+            value={values.nationalCode}
             onChange={onChange}
-            error={!!errors?.NationalCode}
-            helperText={errors?.NationalCode}
+            error={!!errors?.nationalCode}
+            helperText={errors?.nationalCode}
           />
         </Grid>
 
@@ -58,11 +58,11 @@ const DriverGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
             required
             type="number"
             label="  شماره موبایل"
-            name="MobileNumber"
-            value={values.MobileNumber}
+            name="mobileNumber"
+            value={values.mobileNumber}
             onChange={onChange}
-            error={!!errors?.MobileNumber}
-            helperText={errors?.MobileNumber}
+            error={!!errors?.mobileNumber}
+            helperText={errors?.mobileNumber}
           />
         </Grid>
       </Grid>

@@ -1,18 +1,20 @@
 import React, { memo, useCallback, useEffect, useState } from 'react';
-import Box from '@mui/material/Box';
 
+import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+
 import { useNavigate, useParams } from 'react-router-dom';
 
 import VehicleForm from '../components/VehicleForm';
 import VehicleDocumentsSection from '../sections/VehicleDocumentsSection';
+
 import { gregorianYearToJalali } from '@/utils';
 import { AppCard } from '@/components';
 
 import useVehicle from '../hooks/useVehicle';
 
 const VehicleEditPage = () => {
-  const { Id } = useParams();
+  const { id } = useParams();
 
   const navigate = useNavigate();
 
@@ -22,26 +24,28 @@ const VehicleEditPage = () => {
 
   useEffect(() => {
     const loadVehicle = async () => {
-      const data = await getVehicleById(Id);
+      const data = await getVehicleById(id);
 
       setVehicle({
         ...data,
         productionYear: gregorianYearToJalali(data.productionYear),
+        purchaseDate: data.purchaseDate ? new Date(data.purchaseDate) : null,
       });
     };
 
     loadVehicle();
-  }, [Id, getVehicleById]);
+  }, [id, getVehicleById]);
+
   const handleSubmit = useCallback(
     async (values) => {
       try {
-        await updateVehicle(Id, values);
-        navigate('/vehicles');
+        await updateVehicle(id, values);
+        navigate('/fleet/vehicles');
       } catch (error) {
         console.error(error);
       }
     },
-    [Id, updateVehicle, navigate],
+    [id, updateVehicle, navigate],
   );
 
   if (!vehicle) {
@@ -49,19 +53,19 @@ const VehicleEditPage = () => {
   }
 
   return (
-    <>
-      <Box sx={{ maxWidth: 900, mx: 'auto', py: 3 }}>
-        <Typography variant="h5" fontWeight={700} mb={3}>
-          ویرایش خودرو
-        </Typography>
-        <AppCard sx={{ p: 4 }}>
-          <VehicleForm initialValues={vehicle} onSubmit={handleSubmit} />
-        </AppCard>
-        <AppCard sx={{ p: 4 }}>
-          <VehicleDocumentsSection vehicleId={Id} />
-        </AppCard>
-      </Box>
-    </>
+    <Box sx={{ maxWidth: 900, mx: 'auto', py: 3 }}>
+      <Typography variant="h5" fontWeight={700} mb={3}>
+        ویرایش خودرو
+      </Typography>
+
+      <AppCard sx={{ p: 4, mb: 3 }}>
+        <VehicleForm initialValues={vehicle} onSubmit={handleSubmit} />
+      </AppCard>
+
+      <AppCard sx={{ p: 4 }}>
+        <VehicleDocumentsSection vehicleId={id} />
+      </AppCard>
+    </Box>
   );
 };
 
