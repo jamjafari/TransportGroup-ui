@@ -1,4 +1,4 @@
-export { default as TokenManager } from './TokenManager';
+export { default as tokenManager } from './tokenManager';
 
 export { default as AuthStorage } from './AuthStorage';
 

@@ -117,7 +117,7 @@ const TireListPage = () => {
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف تایر"
-        message={`آیا از حذف تایر «${deleteTarget?.firstName} ${deleteTarget?.lastName}» مطمئن هستید؟`}
+        message={`آیا از حذف تایر «${deleteTarget?.model} » مطمئن هستید؟`}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

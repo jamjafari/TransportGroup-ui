@@ -113,7 +113,7 @@ const ExpenseListPage = () => {
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف هزینه"
-        message={`آیا از حذف هزینه «${deleteTarget?.firstName} ${deleteTarget?.invoiceNumber}» مطمئن هستید؟`}
+        message={`آیا از حذف هزینه « ${deleteTarget?.invoiceNumber}» مطمئن هستید؟`}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

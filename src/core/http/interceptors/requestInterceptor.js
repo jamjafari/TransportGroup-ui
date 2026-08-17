@@ -1,7 +1,7 @@
-import { TokenManager } from '@/core/auth';
+import { tokenManager } from '@/core/auth';
 
 const requestInterceptor = (config) => {
-  const token = TokenManager.getToken();
+  const token = tokenManager.getToken();
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;

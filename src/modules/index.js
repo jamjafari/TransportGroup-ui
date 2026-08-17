@@ -7,3 +7,7 @@ export * from './expensetypes';
 export * from './expenses';
 export * from './vendors';
 export * from './servicetypes';
+
+export * from './locations';
+export * from './missions';
+export * from './admin';

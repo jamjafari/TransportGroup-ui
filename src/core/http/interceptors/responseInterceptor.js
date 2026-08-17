@@ -1,6 +1,6 @@
 import axiosClient from '../axiosClient';
 
-import { TokenManager } from '@/core/auth';
+import { tokenManager } from '@/core/auth';
 
 let isRefreshing = false;
 
@@ -45,14 +45,14 @@ const responseErrorInterceptor = async (error) => {
   isRefreshing = true;
 
   try {
-    const refreshToken = TokenManager.getRefreshToken();
+    const refreshToken = tokenManager.getRefreshToken();
 
     const response = await axiosClient.post('/auth/refresh-token', {
       refreshToken,
     });
 
     const newToken = response.data.accessToken;
-    TokenManager.setToken(newToken);
+    tokenManager.setToken(newToken);
 
     originalRequest.headers.Authorization = `Bearer ${newToken}`;
 
@@ -62,7 +62,7 @@ const responseErrorInterceptor = async (error) => {
   } catch (err) {
     processQueue(err);
 
-    TokenManager.clear();
+    tokenManager.clear();
 
     window.location.href = '/login';
 

@@ -34,6 +34,7 @@ const AppTextField = forwardRef(
     return (
       <TextField
         {...restProps}
+        dir="rtl"
         ref={ref}
         type={isPassword && showPassword ? 'text' : type}
         size={size}

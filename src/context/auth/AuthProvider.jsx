@@ -4,7 +4,12 @@ import AuthContext from './AuthContext';
 
 import { AuthRepository } from '@/repositories';
 
-import { TokenManager, decodeToken, isTokenExpired } from '@/core/auth';
+import { tokenManager, decodeToken, isTokenExpired } from '@/core/auth';
+import {
+  hasPermission,
+  hasAnyPermission,
+  hasAllPermissions,
+} from '@/core/auth';
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -16,9 +21,9 @@ const AuthProvider = ({ children }) => {
   const login = useCallback(async (credentials) => {
     const result = await AuthRepository.login(credentials);
 
-    TokenManager.setToken(result.accessToken);
+    tokenManager.setToken(result.accessToken);
 
-    TokenManager.setRefreshToken(result.refreshToken);
+    tokenManager.setRefreshToken(result.refreshToken);
 
     const decoded = decodeToken(result.accessToken);
 
@@ -30,7 +35,7 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const logout = useCallback(() => {
-    TokenManager.clear();
+    tokenManager.clear();
 
     setToken(null);
 
@@ -38,7 +43,7 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const restoreUser = useCallback(() => {
-    const savedToken = TokenManager.getToken();
+    const savedToken = tokenManager.getToken();
 
     if (!savedToken) {
       setLoading(false);
@@ -46,7 +51,7 @@ const AuthProvider = ({ children }) => {
     }
 
     if (isTokenExpired(savedToken)) {
-      TokenManager.clear();
+      tokenManager.clear();
 
       setLoading(false);
 
@@ -73,6 +78,9 @@ const AuthProvider = ({ children }) => {
       token,
 
       loading,
+      can: (permission) => hasPermission(user, permission),
+      canAny: (permissions) => hasAnyPermission(user, permissions),
+      canAll: (permissions) => hasAllPermissions(user, permissions),
 
       login,
 

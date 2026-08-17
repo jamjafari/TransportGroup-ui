@@ -57,7 +57,7 @@ const DriverEditPage = () => {
   return (
     <Box sx={{ maxWidth: 900, mx: 'auto', py: 3 }}>
       <Typography variant="h5" fontWeight={700} mb={3}>
-        ویرایش خودرو
+        ویرایش راننده
       </Typography>
 
       <AppCard sx={{ p: 4, mb: 3 }}>
