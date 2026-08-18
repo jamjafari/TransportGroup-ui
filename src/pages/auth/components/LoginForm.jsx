@@ -34,7 +34,7 @@ const LoginForm = () => {
     <AppForm onSubmit={handleSubmit}>
       <AppStack spacing={3}>
         {!!error && (
-          <AppAlert severity="error" title="خطا">
+          <AppAlert open severity="error" title="خطا">
             {error}
           </AppAlert>
         )}

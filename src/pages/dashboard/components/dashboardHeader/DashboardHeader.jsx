@@ -16,6 +16,7 @@ const DashboardHeader = ({
   onReports,
 }) => {
   const { open, openDialog, closeDialog } = useReportDialog();
+
   return (
     <>
       <Box>
@@ -25,28 +26,18 @@ const DashboardHeader = ({
           alignItems="center"
           spacing={2}
           sx={{
-            direction: 'rtl',
-
             mb: 4,
-
             px: 4,
             py: 3,
-
             borderRadius: 3,
-
             bgcolor: 'grey.100',
-
             border: '1px solid',
             borderColor: 'divider',
           }}
         >
-          {/* عنوان داشبورد */}
           <DashboardHeaderTitle />
-
-          {/* زمان آخرین بروزرسانی */}
           <DashboardHeaderInfo lastUpdate={lastUpdate} />
 
-          {/* عملیات داشبورد */}
           <DashboardHeaderActions
             loading={loading}
             onRefresh={onRefresh}
@@ -54,9 +45,11 @@ const DashboardHeader = ({
             onExport={onExport}
             onReports={openDialog}
           />
+
           <DashboardSearchSummary />
         </Stack>
       </Box>
+
       <ReportDialog open={open} onClose={closeDialog} />
     </>
   );

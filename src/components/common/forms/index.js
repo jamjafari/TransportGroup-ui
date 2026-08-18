@@ -41,5 +41,6 @@ export * from './appjalalidatepicker';
 /* Text */
 
 export { default as AppTextField } from './inputs/AppTextField';
+export { default as AppPlateNumberField } from './inputs/AppPlateNumberField';
 
 export { default as AppFormGrid } from './AppFormGrid';

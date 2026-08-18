@@ -9,6 +9,7 @@ export const ATTACHMENT_OWNER_TYPE = {
   FUEL_RECORD: 6,
   TIRE: 7,
   VENDOR: 8,
+  ACCIDENT: 9,
 };
 
 // export const attachmentCategoryOptions = [

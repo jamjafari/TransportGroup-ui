@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Alert, AlertTitle } from '@mui/material';
-import Stack from '@mui/system/Stack';
+import Stack from '@mui/material/Stack';
 
 import { BaseCard } from '../../../common/cards/BaseCard';
 

@@ -1,7 +1,6 @@
 import React, { memo } from 'react';
 
-import Stack from '@mui/system/Stack';
-
+import Stack from '@mui/material/Stack';
 import DashboardContainer from './DashboardContainer';
 
 import DashboardSpacing from './DashboardSpacing';

@@ -117,14 +117,14 @@ const VendorListPage = () => {
         loading={loading}
         toolbar
         pagination
-        onRowClick={(row) => navigate(`/vendors/${row.id}/edit`)}
+        onRowClick={(row) => navigate(`/vendors/edit/${row.id}`)}
         emptyTitle="تامین کننده ای ثبت نشده است"
       />
 
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف تامین کننده"
-        message={`آیا از حذف تامین کننده «${deleteTarget?.vendorName} ${deleteTarget?.lastName}» مطمئن هستید؟`}
+        message={`مطمئن هستید؟«${deleteTarget?.vendorName}» آیا از حذف تامین کننده`}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

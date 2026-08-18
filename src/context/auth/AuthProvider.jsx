@@ -1,11 +1,11 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 
 import AuthContext from './AuthContext';
-
 import { AuthRepository } from '@/repositories';
-
-import { tokenManager, decodeToken, isTokenExpired } from '@/core/auth';
 import {
+  tokenManager,
+  decodeToken,
+  isTokenExpired,
   hasPermission,
   hasAnyPermission,
   hasAllPermissions,
@@ -13,22 +13,17 @@ import {
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-
   const [token, setToken] = useState(null);
-
   const [loading, setLoading] = useState(true);
 
   const login = useCallback(async (credentials) => {
     const result = await AuthRepository.login(credentials);
 
-    tokenManager.setToken(result.accessToken);
-
-    tokenManager.setRefreshToken(result.refreshToken);
+    tokenManager.setToken(result.accessToken, credentials.rememberMe);
+    tokenManager.setRefreshToken(result.refreshToken, credentials.rememberMe);
 
     const decoded = decodeToken(result.accessToken);
-
     setToken(result.accessToken);
-
     setUser(decoded);
 
     return result;
@@ -36,9 +31,7 @@ const AuthProvider = ({ children }) => {
 
   const logout = useCallback(() => {
     tokenManager.clear();
-
     setToken(null);
-
     setUser(null);
   }, []);
 
@@ -52,18 +45,13 @@ const AuthProvider = ({ children }) => {
 
     if (isTokenExpired(savedToken)) {
       tokenManager.clear();
-
       setLoading(false);
-
       return;
     }
 
     const decoded = decodeToken(savedToken);
-
     setToken(savedToken);
-
     setUser(decoded);
-
     setLoading(false);
   }, []);
 
@@ -74,21 +62,15 @@ const AuthProvider = ({ children }) => {
   const value = useMemo(
     () => ({
       user,
-
       token,
-
       loading,
+      login,
+      logout,
+      restoreUser,
+      isAuthenticated: !!token,
       can: (permission) => hasPermission(user, permission),
       canAny: (permissions) => hasAnyPermission(user, permissions),
       canAll: (permissions) => hasAllPermissions(user, permissions),
-
-      login,
-
-      logout,
-
-      restoreUser,
-
-      isAuthenticated: !!token,
     }),
     [user, token, loading, login, logout, restoreUser],
   );

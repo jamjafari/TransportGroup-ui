@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 import * as Mui from '@mui/material';
 
-import Stack from '@mui/system/Stack';
+import Stack from '@mui/material/Stack';
 
 import { AppStackPropTypes, AppStackDefaultProps } from './AppStack.types';
 

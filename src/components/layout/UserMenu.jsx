@@ -1,24 +1,44 @@
-import { Avatar, Menu, MenuItem, IconButton } from '@mui/material';
+import React, { useState } from 'react';
 
-import { useState } from 'react';
+import {
+  Avatar,
+  Menu,
+  MenuItem,
+  IconButton,
+  Divider,
+  ListItemIcon,
+  ListItemText,
+} from '@mui/material';
+import LogoutIcon from '@mui/icons-material/Logout';
+import LockResetIcon from '@mui/icons-material/LockReset';
 
-import { useAuth } from '@/context';
+import { useNavigate } from 'react-router-dom';
+
+import { useAuth } from '@/hooks';
 
 function UserMenu() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const logout = () => {
-    localStorage.removeItem('token');
+  const displayName = user?.unique_name || user?.UniqueName || 'کاربر';
 
-    window.location.href = '/login';
+  const handleLogout = () => {
+    setAnchorEl(null);
+    logout();
+    navigate('/login', { replace: true });
+  };
+
+  const handleChangePassword = () => {
+    setAnchorEl(null);
+    navigate('/change-password');
   };
 
   return (
     <>
       <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
-        <Avatar>{user?.userName?.[0]}</Avatar>
+        <Avatar>{displayName?.[0]}</Avatar>
       </IconButton>
 
       <Menu
@@ -26,9 +46,23 @@ function UserMenu() {
         open={Boolean(anchorEl)}
         onClose={() => setAnchorEl(null)}
       >
-        <MenuItem>{user?.userName}</MenuItem>
+        <MenuItem disabled>{displayName}</MenuItem>
 
-        <MenuItem onClick={logout}>Logout</MenuItem>
+        <Divider />
+
+        <MenuItem onClick={handleChangePassword}>
+          <ListItemIcon>
+            <LockResetIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText>تغییر رمز عبور</ListItemText>
+        </MenuItem>
+
+        <MenuItem onClick={handleLogout}>
+          <ListItemIcon>
+            <LogoutIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText>خروج</ListItemText>
+        </MenuItem>
       </Menu>
     </>
   );

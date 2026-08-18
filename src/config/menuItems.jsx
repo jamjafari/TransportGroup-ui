@@ -12,6 +12,7 @@ import PlaceIcon from '@mui/icons-material/Place';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import CarCrashIcon from '@mui/icons-material/CarCrash';
 
 export const menuItems = [
   {
@@ -137,7 +138,13 @@ export const menuItems = [
       },
     ],
   },
-
+  {
+    id: 'accidents',
+    label: 'تصادفات',
+    icon: <CarCrashIcon fontSize="small" />,
+    path: '/accidents',
+    permission: 'Accident.View',
+  },
   {
     id: 'reports',
     label: 'گزارش‌ها',

@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useEffect, useState } from 'react';
 
-import Stack from '@mui/system/Stack';
+import Stack from '@mui/material/Stack';
 
 import { AppForm, AppFormActions, AppButton } from '@/components';
 import { validate, hasErrors } from '@/validation';

@@ -32,9 +32,7 @@ export const uploadAttachment = async ({
 
   formData.append('file', file);
 
-  const { data } = await axiosClient.post(BASE_URL, formData, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-  });
+  const { data } = await axiosClient.post(BASE_URL, formData);
 
   return data;
 };

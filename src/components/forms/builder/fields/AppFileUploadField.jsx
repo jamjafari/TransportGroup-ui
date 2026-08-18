@@ -4,7 +4,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 
 import { Button, FormControl, FormHelperText, Typography } from '@mui/material';
 
-import Stack from '@mui/system/Stack';
+import Stack from '@mui/material/Stack';
 
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 

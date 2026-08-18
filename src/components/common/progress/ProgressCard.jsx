@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 
 import { Card, CardContent, Typography } from '@mui/material';
-import Stack from '@mui/system/Stack';
+import Stack from '@mui/material/Stack';
 
 import AppLinearProgress from './AppLinearProgress';
 

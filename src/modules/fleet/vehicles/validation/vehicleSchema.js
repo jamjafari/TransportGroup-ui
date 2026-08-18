@@ -14,9 +14,17 @@ const nonNegative = (message) => (value) => {
 
   return Number(value) >= 0 ? null : message;
 };
+const plateFormat = (message) => (value) => {
+  if (!value) return null;
+  const isValid = /^\d{2}[^\d]+\d{3}-\d{2}$/.test(value);
+  return isValid ? null : message;
+};
 
 export const vehicleSchema = {
-  plateNumber: [required('شماره پلاک الزامی است')],
+  plateNumber: [
+    required('شماره پلاک الزامی است'),
+    plateFormat('فرمت پلاک کامل نیست'),
+  ],
   brand: [required('برند الزامی است')],
   model: [required('مدل الزامی است')],
   chassisNumber: [

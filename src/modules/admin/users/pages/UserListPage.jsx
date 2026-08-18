@@ -119,7 +119,7 @@ const UserListPage = () => {
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف کاربر"
-        message={`   مطمئن هستید؟ «${deleteTarget?.userName}» آیا از حذف کاربر`}
+        message={`مطمئن هستید؟ «${deleteTarget?.userName}» آیا از حذف کاربر`}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

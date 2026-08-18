@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import Stack from '@mui/system/Stack';
+import Stack from '@mui/material/Stack';
 import { Avatar, Typography } from '@mui/material';
 
 import DirectionsCarFilledIcon from '@mui/icons-material/DirectionsCarFilled';

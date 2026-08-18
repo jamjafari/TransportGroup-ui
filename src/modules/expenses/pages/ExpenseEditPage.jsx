@@ -55,7 +55,7 @@ const ExpenseEditPage = () => {
   return (
     <Box sx={{ maxWidth: 900, mx: 'auto', py: 3 }}>
       <Typography variant="h5" fontWeight={700} mb={3}>
-        ویرایش خودرو
+        ویرایش هزینه
       </Typography>
 
       <AppCard sx={{ p: 4, mb: 3 }}>

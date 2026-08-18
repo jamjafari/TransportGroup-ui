@@ -1,7 +1,6 @@
 import { Typography } from '@mui/material';
 
-import Stack from '@mui/system/Stack';
-
+import Stack from '@mui/material/Stack'; // به‌جای '@mui/system/Stack'
 const DashboardHeaderTitle = () => {
   return (
     <Stack spacing={0.5}>

@@ -124,14 +124,14 @@ const VehicleListPage = () => {
         loading={loading}
         toolbar
         pagination
-        onRowClick={(row) => navigate(`/fleet/vehicles/${row.id}/edit`)}
+        onRowClick={(row) => navigate('/fleet/vehicles/create')}
         emptyTitle="خودرویی ثبت نشده است"
       />
 
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف خودرو"
-        message={`آیا از حذف خودروی «${deleteTarget?.plateNumber}» مطمئن هستید؟`}
+        message={`مطمئن هستید؟ «${deleteTarget?.plateNumber}»  آیا از حذف خودرو`}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

@@ -23,15 +23,25 @@ const useLogin = () => {
     setLoading(true);
 
     try {
-      await login({
+      console.log('LOGIN START');
+
+      const result = await login({
         username,
         password,
         rememberMe,
       });
 
+      console.log('LOGIN SUCCESS:', result);
+
       navigate('/dashboard');
     } catch (err) {
-      setError(err.message || 'نام کاربری یا رمز عبور صحیح نیست.');
+      if (err.response?.status === 401) {
+        setError('نام کاربری یا رمز عبور صحیح نیست.');
+      } else if (!err.response) {
+        setError('خطا در برقراری ارتباط با سرور. اتصال اینترنت را بررسی کنید.');
+      } else {
+        setError('خطایی رخ داد. لطفاً دوباره تلاش کنید.');
+      }
     } finally {
       setLoading(false);
     }

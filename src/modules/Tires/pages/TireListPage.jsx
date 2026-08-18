@@ -110,14 +110,14 @@ const TireListPage = () => {
         loading={loading}
         toolbar
         pagination
-        onRowClick={(row) => navigate(`/tires/${row.id}/edit`)}
+        onRowClick={(row) => navigate(`/tires/edit/${row.id}`)}
         emptyTitle="تایر ای ثبت نشده است"
       />
 
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف تایر"
-        message={`آیا از حذف تایر «${deleteTarget?.model} » مطمئن هستید؟`}
+        message={`مطمئن هستید؟ «${deleteTarget?.model} »  آیا از حذف تایر`}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

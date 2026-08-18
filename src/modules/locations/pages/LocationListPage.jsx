@@ -99,14 +99,14 @@ const LocationListPage = () => {
         loading={loading}
         toolbar
         pagination
-        onRowClick={(row) => navigate(`/locations/${row.id}/edit`)}
+        onRowClick={(row) => navigate(`/locations/edit/${row.id}`)}
         emptyTitle="مکانی ثبت نشده است"
       />
 
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف مکان"
-        message={`آیا از حذف مکان «${deleteTarget?.name} ${deleteTarget?.lastName}» مطمئن هستید؟`}
+        message={`مطمئن هستید؟ «${deleteTarget?.name} »  آیا از حذف مکان`}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

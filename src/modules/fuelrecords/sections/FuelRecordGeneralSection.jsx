@@ -1,46 +1,23 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 
 import Grid from '@mui/material/Grid';
 
-import {
-  AppFormSection,
-  AppSelectform,
-  AppAutocompleteform,
-  AppTextField,
-} from '@/components';
-
-import useFuelRecordVehicles from '../hooks/useFuelRecordVehicles';
-import useFuelRecordDrivers from '../hooks/useFuelRecordDrivers';
+import { AppFormSection, AppAutocompleteform } from '@/components';
 
 const FuelRecordGeneralSection = ({
   values,
   errors,
-  onChange,
   setFieldValue,
+  vehicles,
+  vehiclesLoading,
+  drivers,
+  driversLoading,
 }) => {
-  const {
-    vehicles,
-    loading: vehiclesLoading,
-    getVehicles,
-  } = useFuelRecordVehicles();
-  const {
-    drivers,
-    loading: driversLoading,
-    getDrivers,
-  } = useFuelRecordDrivers();
-  useEffect(() => {
-    getVehicles();
-    getDrivers();
-  }, [getVehicles, getDrivers]);
-
-  const vehicleOptions = vehicles.map((vehicle) => ({
-    value: vehicle.id,
-    label: vehicle.plateNumber,
-  }));
   const driverOptions = drivers.map((driver) => ({
     value: driver.id,
     label: driver.lastName,
   }));
+
   return (
     <AppFormSection title="اطلاعات اولیه">
       <Grid container spacing={2}>
@@ -70,7 +47,7 @@ const FuelRecordGeneralSection = ({
           <AppAutocompleteform
             fullWidth
             required
-            label="نام راننده "
+            label="نام راننده"
             name="driverId"
             options={drivers}
             loading={driversLoading}

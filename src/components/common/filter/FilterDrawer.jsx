@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 import { Drawer, Box, Typography, Divider, IconButton } from '@mui/material';
 
-import Stack from '@mui/system/Stack';
+import Stack from '@mui/material/Stack';
 
 import CloseIcon from '@mui/icons-material/Close';
 

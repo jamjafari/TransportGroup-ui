@@ -106,14 +106,14 @@ const ExpenseListPage = () => {
         loading={loading}
         toolbar
         pagination
-        onRowClick={(row) => navigate(`/expenses/${row.id}/edit`)}
+        onRowClick={(row) => navigate(`/expenses/edit/${row.id}`)}
         emptyTitle="هزینه ای ثبت نشده است"
       />
 
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف هزینه"
-        message={`آیا از حذف هزینه « ${deleteTarget?.invoiceNumber}» مطمئن هستید؟`}
+        message={`مطمئن هستید؟ « ${deleteTarget?.invoiceNumber}» آیا از حذف هزینه `}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

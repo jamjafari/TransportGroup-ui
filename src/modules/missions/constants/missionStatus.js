@@ -1,4 +1,4 @@
-export const attachmentCategoryOptions = [
+export const missionStatusOptions = [
   { value: 1, label: ' برنامه ریزی شده' },
   { value: 2, label: '  در حال انجام' },
   { value: 3, label: '   لغو شده' },

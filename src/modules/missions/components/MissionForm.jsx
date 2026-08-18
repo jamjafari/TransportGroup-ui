@@ -1,5 +1,5 @@
-import React, { memo, useCallback, useState } from 'react';
-import Stack from '@mui/system/Stack';
+import React, { memo, useCallback, useEffect, useState } from 'react';
+import Stack from '@mui/material/Stack';
 
 import { AppForm, AppFormActions, AppButton } from '@/components';
 import { hasErrors, validate } from '@/validation';
@@ -7,6 +7,9 @@ import { hasErrors, validate } from '@/validation';
 import MissionGeneralSection from '../sections/MissionGeneralSection';
 import MissionLocationSection from '../sections/MissionLocationSection';
 import MissionStartEndSection from '../sections/MissionStartEndSection';
+
+import useMissionVehicles from '../hooks/useMissionVehicles';
+import useMissionDriver from '../hooks/useMissionDriver';
 
 import missionSchema from '../validation/missionSchema';
 
@@ -29,19 +32,25 @@ const defaultValues = {
 const MissionForm = ({ initialValues = defaultValues, onSubmit }) => {
   const [errors, setErrors] = useState({});
 
+  const {
+    vehicles,
+    loading: vehiclesLoading,
+    getVehicles,
+  } = useMissionVehicles();
+  const { drivers, loading: driversLoading, getDrivers } = useMissionDriver();
+
+  useEffect(() => {
+    getVehicles();
+    getDrivers();
+  }, [getVehicles, getDrivers]);
+
   const handleValidatedSubmit = useCallback(
     (values) => {
-      console.log('MissionForm submit');
-      console.log(values);
       const validationErrors = validate(missionSchema, values);
-      console.log('Validation errors:', validationErrors);
       setErrors(validationErrors);
 
       if (!hasErrors(validationErrors)) {
-        console.log('Validation passed');
-        onSubmit?.({
-          ...values,
-        });
+        onSubmit?.({ ...values });
       }
     },
     [onSubmit],
@@ -60,6 +69,10 @@ const MissionForm = ({ initialValues = defaultValues, onSubmit }) => {
             errors={errors}
             onChange={handleChange}
             setFieldValue={setFieldValue}
+            vehicles={vehicles}
+            vehiclesLoading={vehiclesLoading}
+            drivers={drivers}
+            driversLoading={driversLoading}
             divider
           />
 
@@ -69,12 +82,15 @@ const MissionForm = ({ initialValues = defaultValues, onSubmit }) => {
             onChange={handleChange}
             setFieldValue={setFieldValue}
           />
+
           <MissionStartEndSection
             values={values}
             errors={errors}
             onChange={handleChange}
             setFieldValue={setFieldValue}
+            vehicles={vehicles}
           />
+
           <AppFormActions align="flex-end" spacing={2} divider>
             <AppButton
               variant="outlined"

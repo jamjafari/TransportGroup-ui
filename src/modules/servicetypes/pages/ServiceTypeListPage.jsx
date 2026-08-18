@@ -98,14 +98,14 @@ const ServiceTypeListPage = () => {
         loading={loading}
         toolbar
         pagination
-        onRowClick={(row) => navigate(`/serviceTypes/${row.id}/edit`)}
+        onRowClick={(row) => navigate(`/serviceTypes/edit/${row.id}`)}
         emptyTitle="سرویسی ثبت نشده است"
       />
 
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف سرویس"
-        message={`آیا از حذف سرویس «${deleteTarget?.title} » مطمئن هستید؟`}
+        message={`مطمئن هستید؟  «${deleteTarget?.title} »  آیا از حذف سرویس`}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

@@ -98,14 +98,14 @@ const ExpenseTypeListPage = () => {
         loading={loading}
         toolbar
         pagination
-        onRowClick={(row) => navigate(`/expenseTypes/${row.id}/edit`)}
+        onRowClick={(row) => navigate(`/expenseTypes/edit/${row.id}`)}
         emptyTitle="نوع هزینه ای  ثبت نشده است"
       />
 
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف  نوع هزنه"
-        message={`آیا از حذف  نوع هزینه «${deleteTarget?.title} ${deleteTarget?.lastName}» مطمئن هستید؟`}
+        message={`مطمئن هستید؟ «${deleteTarget?.title} »  آیا از حذف نوع هزینه`}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

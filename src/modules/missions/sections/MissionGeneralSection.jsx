@@ -1,42 +1,20 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 
 import Grid from '@mui/material/Grid';
-import useMissionVehicle from '../hooks/useMissionVehicle';
-import useMissionDriver from '../hooks/useMissionDriver';
 
-import {
-  AppFormSection,
-  AppSelectform,
-  AppJalaliDatePicker,
-  AppTextField,
-  AppAutocompleteform,
-} from '@/components';
+import { AppFormSection, AppAutocompleteform } from '@/components';
 
-const MissionGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
-  const {
-    vehicles,
-    loading: vehiclesLoading,
-    getVehicles,
-  } = useMissionVehicle();
-
-  const { drivers, loading: driversLoading, getDrivers } = useMissionDriver();
-  useEffect(() => {
-    getVehicles();
-
-    getDrivers();
-  }, [getVehicles, getDrivers]);
-
-  const vehicleOptions = vehicles.map((vehicle) => ({
-    value: vehicle.id,
-    label: vehicle.plateNumber,
-  }));
-
-  const driverOptions = drivers.map((driver) => ({
-    value: driver.id,
-    label: driver.driverName,
-  }));
+const MissionGeneralSection = ({
+  values,
+  errors,
+  setFieldValue,
+  vehicles,
+  vehiclesLoading,
+  drivers,
+  driversLoading,
+}) => {
   return (
-    <AppFormSection title="اطلاعات  مورد نیاز هزینه جدید">
+    <AppFormSection title="اطلاعات پایه ماموریت">
       <Grid container spacing={2}>
         <Grid size={{ xs: 12, md: 6 }}>
           <AppAutocompleteform
@@ -63,8 +41,7 @@ const MissionGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
         <Grid size={{ xs: 12, md: 6 }}>
           <AppAutocompleteform
             fullWidth
-
-            label="نام  راننده "
+            label="نام راننده"
             name="driverId"
             options={drivers}
             loading={driversLoading}
@@ -72,7 +49,9 @@ const MissionGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
               drivers.find((driver) => driver.id === values.driverId) || null
             }
             getOptionLabel={(option) =>
-              (option?.firstName && option?.lastName) || ''
+              option?.firstName && option?.lastName
+                ? `${option.firstName} ${option.lastName}`
+                : ''
             }
             isOptionEqualToValue={(option, value) => option?.id === value?.id}
             onChange={(event, value) => {

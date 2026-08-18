@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import LoginPage from '@/pages/auth/LoginPage';
+import ChangePasswordPage from '@/pages/auth/ChangePasswordPage';
+
 import DashboardPage from '@/pages/dashboard/DashboardPage';
 import MissionReportPage from '@/pages/dashboard/reports/pages/missions';
 import DriverReportPage from '@/pages/dashboard/reports/pages/drivers';
@@ -66,6 +68,10 @@ import {
   UserListPage,
   UserCreatePage,
   UserEditPage,
+  AccidentProvider,
+  AccidentListPage,
+  AccidentCreatePage,
+  AccidentEditPage,
 } from '@/modules';
 
 import MainLayout from '@/layouts/MainLayout';
@@ -87,7 +93,7 @@ const AppRouter = () => {
         <Route element={<ProtectedRoute />}>
           <Route element={<MainLayout />}>
             <Route path="/dashboard" element={<DashboardPage />} />
-
+            <Route path="/change-password" element={<ChangePasswordPage />} />
             {/* ===== گزارش‌ها ===== */}
             <Route element={<PermissionRoute permission="Report.View" />}>
               <Route path="/reports/missions" element={<MissionReportPage />} />
@@ -154,7 +160,6 @@ const AppRouter = () => {
                 }
               />
             </Route>
-
             {/* ===== خودروها ===== */}
             <Route element={<PermissionRoute permission="Vehicle.View" />}>
               <Route
@@ -184,7 +189,6 @@ const AppRouter = () => {
                 }
               />
             </Route>
-
             {/* ===== رانندگان ===== */}
             <Route element={<PermissionRoute permission="Driver.View" />}>
               <Route
@@ -214,7 +218,6 @@ const AppRouter = () => {
                 }
               />
             </Route>
-
             {/* ===== تایر ===== */}
             <Route element={<PermissionRoute permission="Tire.View" />}>
               <Route
@@ -244,7 +247,6 @@ const AppRouter = () => {
                 }
               />
             </Route>
-
             {/* ===== کارت سوخت ===== */}
             <Route element={<PermissionRoute permission="FuelCard.View" />}>
               <Route
@@ -274,7 +276,6 @@ const AppRouter = () => {
                 }
               />
             </Route>
-
             {/* ===== سوخت‌گیری ===== */}
             <Route element={<PermissionRoute permission="FuelRecord.View" />}>
               <Route
@@ -304,7 +305,6 @@ const AppRouter = () => {
                 }
               />
             </Route>
-
             {/* ===== نوع هزینه ===== */}
             <Route element={<PermissionRoute permission="Expense.View" />}>
               <Route
@@ -334,7 +334,6 @@ const AppRouter = () => {
                 }
               />
             </Route>
-
             {/* ===== هزینه‌ها ===== */}
             <Route element={<PermissionRoute permission="Expense.View" />}>
               <Route
@@ -364,7 +363,6 @@ const AppRouter = () => {
                 }
               />
             </Route>
-
             {/* ===== تامین‌کننده ===== */}
             <Route
               element={<PermissionRoute permission="VehicleService.View" />}
@@ -398,7 +396,6 @@ const AppRouter = () => {
                 }
               />
             </Route>
-
             {/* ===== نوع سرویس ===== */}
             <Route
               element={<PermissionRoute permission="VehicleService.View" />}
@@ -432,7 +429,6 @@ const AppRouter = () => {
                 }
               />
             </Route>
-
             {/* ===== مکان ===== */}
             <Route element={<PermissionRoute permission="Report.View" />}>
               <Route
@@ -460,7 +456,6 @@ const AppRouter = () => {
                 }
               />
             </Route>
-
             {/* ===== ماموریت‌ها ===== */}
             <Route element={<PermissionRoute permission="Report.View" />}>
               <Route
@@ -488,7 +483,6 @@ const AppRouter = () => {
                 }
               />
             </Route>
-
             {/* ===== کاربران ===== */}
             <Route element={<PermissionRoute permission="User.View" />}>
               <Route
@@ -515,6 +509,35 @@ const AppRouter = () => {
                   <UserProvider>
                     <UserCreatePage />
                   </UserProvider>
+                }
+              />
+            </Route>
+            // AppRouter.jsx
+            <Route element={<PermissionRoute permission="Accident.View" />}>
+              <Route
+                path="/accidents"
+                element={
+                  <AccidentProvider>
+                    <AccidentListPage />
+                  </AccidentProvider>
+                }
+              />
+              <Route
+                path="/accidents/edit/:id"
+                element={
+                  <AccidentProvider>
+                    <AccidentEditPage />
+                  </AccidentProvider>
+                }
+              />
+            </Route>
+            <Route element={<PermissionRoute permission="Accident.Create" />}>
+              <Route
+                path="/accidents/create"
+                element={
+                  <AccidentProvider>
+                    <AccidentCreatePage />
+                  </AccidentProvider>
                 }
               />
             </Route>

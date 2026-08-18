@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 import { Box, Typography } from '@mui/material';
 
-import Stack from '@mui/system/Stack';
+import Stack from '@mui/material/Stack';
 
 import InsertChartOutlinedIcon from '@mui/icons-material/InsertChartOutlined';
 

@@ -147,14 +147,14 @@ const FuelRecordListPage = () => {
         loading={loading}
         toolbar
         pagination
-        onRowClick={(row) => navigate(`/fuelRecords/${row.id}/edit`)}
-        emptyTitle="سوختگیرای ثبت نشده است"
+        onRowClick={(row) => navigate(`/fuelRecords/edit/${row.id}`)}
+        emptyTitle="سوختگیری ثبت نشده است"
       />
 
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف سوختگیری"
-        message={`آیا از حذف سوختگیری «${deleteTarget?.fuelAmount} ${deleteTarget?.lastName}» مطمئن هستید؟`}
+        message={`مطمئن هستید؟ «${deleteTarget?.fuelAmount}»  آیا از حذف سوختگیری`}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

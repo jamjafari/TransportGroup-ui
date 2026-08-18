@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 import { TableBody, TableRow, TableCell, Typography, Box } from '@mui/material';
 
-import Stack from '@mui/system/Stack';
+import Stack from '@mui/material/Stack';
 
 import InboxOutlinedIcon from '@mui/icons-material/InboxOutlined';
 

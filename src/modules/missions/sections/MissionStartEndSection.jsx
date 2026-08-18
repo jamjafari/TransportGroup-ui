@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 
 import Grid from '@mui/material/Grid';
 
@@ -6,21 +6,31 @@ import {
   AppFormSection,
   AppSelectform,
   AppTextField,
-  AppSwitch,
   AppJalaliDatePicker,
   AppTimePicker,
 } from '@/components';
 
-import { attachmentCategoryOptions } from '../constants';
+// ⚠️ فعلاً placeholder — باید با missionStatusOptions واقعی (بر اساس enum MissionStatus) جایگزین بشه
+import { missionStatusOptions } from '../constants';
 
 const MissionStartEndSection = ({
   values,
   errors,
   onChange,
   setFieldValue,
+  vehicles,
 }) => {
+  const selectedVehicle = useMemo(
+    () => vehicles.find((v) => v.id === values.vehicleId) || null,
+    [vehicles, values.vehicleId],
+  );
+
+  const currentKmHint = selectedVehicle
+    ? `کارکرد فعلی ثبت‌شده: ${selectedVehicle.currentKM?.toLocaleString() ?? '—'} کیلومتر`
+    : 'ابتدا خودرو را از بخش اطلاعات پایه انتخاب کنید';
+
   return (
-    <AppFormSection title="اطلاعات  شروع و پایان">
+    <AppFormSection title="اطلاعات شروع و پایان">
       <Grid container spacing={2}>
         <Grid size={{ xs: 12, md: 6 }}>
           <AppJalaliDatePicker
@@ -33,6 +43,7 @@ const MissionStartEndSection = ({
             helperText={errors?.startDate}
           />
         </Grid>
+
         <Grid size={{ xs: 12, md: 6 }}>
           <AppJalaliDatePicker
             label="تاریخ پایان ماموریت"
@@ -55,6 +66,7 @@ const MissionStartEndSection = ({
             helperText={errors?.startTime}
           />
         </Grid>
+
         <Grid size={{ xs: 12, md: 6 }}>
           <AppTimePicker
             fullWidth
@@ -66,17 +78,17 @@ const MissionStartEndSection = ({
             helperText={errors?.endTime}
           />
         </Grid>
+
         <Grid size={{ xs: 12, md: 6 }}>
           <AppTextField
             fullWidth
             type="number"
-
-            label="کیلومتر خودرو در شروع "
+            label="کیلومتر خودرو در شروع"
             name="startOdometerKm"
             value={values.startOdometerKm}
             onChange={onChange}
             error={!!errors?.startOdometerKm}
-            helperText={errors?.startOdometerKm}
+            helperText={errors?.startOdometerKm || currentKmHint}
           />
         </Grid>
 
@@ -84,8 +96,7 @@ const MissionStartEndSection = ({
           <AppTextField
             fullWidth
             type="number"
-
-            label="کیلومتر خودرو در پایان "
+            label="کیلومتر خودرو در پایان"
             name="endOdometerKm"
             value={values.endOdometerKm}
             onChange={onChange}
@@ -93,11 +104,11 @@ const MissionStartEndSection = ({
             helperText={errors?.endOdometerKm}
           />
         </Grid>
+
         <Grid size={{ xs: 12, md: 6 }}>
           <AppTextField
             fullWidth
             type="number"
-
             label="مسافت مبدا و مقصد (کیلومتر)"
             name="distanceKM"
             value={values.distanceKM}
@@ -106,14 +117,15 @@ const MissionStartEndSection = ({
             helperText={errors?.distanceKM}
           />
         </Grid>
+
         <Grid size={{ xs: 12, md: 6 }}>
           <AppSelectform
             fullWidth
             required
-            label="وضعیت ماموریت "
+            label="وضعیت ماموریت"
             name="status"
             value={values.status}
-            options={attachmentCategoryOptions}
+            options={missionStatusOptions}
             onChange={(value) => setFieldValue('status', value)}
             error={!!errors?.status}
             helperText={errors?.status}

@@ -7,6 +7,7 @@ import {
   AppSelectform,
   AppJalaliDatePicker,
   AppTextField,
+  AppPlateNumberField,
 } from '@/components';
 
 import { vehicleStatusOptions } from '../constants';
@@ -16,13 +17,11 @@ const VehicleGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
     <AppFormSection title="اطلاعات عمومی خودرو">
       <Grid container spacing={2}>
         <Grid size={{ xs: 12, md: 6 }}>
-          <AppTextField
-            fullWidth
+          <AppPlateNumberField
             required
             label="شماره پلاک"
-            name="plateNumber"
             value={values.plateNumber}
-            onChange={onChange}
+            onChange={(value) => setFieldValue('plateNumber', value)}
             error={!!errors?.plateNumber}
             helperText={errors?.plateNumber}
           />

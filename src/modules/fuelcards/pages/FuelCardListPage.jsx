@@ -43,7 +43,7 @@ const FuelCardListPage = () => {
         field: 'expireDate',
         headerName: ' تاریخ اعتبار ',
         width: 130,
-        renderCell: ({ row }) => formatJalaliDate(row.licenseExpireDate),
+        renderCell: ({ row }) => formatJalaliDate(row.expireDate),
       },
 
       {
@@ -91,14 +91,14 @@ const FuelCardListPage = () => {
         loading={loading}
         toolbar
         pagination
-        onRowClick={(row) => navigate(`/fuelCards/${row.id}/edit`)}
+        onRowClick={(row) => navigate(`/fuelCards/edit/${row.id}`)}
         emptyTitle="کارت سوختی ثبت نشده است"
       />
 
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف کارت سوخت"
-        message={`آیا از حذف کارت سوخت «${deleteTarget?.firstName} ${deleteTarget?.lastName}» مطمئن هستید؟`}
+        message={` مطمئن هستید؟ «${deleteTarget?.cardNumber} »  آیا از حذف کارت سوخت`}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

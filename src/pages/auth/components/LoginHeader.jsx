@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import Stack from '@mui/system/Stack';
+import Stack from '@mui/material/Stack';
 import { Typography } from '@mui/material';
 
 const LoginHeader = () => {

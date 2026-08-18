@@ -13,7 +13,7 @@ import {
   CircularProgress,
 } from '@mui/material';
 
-import Stack from '@mui/system/Stack';
+import Stack from '@mui/material/Stack';
 
 import RefreshIcon from '@mui/icons-material/Refresh';
 

@@ -111,14 +111,14 @@ const DriverListPage = () => {
         loading={loading}
         toolbar
         pagination
-        onRowClick={(row) => navigate(`/drivers/${row.id}/edit`)}
+        onRowClick={(row) => navigate(`/drivers/edit/${row.id}`)}
         emptyTitle="راننده ای ثبت نشده است"
       />
 
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف راننده"
-        message={`آیا از حذف راننده «${deleteTarget?.firstName} ${deleteTarget?.lastName}» مطمئن هستید؟`}
+        message={`مطمئن هستید؟ «${deleteTarget?.firstName} ${deleteTarget?.lastName}» آیا از حذف راننده `}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

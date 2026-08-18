@@ -23,11 +23,32 @@ const responseInterceptor = (response) => response;
 const responseErrorInterceptor = async (error) => {
   const originalRequest = error.config;
 
-  if (error.response?.status !== 401 || originalRequest._retry) {
+  const status = error.response?.status;
+
+  const url = originalRequest?.url || '';
+
+  // --------------------------------------------------
+  // Login و Refresh نباید وارد فرآیند refresh شوند
+  // --------------------------------------------------
+
+  const isLoginRequest = url.includes('/auth/login');
+
+  const isRefreshRequest = url.includes('/auth/refresh-token');
+
+  if (
+    status !== 401 ||
+    originalRequest?._retry ||
+    isLoginRequest ||
+    isRefreshRequest
+  ) {
     return Promise.reject(error);
   }
 
   originalRequest._retry = true;
+
+  // --------------------------------------------------
+  // اگر درخواست دیگری در حال refresh است
+  // --------------------------------------------------
 
   if (isRefreshing) {
     return new Promise((resolve, reject) => {
@@ -36,7 +57,10 @@ const responseErrorInterceptor = async (error) => {
         reject,
       });
     }).then((token) => {
-      originalRequest.headers.Authorization = `Bearer ${token}`;
+      originalRequest.headers = {
+        ...originalRequest.headers,
+        Authorization: `Bearer ${token}`,
+      };
 
       return axiosClient(originalRequest);
     });
@@ -47,14 +71,22 @@ const responseErrorInterceptor = async (error) => {
   try {
     const refreshToken = tokenManager.getRefreshToken();
 
+    if (!refreshToken) {
+      throw new Error('Refresh token وجود ندارد.');
+    }
+
     const response = await axiosClient.post('/auth/refresh-token', {
       refreshToken,
     });
 
     const newToken = response.data.accessToken;
+
     tokenManager.setToken(newToken);
 
-    originalRequest.headers.Authorization = `Bearer ${newToken}`;
+    originalRequest.headers = {
+      ...originalRequest.headers,
+      Authorization: `Bearer ${newToken}`,
+    };
 
     processQueue(null, newToken);
 

@@ -6,7 +6,7 @@ import { AppDataGrid } from '@/components';
 import { AppButton, ConfirmDialog, StatusChip } from '@/components';
 
 import useMission from '../hooks/useMission';
-import { attachmentCategoryOptions } from '../constants';
+import { missionStatusOptions } from '../constants';
 import { gregorianYearToJalali, formatJalaliDate } from '@/utils';
 const MissionListPage = () => {
   const navigate = useNavigate();
@@ -16,8 +16,8 @@ const MissionListPage = () => {
   const [deleteTarget, setDeleteTarget] = useState(null);
   const missionLabel = useCallback(
     (value) =>
-      attachmentCategoryOptions.find((option) => option.value === value)
-        ?.label ?? '—',
+      missionStatusOptions.find((option) => option.value === value)?.label ??
+      '—',
     [],
   );
   useEffect(() => {
@@ -94,7 +94,7 @@ const MissionListPage = () => {
       },
       {
         field: 'distanceKM',
-        headerName: 'مسافت مبدا از مقصد (کیلومتر)',
+        headerName: 'مسافت مبدا از مقصد (KM)',
         width: 130,
       },
 
@@ -150,14 +150,14 @@ const MissionListPage = () => {
         loading={loading}
         toolbar
         pagination
-        onRowClick={(row) => navigate(`/missions/${row.id}/edit`)}
+        onRowClick={(row) => navigate(`/missions/edit/${row.id}`)}
         emptyTitle="ماموریتی ثبت نشده است"
       />
 
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف ماموریت"
-        message={`آیا از حذف ماموریت «${deleteTarget?.missionCode}» مطمئن هستید؟`}
+        message={` مطمئن هستید؟   «${deleteTarget?.missionCode}»  آیا از حذف ماموریت`}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

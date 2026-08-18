@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 import { Box } from '@mui/material';
 
-import Stack from '@mui/system/Stack';
+import Stack from '@mui/material/Stack';
 
 import {
   AppFormActionsPropTypes,

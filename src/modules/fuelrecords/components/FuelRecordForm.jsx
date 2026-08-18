@@ -1,12 +1,14 @@
-import React, { memo, useCallback, useState } from 'react';
-import Stack from '@mui/system/Stack';
+import React, { memo, useCallback, useEffect, useState } from 'react';
+import Stack from '@mui/material/Stack';
 
 import { AppForm, AppFormActions, AppButton } from '@/components';
 import { hasErrors, validate } from '@/validation';
 
 import FuelRecordGeneralSection from '../sections/FuelRecordGeneralSection';
 import FuelRecordTechnicalSection from '../sections/FuelRecordTechnicalSection';
-import { jalaliYearToGregorian } from '@/utils';
+
+import useFuelRecordVehicles from '../hooks/useFuelRecordVehicles';
+import useFuelRecordDrivers from '../hooks/useFuelRecordDrivers';
 
 import fuelRecordSchema from '../validation/fuelRecordSchema';
 
@@ -26,6 +28,22 @@ const defaultValues = {
 const FuelRecordForm = ({ initialValues = defaultValues, onSubmit }) => {
   const [errors, setErrors] = useState({});
 
+  const {
+    vehicles,
+    loading: vehiclesLoading,
+    getVehicles,
+  } = useFuelRecordVehicles();
+  const {
+    drivers,
+    loading: driversLoading,
+    getDrivers,
+  } = useFuelRecordDrivers();
+
+  useEffect(() => {
+    getVehicles();
+    getDrivers();
+  }, [getVehicles, getDrivers]);
+
   const handleValidatedSubmit = useCallback(
     (values) => {
       const validationErrors = validate(fuelRecordSchema, values);
@@ -33,9 +51,7 @@ const FuelRecordForm = ({ initialValues = defaultValues, onSubmit }) => {
       setErrors(validationErrors);
 
       if (!hasErrors(validationErrors)) {
-        onSubmit?.({
-          ...values,
-        });
+        onSubmit?.({ ...values });
       }
     },
     [onSubmit],
@@ -54,6 +70,10 @@ const FuelRecordForm = ({ initialValues = defaultValues, onSubmit }) => {
             errors={errors}
             onChange={handleChange}
             setFieldValue={setFieldValue}
+            vehicles={vehicles}
+            vehiclesLoading={vehiclesLoading}
+            drivers={drivers}
+            driversLoading={driversLoading}
             divider
           />
 
@@ -62,6 +82,7 @@ const FuelRecordForm = ({ initialValues = defaultValues, onSubmit }) => {
             errors={errors}
             onChange={handleChange}
             setFieldValue={setFieldValue}
+            vehicles={vehicles}
           />
 
           <AppFormActions align="flex-end" spacing={2} divider>
