@@ -2,7 +2,6 @@ import React from 'react';
 
 import ReportLayout from '../../components/ReportLayout';
 import { DashboardSection } from '@/components';
-import DashboardSearchShortForm from '@/pages/dashboard/components/DashboardSearch/DashboardSearchShortForm';
 import VehicleReportSummary from './VehicleReportSummary';
 import VehicleReportTable from './VehicleReportTable';
 import DashboardSearchProvider from '@/pages/dashboard/context/DashboardSearchProvider';
@@ -11,10 +10,6 @@ const VehicleReportPage = () => {
   return (
     <DashboardSearchProvider>
       <ReportLayout title="گزارش خودروها" subtitle="گزارش کامل خودروها">
-        <DashboardSection title="جستجو بر اساس بازه زمانی">
-          <DashboardSearchShortForm />
-        </DashboardSection>
-
         <DashboardSection title="خلاصه">
           <VehicleReportSummary />
         </DashboardSection>

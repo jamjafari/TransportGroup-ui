@@ -20,7 +20,12 @@ const AccidentEditPage = () => {
   const [submitError, setSubmitError] = useState('');
 
   useEffect(() => {
-    getAccidentById(id).then(setAccident);
+    getAccidentById(id).then((data) => {
+      setAccident({
+        ...data,
+        accidentDate: data.accidentDate ? new Date(data.accidentDate) : null,
+      });
+    });
   }, [id, getAccidentById]);
 
   const handleSubmit = useCallback(
@@ -54,7 +59,7 @@ const AccidentEditPage = () => {
         <AccidentForm initialValues={accident} onSubmit={handleSubmit} />
       </AppCard>
       <AppCard sx={{ p: 4 }}>
-        <AccidentDocumentsSection vehicleId={id} />
+        <AccidentDocumentsSection accidentId={id} />
       </AppCard>
     </Box>
   );

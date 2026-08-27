@@ -2,10 +2,10 @@ import React, { memo } from 'react';
 
 import { DashboardTable } from '../widgets';
 
-import useInsuranceTable from './useInsuranceTable';
+import useComplianceAlertsTable from './useComplianceAlertsTable';
 
 const insuranceTable = () => {
-  const table = useInsuranceTable();
+  const table = useComplianceAlertsTable();
 
   return <DashboardTable {...table} />;
 };

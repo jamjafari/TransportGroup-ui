@@ -110,11 +110,11 @@ const MissionStartEndSection = ({
             fullWidth
             type="number"
             label="مسافت مبدا و مقصد (کیلومتر)"
-            name="distanceKM"
-            value={values.distanceKM}
+            name="distanceKm"
+            value={values.distanceKm}
             onChange={onChange}
-            error={!!errors?.distanceKM}
-            helperText={errors?.distanceKM}
+            error={!!errors?.distanceKm}
+            helperText={errors?.distanceKm}
           />
         </Grid>
 

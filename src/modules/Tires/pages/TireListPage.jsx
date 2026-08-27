@@ -56,7 +56,6 @@ const TireListPage = () => {
         renderCell: ({ row }) => formatJalaliDate(row.purchaseDate),
       },
 
-      { field: 'purchasePrice', headerName: 'هزینه خرید', width: 120 },
       {
         field: 'isActive',
         headerName: 'فعال',

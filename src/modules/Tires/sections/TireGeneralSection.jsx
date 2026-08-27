@@ -57,7 +57,6 @@ const TireGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
           <AppTextField
             fullWidth
             required
-            type="number"
             label="  سایز "
             name="size"
             value={values.size}
@@ -77,7 +76,7 @@ const TireGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
             helperText={errors?.purchaseDate}
           />
         </Grid>
-        <Grid size={{ xs: 12, md: 6 }}>
+        {/* <Grid size={{ xs: 12, md: 6 }}>
           <AppTextField
             fullWidth
             required
@@ -89,7 +88,7 @@ const TireGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
             error={!!errors?.purchasePrice}
             helperText={errors?.purchasePrice}
           />
-        </Grid>
+        </Grid> */}
         <Grid size={{ xs: 12, md: 6 }}>
           <AppSwitch
             label="تایر فعال است"

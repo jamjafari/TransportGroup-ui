@@ -13,6 +13,17 @@ import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import CarCrashIcon from '@mui/icons-material/CarCrash';
+import FactCheckIcon from '@mui/icons-material/FactCheck';
+
+// Report Icons
+import RouteIcon from '@mui/icons-material/Route';
+import EngineeringIcon from '@mui/icons-material/Engineering';
+import DirectionsCarFilledIcon from '@mui/icons-material/DirectionsCarFilled';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import LocalGasStationOutlinedIcon from '@mui/icons-material/LocalGasStationOutlined';
+import SecurityIcon from '@mui/icons-material/Security';
+import BuildCircleIcon from '@mui/icons-material/BuildCircle';
+import HistoryIcon from '@mui/icons-material/History';
 
 export const menuItems = [
   {
@@ -20,8 +31,12 @@ export const menuItems = [
     label: 'داشبورد',
     icon: <DashboardIcon />,
     path: '/dashboard',
-    // بدون permission → همیشه برای هر کاربر لاگین‌شده نمایش داده میشه
   },
+
+  // =========================================================
+  // مدیریت کاربران
+  // =========================================================
+
   {
     id: 'admin-users',
     label: 'مدیریت کاربران',
@@ -29,6 +44,11 @@ export const menuItems = [
     path: '/admin/users',
     permission: 'User.View',
   },
+
+  // =========================================================
+  // ناوگان
+  // =========================================================
+
   {
     id: 'fleet',
     label: 'ناوگان',
@@ -41,6 +61,7 @@ export const menuItems = [
         path: '/fleet/vehicles',
         permission: 'Vehicle.View',
       },
+
       {
         id: 'drivers',
         label: 'رانندگان',
@@ -49,14 +70,57 @@ export const menuItems = [
         permission: 'Driver.View',
       },
       {
+        id: 'missions',
+        label: 'ماموریت‌ها',
+        icon: <LocalShippingIcon />,
+        path: '/missions',
+        permission: 'Report.View',
+      },
+
+      {
         id: 'tires',
         label: 'تایر',
         icon: <AlbumIcon fontSize="small" />,
         path: '/tires',
         permission: 'Tire.View',
       },
+
+      {
+        id: 'services',
+        label: 'سرویس خودرو',
+        icon: <BuildIcon fontSize="small" />,
+        path: '/services',
+        permission: 'VehicleService.View',
+      },
+
+      {
+        id: 'insurances',
+        label: 'بیمه',
+        icon: <CreditCardIcon fontSize="small" />,
+        path: '/insurances',
+        permission: 'Vehicle.View',
+      },
+
+      {
+        id: 'inspections',
+        label: 'معاینه فنی',
+        icon: <FactCheckIcon fontSize="small" />,
+        path: '/inspections',
+        permission: 'Vehicle.View',
+      },
+      {
+        id: 'accidents',
+        label: 'تصادفات',
+        icon: <CarCrashIcon fontSize="small" />,
+        path: '/accidents',
+        permission: 'Accident.View',
+      },
     ],
   },
+
+  // =========================================================
+  // سوخت
+  // =========================================================
 
   {
     id: 'fuel',
@@ -70,6 +134,7 @@ export const menuItems = [
         path: '/fuelcards',
         permission: 'FuelCard.View',
       },
+
       {
         id: 'fuelrecords',
         label: 'سوخت‌گیری',
@@ -79,6 +144,10 @@ export const menuItems = [
       },
     ],
   },
+
+  // =========================================================
+  // هزینه‌ها
+  // =========================================================
 
   {
     id: 'expenses-group',
@@ -92,6 +161,7 @@ export const menuItems = [
         path: '/expenses',
         permission: 'Expense.View',
       },
+
       {
         id: 'expensetypes',
         label: 'نوع هزینه',
@@ -102,13 +172,13 @@ export const menuItems = [
     ],
   },
 
-  {
-    id: 'missions',
-    label: 'ماموریت‌ها',
-    icon: <LocalShippingIcon />,
-    path: '/missions',
-    permission: 'Report.View', // ⚠️ فرض — چون Permission اختصاصی «Mission» تو JWT ندیدیم؛ اگه enum جدا داره بگو عوضش کنم
-  },
+  // =========================================================
+  // ماموریت‌ها
+  // =========================================================
+
+  // =========================================================
+  // داده‌های پایه
+  // =========================================================
 
   {
     id: 'master-data',
@@ -122,6 +192,7 @@ export const menuItems = [
         path: '/vendors',
         permission: 'VehicleService.View',
       },
+
       {
         id: 'serviceTypes',
         label: 'نوع سرویس',
@@ -129,6 +200,7 @@ export const menuItems = [
         path: '/serviceTypes',
         permission: 'VehicleService.View',
       },
+
       {
         id: 'locations',
         label: 'مکان',
@@ -138,56 +210,122 @@ export const menuItems = [
       },
     ],
   },
-  {
-    id: 'accidents',
-    label: 'تصادفات',
-    icon: <CarCrashIcon fontSize="small" />,
-    path: '/accidents',
-    permission: 'Accident.View',
-  },
+
+  // =========================================================
+  // تصادفات
+  // =========================================================
+
+  // =========================================================
+  // گزارش‌ها
+  // =========================================================
+
   {
     id: 'reports',
     label: 'گزارش‌ها',
     icon: <AssessmentIcon />,
     permission: 'Report.View',
+
     children: [
       {
         id: 'reports-missions',
         label: 'ماموریت‌ها',
+        icon: <RouteIcon fontSize="small" />,
         path: '/reports/missions',
       },
-      { id: 'reports-drivers', label: 'رانندگان', path: '/reports/drivers' },
-      { id: 'reports-vehicles', label: 'خودروها', path: '/reports/vehicles' },
-      { id: 'reports-fleet', label: 'ناوگان', path: '/reports/fleet' },
-      { id: 'reports-financial', label: 'مالی', path: '/reports/financial' },
-      { id: 'reports-fbv', label: 'مالی بر اساس خودرو', path: '/reports/fbv' },
+
+      {
+        id: 'reports-drivers',
+        label: 'رانندگان',
+        icon: <PeopleIcon fontSize="small" />,
+        path: '/reports/drivers',
+      },
+
+      {
+        id: 'reports-vehicles',
+        label: 'خودروها',
+        icon: <DirectionsCarFilledIcon fontSize="small" />,
+        path: '/reports/vehicles',
+      },
+
+      {
+        id: 'reports-fleet',
+        label: 'ناوگان',
+        icon: <DirectionsCarIcon fontSize="small" />,
+        path: '/reports/fleet',
+      },
+
+      {
+        id: 'reports-financial',
+        label: 'مالی',
+        icon: <AccountBalanceIcon fontSize="small" />,
+        path: '/reports/financial',
+      },
+
       {
         id: 'reports-fuelcost',
         label: 'هزینه سوخت',
+        icon: <LocalGasStationOutlinedIcon fontSize="small" />,
         path: '/reports/fuelcost',
       },
-      { id: 'reports-insurance', label: 'بیمه', path: '/reports/insurance' },
-      { id: 'reports-service', label: 'سرویس‌ها', path: '/reports/service' },
+
+      {
+        id: 'reports-insurance',
+        label: 'بیمه',
+        icon: <SecurityIcon fontSize="small" />,
+        path: '/reports/insurance',
+      },
+
+      {
+        id: 'reports-inspection',
+        label: 'معاینه فنی',
+        icon: <FactCheckIcon fontSize="small" />,
+        path: '/reports/inspection',
+      },
+
+      {
+        id: 'reports-service',
+        label: 'سرویس‌ها',
+        icon: <BuildCircleIcon fontSize="small" />,
+        path: '/reports/service',
+      },
+
       {
         id: 'reports-latest',
         label: 'آخرین فعالیت‌ها',
+        icon: <HistoryIcon fontSize="small" />,
         path: '/reports/latest-activities',
       },
     ],
   },
 ];
 
+// =========================================================
+// Permission Filter
+// =========================================================
+
 export const filterMenuByPermission = (items, canAny) => {
   return items
     .map((item) => {
-      if (item.children) {
-        const filteredChildren = filterMenuByPermission(item.children, canAny);
-        if (filteredChildren.length === 0) return null;
-        return { ...item, children: filteredChildren };
-      }
-
+      // اگر خود آیتم permission دارد،
+      // ابتدا permission آن را بررسی می‌کنیم.
       if (item.permission && !canAny([item.permission])) {
         return null;
+      }
+
+      // اگر children دارد، فرزندان را نیز فیلتر می‌کنیم.
+      if (item.children) {
+        const filteredChildren = filterMenuByPermission(item.children, canAny);
+
+        // اگر هیچ فرزند مجازی باقی نماند،
+        // خود آیتم parent هم نمایش داده نمی‌شود.
+        if (filteredChildren.length === 0) {
+          return null;
+        }
+
+        return {
+          ...item,
+          children: filteredChildren,
+        };
       }
 
       return item;

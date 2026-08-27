@@ -1,12 +1,12 @@
 import React, { memo, useCallback, useState } from 'react';
-import Stack from '@mui/system/Stack';
+import Stack from '@mui/material/Stack';
 
 import { AppForm, AppFormActions, AppButton } from '@/components';
 import { hasErrors, validate } from '@/validation';
 
 import VehicleGeneralSection from '../sections/VehicleGeneralSection';
 import VehicleTechnicalSection from '../sections/VehicleTechnicalSection';
-import { jalaliYearToGregorian } from '@/utils';
+import { jalaliYearToGregorian, sanitizeNumericFields } from '@/utils';
 
 import vehicleSchema from '../validation/vehicleSchema';
 
@@ -33,8 +33,10 @@ const VehicleForm = ({ initialValues = defaultValues, onSubmit }) => {
       setErrors(validationErrors);
 
       if (!hasErrors(validationErrors)) {
+        const sanitized = sanitizeNumericFields(values, ['currentKM']);
+
         onSubmit?.({
-          ...values,
+          ...sanitized,
           productionYear: jalaliYearToGregorian(values.productionYear),
         });
       }

@@ -39,11 +39,20 @@ const statusMap = {
     color: 'warning',
     icon: <PendingActionsIcon />,
   },
-
+  Planned: {
+    label: 'برنامه‌ریزی‌شده',
+    color: 'info',
+    icon: <PendingActionsIcon />,
+  },
   Rejected: {
     label: 'رد شده',
     color: 'error',
     icon: <CancelIcon />,
+  },
+  Conditional: {
+    label: 'مشروط ',
+    color: 'warning',
+    icon: <PendingActionsIcon />,
   },
   Active: {
     label: 'فعال',
@@ -157,6 +166,11 @@ const statusMap = {
     label: 'فروخته‌شده',
     color: 'default',
     icon: <HighlightOffIcon />,
+  },
+  ExpiringSoon: {
+    label: 'نزدیک به انقضا',
+    color: 'warning',
+    icon: <WarningAmberIcon />,
   },
 };
 

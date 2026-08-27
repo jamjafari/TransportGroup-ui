@@ -4,6 +4,7 @@ import DashboardRepository from '../../../../repositories/dashboard/dashboard.re
 
 import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
 import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
+import { formatJalaliDate } from '@/utils';
 
 const useMissionTable = () => {
   const { filters } = useDashboardSearch();
@@ -13,13 +14,13 @@ const useMissionTable = () => {
 
     subtitle: 'آخرین ماموریت های ثبت شده',
 
-    fetcher: () => DashboardRepository.getMissions(filters),
+    fetcher: () => DashboardRepository.getMissionsDashboard(filters),
   });
 
   const columns = useMemo(
     () => [
       {
-        field: 'missionNumber',
+        field: 'missionCode',
         headerName: 'شماره',
         flex: 1,
       },
@@ -37,21 +38,22 @@ const useMissionTable = () => {
       },
 
       {
-        field: 'origin',
+        field: 'originLocation',
         headerName: 'مبدأ',
         flex: 1,
       },
 
       {
-        field: 'destination',
+        field: 'destinationLocation',
         headerName: 'مقصد',
         flex: 1,
       },
 
       {
-        field: 'missionDate',
-        headerName: 'تاریخ',
+        field: 'startDate',
+        headerName: 'تاریخ حرکت',
         flex: 1,
+        renderCell: ({ value }) => (value ? formatJalaliDate(value) : '—'),
       },
 
       {

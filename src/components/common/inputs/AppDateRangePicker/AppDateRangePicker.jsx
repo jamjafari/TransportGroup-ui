@@ -2,9 +2,7 @@ import React, { memo } from 'react';
 
 import { Stack, Typography, Box } from '@mui/material';
 
-import { DashboardGrid, DashboardColumn } from '@/components';
-
-import { AppDatePicker } from '@/components';
+import { AppJalaliDatePicker } from '@/components';
 
 import {
   AppDateRangePickerPropTypes,
@@ -12,46 +10,31 @@ import {
 } from './AppDateRangePicker.types';
 
 const AppDateRangePicker = ({ label, value, disabled, onChange }) => {
-  const handleFromDate = (event) => {
-    onChange({
-      ...value,
-      from: event.target.value,
-    });
+  const handleFromDate = (date) => {
+    onChange({ ...value, from: date });
   };
 
-  const handleToDate = (event) => {
-    onChange({
-      ...value,
-      to: event.target.value,
-    });
+  const handleToDate = (date) => {
+    onChange({ ...value, to: date });
   };
 
   return (
-    <Box
-      sx={{
-        width: '100%',
-      }}
-    >
-      <Stack
-        spacing={2}
-        sx={{
-          width: '100%',
-        }}
-      >
+    <Box sx={{ width: '100%' }}>
+      <Stack spacing={2} sx={{ width: '100%' }}>
         {label && (
           <Typography variant="body2" fontWeight={600}>
             {label}
           </Typography>
         )}
 
-        <AppDatePicker
+        <AppJalaliDatePicker
           label="از تاریخ"
           value={value?.from}
           disabled={disabled}
           onChange={handleFromDate}
         />
 
-        <AppDatePicker
+        <AppJalaliDatePicker
           label="تا تاریخ"
           value={value?.to}
           disabled={disabled}
@@ -63,7 +46,6 @@ const AppDateRangePicker = ({ label, value, disabled, onChange }) => {
 };
 
 AppDateRangePicker.propTypes = AppDateRangePickerPropTypes;
-
 AppDateRangePicker.defaultProps = AppDateRangePickerDefaultProps;
 
 export default memo(AppDateRangePicker);

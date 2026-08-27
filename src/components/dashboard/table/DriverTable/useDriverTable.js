@@ -4,63 +4,46 @@ import DashboardRepository from '../../../../repositories/dashboard/dashboard.re
 
 import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
 import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
-
-import DriverStatusCell from './DriverStatusCell';
+import { formatJalaliDate } from '@/utils';
 
 const useDriverTable = () => {
   const { filters } = useDashboardSearch();
 
   const widget = useDashboardWidget({
-    title: 'رانندگان',
-
-    subtitle: 'وضعیت رانندگان',
-
-    fetcher: () => DashboardRepository.getDrivers(filters),
+    title: 'وضعیت رانندگان',
+    subtitle: 'تخصیص خودرو و ماموریت هر راننده',
+    fetcher: () => DashboardRepository.getDriversDashboard(filters),
   });
 
   const columns = useMemo(
     () => [
+      { field: 'fullName', headerName: 'نام و نام‌خانوادگی', flex: 1.5 },
       {
-        field: 'fullName',
-        headerName: 'نام راننده',
+        field: 'assignedVehiclePlate',
+        headerName: 'خودروی تخصیصی',
         flex: 1,
+        renderCell: ({ value }) => value || '—',
       },
-
       {
-        field: 'nationalCode',
-        headerName: 'کد ملی',
+        field: 'lastAssignmentStartDate',
+        headerName: 'تاریخ شروع تخصیص',
         flex: 1,
+        renderCell: ({ value }) => (value ? formatJalaliDate(value) : '—'),
       },
-
-      {
-        field: 'phoneNumber',
-        headerName: 'موبایل',
-        flex: 1,
-      },
-
       {
         field: 'missionCount',
-        headerName: 'ماموریت',
-        flex: 1,
-      },
-
-      {
-        field: 'status',
-        headerName: 'وضعیت',
+        headerName: 'تعداد ماموریت',
         flex: 1,
         align: 'right',
-
-        renderCell: DriverStatusCell,
       },
+      { field: 'status', headerName: 'وضعیت', flex: 1, align: 'right' },
     ],
     [],
   );
 
   return {
     ...widget,
-
     columns,
-
     rows: widget.rows,
   };
 };

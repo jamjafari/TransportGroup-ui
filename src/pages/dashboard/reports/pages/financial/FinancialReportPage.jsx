@@ -1,11 +1,15 @@
 import React from 'react';
 
-import { Stack } from '@mui/material';
-
-import { AppLoader } from '@/components';
+import {
+  AppLoader,
+  DashboardGrid,
+  DashboardColumn,
+  DashboardSection,
+} from '@/components';
 
 import useFinancialReport from './hooks/useFinancialReport';
-import { DashboardGrid, DashboardColumn, DashboardSection } from '@/components';
+
+import DashboardSearchShortForm from '@/pages/dashboard/components/DashboardSearch/DashboardSearchShortForm';
 
 import FinancialReportSummary from './FinancialReportSummary';
 import ReportLayout from '../../components/ReportLayout';
@@ -18,50 +22,49 @@ import FinancialReportTable from './FinancialReportTable';
 const FinancialReportPage = () => {
   const { data, loading, error } = useFinancialReport();
 
-  if (loading) {
-    return <AppLoader />;
-  }
-
-  if (error) {
-    return <div>خطا در دریافت اطلاعات گزارش مالی</div>;
-  }
-
-  if (!data) {
-    return null;
-  }
-
   return (
-    <ReportLayout title="گزارش  مالی" subtitle="گزارش کامل  مالی">
-      {/* Summary */}
-      <DashboardSection title="خلاصه">
-        <FinancialReportSummary summary={data?.summary} />
+    <ReportLayout title="گزارش مالی" subtitle="گزارش کامل مالی">
+      <DashboardSection title="جستجو">
+        <DashboardSearchShortForm />
       </DashboardSection>
 
-      {/* KPI */}
-      <DashboardSection title="شاخص‌ها">
-        <FinancialReportKPI kpi={data.kpi} />
-      </DashboardSection>
+      {loading && <AppLoader />}
 
-      {/* Charts */}
-      <DashboardSection>
-        <DashboardGrid>
-          <DashboardColumn xs={12} md={12} lg={4}>
-            <FinancialMonthlyChart data={data?.charts?.monthlyExpenses} />
-          </DashboardColumn>
+      {!loading && error && <div>خطا در دریافت اطلاعات گزارش مالی</div>}
 
-          <DashboardColumn xs={12} md={12} lg={4}>
-            <FinancialVehicleChart data={data?.charts?.vehicleCost} />
-          </DashboardColumn>
+      {!loading && !error && data && (
+        <>
+          <DashboardSection title="خلاصه">
+            <FinancialReportSummary summary={data?.summary} />
+          </DashboardSection>
 
-          <DashboardColumn xs={12} md={12} lg={4}>
-            <FinancialExpenseChart data={data?.charts?.expenseDistribution} />
-          </DashboardColumn>
-        </DashboardGrid>
-      </DashboardSection>
+          <DashboardSection title="شاخص‌ها">
+            <FinancialReportKPI kpi={data.kpi} />
+          </DashboardSection>
 
-      <DashboardSection title="جداول">
-        <FinancialReportTable rows={data.table} loading={loading} />
-      </DashboardSection>
+          <DashboardSection>
+            <DashboardGrid>
+              <DashboardColumn xs={12} md={12} lg={4}>
+                <FinancialMonthlyChart data={data?.charts?.monthlyExpenses} />
+              </DashboardColumn>
+
+              <DashboardColumn xs={12} md={12} lg={4}>
+                <FinancialVehicleChart data={data?.charts?.vehicleCost} />
+              </DashboardColumn>
+
+              <DashboardColumn xs={12} md={12} lg={4}>
+                <FinancialExpenseChart
+                  data={data?.charts?.expenseDistribution}
+                />
+              </DashboardColumn>
+            </DashboardGrid>
+          </DashboardSection>
+
+          <DashboardSection title="جداول">
+            <FinancialReportTable rows={data.table} loading={loading} />
+          </DashboardSection>
+        </>
+      )}
     </ReportLayout>
   );
 };

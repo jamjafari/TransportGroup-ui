@@ -7,7 +7,6 @@ import DashboardPage from '@/pages/dashboard/DashboardPage';
 import MissionReportPage from '@/pages/dashboard/reports/pages/missions';
 import DriverReportPage from '@/pages/dashboard/reports/pages/drivers';
 import VehicleReportPage from '@/pages/dashboard/reports/pages/vehicles';
-import LatestActivitiesReportPage from '@/pages/dashboard/reports/pages/latest-activities';
 import FleetReportPage from '@/pages/dashboard/reports/pages/fleet';
 import FinancialReportPage from '@/pages/dashboard/reports/pages/financial';
 import FBVReportPage from '@/pages/dashboard/reports/pages/financialbyvehicle';
@@ -16,6 +15,8 @@ import InsuranceReportPage from '@/pages/dashboard/reports/pages/insurance';
 import ServiceReportPage from '@/pages/dashboard/reports/pages/services';
 import DateRangeFinancialReportPage from '@/pages/dashboard/reports/pages/daterange';
 import DateRangeFuelCostReportPage from '@/pages/dashboard/reports/pages/fuelcosts-date';
+import InspectionReportPage from '@/pages/dashboard/reports/pages/inspection';
+import ActivityReportPage from '@/pages/dashboard/reports/pages/activities';
 
 import DashboardSearchProvider from '@/pages/dashboard/context/DashboardSearchProvider';
 
@@ -72,6 +73,18 @@ import {
   AccidentListPage,
   AccidentCreatePage,
   AccidentEditPage,
+  InsuranceProvider,
+  InsuranceListPage,
+  InsuranceCreatePage,
+  InsuranceEditPage,
+  InspectionProvider,
+  InspectionListPage,
+  InspectionCreatePage,
+  InspectionEditPage,
+  ServiceProvider,
+  ServiceListPage,
+  ServiceCreatePage,
+  ServiceEditPage,
 } from '@/modules';
 
 import MainLayout from '@/layouts/MainLayout';
@@ -101,7 +114,7 @@ const AppRouter = () => {
               <Route path="/reports/vehicles" element={<VehicleReportPage />} />
               <Route
                 path="/reports/latest-activities"
-                element={<LatestActivitiesReportPage />}
+                element={<ActivityReportPage />}
               />
               <Route
                 path="/reports/financial-date"
@@ -148,6 +161,14 @@ const AppRouter = () => {
                 element={
                   <DashboardSearchProvider>
                     <InsuranceReportPage />
+                  </DashboardSearchProvider>
+                }
+              />
+              <Route
+                path="/reports/inspection"
+                element={
+                  <DashboardSearchProvider>
+                    <InspectionReportPage />
                   </DashboardSearchProvider>
                 }
               />
@@ -538,6 +559,94 @@ const AppRouter = () => {
                   <AccidentProvider>
                     <AccidentCreatePage />
                   </AccidentProvider>
+                }
+              />
+            </Route>
+            <Route element={<PermissionRoute permission="Vehicle.View" />}>
+              <Route
+                path="/insurances"
+                element={
+                  <InsuranceProvider>
+                    <InsuranceListPage />
+                  </InsuranceProvider>
+                }
+              />
+              <Route
+                path="/insurances/edit/:id"
+                element={
+                  <InsuranceProvider>
+                    <InsuranceEditPage />
+                  </InsuranceProvider>
+                }
+              />
+            </Route>
+            <Route element={<PermissionRoute permission="Vehicle.Create" />}>
+              <Route
+                path="/insurances/create"
+                element={
+                  <InsuranceProvider>
+                    <InsuranceCreatePage />
+                  </InsuranceProvider>
+                }
+              />
+            </Route>
+            <Route element={<PermissionRoute permission="Vehicle.View" />}>
+              <Route
+                path="/inspections"
+                element={
+                  <InspectionProvider>
+                    <InspectionListPage />
+                  </InspectionProvider>
+                }
+              />
+              <Route
+                path="/inspections/edit/:id"
+                element={
+                  <InspectionProvider>
+                    <InspectionEditPage />
+                  </InspectionProvider>
+                }
+              />
+            </Route>
+            <Route element={<PermissionRoute permission="Vehicle.Create" />}>
+              <Route
+                path="/inspections/create"
+                element={
+                  <InspectionProvider>
+                    <InspectionCreatePage />
+                  </InspectionProvider>
+                }
+              />
+            </Route>
+            <Route
+              element={<PermissionRoute permission="VehicleService.View" />}
+            >
+              <Route
+                path="/services"
+                element={
+                  <ServiceProvider>
+                    <ServiceListPage />
+                  </ServiceProvider>
+                }
+              />
+              <Route
+                path="/services/edit/:id"
+                element={
+                  <ServiceProvider>
+                    <ServiceEditPage />
+                  </ServiceProvider>
+                }
+              />
+            </Route>
+            <Route
+              element={<PermissionRoute permission="VehicleService.Create" />}
+            >
+              <Route
+                path="/services/create"
+                element={
+                  <ServiceProvider>
+                    <ServiceCreatePage />
+                  </ServiceProvider>
                 }
               />
             </Route>

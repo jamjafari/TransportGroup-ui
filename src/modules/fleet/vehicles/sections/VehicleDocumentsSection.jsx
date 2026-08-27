@@ -16,6 +16,7 @@ import {
   AppFileUpload,
   AppButton,
 } from '@/components';
+import { formatJalaliDate } from '@/utils';
 
 import { attachmentCategoryOptions } from '../constants';
 import useAttachments from '@/hooks/useAttachments';
@@ -122,7 +123,7 @@ const VehicleDocumentsSection = ({ vehicleId }) => {
           >
             <ListItemText
               primary={item.originalFileName}
-              secondary={`${categoryLabel(item.category)} — انقضا: ${item.expiryDate ?? '—'}`}
+              secondary={`${categoryLabel(item.category)} — انقضا: ${formatJalaliDate(item.expiryDate ?? '—')}`}
             />
           </ListItem>
         ))}

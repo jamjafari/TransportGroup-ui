@@ -8,241 +8,73 @@ class DashboardRepository extends BaseRepository {
     super(dashboardService);
   }
 
+  // =========================================================
+  // Summary
+  // =========================================================
+
+  getSummary = async () => {
+    return this.service.getSummary();
+  };
+
+  // =========================================================
+  // Alerts
+  // =========================================================
+
+  getAlerts = async (filters = {}) => {
+    const data = await this.service.getAlerts();
+
+    return dashboardSearchFilter(data, filters, [
+      'vehicleId',
+      'driverId',
+      'missionId',
+    ]);
+  };
+
+  getComplianceAlerts = async (filters = {}) => {
+    const data = await this.service.getComplianceAlerts();
+
+    return dashboardSearchFilter(data, filters, ['vehicleId'], {
+      dateField: 'expiryDate',
+    });
+  };
+
+  // =========================================================
+  // Fuel
+  // =========================================================
+
   getFuelConsumption = async (filters = {}) => {
     const data = await this.service.getFuelConsumption();
 
     const filteredData = dashboardSearchFilter(
       data,
       filters,
-      ['vehicleId', 'driverId', 'missionId', 'fuelType', 'dateRange'],
+      ['vehicleId', 'driverId', 'fuelType', 'dateRange'],
       {
-        dateField: 'date',
+        dateField: 'fuelDate',
       },
     );
 
     const result = Array.from({ length: 12 }, (_, index) => ({
       month: index + 1,
-      fuel: 0,
+      fuelAmount: 0,
     }));
 
     filteredData.forEach((item) => {
-      const month = new Date(item.date).getMonth();
+      if (!item.fuelDate) return;
 
-      result[month].fuel += item.fuel;
+      const month = new Date(item.fuelDate).getMonth();
+
+      if (month >= 0 && month < 12) {
+        result[month].fuelAmount += Number(item.fuelAmount) || 0;
+      }
     });
 
     return result;
   };
 
-  getVehicleStatus = async () => {
-    return this.service.getVehicleStatus();
-  };
-  // getVehicleUsage = async () => {
-  //   return this.service.getVehicleUsage();
-  // };
-  getVehicleUsage = async (filters = {}) => {
-    const data = await this.service.getVehicleUsage();
+  getFuelRecordsDashboard = async (filters = {}) => {
+    const data = await this.service.getFuelRecordsDashboard();
 
-    return dashboardSearchFilter(data, filters, ['dateRange'], {
-      dateField: 'Date',
-    });
-  };
-  getVehicleSummary = async (filters = {}) => {
-    const vehicles = await this.getVehicles();
-
-    return {
-      total: vehicles.length,
-
-      active: vehicles.filter((x) => x.status === 'Active').length,
-
-      mission: vehicles.filter((x) => x.status === 'Mission').length,
-
-      inactive: vehicles.filter((x) => x.status === 'Inactive').length,
-
-      repair: vehicles.filter((x) => x.status === 'Repair').length,
-    };
-  };
-  getSummary = async () => {
-    return this.service.getSummary();
-  };
-  getFuelCost = async () => {
-    return this.service.getFuelCost();
-  };
-  getMonthlyDistance = async (filters = {}) => {
-    const data = await this.service.getMonthlyDistance();
-
-    const filteredData = dashboardSearchFilter(
-      data,
-      filters,
-      ['vehicleId', 'driverId', 'missionId', 'dateRange'],
-      {
-        dateField: 'missionDate',
-      },
-    );
-
-    const result = Array.from({ length: 12 }, (_, index) => ({
-      month: index + 1,
-      distanceKm: 0,
-    }));
-
-    filteredData.forEach((item) => {
-      const month = new Date(item.missionDate).getMonth();
-
-      result[month].distanceKm += item.distanceKm;
-    });
-
-    return result;
-  };
-  getExpenses = async (filters = {}) => {
-    const expense = await this.service.getExpenses();
-
-    return dashboardSearchFilter(
-      expense,
-      filters,
-      ['vehicleId', 'expenseTypeId', 'dateRange', 'statusColor'],
-      {
-        dateField: 'expenseDate',
-      },
-    );
-  };
-  getExpense = async (filters = {}) => {
-    const expense = await this.service.getExpense();
-
-    const filteredExpenses = dashboardSearchFilter(
-      expense,
-      filters,
-      ['vehicleId', 'expenseTypeId', 'dateRange'],
-      {
-        dateField: 'expenseDate',
-      },
-    );
-
-    const groupedByMonth = Array.from({ length: 12 }, (_, index) => ({
-      month: index + 1,
-      amount: 0,
-    }));
-
-    filteredExpenses.forEach((expense) => {
-      const month = new Date(expense.expenseDate).getMonth();
-
-      groupedByMonth[month].amount += expense.amount;
-    });
-
-    return groupedByMonth;
-  };
-
-  getMissions = async (filters = {}) => {
-    const data = await this.service.getMissions();
-    return dashboardSearchFilter(
-      data,
-      filters,
-      ['vehicleId', 'driverId', 'missionId', 'dateRange', 'statusColor'],
-      {
-        dateField: 'missionDate',
-      },
-    );
-  };
-  getMissionSummary = async (filters = {}) => {
-    const missions = await this.getMissions();
-
-    return {
-      total: missions.length,
-
-      Completed: missions.filter((x) => x.status === 'Completed').length,
-
-      Running: missions.filter((x) => x.status === 'Running').length,
-
-      cancelled: missions.filter((x) => x.status === 'Cancelled').length,
-    };
-  };
-  getMissionTrend = async (filters = {}) => {
-    const data = await this.service.getMissionTrend();
-
-    const filteredData = dashboardSearchFilter(
-      data,
-      filters,
-      ['vehicleId', 'driverId', 'dateRange'],
-      {
-        dateField: 'missionDate',
-      },
-    );
-
-    const result = Array.from({ length: 12 }, (_, index) => ({
-      month: index + 1,
-      missionCount: 0,
-    }));
-
-    filteredData.forEach((item) => {
-      const month = new Date(item.missionDate).getMonth();
-
-      result[month].missionCount += 1;
-    });
-
-    return result;
-  };
-  getDriverPerformance = async () => {
-    return this.service.getDriverPerformance();
-  };
-  getLatestActivities = async (filters = {}) => {
-    const data = await this.service.getLatestActivities();
-
-    return dashboardSearchFilter(
-      data,
-      filters,
-      ['vehicleId', 'driverId', 'missionId', 'dateRange'],
-      {
-        dateField: 'date',
-      },
-    );
-  };
-  getLatestActivitiesSummary = async (filters = {}) => {
-    const latestactivity = await this.getLatestActivities();
-
-    return {
-      total: latestactivity.length,
-
-      mission: latestactivity.filter((x) => x.type === 'Mission').length,
-
-      expense: latestactivity.filter((x) => x.type === 'Expense').length,
-
-      fuel: latestactivity.filter((x) => x.type === 'Fuel').length,
-
-      service: latestactivity.filter((x) => x.type === 'Service').length,
-
-      insurance: latestactivity.filter((x) => x.type === 'Insurance').length,
-    };
-  };
-  getVehicles = async (filters = {}) => {
-    const data = await this.service.getVehicles();
-
-    return dashboardSearchFilter(data, filters, [
-      'vehicleId',
-      'driverId',
-      'statusColor',
-    ]);
-  };
-  getDrivers = async (filters = {}) => {
-    const data = await this.service.getDrivers();
-
-    return dashboardSearchFilter(data, filters, ['driverId', 'statusColor']);
-  };
-  getDriverSummary = async (filters = {}) => {
-    const drivers = await this.getDrivers();
-
-    return {
-      total: drivers.length,
-
-      active: drivers.filter((x) => x.status === 'Active').length,
-
-      mission: drivers.filter((x) => x.status === 'Mission').length,
-
-      inactive: drivers.filter((x) => x.status === 'Inactive').length,
-
-      repair: drivers.filter((x) => x.status === 'Repair').length,
-    };
-  };
-  getFuelRecords = async (filters = {}) => {
-    const data = await this.service.getFuelRecords();
     return dashboardSearchFilter(
       data,
       filters,
@@ -253,60 +85,107 @@ class DashboardRepository extends BaseRepository {
     );
   };
 
-  getInsurances = async (filters = {}) => {
-    const data = await this.service.getInsurances();
+  getDateRangeFuelCosts = async (filters = {}) => {
+    const data = await this.service.getFuelRecordsDashboard();
+
     return dashboardSearchFilter(
       data,
       filters,
-      ['vehicleId', 'dateRange', 'statusColor'],
+      ['vehicleId', 'driverId', 'dateRange'],
       {
-        dateField: 'expireDate',
+        dateField: 'fuelDate',
       },
     );
   };
-  getServiceReminders = async (filters = {}) => {
-    const data = await this.service.getServiceReminders();
-    return dashboardSearchFilter(data, filters, ['vehicleId', 'statusColor']);
+
+  // =========================================================
+  // Expense
+  // =========================================================
+
+  getExpenses = async (filters = {}) => {
+    const data = await this.service.getExpenses();
+
+    return dashboardSearchFilter(
+      data,
+      filters,
+      ['vehicleId', 'expenseTypeId', 'dateRange'],
+      {
+        dateField: 'expenseDate',
+      },
+    );
   };
 
-  getAlerts = async (filters = {}) => {
-    const alerts = await this.service.getAlerts();
+  getExpenseDashboard = async (filters = {}) => {
+    const data = await this.service.getExpenseDashboard();
 
-    return dashboardSearchFilter(alerts, filters, [
-      'vehicleId',
-      'driverId',
-      'missionId',
-    ]);
+    return dashboardSearchFilter(
+      data,
+      filters,
+      ['vehicleId', 'expenseTypeId', 'dateRange'],
+      {
+        dateField: 'expenseDate',
+      },
+    );
   };
-  getFleet = async (filters = {}) => {
-    return await this.service.getFleet();
+
+  getMonthlyExpense = async (filters = {}) => {
+    const data = await this.service.getMonthlyExpense();
+
+    return dashboardSearchFilter(
+      data,
+      filters,
+      ['vehicleId', 'expenseTypeId', 'dateRange'],
+      {
+        dateField: 'expenseDate',
+      },
+    );
   };
-  getFinancial = async (filters = {}) => {
-    return await this.service.getFinancial();
-  };
-  getFinancialByVehicle = async (filters = {}) => {
-    return await this.service.getFinancialByVehicle();
-  };
-  getFuelCost = async (filters = {}) => {
-    return await this.service.getFuelCost();
-  };
-  getInsuranceReport = async (filters = {}) => {
-    const result = await this.service.getInsuranceReport();
-    console.log('Repository Result:', result);
+
+  getExpense = async (filters = {}) => {
+    const data = await this.service.getExpenses();
+
+    const filteredExpenses = dashboardSearchFilter(
+      data,
+      filters,
+      ['vehicleId', 'expenseTypeId', 'dateRange'],
+      {
+        dateField: 'expenseDate',
+      },
+    );
+
+    const result = Array.from({ length: 12 }, (_, index) => ({
+      month: index + 1,
+      amount: 0,
+    }));
+
+    filteredExpenses.forEach((expense) => {
+      if (!expense.expenseDate) return;
+
+      const month = new Date(expense.expenseDate).getMonth();
+
+      if (month >= 0 && month < 12) {
+        result[month].amount += Number(expense.amount) || 0;
+      }
+    });
+
     return result;
   };
-  getServiceReport = async (filters = {}) => {
-    return await this.service.getServiceReport();
-  };
+
   getDateRangeFinancials = async (filters = {}) => {
-    console.log('Repository', filters);
-    const expense = await this.service.getExpenses();
-    return dashboardSearchFilter(expense, filters, ['dateRange'], {
-      dateField: 'expenseDate',
-    });
+    const data = await this.service.getExpenses();
+
+    return dashboardSearchFilter(
+      data,
+      filters,
+      ['vehicleId', 'expenseTypeId', 'dateRange'],
+      {
+        dateField: 'expenseDate',
+      },
+    );
   };
+
   getDateRangeFinancialSummary = async (filters = {}) => {
-    const expenses = await this.service.getExpenses();
+    const expenses = await this.getExpenses(filters);
 
     return {
       total: expenses.length,
@@ -318,15 +197,171 @@ class DashboardRepository extends BaseRepository {
       Pending: expenses.filter((x) => x.status === 'Pending').length,
     };
   };
-  getDateRangeFuelCosts = async (filters = {}) => {
-    console.log('Repository', filters);
-    const fuelcost = await this.service.getFuelRecords();
-    return dashboardSearchFilter(fuelcost, filters, ['dateRange'], {
-      dateField: 'fuelDate',
+
+  // =========================================================
+  // Missions
+  // =========================================================
+
+  getMissions = async (filters = {}) => {
+    const data = await this.service.getMissions();
+
+    return dashboardSearchFilter(
+      data,
+      filters,
+      ['vehicleId', 'driverId', 'missionId', 'dateRange'],
+      {
+        dateField: 'startDate',
+      },
+    );
+  };
+
+  getMissionsDashboard = async (filters = {}) => {
+    const data = await this.service.getMissionsDashboard();
+
+    return dashboardSearchFilter(
+      data,
+      filters,
+      ['vehicleId', 'driverId', 'missionId', 'dateRange'],
+      {
+        dateField: 'startDate',
+      },
+    );
+  };
+
+  getMissionTrend = async (filters = {}) => {
+    const data = await this.service.getMissions();
+
+    const filteredData = dashboardSearchFilter(
+      data,
+      filters,
+      ['vehicleId', 'driverId', 'dateRange'],
+      {
+        dateField: 'startDate',
+      },
+    );
+
+    const result = Array.from({ length: 12 }, (_, index) => ({
+      month: index + 1,
+      missionCount: 0,
+    }));
+
+    filteredData.forEach((item) => {
+      if (!item.startDate) return;
+
+      const month = new Date(item.startDate).getMonth();
+
+      if (month >= 0 && month < 12) {
+        result[month].missionCount += 1;
+      }
+    });
+
+    return result;
+  };
+
+  getMonthlyDistance = async (filters = {}) => {
+    const data = await this.service.getMissions();
+
+    const filteredData = dashboardSearchFilter(
+      data,
+      filters,
+      ['vehicleId', 'driverId', 'missionId', 'dateRange'],
+      {
+        dateField: 'startDate',
+      },
+    );
+
+    const result = Array.from({ length: 12 }, (_, index) => ({
+      month: index + 1,
+      distanceKm: 0,
+    }));
+
+    filteredData.forEach((item) => {
+      if (!item.startDate) return;
+
+      const month = new Date(item.startDate).getMonth();
+
+      if (month >= 0 && month < 12) {
+        result[month].distanceKm += Number(item.distanceKm) || 0;
+      }
+    });
+
+    return result;
+  };
+
+  // =========================================================
+  // Vehicles
+  // =========================================================
+
+  getVehiclesDashboard = async (filters = {}) => {
+    const data = await this.service.getVehiclesDashboard();
+
+    return dashboardSearchFilter(data, filters, ['vehicleId']);
+  };
+
+  getVehicleStatus = async () => {
+    return this.service.getVehicleStatus();
+  };
+
+  getVehicleUsage = async (filters = {}) => {
+    const data = await this.service.getVehicleUsage();
+
+    return dashboardSearchFilter(data, filters, ['vehicleId', 'dateRange'], {
+      dateField: 'date',
     });
   };
-  getDateRangeFuelCostSummary = async (filters = {}) => {
-    return await this.service.getFuelCost();
+
+  // =========================================================
+  // Drivers
+  // =========================================================
+
+  getDriversDashboard = async (filters = {}) => {
+    const data = await this.service.getDriversDashboard();
+
+    return dashboardSearchFilter(data, filters, ['driverId']);
+  };
+
+  getDriverPerformance = async () => {
+    return this.service.getDriverPerformance();
+  };
+
+  // =========================================================
+  // Services
+  // =========================================================
+
+  getServiceDashboard = async (filters = {}) => {
+    const data = await this.service.getServiceDashboard();
+
+    return dashboardSearchFilter(data, filters, ['vehicleId']);
+  };
+
+  // =========================================================
+  // Latest Activities
+  // =========================================================
+
+  getLatestActivities = async (filters = {}) => {
+    const data = await this.service.getLatestActivities();
+
+    return dashboardSearchFilter(data, filters, ['dateRange'], {
+      dateField: 'date',
+    });
+  };
+
+  getLatestActivitiesSummary = async (filters = {}) => {
+    const activities = await this.getLatestActivities(filters);
+
+    return {
+      total: activities.length,
+
+      mission: activities.filter((x) => x.type === 'Mission').length,
+
+      expense: activities.filter((x) => x.type === 'Expense').length,
+
+      fuel: activities.filter((x) => x.type === 'Fuel').length,
+
+      service: activities.filter((x) => x.type === 'Service').length,
+
+      insurance: activities.filter((x) => x.type === 'Insurance').length,
+    };
   };
 }
 

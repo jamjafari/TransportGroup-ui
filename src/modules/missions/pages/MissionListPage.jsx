@@ -93,7 +93,7 @@ const MissionListPage = () => {
         width: 130,
       },
       {
-        field: 'distanceKM',
+        field: 'distanceKm',
         headerName: 'مسافت مبدا از مقصد (KM)',
         width: 130,
       },

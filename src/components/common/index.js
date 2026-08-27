@@ -74,3 +74,4 @@ export * from './toolbar';
 export * from './inputs';
 
 export * from './utility';
+export * from './attachments';

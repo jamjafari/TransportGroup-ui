@@ -1,89 +1,39 @@
 import React from 'react';
 
-import { AppLoader } from '@/components';
+import { AppLoader, DashboardSection } from '@/components';
 
-import {
-  DashboardGrid,
-  DashboardColumn,
-  DashboardSection,
-  DashboardCard,
-} from '@/components';
-
-import ReportLayout from '../../components/ReportLayout';
+import DashboardSearchShortForm from '@/pages/dashboard/components/DashboardSearch/DashboardSearchShortForm';
 
 import useInsuranceReport from './hooks/useInsuranceReport';
 
 import InsuranceReportSummary from './InsuranceReportSummary';
-import InsuranceReportKPI from './InsuranceReportKPI';
-
-import InsuranceStatusChart from './InsuranceStatusChart';
-import InsuranceCompanyChart from './InsuranceCompanyChart';
-import InsuranceExpireChart from './InsuranceExpireChart';
-
 import InsuranceReportTable from './InsuranceReportTable';
+import ReportLayout from '../../components/ReportLayout';
 
 const InsuranceReportPage = () => {
   const { data, loading, error } = useInsuranceReport();
 
-  if (loading) {
-    return <AppLoader />;
-  }
-
-  if (error) {
-    return <div>خطا در دریافت اطلاعات بیمه</div>;
-  }
-
-  if (!data) {
-    return null;
-  }
-  console.log('data insurance:', data);
   return (
-    <ReportLayout title="گزارش بیمه" subtitle="گزارش بیمه‌های ناوگان">
-      {/* Summary */}
-      <DashboardSection title="خلاصه">
-        <InsuranceReportSummary summary={data?.summary} />
+    <ReportLayout title="گزارش بیمه" subtitle="وضعیت بیمه‌نامه‌های ناوگان">
+      <DashboardSection title="جستجو">
+        <DashboardSearchShortForm />
       </DashboardSection>
 
-      {/* KPI */}
-      <DashboardSection title="شاخص‌ها">
-        <InsuranceReportKPI kpi={data?.kpi} />
-      </DashboardSection>
+      {loading && <AppLoader />}
 
-      {/* Charts */}
-      <DashboardSection title="نمودارها">
-        <DashboardGrid>
-          <DashboardColumn xs={12} md={6} lg={4}>
-            <InsuranceStatusChart
-              labels={data?.charts?.insuranceStatus?.labels}
-              series={data?.charts?.insuranceStatus?.series}
-            />
-          </DashboardColumn>
+      {!loading && error && <div>خطا در دریافت اطلاعات گزارش بیمه</div>}
 
-          <DashboardColumn xs={12} md={6} lg={4}>
-            <InsuranceCompanyChart
-              categories={data?.charts?.insuranceCompany?.categories}
-              series={data?.charts?.insuranceCompany?.series}
-            />
-          </DashboardColumn>
+      {!loading && !error && data && (
+        <>
+          <DashboardSection title="خلاصه">
+            <InsuranceReportSummary summary={data.summary} />
+          </DashboardSection>
 
-          <DashboardColumn xs={12} md={12} lg={4}>
-            <InsuranceExpireChart
-              categories={data?.charts?.insuranceExpireByMonth?.categories}
-              series={data?.charts?.insuranceExpireByMonth?.series}
-            />
-          </DashboardColumn>
-        </DashboardGrid>
-      </DashboardSection>
-
-      {/* Table */}
-      <DashboardSection title="جداول">
-        <DashboardCard
-          title="فهرست بیمه‌ها"
-          subtitle="وضعیت تمامی بیمه‌های ناوگان"
-        >
-          <InsuranceReportTable rows={data?.table} loading={loading} />
-        </DashboardCard>
-      </DashboardSection>
+          <DashboardSection title="جداول">
+            <InsuranceReportTable rows={data.table} loading={loading} />
+          </DashboardSection>
+        </>
+      )}
     </ReportLayout>
   );
 };

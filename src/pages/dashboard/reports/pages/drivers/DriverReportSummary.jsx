@@ -10,59 +10,30 @@ const DriverReportSummary = () => {
   const summaryItems = [
     {
       title: 'کل رانندگان',
-
       value: Number(data.total ?? 0).toLocaleString('en-US'),
-
       color: 'primary',
-
       icon: 'vehicle',
+      subtitle: 'ثبت‌شده در سیستم',
     },
-
     {
       title: 'فعال',
-
       value: Number(data.active ?? 0).toLocaleString('en-US'),
-
       color: 'success',
-
       icon: 'check',
+      percent: data.total ? (data.active / data.total) * 100 : 0,
     },
-
-    {
-      title: 'در مأموریت',
-
-      value: Number(data.mission ?? 0).toLocaleString('en-US'),
-
-      color: 'info',
-
-      icon: 'report',
-    },
-
     {
       title: 'غیرفعال',
-
       value: Number(data.inactive ?? 0).toLocaleString('en-US'),
-
       color: 'secondary',
-
       icon: 'expired',
-    },
-
-    {
-      title: 'در تعمیرگاه',
-
-      value: Number(data.repair ?? 0).toLocaleString('en-US'),
-
-      color: 'warning',
-
-      icon: 'service',
+      percent: data.total ? (data.inactive / data.total) * 100 : 0,
     },
   ];
-
   return (
     <DashboardGrid>
       {summaryItems.map((item) => (
-        <DashboardColumn key={item.title} xs={12} md={6} lg={2.4}>
+        <DashboardColumn key={item.title} xs={12} md={4}>
           <KpiCard
             title={item.title}
             value={item.value}

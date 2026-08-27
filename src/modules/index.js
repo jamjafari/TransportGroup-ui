@@ -11,3 +11,5 @@ export * from './servicetypes';
 export * from './locations';
 export * from './missions';
 export * from './admin';
+export * from './insurances';
+export * from './services';

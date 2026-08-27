@@ -15,7 +15,7 @@ const defaultValues = {
   lastName: '',
   nationalCode: '',
   licenseExpireDate: null,
-  isActive: '',
+  isActive: true,
   mobileNumber: '',
   licenseNumber: '',
   description: '',

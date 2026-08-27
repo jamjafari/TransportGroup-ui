@@ -1,6 +1,9 @@
 import React from 'react';
 
-import { AppDataGrid } from '@/components';
+import { AppDataGrid, AttachmentsButton } from '@/components';
+
+import { formatJalaliDate } from '@/utils';
+import { ATTACHMENT_OWNER_TYPE } from '@/constants/attachmentTypes';
 
 const FuelCostReportTable = ({ rows = [], loading }) => {
   const columns = [
@@ -13,51 +16,61 @@ const FuelCostReportTable = ({ rows = [], loading }) => {
     },
     {
       field: 'fuelDate',
-      headerName: 'تاریخ سوخت گیری ',
+      headerName: 'تاریخ سوخت‌گیری',
+      width: 180,
+      align: 'center',
+      headerAlign: 'center',
+      renderCell: ({ value }) => formatJalaliDate(value),
+    },
+    {
+      field: 'unitCost',
+      headerName: 'قیمت واحد',
       width: 180,
       align: 'center',
       headerAlign: 'center',
     },
     {
-      field: 'unitCost',
-      headerName: ' واحد پرداخت ',
-      width: 180,
-      align: 'left',
-      headerAlign: 'right',
-    },
-
-    {
       field: 'fuelAmount',
-      headerName: 'مقدار سوختگیری(لیتر)',
-      width: 280,
+      headerName: 'مقدار سوخت‌گیری (لیتر)',
+      width: 220,
       align: 'center',
       headerAlign: 'center',
     },
     {
       field: 'totalCost',
       headerName: 'هزینه پرداختی',
-      width: 280,
+      width: 200,
       align: 'center',
       headerAlign: 'center',
     },
     {
       field: 'odometerKM',
-      headerName: 'کیلوتر در سوختگیری',
-      type: 'status',
-      width: 280,
+      headerName: 'کیلومتر در سوخت‌گیری',
+      width: 220,
       align: 'center',
       headerAlign: 'center',
     },
     {
       field: 'stationName',
       headerName: 'جایگاه',
-      width: 280,
+      width: 200,
       align: 'center',
       headerAlign: 'center',
     },
+    {
+      field: 'attachments',
+      headerName: 'مدارک',
+      width: 90,
+      renderCell: ({ row }) => (
+        <AttachmentsButton
+          ownerType={ATTACHMENT_OWNER_TYPE.FUEL_RECORD}
+          ownerId={row.id}
+          title={`مدارک سوختگیری — ${row.vehicleName}`}
+        />
+      ),
+    },
   ];
-  console.log('=======', rows);
-  console.log(Array.isArray(rows));
+
   return (
     <AppDataGrid
       rows={rows}
@@ -69,7 +82,7 @@ const FuelCostReportTable = ({ rows = [], loading }) => {
       rowSelection
       toolbar
       sortable
-      initialSortField="expenseDate"
+      initialSortField="fuelDate"
       initialSortDirection="desc"
       stickyHeader
     />

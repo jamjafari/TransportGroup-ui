@@ -3,47 +3,49 @@ import React, { memo } from 'react';
 import { DashboardGrid, DashboardColumn, KpiCard } from '@/components';
 
 const InsuranceReportSummary = ({ summary = {} }) => {
+  const total = summary.total ?? 0;
+  const pct = (value) => (total ? (value / total) * 100 : 0);
+
   const items = [
     {
-      title: 'کل بیمه‌ها',
-
-      value: Number(summary.totalInsurances ?? 0).toLocaleString('en-US'),
-
+      title: 'کل بیمه‌نامه‌ها',
+      value: total,
       color: 'primary',
-
       icon: 'insurance',
     },
-
     {
-      title: 'کل هزینه بیمه',
-
-      value: Number(summary.totalInsuranceCost ?? 0).toLocaleString('en-US'),
-
-      color: 'warning',
-
-      icon: 'money',
+      title: 'معتبر',
+      value: summary.valid ?? 0,
+      color: 'success',
+      icon: 'check',
+      percent: pct(summary.valid ?? 0),
     },
-
     {
-      title: 'میانگین هزینه',
-
-      value: Number(summary.averageInsuranceCost ?? 0).toLocaleString('en-US'),
-
-      color: 'info',
-
-      icon: 'report',
+      title: 'نزدیک به انقضا (۱۵ روز)',
+      value: summary.expiringSoon ?? 0,
+      color: 'warning',
+      icon: 'warning',
+      percent: pct(summary.expiringSoon ?? 0),
+    },
+    {
+      title: 'منقضی‌شده',
+      value: summary.expired ?? 0,
+      color: 'error',
+      icon: 'expired',
+      percent: pct(summary.expired ?? 0),
     },
   ];
 
   return (
     <DashboardGrid>
       {items.map((item) => (
-        <DashboardColumn key={item.title} xs={12} md={6} lg={4}>
+        <DashboardColumn key={item.title} xs={12} md={6} lg={3}>
           <KpiCard
             title={item.title}
-            value={item.value}
+            value={Number(item.value).toLocaleString('fa-IR')}
             color={item.color}
             icon={item.icon}
+            percent={item.percent}
           />
         </DashboardColumn>
       ))}

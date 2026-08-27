@@ -1,58 +1,64 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
-import { AppDataGrid, StatusChip } from '@/components';
+import { AppDataGrid, StatusChip, AttachmentsButton } from '@/components';
+
+import { formatJalaliDate } from '@/utils';
+import { insuranceTypeOptions } from '@/modules';
+import { ATTACHMENT_OWNER_TYPE } from '@/constants/attachmentTypes';
 
 const InsuranceReportTable = ({ rows = [], loading }) => {
+  const insuranceLabel = useCallback(
+    (value) =>
+      insuranceTypeOptions.find((option) => option.value === value)?.label ??
+      '—',
+    [],
+  );
   const columns = [
-    {
-      field: 'plateNumber',
-      headerName: 'پلاک',
-      width: 120,
-    },
-    {
-      field: 'vehicleName',
-      headerName: 'خودرو',
-      width: 140,
-    },
+    { field: 'plateNumber', headerName: 'خودرو', flex: 1 },
+    { field: 'vendorName', headerName: 'شرکت بیمه', flex: 1 },
     {
       field: 'insuranceType',
       headerName: 'نوع بیمه',
-      width: 140,
+      flex: 1,
+      renderCell: ({ row }) => insuranceLabel(row.insuranceType),
     },
+    { field: 'policyNumber', headerName: 'شماره بیمه‌نامه', flex: 1 },
     {
-      field: 'company',
-      headerName: 'شرکت بیمه',
-      width: 140,
-    },
-    {
-      field: 'startDate',
-      headerName: 'تاریخ شروع',
-      type: 'date',
-      width: 140,
-    },
-    {
-      field: 'expireDate',
-      headerName: 'تاریخ پایان',
-      type: 'date',
-      width: 140,
+      field: 'endDate',
+      headerName: 'تاریخ انقضا',
+      flex: 1,
+      renderCell: ({ value }) => formatJalaliDate(value),
     },
     {
       field: 'remainingDays',
-      headerName: 'روز باقیمانده',
-      type: 'number',
-      width: 100,
+      headerName: 'روز باقی‌مانده',
+      flex: 1,
+      renderCell: ({ value }) =>
+        value < 0 ? `${Math.abs(value)} روز پیش` : `${value} روز`,
     },
     {
-      field: 'amount',
-      headerName: 'مبلغ',
-      type: 'currency',
-      width: 100,
-    },
-    {
-      field: 'status',
+      field: 'computedStatus',
       headerName: 'وضعیت',
-      renderCell: ({ value }) => <StatusChip status={value} />,
-      width: 100,
+      flex: 1,
+      renderCell: ({ row }) => (
+        <StatusChip
+          status={
+            row.computedStatus === 'Valid' ? 'Success' : row.computedStatus
+          }
+        />
+      ),
+    },
+    {
+      field: 'attachments',
+      headerName: 'مدارک',
+      width: 90,
+      renderCell: ({ row }) => (
+        <AttachmentsButton
+          ownerType={ATTACHMENT_OWNER_TYPE.INSURANCE}
+          ownerId={row.id}
+          title={`مدارک بیمه — ${row.insuranceType}`}
+        />
+      ),
     },
   ];
 
@@ -61,8 +67,15 @@ const InsuranceReportTable = ({ rows = [], loading }) => {
       rows={rows}
       columns={columns}
       loading={loading}
-      toolbar
       pagination
+      initialPageSize={10}
+      filterable
+      rowSelection
+      toolbar
+      sortable
+      initialSortField="remainingDays"
+      initialSortDirection="asc"
+      stickyHeader
     />
   );
 };

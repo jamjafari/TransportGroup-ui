@@ -1,5 +1,6 @@
 import React, { memo, useCallback, useEffect, useState } from 'react';
 import Stack from '@mui/material/Stack';
+import { sanitizeNumericFields } from '@/utils';
 
 import { AppForm, AppFormActions, AppButton } from '@/components';
 import { hasErrors, validate } from '@/validation';
@@ -20,7 +21,7 @@ const defaultValues = {
   accidentTime: null,
   severity: '',
   description: '',
-  odometerKm: '',
+  odometerKm: null,
   thirdPartyInvolved: false,
   thirdPartyDetails: '',
   estimatedDamageCost: '',
@@ -57,7 +58,9 @@ const AccidentForm = ({ initialValues = defaultValues, onSubmit }) => {
       setErrors(validationErrors);
 
       if (!hasErrors(validationErrors)) {
-        onSubmit?.({ ...values });
+        onSubmit?.(
+          sanitizeNumericFields(values, ['odometerKm', 'estimatedDamageCost']),
+        );
       }
     },
     [onSubmit],
@@ -84,6 +87,7 @@ const AccidentForm = ({ initialValues = defaultValues, onSubmit }) => {
           <AccidentDetailsSection
             values={values}
             errors={errors}
+            vehicles={vehicles}
             onChange={handleChange}
             setFieldValue={setFieldValue}
           />

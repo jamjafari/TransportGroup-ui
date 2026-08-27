@@ -16,6 +16,7 @@ import {
   AppFileUpload,
   AppButton,
 } from '@/components';
+import { formatJalaliDate } from '@/utils';
 
 import { attachmentCategoryOptions } from '../constants';
 import useAttachments from '@/hooks/useAttachments';
@@ -112,7 +113,7 @@ const VendorDocumentSection = ({ vendorId }) => {
           >
             <ListItemText
               primary={item.originalFileName}
-              secondary={`${categoryLabel(item.category)} — تصویر: ${item.issueDate ?? '—'}`}
+              secondary={`${categoryLabel(item.category)} — تصویر: ${formatJalaliDate(item.issueDate ?? '—')}`}
             />
           </ListItem>
         ))}

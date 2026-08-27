@@ -2,7 +2,7 @@
 
 export const ATTACHMENT_OWNER_TYPE = {
   VEHICLE: 1,
-  DRIVER: 2,
+  DERIVER: 2,
   EXPENSE: 3,
   VEHICLE_SERVICE: 4,
   FUEL_CARD: 5,
@@ -10,6 +10,8 @@ export const ATTACHMENT_OWNER_TYPE = {
   TIRE: 7,
   VENDOR: 8,
   ACCIDENT: 9,
+  INSURANCE: 10,
+  INSPECTION: 11,
 };
 
 // export const attachmentCategoryOptions = [

@@ -2,53 +2,76 @@ import React from 'react';
 
 import { Stack, Box } from '@mui/material';
 
-import { DashboardGrid, DashboardColumn } from '@/components';
-
-import { AppAutocomplete, AppSelect, AppDateRangePicker } from '@/components';
+import { AppAutocomplete, AppDateRangePicker, AppButton } from '@/components';
 
 import useDashboardSearch from '../../hooks/useDashboardSearch';
 
 const DashboardSearchShortForm = () => {
   const {
     filters,
-
     vehicleOptions,
     driverOptions,
-    missionOptions,
-
-    fuelTypes,
-    expenseTypes,
-
-    insuranceStatusOptions,
-    serviceStatusOptions,
-    statusColorOptions,
-
     updateFilters,
+    clearFilters,
   } = useDashboardSearch();
 
   return (
-    <Stack spacing={3}>
-      {/* Row 1 */}
+    <Stack spacing={3} sx={{ width: '100%' }}>
+      <Box
+        sx={{
+          width: {
+            xs: '100%',
+            md: '40%',
+          },
+          maxWidth: {
+            xs: '100%',
+            md: '40%',
+          },
+        }}
+      >
+        <Stack spacing={2}>
+          {/* خودرو */}
+          <AppAutocomplete
+            fullWidth
+            label="خودرو"
+            value={filters.vehicleId}
+            options={vehicleOptions}
+            onChange={(value) => updateFilters({ vehicleId: value })}
+          />
 
-      {/* Row 4 */}
+          {/* راننده */}
+          <AppAutocomplete
+            fullWidth
+            label="راننده"
+            value={filters.driverId}
+            options={driverOptions}
+            onChange={(value) => updateFilters({ driverId: value })}
+          />
 
-      <DashboardGrid>
-        <DashboardColumn md={6}>
+          {/* بازه زمانی */}
           <AppDateRangePicker
+            fullWidth
             label="بازه زمانی"
             value={filters.dateRange}
-            onChange={(value) => {
-              console.log('DateRange', value);
-
-              updateFilters({
-                dateRange: value,
-              });
-            }}
+            onChange={(value) => updateFilters({ dateRange: value })}
           />
-        </DashboardColumn>
+        </Stack>
+      </Box>
 
-        <DashboardColumn md={6}></DashboardColumn>
-      </DashboardGrid>
+      <Box
+        sx={{
+          width: {
+            xs: '100%',
+            md: '40%',
+          },
+          display: 'flex',
+          justifyContent: 'flex-end',
+        }}
+      >
+        <AppButton variant="outlined" onClick={clearFilters}>
+          پاک کردن فیلترها
+        </AppButton>
+      </Box>
     </Stack>
   );
 };

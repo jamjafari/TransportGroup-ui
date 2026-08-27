@@ -10,6 +10,8 @@ import FuelRecordTechnicalSection from '../sections/FuelRecordTechnicalSection';
 import useFuelRecordVehicles from '../hooks/useFuelRecordVehicles';
 import useFuelRecordDrivers from '../hooks/useFuelRecordDrivers';
 
+import { sanitizeNumericFields } from '@/utils';
+
 import fuelRecordSchema from '../validation/fuelRecordSchema';
 
 const defaultValues = {
@@ -51,7 +53,13 @@ const FuelRecordForm = ({ initialValues = defaultValues, onSubmit }) => {
       setErrors(validationErrors);
 
       if (!hasErrors(validationErrors)) {
-        onSubmit?.({ ...values });
+        onSubmit?.(
+          sanitizeNumericFields(values, [
+            'fuelAmount',
+            'unitPrice',
+            'odometerKM',
+          ]),
+        );
       }
     },
     [onSubmit],

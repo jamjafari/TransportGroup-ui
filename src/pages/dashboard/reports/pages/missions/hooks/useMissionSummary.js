@@ -1,19 +1,29 @@
-// hooks/useMissionReport.js
-
 import useAsyncData from '@/hooks/useAsyncData';
-
-import DashboardRepository from '@/repositories/dashboard/dashboard.repository';
 
 import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
 
-const useMissionReport = () => {
+import { getMissionsSummary } from '../api/missionReportApi';
+import { mapToMissionReportFilter } from '../utils/mapFilters';
+
+const useMissionSummary = () => {
   const { appliedFilters } = useDashboardSearch();
 
   return useAsyncData({
-    fetcher: () => DashboardRepository.getMissionSummary(appliedFilters),
+    fetcher: async () => {
+      const response = await getMissionsSummary(
+        mapToMissionReportFilter(appliedFilters),
+      );
 
+      if (!response.success) {
+        throw new Error(
+          response.errors?.[0] || 'خطا در دریافت خلاصه ماموریت‌ها',
+        );
+      }
+
+      return response.data;
+    },
     dependencies: [JSON.stringify(appliedFilters)],
   });
 };
 
-export default useMissionReport;
+export default useMissionSummary;

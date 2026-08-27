@@ -4,6 +4,7 @@ import DashboardRepository from '../../../../repositories/dashboard/dashboard.re
 
 import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
 import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
+import { formatJalaliDate } from '@/utils';
 
 const useServiceReminderTable = () => {
   const { filters } = useDashboardSearch();
@@ -12,13 +13,13 @@ const useServiceReminderTable = () => {
 
     subtitle: 'سرویس های نزدیک به موعد',
 
-    fetcher: () => DashboardRepository.getServiceReminders(filters),
+    fetcher: () => DashboardRepository.getServiceDashboard(filters),
   });
 
   const columns = useMemo(
     () => [
       {
-        field: 'vehicleName',
+        field: 'plateNumber',
         headerName: 'خودرو',
         flex: 1,
       },
@@ -28,28 +29,31 @@ const useServiceReminderTable = () => {
         headerName: 'نوع سرویس',
         flex: 1,
       },
-
       {
-        field: 'currentKm',
-        headerName: 'کارکرد فعلی',
+        field: 'serviceDate',
+        headerName: 'تاریخ سرویس',
+        flex: 1,
+        renderCell: ({ value }) => (value ? formatJalaliDate(value) : '—'),
+      },
+      {
+        field: 'odometerKm',
+        headerName: 'کارکرد در سرویس',
         flex: 1,
         align: 'right',
       },
 
       {
-        field: 'serviceKm',
-        headerName: 'سرویس در',
+        field: 'remainingKm',
+        headerName: ' کیلومتر باقیمانده',
         flex: 1,
         align: 'right',
       },
-
       {
-        field: 'remainKm',
-        headerName: 'باقیمانده',
+        field: 'remainingDays',
+        headerName: ' روز باقیماده',
         flex: 1,
         align: 'right',
       },
-
       {
         field: 'status',
         headerName: 'وضعیت',

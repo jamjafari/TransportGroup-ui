@@ -8,6 +8,8 @@ import {
   DashboardCard,
 } from '@/components';
 
+import DashboardSearchShortForm from '@/pages/dashboard/components/DashboardSearch/DashboardSearchShortForm';
+
 import ReportLayout from '../../components/ReportLayout';
 
 import useServiceReport from './hooks/useServiceReport';
@@ -24,65 +26,68 @@ import ServiceReportTable from './ServiceReportTable';
 const ServiceReportPage = () => {
   const { data, loading, error } = useServiceReport();
 
-  if (loading) {
-    return <AppLoader />;
-  }
-
-  if (error) {
-    return <div>خطا در دریافت اطلاعات سرویس</div>;
-  }
-
-  if (!data) {
-    return null;
-  }
-
   return (
     <ReportLayout title="گزارش سرویس" subtitle="گزارش سرویس‌های ناوگان">
-      {/* Summary */}
-      <DashboardSection title="خلاصه">
-        <ServiceReportSummary summary={data?.summary} />
+      <DashboardSection title="جستجو">
+        <DashboardSearchShortForm />
       </DashboardSection>
 
-      {/* KPI */}
-      <DashboardSection title="شاخص‌ها">
-        <ServiceReportKPI kpi={data?.kpi} />
-      </DashboardSection>
+      {loading && <AppLoader />}
 
-      {/* Charts */}
-      <DashboardSection title="نمودارها">
-        <DashboardGrid>
-          <DashboardColumn xs={12} md={6} lg={4}>
-            <ServiceStatusChart
-              labels={data?.charts?.serviceStatus?.labels}
-              series={data?.charts?.serviceStatus?.series}
-            />
-          </DashboardColumn>
+      {!loading && error && <div>خطا در دریافت اطلاعات سرویس</div>}
 
-          <DashboardColumn xs={12} md={6} lg={4}>
-            <ServiceTypeCostChart
-              categories={data?.charts?.serviceTypeChart?.categories}
-              series={data?.charts?.serviceTypeChart?.series}
-            />
-          </DashboardColumn>
+      {!loading && !error && data && (
+        <>
+          <DashboardSection title="خلاصه">
+            <ServiceReportSummary summary={data?.summary} />
+          </DashboardSection>
 
-          <DashboardColumn xs={12} md={12} lg={4}>
-            <ServiceCostByMonthChart
-              categories={data?.charts?.serviceCostByMonth?.categories}
-              series={data?.charts?.serviceCostByMonth?.series}
-            />
-          </DashboardColumn>
-        </DashboardGrid>
-      </DashboardSection>
+          <DashboardSection title="شاخص‌ها">
+            <ServiceReportKPI kpi={data?.kpi} />
+          </DashboardSection>
 
-      {/* Table */}
-      <DashboardSection title="جداول">
-        <DashboardCard
-          title="فهرست سرویس‌ها"
-          subtitle="وضعیت تمامی سرویس‌های ناوگان"
-        >
-          <ServiceReportTable rows={data?.table} loading={loading} />
-        </DashboardCard>
-      </DashboardSection>
+          <DashboardSection title="نمودارها">
+            <DashboardGrid>
+              <DashboardColumn xs={12} md={6} lg={4}>
+                <ServiceStatusChart
+                  labels={data?.charts?.statusLabels}
+                  series={data?.charts?.statusSeries}
+                />
+              </DashboardColumn>
+
+              <DashboardColumn xs={12} md={6} lg={4}>
+                <ServiceTypeCostChart
+                  categories={data?.charts?.typeCategories}
+                  series={[
+                    { name: 'هزینه', data: data?.charts?.typeSeries ?? [] },
+                  ]}
+                />
+              </DashboardColumn>
+
+              <DashboardColumn xs={12} md={12} lg={4}>
+                <ServiceCostByMonthChart
+                  categories={data?.charts?.monthlyCategories}
+                  series={[
+                    {
+                      name: 'هزینه سرویس',
+                      data: data?.charts?.monthlySeries ?? [],
+                    },
+                  ]}
+                />
+              </DashboardColumn>
+            </DashboardGrid>
+          </DashboardSection>
+
+          <DashboardSection title="جداول">
+            <DashboardCard
+              title="فهرست سرویس‌ها"
+              subtitle="وضعیت تمامی سرویس‌های ناوگان"
+            >
+              <ServiceReportTable rows={data?.table} loading={loading} />
+            </DashboardCard>
+          </DashboardSection>
+        </>
+      )}
     </ReportLayout>
   );
 };

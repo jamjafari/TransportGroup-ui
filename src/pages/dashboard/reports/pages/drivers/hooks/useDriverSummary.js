@@ -1,26 +1,27 @@
-// useDriverSummary.js
-
 import useAsyncData from '@/hooks/useAsyncData';
-
-import DashboardRepository from '@/repositories/dashboard/dashboard.repository';
 
 import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
 
+import { getDriversSummary } from '../api/driverReportApi';
+import { mapToDriverReportFilter } from '../utils/mapFilters';
+
 const useDriverSummary = () => {
-  const { filters, searchKey } = useDashboardSearch();
+  const { appliedFilters } = useDashboardSearch();
 
   return useAsyncData({
-    fetcher: () => DashboardRepository.getDriverSummary(filters),
+    fetcher: async () => {
+      const response = await getDriversSummary(
+        mapToDriverReportFilter(appliedFilters),
+      );
 
-    dependencies: [searchKey],
+      if (!response.success) {
+        throw new Error(response.errors?.[0] || 'خطا در دریافت خلاصه رانندگان');
+      }
 
-    initialData: {
-      total: 0,
-      active: 0,
-      mission: 0,
-      inactive: 0,
-      repair: 0,
+      return response.data;
     },
+    dependencies: [JSON.stringify(appliedFilters)],
+    initialData: { total: 0, active: 0, inactive: 0 },
   });
 };
 

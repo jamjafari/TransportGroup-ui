@@ -24,7 +24,7 @@ const useFuelConsumptionChart = () => {
 
       series: [
         {
-          field: 'fuel',
+          field: 'fuelAmount',
 
           name: 'لیتر',
 

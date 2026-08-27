@@ -4,6 +4,7 @@ import DashboardRepository from '../../../../repositories/dashboard/dashboard.re
 
 import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
 import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
+import { formatJalaliDate } from '@/utils';
 
 const useFuelRecordTable = () => {
   const { filters } = useDashboardSearch();
@@ -13,7 +14,7 @@ const useFuelRecordTable = () => {
 
     subtitle: 'آخرین تراکنش های سوخت',
 
-    fetcher: () => DashboardRepository.getFuelRecords(filters),
+    fetcher: () => DashboardRepository.getFuelRecordsDashboard(filters),
   });
 
   const columns = useMemo(
@@ -22,10 +23,11 @@ const useFuelRecordTable = () => {
         field: 'fuelDate',
         headerName: 'تاریخ',
         flex: 1,
+        renderCell: ({ value }) => (value ? formatJalaliDate(value) : '—'),
       },
 
       {
-        field: 'vehicleName',
+        field: 'plateNumber',
         headerName: 'خودرو',
         flex: 1,
       },
@@ -42,18 +44,20 @@ const useFuelRecordTable = () => {
         flex: 1,
         align: 'right',
       },
-
       {
-        field: 'totalCost',
-        headerName: 'هزینه',
+        field: 'unitPrice',
+        headerName: 'هزینه واحد',
         flex: 1,
         align: 'right',
+        renderCell: ({ value }) => Number(value ?? 0).toLocaleString('fa-IR'),
       },
 
       {
-        field: 'stationName',
-        headerName: 'جایگاه',
+        field: 'totalPrice',
+        headerName: 'مبلغ (تومان)',
         flex: 1,
+        align: 'right',
+        renderCell: ({ value }) => Number(value ?? 0).toLocaleString('fa-IR'),
       },
     ],
     [],

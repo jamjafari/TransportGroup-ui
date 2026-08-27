@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 
 import Grid from '@mui/material/Grid';
 
@@ -16,7 +16,12 @@ const AccidentDetailsSection = ({
   errors,
   onChange,
   setFieldValue,
+  vehicles,
 }) => {
+  const selectedVehicle = useMemo(
+    () => vehicles.find((v) => v.id === values.vehicleId) || null,
+    [vehicles, values.vehicleId],
+  );
   return (
     <AppFormSection title="جزئیات و خسارت">
       <Grid container spacing={2}>
@@ -41,6 +46,13 @@ const AccidentDetailsSection = ({
             name="odometerKm"
             value={values.odometerKm}
             onChange={onChange}
+            error={!!errors?.odometerKm}
+            helperText={
+              errors?.odometerKm ||
+              (selectedVehicle
+                ? `کارکرد فعلی ثبت‌شده: ${selectedVehicle.currentKM?.toLocaleString() ?? '—'} کیلومتر`
+                : 'ابتدا خودرو را انتخاب کنید')
+            }
           />
         </Grid>
 

@@ -1,8 +1,9 @@
 import React from 'react';
 
-import { AppDataGrid, StatusChip } from '@/components';
+import { AppDataGrid, StatusChip, AttachmentsButton } from '@/components';
 
 import useDriverReport from './hooks/useDriverReport';
+import { ATTACHMENT_OWNER_TYPE } from '@/constants/attachmentTypes';
 
 const DriverReportTable = () => {
   const { data, loading } = useDriverReport();
@@ -38,6 +39,18 @@ const DriverReportTable = () => {
       headerName: 'وضعیت',
       renderCell: ({ value }) => <StatusChip status={value} />,
       flex: 1,
+    },
+    {
+      field: 'attachments',
+      headerName: 'مدارک',
+      width: 90,
+      renderCell: ({ row }) => (
+        <AttachmentsButton
+          ownerType={ATTACHMENT_OWNER_TYPE.DERIVER}
+          ownerId={row.id}
+          title={`مدارک راننده — ${row.fullName}`}
+        />
+      ),
     },
   ];
 

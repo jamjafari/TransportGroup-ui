@@ -1,11 +1,15 @@
 import React from 'react';
 
-import { Stack } from '@mui/material';
+import {
+  AppLoader,
+  DashboardGrid,
+  DashboardColumn,
+  DashboardSection,
+} from '@/components';
 
-import { AppLoader } from '@/components';
+import DashboardSearchShortForm from '@/pages/dashboard/components/DashboardSearch/DashboardSearchShortForm';
 
 import useFleetReport from './hooks/useFleetReport';
-import { DashboardGrid, DashboardColumn, DashboardSection } from '@/components';
 
 import FleetSummary from './components/FleetSummary';
 import ReportLayout from '../../components/ReportLayout';
@@ -20,56 +24,66 @@ import FleetExpenseChart from './charts/FleetExpenseChart';
 const FleetReportPage = () => {
   const { data, loading, error } = useFleetReport();
 
-  if (loading) {
-    return <AppLoader />;
-  }
-
-  if (error) {
-    return <div>خطا در دریافت اطلاعات گزارش ناوگان</div>;
-  }
-
-  if (!data) {
-    return null;
-  }
-
   return (
-    <ReportLayout title="گزارش  ناوگاه" subtitle="گزارش کامل  ناوگان">
-      {/* Summary */}
-      <DashboardSection title="خلاصه">
-        <FleetSummary summary={data?.summary} />
+    <ReportLayout title="گزارش ناوگان" subtitle="گزارش کامل ناوگان">
+      <DashboardSection title="جستجو">
+        <DashboardSearchShortForm />
       </DashboardSection>
 
-      {/* KPI */}
-      <DashboardSection title="شاخص‌ها">
-        <FleetKPI kpi={data.kpi} />
-      </DashboardSection>
+      {loading && <AppLoader />}
 
-      {/* Financial */}
-      <DashboardSection title="">
-        <FleetFinancial financial={data?.financial} />
-      </DashboardSection>
+      {!loading && error && <div>خطا در دریافت اطلاعات گزارش ناوگان</div>}
 
-      {/* Alerts */}
-      <DashboardSection title="هشدارها">
-        <FleetAlerts alerts={data?.alerts} />
-      </DashboardSection>
+      {!loading && !error && data && (
+        <>
+          <DashboardSection title="خلاصه">
+            <FleetSummary summary={data?.summary} />
+          </DashboardSection>
 
-      {/* Charts */}
-      <DashboardSection>
-        <DashboardGrid>
-          <DashboardColumn xs={12} md={12} lg={4}>
-            <FleetStatusChart data={data?.charts?.status} />
-          </DashboardColumn>
+          <DashboardSection title="شاخص‌ها">
+            <FleetKPI kpi={data.kpi} />
+          </DashboardSection>
 
-          <DashboardColumn xs={12} md={12} lg={4}>
-            <FleetFuelChart data={data?.charts?.fuel} />
-          </DashboardColumn>
+          <DashboardSection title="وضعیت مالی">
+            <FleetFinancial financial={data?.financial} />
+          </DashboardSection>
 
-          <DashboardColumn xs={12} md={12} lg={4}>
-            <FleetExpenseChart data={data?.charts?.expense} />
-          </DashboardColumn>
-        </DashboardGrid>
-      </DashboardSection>
+          <DashboardSection title="هشدارها">
+            <FleetAlerts alerts={data?.alerts} />
+          </DashboardSection>
+
+          <DashboardSection>
+            <DashboardGrid>
+              <DashboardColumn xs={12} md={12} lg={4}>
+                <FleetStatusChart
+                  data={{
+                    labels: data?.charts?.statusLabels ?? [],
+                    series: data?.charts?.statusSeries ?? [],
+                  }}
+                />
+              </DashboardColumn>
+
+              <DashboardColumn xs={12} md={12} lg={4}>
+                <FleetFuelChart
+                  data={{
+                    categories: data?.charts?.fuelCategories ?? [],
+                    series: data?.charts?.fuelSeries ?? [],
+                  }}
+                />
+              </DashboardColumn>
+
+              <DashboardColumn xs={12} md={12} lg={4}>
+                <FleetExpenseChart
+                  data={{
+                    categories: data?.charts?.expenseCategories ?? [],
+                    series: data?.charts?.expenseSeries ?? [],
+                  }}
+                />
+              </DashboardColumn>
+            </DashboardGrid>
+          </DashboardSection>
+        </>
+      )}
     </ReportLayout>
   );
 };

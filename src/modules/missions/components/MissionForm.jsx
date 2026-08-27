@@ -11,6 +11,8 @@ import MissionStartEndSection from '../sections/MissionStartEndSection';
 import useMissionVehicles from '../hooks/useMissionVehicles';
 import useMissionDriver from '../hooks/useMissionDriver';
 
+import { sanitizeNumericFields } from '@/utils';
+
 import missionSchema from '../validation/missionSchema';
 
 const defaultValues = {
@@ -22,10 +24,10 @@ const defaultValues = {
   endDate: null,
   startTime: null,
   endTime: null,
-  startOdometerKM: null,
-  endOdometerKM: null,
+  startOdometerKm: null,
+  endOdometerKm: null,
   description: '',
-  distanceKM: null,
+  distanceKm: null,
   status: null,
 };
 
@@ -50,7 +52,13 @@ const MissionForm = ({ initialValues = defaultValues, onSubmit }) => {
       setErrors(validationErrors);
 
       if (!hasErrors(validationErrors)) {
-        onSubmit?.({ ...values });
+        onSubmit?.(
+          sanitizeNumericFields(values, [
+            'startOdometerKm',
+            'endOdometerKm',
+            'distanceKm',
+          ]),
+        );
       }
     },
     [onSubmit],

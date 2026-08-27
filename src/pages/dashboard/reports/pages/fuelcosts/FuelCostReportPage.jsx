@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { Stack } from '@mui/material';
-
 import { AppLoader } from '@/components';
 
 import useFuelCostReport from './hooks/useFuelCostReport';
@@ -12,63 +10,70 @@ import {
   DashboardCard,
 } from '@/components';
 
+import DashboardSearchShortForm from '@/pages/dashboard/components/DashboardSearch/DashboardSearchShortForm';
+
 import FuelCostReportSummary from './FuelCostReportSummary';
 import ReportLayout from '../../components/ReportLayout';
-// import FinancialReportKPI from './FinancialReportKPI';
 import FuelCostShareChart from './FuelCostShareChart';
 import FuelEfficiencyChart from './FuelEfficiencyChart';
-// import FinancialExpenseChart from './FinancialExpenseChart';
 import FuelCostReportTable from './FuelCostReportTable';
 
 const FuelCostReportPage = () => {
   const { data, loading, error } = useFuelCostReport();
 
-  if (loading) {
-    return <AppLoader />;
-  }
-
-  if (error) {
-    return <div>خطا در دریافت اطلاعات گزارش مالی</div>;
-  }
-
-  if (!data) {
-    return null;
-  }
-
   return (
     <ReportLayout title="گزارش مالی سوخت" subtitle="گزارش کامل مالی سوخت">
-      {/* Summary */}
-      <DashboardSection title="خلاصه">
-        <FuelCostReportSummary summary={data?.summary} />
+      <DashboardSection title="جستجو">
+        <DashboardSearchShortForm />
       </DashboardSection>
 
-      {/* KPI */}
-      {/* <FinancialReportKPI kpi={data.kpi} /> */}
+      {loading && <AppLoader />}
 
-      {/* Charts */}
-      <DashboardSection>
-        <DashboardGrid>
-          <DashboardColumn xs={12} md={12} lg={6}>
-            <FuelCostShareChart data={data?.charts?.fuelCostShare} />
-          </DashboardColumn>
+      {!loading && error && <div>خطا در دریافت اطلاعات گزارش مالی</div>}
 
-          <DashboardColumn xs={12} md={12} lg={6}>
-            <FuelEfficiencyChart data={data?.charts?.fuelEfficiency} />
-          </DashboardColumn>
+      {!loading && !error && data && (
+        <>
+          <DashboardSection title="خلاصه">
+            <FuelCostReportSummary summary={data?.summary} />
+          </DashboardSection>
 
-          {/* <DashboardColumn xs={12} md={12} lg={4}>
-            <FinancialExpenseChart data={data?.charts?.expenseDistribution} />
-          </DashboardColumn> */}
-        </DashboardGrid>
-      </DashboardSection>
-      <DashboardSection title="جداول">
-        <DashboardCard
-          title="هزینه‌های سوخت"
-          subtitle="  تراکنش های سوخت در جایگاههای مختلف و کیلومتر هر خودرو "
-        >
-          <FuelCostReportTable rows={data.table} loading={loading} />
-        </DashboardCard>
-      </DashboardSection>
+          <DashboardSection>
+            <DashboardGrid>
+              <DashboardColumn xs={12} md={12} lg={6}>
+                <FuelCostShareChart
+                  data={{
+                    labels: data?.charts?.fuelCostShareLabels ?? [],
+                    series: data?.charts?.fuelCostShareSeries ?? [],
+                  }}
+                />
+              </DashboardColumn>
+
+              <DashboardColumn xs={12} md={12} lg={6}>
+                <FuelEfficiencyChart
+                  data={{
+                    categories: data?.charts?.fuelEfficiencyCategories ?? [],
+                    series: [
+                      {
+                        name: 'کیلومتر به ازای هر لیتر',
+                        data: data?.charts?.fuelEfficiencySeries ?? [],
+                      },
+                    ],
+                  }}
+                />
+              </DashboardColumn>
+            </DashboardGrid>
+          </DashboardSection>
+
+          <DashboardSection title="جداول">
+            <DashboardCard
+              title="هزینه‌های سوخت"
+              subtitle="تراکنش‌های سوخت در جایگاه‌های مختلف و کیلومتر هر خودرو"
+            >
+              <FuelCostReportTable rows={data.table} loading={loading} />
+            </DashboardCard>
+          </DashboardSection>
+        </>
+      )}
     </ReportLayout>
   );
 };

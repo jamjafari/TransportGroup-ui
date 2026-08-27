@@ -1,45 +1,34 @@
 import React from 'react';
 
-import { AppDataGrid, StatusChip } from '@/components';
-
-import useFinancialReport from './hooks/useFinancialReport';
+import { AppDataGrid, AttachmentsButton } from '@/components';
+import { ATTACHMENT_OWNER_TYPE } from '@/constants/attachmentTypes';
 
 const FinancialReportTable = ({ rows = [], loading }) => {
   const columns = [
-    {
-      field: 'expenseDate',
-      headerName: 'تاریخ ',
-      flex: 1,
-    },
-    {
-      field: 'expenseType',
-      headerName: 'نوع هزینه ',
-      flex: 1,
-    },
-    {
-      field: 'vehicleName',
-      headerName: 'خودرو',
-      flex: 1,
-    },
+    { field: 'expenseDate', headerName: 'تاریخ', flex: 1 },
+    { field: 'expenseType', headerName: 'نوع هزینه', flex: 1 },
+    { field: 'vehicleName', headerName: 'خودرو', flex: 1 },
     {
       field: 'amount',
       headerName: 'مبلغ',
       flex: 1,
+      renderCell: ({ value }) => Number(value).toLocaleString('fa-IR'),
     },
+    { field: 'description', headerName: 'توضیحات', flex: 1 },
     {
-      field: 'description',
-      headerName: 'توضیحات',
-      flex: 1,
-    },
-    {
-      field: 'status',
-      headerName: 'وضعیت',
-      renderCell: ({ value }) => <StatusChip status={value} />,
-      flex: 1,
+      field: 'attachments',
+      headerName: 'مدارک',
+      width: 90,
+      renderCell: ({ row }) => (
+        <AttachmentsButton
+          ownerType={ATTACHMENT_OWNER_TYPE.EXPENSE}
+          ownerId={row.id}
+          title={`مدارک هزینه — ${row.expenseType}`}
+        />
+      ),
     },
   ];
-  console.log('=======', rows);
-  console.log(Array.isArray(rows));
+
   return (
     <AppDataGrid
       rows={rows}

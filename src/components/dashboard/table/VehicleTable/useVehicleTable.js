@@ -10,39 +10,45 @@ const useVehicleTable = () => {
 
   const widget = useDashboardWidget({
     title: 'وضعیت خودروها',
-
-    subtitle: 'ناوگان فعال',
-
-    fetcher: () => DashboardRepository.getVehicles(filters),
+    subtitle: 'کارکرد، ماموریت و هزینه هر خودرو',
+    fetcher: () => DashboardRepository.getVehiclesDashboard(filters),
   });
 
   const columns = useMemo(
     () => [
+      { field: 'plateNumber', headerName: 'پلاک', flex: 1 },
       {
-        field: 'plateNumber',
-        headerName: 'پلاک',
-        flex: 1,
-      },
-
-      {
-        field: 'vehicleName',
-        headerName: 'خودرو',
-        flex: 1,
-      },
-
-      {
-        field: 'driverName',
-        headerName: 'راننده',
-        flex: 1,
-      },
-
-      {
-        field: 'odometer',
-        headerName: 'کارکرد',
+        field: 'currentKM',
+        headerName: 'کیلومتر جاری',
         flex: 1,
         align: 'right',
       },
-
+      {
+        field: 'missionCount',
+        headerName: 'تعداد ماموریت',
+        flex: 1,
+        align: 'right',
+      },
+      {
+        field: 'fuelPer100Km',
+        headerName: 'مصرف سوخت (لیتر/۱۰۰کیلومتر)',
+        flex: 1,
+        align: 'right',
+        renderCell: ({ value }) => (value != null ? value.toFixed(2) : '—'),
+      },
+      {
+        field: 'serviceCount',
+        headerName: 'تعداد سرویس',
+        flex: 1,
+        align: 'right',
+      },
+      {
+        field: 'totalCost',
+        headerName: 'هزینه کل',
+        flex: 1,
+        align: 'right',
+        renderCell: ({ value }) => Number(value ?? 0).toLocaleString('fa-IR'),
+      },
       {
         field: 'status',
         headerName: 'وضعیت',
@@ -55,9 +61,7 @@ const useVehicleTable = () => {
 
   return {
     ...widget,
-
     columns,
-
     rows: widget.rows,
   };
 };

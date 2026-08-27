@@ -24,7 +24,7 @@ export const vehicleSchema = {
   odometerKM: [
     required(' کیلومتر خودرو الزامی است'),
     number('کیلومتر باید عدد باشد'),
-    nonNegative('کیلومتر نمی‌تواند منفی باشد'),
+    nonNegative('کیلومتر نمی‌تواند از کیلومتر خودرو کمتر باشد'),
   ],
 };
 

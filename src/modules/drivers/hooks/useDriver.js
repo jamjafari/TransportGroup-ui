@@ -64,6 +64,7 @@ const useDriver = () => {
 
   const updateDriver = useCallback(
     async (driver) => {
+      console.log('UPDATE DRIVER:', driver);
       try {
         setLoading(true);
         const response = await driverApi.updateDriver(driver);

@@ -16,7 +16,7 @@ import {
   AppFileUpload,
   AppButton,
 } from '@/components';
-
+import { formatJalaliDate } from '@/utils';
 import { attachmentCategoryOptions } from '../constants';
 import useAttachments from '@/hooks/useAttachments';
 import { ATTACHMENT_OWNER_TYPE } from '@/constants/attachmentTypes';
@@ -112,7 +112,7 @@ const ExpenseDocumentsSection = ({ expenseId }) => {
           >
             <ListItemText
               primary={item.originalFileName}
-              secondary={`${categoryLabel(item.category)} — صدور: ${item.issueDate ?? '—'}`}
+              secondary={`${categoryLabel(item.category)} — صدور: ${formatJalaliDate(item.issueDate)}`}
             />
           </ListItem>
         ))}

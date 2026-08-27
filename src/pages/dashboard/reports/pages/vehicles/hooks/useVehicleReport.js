@@ -1,17 +1,25 @@
-// hooks/useMissionReport.js
-
 import useAsyncData from '@/hooks/useAsyncData';
 
-import DashboardRepository from '@/repositories/dashboard/dashboard.repository';
-
 import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
+
+import { getVehiclesReport } from '../api/vehicleReportApi';
+import { mapToVehicleReportFilter } from '../utils/mapFilters';
 
 const useVehicleReport = () => {
   const { appliedFilters } = useDashboardSearch();
 
   return useAsyncData({
-    fetcher: () => DashboardRepository.getVehicles(appliedFilters),
+    fetcher: async () => {
+      const response = await getVehiclesReport(
+        mapToVehicleReportFilter(appliedFilters),
+      );
 
+      if (!response.success) {
+        throw new Error(response.errors?.[0] || 'خطا در دریافت گزارش خودروها');
+      }
+
+      return response.data;
+    },
     dependencies: [JSON.stringify(appliedFilters)],
   });
 };

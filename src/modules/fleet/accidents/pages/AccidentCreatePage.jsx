@@ -20,8 +20,9 @@ const AccidentCreatePage = () => {
     async (values) => {
       try {
         setSubmitError('');
-        await createAccident(values);
-        navigate('/accidents');
+
+        const createdId = await createAccident(values);
+        navigate(`/accidents/edit/${createdId}`);
       } catch (error) {
         setSubmitError(error.message);
       }

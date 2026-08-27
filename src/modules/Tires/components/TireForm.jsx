@@ -3,6 +3,7 @@ import Stack from '@mui/material/Stack';
 
 import { AppForm, AppFormActions, AppButton } from '@/components';
 import { hasErrors, validate } from '@/validation';
+import { sanitizeNumericFields } from '@/utils';
 
 import TireGeneralSection from '../sections/TireGeneralSection';
 
@@ -15,7 +16,7 @@ const defaultValues = {
   size: '',
   purchaseDate: null,
   purchasePrice: '',
-  isActive: '',
+  isActive: true,
 };
 
 const TireForm = ({ initialValues = defaultValues, onSubmit }) => {
@@ -23,17 +24,11 @@ const TireForm = ({ initialValues = defaultValues, onSubmit }) => {
 
   const handleValidatedSubmit = useCallback(
     (values) => {
-      //   console.log('TireForm submit');
-      //   console.log(values);
       const validationErrors = validate(tireSchema, values);
-      //   console.log('Validation errors:', validationErrors);
       setErrors(validationErrors);
 
       if (!hasErrors(validationErrors)) {
-        // console.log('Validation passed');
-        onSubmit?.({
-          ...values,
-        });
+        onSubmit?.(sanitizeNumericFields(values, ['purchasePrice']));
       }
     },
     [onSubmit],

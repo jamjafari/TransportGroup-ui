@@ -10,7 +10,7 @@ export const tireSchema = {
     minLength(1, 'سایز تایر  معتبر نیست'),
   ],
 
-  purchasePrice: [required('هزینه خرید   الزامی است')],
+  // purchasePrice: [required('هزینه خرید   الزامی است')],
 };
 
 export default tireSchema;

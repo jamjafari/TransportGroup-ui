@@ -114,7 +114,7 @@ const AccidentListPage = () => {
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف رکورد تصادف"
-        message={`آیا از حذف این رکورد مطمئن هستید؟`}
+        message={`مطمئن هستید؟ « ${deleteTarget?.plateNumber}» آیا از حذف رکوردتصادف خودرو با`}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

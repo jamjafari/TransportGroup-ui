@@ -1,16 +1,29 @@
 import useAsyncData from '@/hooks/useAsyncData';
 
-import DashboardRepository from '@/repositories/dashboard/dashboard.repository';
-
 import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
+
+import { getFinancialReport } from '../api/financialReportApi';
 
 const useFinancialReport = () => {
   const { appliedFilters } = useDashboardSearch();
 
-  return useAsyncData({
-    fetcher: () => DashboardRepository.getFinancial(appliedFilters),
+  const filter = {
+    vehicleId: appliedFilters.vehicleId || null,
+    dateFrom: appliedFilters.dateRange?.from || null,
+    dateTo: appliedFilters.dateRange?.to || null,
+  };
 
-    dependencies: [JSON.stringify(appliedFilters)],
+  return useAsyncData({
+    fetcher: async () => {
+      const response = await getFinancialReport(filter);
+
+      if (!response.success) {
+        throw new Error(response.errors?.[0] || 'خطا در دریافت گزارش مالی');
+      }
+
+      return response.data;
+    },
+    dependencies: [JSON.stringify(filter)],
   });
 };
 

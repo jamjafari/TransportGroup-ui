@@ -4,6 +4,7 @@ import DashboardRepository from '../../../../repositories/dashboard/dashboard.re
 
 import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
 import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
+import { formatJalaliDate } from '@/utils';
 
 const useExpenseTable = () => {
   const { filters } = useDashboardSearch();
@@ -13,7 +14,7 @@ const useExpenseTable = () => {
 
     subtitle: 'آخرین هزینه های ثبت شده',
 
-    fetcher: () => DashboardRepository.getExpenses(filters),
+    fetcher: () => DashboardRepository.getExpenseDashboard(filters),
   });
 
   const columns = useMemo(
@@ -22,6 +23,7 @@ const useExpenseTable = () => {
         field: 'expenseDate',
         headerName: 'تاریخ',
         flex: 1,
+        renderCell: ({ value }) => (value ? formatJalaliDate(value) : '—'),
       },
 
       {
@@ -37,22 +39,16 @@ const useExpenseTable = () => {
       },
 
       {
-        field: 'driverName',
-        headerName: 'راننده',
+        field: 'vendorName',
+        headerName: 'تامین کننده',
         flex: 1,
       },
 
       {
         field: 'amount',
-        headerName: 'مبلغ',
+        headerName: 'مبلغ(تومان)',
         flex: 1,
-      },
-
-      {
-        field: 'status',
-        headerName: 'وضعیت',
-        flex: 1,
-        align: 'right',
+        renderCell: ({ value }) => Number(value ?? 0).toLocaleString('fa-IR'),
       },
     ],
     [],

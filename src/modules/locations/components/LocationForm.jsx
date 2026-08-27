@@ -6,6 +6,7 @@ import { hasErrors, validate } from '@/validation';
 
 import LocationGeneralSection from '../sections/LocationGeneralSection';
 // import LocationTechnicalSection from '../sections/LocationTechnicalSection';
+import { sanitizeNumericFields } from '@/utils';
 
 import locationSchema from '../validation/locationSchema';
 
@@ -30,10 +31,7 @@ const LocationForm = ({ initialValues = defaultValues, onSubmit }) => {
       setErrors(validationErrors);
 
       if (!hasErrors(validationErrors)) {
-        console.log('Validation passed');
-        onSubmit?.({
-          ...values,
-        });
+        onSubmit?.(sanitizeNumericFields(values, ['latitude', 'longitude']));
       }
     },
     [onSubmit],
