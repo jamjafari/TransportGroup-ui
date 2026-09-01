@@ -15,6 +15,7 @@ const AppAlert = ({
   return (
     <Collapse in={open}>
       <Alert
+        dir="rtl"
         severity={severity}
         variant={variant}
         action={action}

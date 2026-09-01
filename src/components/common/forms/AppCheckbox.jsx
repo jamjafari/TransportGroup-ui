@@ -33,6 +33,7 @@ const AppCheckbox = ({
       disabled={disabled}
     >
       <FormControlLabel
+        dir="rtl"
         control={
           <Checkbox
             name={name}

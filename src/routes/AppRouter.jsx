@@ -2,7 +2,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import LoginPage from '@/pages/auth/LoginPage';
 import ChangePasswordPage from '@/pages/auth/ChangePasswordPage';
-
+import SubscriptionRoute from './SubscriptionRoute';
+import SubscriptionExpired from '@/pages/errors/SubscriptionExpired';
 import DashboardPage from '@/pages/dashboard/DashboardPage';
 import MissionReportPage from '@/pages/dashboard/reports/pages/missions';
 import DriverReportPage from '@/pages/dashboard/reports/pages/drivers';
@@ -85,6 +86,11 @@ import {
   ServiceListPage,
   ServiceCreatePage,
   ServiceEditPage,
+  TenantProvider,
+  TenantListPage,
+  TenantCreatePage,
+  TenantEditPage,
+  TenantAdminsPage,
 } from '@/modules';
 
 import MainLayout from '@/layouts/MainLayout';
@@ -102,553 +108,599 @@ const AppRouter = () => {
         </Route>
 
         <Route path="/403" element={<Forbidden />} />
-
+        <Route path="/subscription-expired" element={<SubscriptionExpired />} />
         <Route element={<ProtectedRoute />}>
-          <Route element={<MainLayout />}>
-            <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/change-password" element={<ChangePasswordPage />} />
-            {/* ===== گزارش‌ها ===== */}
-            <Route element={<PermissionRoute permission="Report.View" />}>
-              <Route path="/reports/missions" element={<MissionReportPage />} />
-              <Route path="/reports/drivers" element={<DriverReportPage />} />
-              <Route path="/reports/vehicles" element={<VehicleReportPage />} />
+          <Route element={<SubscriptionRoute />}>
+            <Route element={<MainLayout />}>
+              <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/change-password" element={<ChangePasswordPage />} />
+              {/* ===== گزارش‌ها ===== */}
+              <Route element={<PermissionRoute permission="Report.View" />}>
+                <Route
+                  path="/reports/missions"
+                  element={<MissionReportPage />}
+                />
+                <Route path="/reports/drivers" element={<DriverReportPage />} />
+                <Route
+                  path="/reports/vehicles"
+                  element={<VehicleReportPage />}
+                />
+                <Route
+                  path="/reports/latest-activities"
+                  element={<ActivityReportPage />}
+                />
+                <Route
+                  path="/reports/financial-date"
+                  element={<DateRangeFinancialReportPage />}
+                />
+                <Route
+                  path="/reports/fuelcost-date"
+                  element={<DateRangeFuelCostReportPage />}
+                />
+                <Route
+                  path="/reports/fleet"
+                  element={
+                    <DashboardSearchProvider>
+                      <FleetReportPage />
+                    </DashboardSearchProvider>
+                  }
+                />
+                <Route
+                  path="/reports/financial"
+                  element={
+                    <DashboardSearchProvider>
+                      <FinancialReportPage />
+                    </DashboardSearchProvider>
+                  }
+                />
+                <Route
+                  path="/reports/fbv"
+                  element={
+                    <DashboardSearchProvider>
+                      <FBVReportPage />
+                    </DashboardSearchProvider>
+                  }
+                />
+                <Route
+                  path="/reports/fuelcost"
+                  element={
+                    <DashboardSearchProvider>
+                      <FuelCostReportPage />
+                    </DashboardSearchProvider>
+                  }
+                />
+                <Route
+                  path="/reports/insurance"
+                  element={
+                    <DashboardSearchProvider>
+                      <InsuranceReportPage />
+                    </DashboardSearchProvider>
+                  }
+                />
+                <Route
+                  path="/reports/inspection"
+                  element={
+                    <DashboardSearchProvider>
+                      <InspectionReportPage />
+                    </DashboardSearchProvider>
+                  }
+                />
+                <Route
+                  path="/reports/service"
+                  element={
+                    <DashboardSearchProvider>
+                      <ServiceReportPage />
+                    </DashboardSearchProvider>
+                  }
+                />
+              </Route>
+              {/* ===== خودروها ===== */}
+              <Route element={<PermissionRoute permission="Vehicle.View" />}>
+                <Route
+                  path="/fleet/vehicles"
+                  element={
+                    <VehicleProvider>
+                      <VehicleListPage />
+                    </VehicleProvider>
+                  }
+                />
+                <Route
+                  path="/fleet/vehicles/edit/:id"
+                  element={
+                    <VehicleProvider>
+                      <VehicleEditPage />
+                    </VehicleProvider>
+                  }
+                />
+              </Route>
+              <Route element={<PermissionRoute permission="Vehicle.Create" />}>
+                <Route
+                  path="/fleet/vehicles/create"
+                  element={
+                    <VehicleProvider>
+                      <VehicleCreatePage />
+                    </VehicleProvider>
+                  }
+                />
+              </Route>
+              {/* ===== رانندگان ===== */}
+              <Route element={<PermissionRoute permission="Driver.View" />}>
+                <Route
+                  path="/drivers"
+                  element={
+                    <DriverProvider>
+                      <DriverListPage />
+                    </DriverProvider>
+                  }
+                />
+                <Route
+                  path="/drivers/edit/:id"
+                  element={
+                    <DriverProvider>
+                      <DriverEditPage />
+                    </DriverProvider>
+                  }
+                />
+              </Route>
+              <Route element={<PermissionRoute permission="Driver.Create" />}>
+                <Route
+                  path="/drivers/create"
+                  element={
+                    <DriverProvider>
+                      <DriverCreatePage />
+                    </DriverProvider>
+                  }
+                />
+              </Route>
+              {/* ===== تایر ===== */}
+              <Route element={<PermissionRoute permission="Tire.View" />}>
+                <Route
+                  path="/tires"
+                  element={
+                    <TireProvider>
+                      <TireListPage />
+                    </TireProvider>
+                  }
+                />
+                <Route
+                  path="/tires/edit/:id"
+                  element={
+                    <TireProvider>
+                      <TireEditPage />
+                    </TireProvider>
+                  }
+                />
+              </Route>
+              <Route element={<PermissionRoute permission="Tire.Create" />}>
+                <Route
+                  path="/tires/create"
+                  element={
+                    <TireProvider>
+                      <TireCreatePage />
+                    </TireProvider>
+                  }
+                />
+              </Route>
+              {/* ===== کارت سوخت ===== */}
+              <Route element={<PermissionRoute permission="FuelCard.View" />}>
+                <Route
+                  path="/fuelcards"
+                  element={
+                    <FuelCardProvider>
+                      <FuelCardListPage />
+                    </FuelCardProvider>
+                  }
+                />
+                <Route
+                  path="/fuelcards/edit/:id"
+                  element={
+                    <FuelCardProvider>
+                      <FuelCardEditPage />
+                    </FuelCardProvider>
+                  }
+                />
+              </Route>
+              <Route element={<PermissionRoute permission="FuelCard.Create" />}>
+                <Route
+                  path="/fuelcards/create"
+                  element={
+                    <FuelCardProvider>
+                      <FuelCardCreatePage />
+                    </FuelCardProvider>
+                  }
+                />
+              </Route>
+              {/* ===== سوخت‌گیری ===== */}
+              <Route element={<PermissionRoute permission="FuelRecord.View" />}>
+                <Route
+                  path="/fuelrecords"
+                  element={
+                    <FuelRecordProvider>
+                      <FuelRecordListPage />
+                    </FuelRecordProvider>
+                  }
+                />
+                <Route
+                  path="/fuelrecords/edit/:id"
+                  element={
+                    <FuelRecordProvider>
+                      <FuelRecordEditPage />
+                    </FuelRecordProvider>
+                  }
+                />
+              </Route>
               <Route
-                path="/reports/latest-activities"
-                element={<ActivityReportPage />}
-              />
+                element={<PermissionRoute permission="FuelRecord.Create" />}
+              >
+                <Route
+                  path="/fuelrecords/create"
+                  element={
+                    <FuelRecordProvider>
+                      <FuelRecordCreatePage />
+                    </FuelRecordProvider>
+                  }
+                />
+              </Route>
+              {/* ===== نوع هزینه ===== */}
               <Route
-                path="/reports/financial-date"
-                element={<DateRangeFinancialReportPage />}
-              />
+                element={<PermissionRoute permission="ExpenseType.View" />}
+              >
+                <Route
+                  path="/expensetypes"
+                  element={
+                    <ExpenseTypeProvider>
+                      <ExpenseTypeListPage />
+                    </ExpenseTypeProvider>
+                  }
+                />
+                <Route
+                  path="/expensetypes/edit/:id"
+                  element={
+                    <ExpenseTypeProvider>
+                      <ExpenseTypeEditPage />
+                    </ExpenseTypeProvider>
+                  }
+                />
+              </Route>
               <Route
-                path="/reports/fuelcost-date"
-                element={<DateRangeFuelCostReportPage />}
-              />
+                element={<PermissionRoute permission="ExpenseType.Create" />}
+              >
+                <Route
+                  path="/expensetypes/create"
+                  element={
+                    <ExpenseTypeProvider>
+                      <ExpenseTypeCreatePage />
+                    </ExpenseTypeProvider>
+                  }
+                />
+              </Route>
+              {/* ===== هزینه‌ها ===== */}
+              <Route element={<PermissionRoute permission="Expense.View" />}>
+                <Route
+                  path="/expenses"
+                  element={
+                    <ExpenseProvider>
+                      <ExpenseListPage />
+                    </ExpenseProvider>
+                  }
+                />
+                <Route
+                  path="/expenses/edit/:id"
+                  element={
+                    <ExpenseProvider>
+                      <ExpenseEditPage />
+                    </ExpenseProvider>
+                  }
+                />
+              </Route>
+              <Route element={<PermissionRoute permission="Expense.Create" />}>
+                <Route
+                  path="/expenses/create"
+                  element={
+                    <ExpenseProvider>
+                      <ExpenseCreatePage />
+                    </ExpenseProvider>
+                  }
+                />
+              </Route>
+              {/* ===== تامین‌کننده ===== */}
+              <Route element={<PermissionRoute permission="Vendor.View" />}>
+                <Route
+                  path="/vendors"
+                  element={
+                    <VendorProvider>
+                      <VendorListPage />
+                    </VendorProvider>
+                  }
+                />
+                <Route
+                  path="/vendors/edit/:id"
+                  element={
+                    <VendorProvider>
+                      <VendorEditPage />
+                    </VendorProvider>
+                  }
+                />
+              </Route>
+              <Route element={<PermissionRoute permission="Vendor.Create" />}>
+                <Route
+                  path="/vendors/create"
+                  element={
+                    <VendorProvider>
+                      <VendorCreatePage />
+                    </VendorProvider>
+                  }
+                />
+              </Route>
+              {/* ===== نوع سرویس ===== */}
               <Route
-                path="/reports/fleet"
-                element={
-                  <DashboardSearchProvider>
-                    <FleetReportPage />
-                  </DashboardSearchProvider>
-                }
-              />
+                element={<PermissionRoute permission="ServiceType.View" />}
+              >
+                <Route
+                  path="/servicetypes"
+                  element={
+                    <ServiceTypeProvider>
+                      <ServiceTypeListPage />
+                    </ServiceTypeProvider>
+                  }
+                />
+                <Route
+                  path="/servicetypes/edit/:id"
+                  element={
+                    <ServiceTypeProvider>
+                      <ServiceTypeEditPage />
+                    </ServiceTypeProvider>
+                  }
+                />
+              </Route>
               <Route
-                path="/reports/financial"
-                element={
-                  <DashboardSearchProvider>
-                    <FinancialReportPage />
-                  </DashboardSearchProvider>
-                }
-              />
+                element={<PermissionRoute permission="ServiceType.Create" />}
+              >
+                <Route
+                  path="/servicetypes/create"
+                  element={
+                    <ServiceTypeProvider>
+                      <ServiceTypeCreatePage />
+                    </ServiceTypeProvider>
+                  }
+                />
+              </Route>
+              {/* ===== مکان ===== */}
+              <Route element={<PermissionRoute permission="Location.View" />}>
+                <Route
+                  path="/locations"
+                  element={
+                    <LocationProvider>
+                      <LocationListPage />
+                    </LocationProvider>
+                  }
+                />
+                <Route
+                  path="/locations/edit/:id"
+                  element={
+                    <LocationProvider>
+                      <LocationEditPage />
+                    </LocationProvider>
+                  }
+                />
+                <Route
+                  path="/locations/create"
+                  element={
+                    <LocationProvider>
+                      <LocationCreatePage />
+                    </LocationProvider>
+                  }
+                />
+              </Route>
+              {/* ===== ماموریت‌ها ===== */}
+              <Route element={<PermissionRoute permission="Mission.View" />}>
+                <Route
+                  path="/missions"
+                  element={
+                    <MissionProvider>
+                      <MissionListPage />
+                    </MissionProvider>
+                  }
+                />
+                <Route
+                  path="/missions/edit/:id"
+                  element={
+                    <MissionProvider>
+                      <MissionEditPage />
+                    </MissionProvider>
+                  }
+                />
+                <Route
+                  path="/missions/create"
+                  element={
+                    <MissionProvider>
+                      <MissionCreatePage />
+                    </MissionProvider>
+                  }
+                />
+              </Route>
+              {/* ===== کاربران ===== */}
+              <Route element={<PermissionRoute permission="User.View" />}>
+                <Route
+                  path="/admin/users"
+                  element={
+                    <UserProvider>
+                      <UserListPage />
+                    </UserProvider>
+                  }
+                />
+                <Route
+                  path="/admin/users/edit/:id"
+                  element={
+                    <UserProvider>
+                      <UserEditPage />
+                    </UserProvider>
+                  }
+                />
+              </Route>
+              <Route element={<PermissionRoute permission="User.Create" />}>
+                <Route
+                  path="/admin/users/create"
+                  element={
+                    <UserProvider>
+                      <UserCreatePage />
+                    </UserProvider>
+                  }
+                />
+              </Route>
+              // AppRouter.jsx
+              <Route element={<PermissionRoute permission="Accident.View" />}>
+                <Route
+                  path="/accidents"
+                  element={
+                    <AccidentProvider>
+                      <AccidentListPage />
+                    </AccidentProvider>
+                  }
+                />
+                <Route
+                  path="/accidents/edit/:id"
+                  element={
+                    <AccidentProvider>
+                      <AccidentEditPage />
+                    </AccidentProvider>
+                  }
+                />
+              </Route>
+              <Route element={<PermissionRoute permission="Accident.Create" />}>
+                <Route
+                  path="/accidents/create"
+                  element={
+                    <AccidentProvider>
+                      <AccidentCreatePage />
+                    </AccidentProvider>
+                  }
+                />
+              </Route>
+              <Route element={<PermissionRoute permission="Mission.View" />}>
+                <Route
+                  path="/insurances"
+                  element={
+                    <InsuranceProvider>
+                      <InsuranceListPage />
+                    </InsuranceProvider>
+                  }
+                />
+                <Route
+                  path="/insurances/edit/:id"
+                  element={
+                    <InsuranceProvider>
+                      <InsuranceEditPage />
+                    </InsuranceProvider>
+                  }
+                />
+              </Route>
+              <Route element={<PermissionRoute permission="Mission.Create" />}>
+                <Route
+                  path="/insurances/create"
+                  element={
+                    <InsuranceProvider>
+                      <InsuranceCreatePage />
+                    </InsuranceProvider>
+                  }
+                />
+              </Route>
+              <Route element={<PermissionRoute permission="Mission.View" />}>
+                <Route
+                  path="/inspections"
+                  element={
+                    <InspectionProvider>
+                      <InspectionListPage />
+                    </InspectionProvider>
+                  }
+                />
+                <Route
+                  path="/inspections/edit/:id"
+                  element={
+                    <InspectionProvider>
+                      <InspectionEditPage />
+                    </InspectionProvider>
+                  }
+                />
+              </Route>
+              <Route element={<PermissionRoute permission="Mission.Create" />}>
+                <Route
+                  path="/inspections/create"
+                  element={
+                    <InspectionProvider>
+                      <InspectionCreatePage />
+                    </InspectionProvider>
+                  }
+                />
+              </Route>
               <Route
-                path="/reports/fbv"
-                element={
-                  <DashboardSearchProvider>
-                    <FBVReportPage />
-                  </DashboardSearchProvider>
-                }
-              />
+                element={<PermissionRoute permission="VehicleService.View" />}
+              >
+                <Route
+                  path="/services"
+                  element={
+                    <ServiceProvider>
+                      <ServiceListPage />
+                    </ServiceProvider>
+                  }
+                />
+                <Route
+                  path="/services/edit/:id"
+                  element={
+                    <ServiceProvider>
+                      <ServiceEditPage />
+                    </ServiceProvider>
+                  }
+                />
+              </Route>
               <Route
-                path="/reports/fuelcost"
-                element={
-                  <DashboardSearchProvider>
-                    <FuelCostReportPage />
-                  </DashboardSearchProvider>
-                }
-              />
+                element={<PermissionRoute permission="VehicleService.Create" />}
+              >
+                <Route
+                  path="/services/create"
+                  element={
+                    <ServiceProvider>
+                      <ServiceCreatePage />
+                    </ServiceProvider>
+                  }
+                />
+              </Route>
               <Route
-                path="/reports/insurance"
-                element={
-                  <DashboardSearchProvider>
-                    <InsuranceReportPage />
-                  </DashboardSearchProvider>
-                }
-              />
-              <Route
-                path="/reports/inspection"
-                element={
-                  <DashboardSearchProvider>
-                    <InspectionReportPage />
-                  </DashboardSearchProvider>
-                }
-              />
-              <Route
-                path="/reports/service"
-                element={
-                  <DashboardSearchProvider>
-                    <ServiceReportPage />
-                  </DashboardSearchProvider>
-                }
-              />
-            </Route>
-            {/* ===== خودروها ===== */}
-            <Route element={<PermissionRoute permission="Vehicle.View" />}>
-              <Route
-                path="/fleet/vehicles"
-                element={
-                  <VehicleProvider>
-                    <VehicleListPage />
-                  </VehicleProvider>
-                }
-              />
-              <Route
-                path="/fleet/vehicles/edit/:id"
-                element={
-                  <VehicleProvider>
-                    <VehicleEditPage />
-                  </VehicleProvider>
-                }
-              />
-            </Route>
-            <Route element={<PermissionRoute permission="Vehicle.Create" />}>
-              <Route
-                path="/fleet/vehicles/create"
-                element={
-                  <VehicleProvider>
-                    <VehicleCreatePage />
-                  </VehicleProvider>
-                }
-              />
-            </Route>
-            {/* ===== رانندگان ===== */}
-            <Route element={<PermissionRoute permission="Driver.View" />}>
-              <Route
-                path="/drivers"
-                element={
-                  <DriverProvider>
-                    <DriverListPage />
-                  </DriverProvider>
-                }
-              />
-              <Route
-                path="/drivers/edit/:id"
-                element={
-                  <DriverProvider>
-                    <DriverEditPage />
-                  </DriverProvider>
-                }
-              />
-            </Route>
-            <Route element={<PermissionRoute permission="Driver.Create" />}>
-              <Route
-                path="/drivers/create"
-                element={
-                  <DriverProvider>
-                    <DriverCreatePage />
-                  </DriverProvider>
-                }
-              />
-            </Route>
-            {/* ===== تایر ===== */}
-            <Route element={<PermissionRoute permission="Tire.View" />}>
-              <Route
-                path="/tires"
-                element={
-                  <TireProvider>
-                    <TireListPage />
-                  </TireProvider>
-                }
-              />
-              <Route
-                path="/tires/edit/:id"
-                element={
-                  <TireProvider>
-                    <TireEditPage />
-                  </TireProvider>
-                }
-              />
-            </Route>
-            <Route element={<PermissionRoute permission="Tire.Create" />}>
-              <Route
-                path="/tires/create"
-                element={
-                  <TireProvider>
-                    <TireCreatePage />
-                  </TireProvider>
-                }
-              />
-            </Route>
-            {/* ===== کارت سوخت ===== */}
-            <Route element={<PermissionRoute permission="FuelCard.View" />}>
-              <Route
-                path="/fuelcards"
-                element={
-                  <FuelCardProvider>
-                    <FuelCardListPage />
-                  </FuelCardProvider>
-                }
-              />
-              <Route
-                path="/fuelcards/edit/:id"
-                element={
-                  <FuelCardProvider>
-                    <FuelCardEditPage />
-                  </FuelCardProvider>
-                }
-              />
-            </Route>
-            <Route element={<PermissionRoute permission="FuelCard.Create" />}>
-              <Route
-                path="/fuelcards/create"
-                element={
-                  <FuelCardProvider>
-                    <FuelCardCreatePage />
-                  </FuelCardProvider>
-                }
-              />
-            </Route>
-            {/* ===== سوخت‌گیری ===== */}
-            <Route element={<PermissionRoute permission="FuelRecord.View" />}>
-              <Route
-                path="/fuelrecords"
-                element={
-                  <FuelRecordProvider>
-                    <FuelRecordListPage />
-                  </FuelRecordProvider>
-                }
-              />
-              <Route
-                path="/fuelrecords/edit/:id"
-                element={
-                  <FuelRecordProvider>
-                    <FuelRecordEditPage />
-                  </FuelRecordProvider>
-                }
-              />
-            </Route>
-            <Route element={<PermissionRoute permission="FuelRecord.Create" />}>
-              <Route
-                path="/fuelrecords/create"
-                element={
-                  <FuelRecordProvider>
-                    <FuelRecordCreatePage />
-                  </FuelRecordProvider>
-                }
-              />
-            </Route>
-            {/* ===== نوع هزینه ===== */}
-            <Route element={<PermissionRoute permission="Expense.View" />}>
-              <Route
-                path="/expensetypes"
-                element={
-                  <ExpenseTypeProvider>
-                    <ExpenseTypeListPage />
-                  </ExpenseTypeProvider>
-                }
-              />
-              <Route
-                path="/expensetypes/edit/:id"
-                element={
-                  <ExpenseTypeProvider>
-                    <ExpenseTypeEditPage />
-                  </ExpenseTypeProvider>
-                }
-              />
-            </Route>
-            <Route element={<PermissionRoute permission="Expense.Create" />}>
-              <Route
-                path="/expensetypes/create"
-                element={
-                  <ExpenseTypeProvider>
-                    <ExpenseTypeCreatePage />
-                  </ExpenseTypeProvider>
-                }
-              />
-            </Route>
-            {/* ===== هزینه‌ها ===== */}
-            <Route element={<PermissionRoute permission="Expense.View" />}>
-              <Route
-                path="/expenses"
-                element={
-                  <ExpenseProvider>
-                    <ExpenseListPage />
-                  </ExpenseProvider>
-                }
-              />
-              <Route
-                path="/expenses/edit/:id"
-                element={
-                  <ExpenseProvider>
-                    <ExpenseEditPage />
-                  </ExpenseProvider>
-                }
-              />
-            </Route>
-            <Route element={<PermissionRoute permission="Expense.Create" />}>
-              <Route
-                path="/expenses/create"
-                element={
-                  <ExpenseProvider>
-                    <ExpenseCreatePage />
-                  </ExpenseProvider>
-                }
-              />
-            </Route>
-            {/* ===== تامین‌کننده ===== */}
-            <Route
-              element={<PermissionRoute permission="VehicleService.View" />}
-            >
-              <Route
-                path="/vendors"
-                element={
-                  <VendorProvider>
-                    <VendorListPage />
-                  </VendorProvider>
-                }
-              />
-              <Route
-                path="/vendors/edit/:id"
-                element={
-                  <VendorProvider>
-                    <VendorEditPage />
-                  </VendorProvider>
-                }
-              />
-            </Route>
-            <Route
-              element={<PermissionRoute permission="VehicleService.Create" />}
-            >
-              <Route
-                path="/vendors/create"
-                element={
-                  <VendorProvider>
-                    <VendorCreatePage />
-                  </VendorProvider>
-                }
-              />
-            </Route>
-            {/* ===== نوع سرویس ===== */}
-            <Route
-              element={<PermissionRoute permission="VehicleService.View" />}
-            >
-              <Route
-                path="/servicetypes"
-                element={
-                  <ServiceTypeProvider>
-                    <ServiceTypeListPage />
-                  </ServiceTypeProvider>
-                }
-              />
-              <Route
-                path="/servicetypes/edit/:id"
-                element={
-                  <ServiceTypeProvider>
-                    <ServiceTypeEditPage />
-                  </ServiceTypeProvider>
-                }
-              />
-            </Route>
-            <Route
-              element={<PermissionRoute permission="VehicleService.Create" />}
-            >
-              <Route
-                path="/servicetypes/create"
-                element={
-                  <ServiceTypeProvider>
-                    <ServiceTypeCreatePage />
-                  </ServiceTypeProvider>
-                }
-              />
-            </Route>
-            {/* ===== مکان ===== */}
-            <Route element={<PermissionRoute permission="Report.View" />}>
-              <Route
-                path="/locations"
-                element={
-                  <LocationProvider>
-                    <LocationListPage />
-                  </LocationProvider>
-                }
-              />
-              <Route
-                path="/locations/edit/:id"
-                element={
-                  <LocationProvider>
-                    <LocationEditPage />
-                  </LocationProvider>
-                }
-              />
-              <Route
-                path="/locations/create"
-                element={
-                  <LocationProvider>
-                    <LocationCreatePage />
-                  </LocationProvider>
-                }
-              />
-            </Route>
-            {/* ===== ماموریت‌ها ===== */}
-            <Route element={<PermissionRoute permission="Report.View" />}>
-              <Route
-                path="/missions"
-                element={
-                  <MissionProvider>
-                    <MissionListPage />
-                  </MissionProvider>
-                }
-              />
-              <Route
-                path="/missions/edit/:id"
-                element={
-                  <MissionProvider>
-                    <MissionEditPage />
-                  </MissionProvider>
-                }
-              />
-              <Route
-                path="/missions/create"
-                element={
-                  <MissionProvider>
-                    <MissionCreatePage />
-                  </MissionProvider>
-                }
-              />
-            </Route>
-            {/* ===== کاربران ===== */}
-            <Route element={<PermissionRoute permission="User.View" />}>
-              <Route
-                path="/admin/users"
-                element={
-                  <UserProvider>
-                    <UserListPage />
-                  </UserProvider>
-                }
-              />
-              <Route
-                path="/admin/users/edit/:id"
-                element={
-                  <UserProvider>
-                    <UserEditPage />
-                  </UserProvider>
-                }
-              />
-            </Route>
-            <Route element={<PermissionRoute permission="User.Create" />}>
-              <Route
-                path="/admin/users/create"
-                element={
-                  <UserProvider>
-                    <UserCreatePage />
-                  </UserProvider>
-                }
-              />
-            </Route>
-            // AppRouter.jsx
-            <Route element={<PermissionRoute permission="Accident.View" />}>
-              <Route
-                path="/accidents"
-                element={
-                  <AccidentProvider>
-                    <AccidentListPage />
-                  </AccidentProvider>
-                }
-              />
-              <Route
-                path="/accidents/edit/:id"
-                element={
-                  <AccidentProvider>
-                    <AccidentEditPage />
-                  </AccidentProvider>
-                }
-              />
-            </Route>
-            <Route element={<PermissionRoute permission="Accident.Create" />}>
-              <Route
-                path="/accidents/create"
-                element={
-                  <AccidentProvider>
-                    <AccidentCreatePage />
-                  </AccidentProvider>
-                }
-              />
-            </Route>
-            <Route element={<PermissionRoute permission="Vehicle.View" />}>
-              <Route
-                path="/insurances"
-                element={
-                  <InsuranceProvider>
-                    <InsuranceListPage />
-                  </InsuranceProvider>
-                }
-              />
-              <Route
-                path="/insurances/edit/:id"
-                element={
-                  <InsuranceProvider>
-                    <InsuranceEditPage />
-                  </InsuranceProvider>
-                }
-              />
-            </Route>
-            <Route element={<PermissionRoute permission="Vehicle.Create" />}>
-              <Route
-                path="/insurances/create"
-                element={
-                  <InsuranceProvider>
-                    <InsuranceCreatePage />
-                  </InsuranceProvider>
-                }
-              />
-            </Route>
-            <Route element={<PermissionRoute permission="Vehicle.View" />}>
-              <Route
-                path="/inspections"
-                element={
-                  <InspectionProvider>
-                    <InspectionListPage />
-                  </InspectionProvider>
-                }
-              />
-              <Route
-                path="/inspections/edit/:id"
-                element={
-                  <InspectionProvider>
-                    <InspectionEditPage />
-                  </InspectionProvider>
-                }
-              />
-            </Route>
-            <Route element={<PermissionRoute permission="Vehicle.Create" />}>
-              <Route
-                path="/inspections/create"
-                element={
-                  <InspectionProvider>
-                    <InspectionCreatePage />
-                  </InspectionProvider>
-                }
-              />
-            </Route>
-            <Route
-              element={<PermissionRoute permission="VehicleService.View" />}
-            >
-              <Route
-                path="/services"
-                element={
-                  <ServiceProvider>
-                    <ServiceListPage />
-                  </ServiceProvider>
-                }
-              />
-              <Route
-                path="/services/edit/:id"
-                element={
-                  <ServiceProvider>
-                    <ServiceEditPage />
-                  </ServiceProvider>
-                }
-              />
-            </Route>
-            <Route
-              element={<PermissionRoute permission="VehicleService.Create" />}
-            >
-              <Route
-                path="/services/create"
-                element={
-                  <ServiceProvider>
-                    <ServiceCreatePage />
-                  </ServiceProvider>
-                }
-              />
+                element={<PermissionRoute permission="Tenant.ManageAll" />}
+              >
+                <Route
+                  path="/admin/tenants"
+                  element={
+                    <TenantProvider>
+                      <TenantListPage />
+                    </TenantProvider>
+                  }
+                />
+                <Route
+                  path="/admin/tenants/create"
+                  element={
+                    <TenantProvider>
+                      <TenantCreatePage />
+                    </TenantProvider>
+                  }
+                />
+                <Route
+                  path="/admin/tenants/edit/:id"
+                  element={
+                    <TenantProvider>
+                      <TenantEditPage />
+                    </TenantProvider>
+                  }
+                />
+                <Route
+                  path="/admin/tenants/admins"
+                  element={
+                    <TenantProvider>
+                      <TenantAdminsPage />
+                    </TenantProvider>
+                  }
+                />
+              </Route>
             </Route>
           </Route>
         </Route>

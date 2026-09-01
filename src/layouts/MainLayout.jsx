@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { Box, Drawer, Toolbar } from '@mui/material';
 
@@ -8,6 +8,10 @@ import AppSidebar from '@/components/common/navigation/AppSidebar/AppSidebar';
 import AppHeader from '../components/layout/AppHeader';
 
 import { menuItems } from '@/config/menuItems';
+import { filterMenuByPermission } from '@/utils/filterMenuByPermission';
+
+import { useAuth } from '@/hooks';
+
 import colors from '@/theme/colors';
 
 const expandedWidth = 260;
@@ -16,7 +20,14 @@ const collapsedWidth = 72;
 function MainLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
+  const { can } = useAuth();
+
   const drawerWidth = sidebarOpen ? expandedWidth : collapsedWidth;
+
+  const visibleMenuItems = useMemo(
+    () => filterMenuByPermission(menuItems, can),
+    [can],
+  );
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -27,6 +38,7 @@ function MainLayout() {
         sx={{
           width: drawerWidth,
           flexShrink: 0,
+
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             overflowX: 'hidden',
@@ -39,7 +51,8 @@ function MainLayout() {
         }}
       >
         <Toolbar />
-        <AppSidebar items={menuItems} collapsed={!sidebarOpen} />
+
+        <AppSidebar items={visibleMenuItems} collapsed={!sidebarOpen} />
       </Drawer>
 
       <Box
@@ -52,6 +65,7 @@ function MainLayout() {
         }}
       >
         <Toolbar />
+
         <Outlet />
       </Box>
     </Box>

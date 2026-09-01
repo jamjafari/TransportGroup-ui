@@ -12,6 +12,7 @@ export const ATTACHMENT_OWNER_TYPE = {
   ACCIDENT: 9,
   INSURANCE: 10,
   INSPECTION: 11,
+  TENANT: 12,
 };
 
 // export const attachmentCategoryOptions = [

@@ -9,9 +9,20 @@ import { useNavigate } from 'react-router-dom';
 import VehicleForm from '../components/VehicleForm';
 
 import useVehicle from '../hooks/useVehicle';
-import { AppCard } from '@/components';
+import { AppCard, AppAlert } from '@/components';
+import { usePlanLimits } from '@/hooks';
 
 const VehicleCreatePage = () => {
+  const { canAddVehicle, tenant } = usePlanLimits(vehicles.length);
+
+  {
+    !canAddVehicle && (
+      <AppAlert severity="warning">
+        به سقف مجاز {tenant.maxVehicles} خودرو در پلن فعلی رسیده‌اید. برای
+        افزودن بیشتر، اشتراک خود را ارتقا دهید.
+      </AppAlert>
+    );
+  }
   const navigate = useNavigate();
 
   const { createVehicle } = useVehicle();

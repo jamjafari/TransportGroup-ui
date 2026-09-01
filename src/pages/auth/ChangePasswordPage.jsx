@@ -2,14 +2,21 @@ import React, { memo, useState } from 'react';
 
 import { Box, Typography, Alert } from '@mui/material';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import { AppCard, AppTextField, AppButton } from '@/components';
 
 import { apiClient } from '@/services';
+import { useAuth } from '@/hooks';
 
 const ChangePasswordPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { forceChangePassword } = useAuth();
+
+  // ✅ اگه از صفحه‌ی لاگین (با mustChangePassword) اومده باشیم، username همراهش هست
+  const isForced = !!location.state?.username;
+  const forcedUsername = location.state?.username;
 
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -34,6 +41,19 @@ const ChangePasswordPage = () => {
     setSubmitting(true);
 
     try {
+      if (isForced) {
+        // ✅ حالت تغییر اجباری (بدون توکن) — این تابع خودش بعد از موفقیت وارد سیستم هم می‌کند
+        await forceChangePassword({
+          userName: forcedUsername,
+          currentPassword,
+          newPassword,
+        });
+
+        navigate('/dashboard');
+        return;
+      }
+
+      // حالت عادی (کاربر لاگین‌شده که می‌خواد رمزش رو عوض کنه)
       const response = await apiClient.post('/users/change-password', {
         currentPassword,
         newPassword,
@@ -49,7 +69,7 @@ const ChangePasswordPage = () => {
       setNewPassword('');
       setConfirmPassword('');
     } catch (err) {
-      setError(err.message);
+      setError(err.response?.data?.message || err.message);
     } finally {
       setSubmitting(false);
     }
@@ -58,7 +78,7 @@ const ChangePasswordPage = () => {
   return (
     <Box sx={{ maxWidth: 480, mx: 'auto', py: 3 }}>
       <Typography variant="h5" fontWeight={700} mb={3}>
-        تغییر رمز عبور
+        {isForced ? 'برای ادامه، رمز عبور خود را تغییر دهید' : 'تغییر رمز عبور'}
       </Typography>
 
       <AppCard sx={{ p: 4 }}>
@@ -99,9 +119,11 @@ const ChangePasswordPage = () => {
           />
 
           <Box display="flex" justifyContent="flex-end" gap={2} mt={2}>
-            <AppButton variant="outlined" onClick={() => navigate(-1)}>
-              انصراف
-            </AppButton>
+            {!isForced && (
+              <AppButton variant="outlined" onClick={() => navigate(-1)}>
+                انصراف
+              </AppButton>
+            )}
 
             <AppButton onClick={handleSubmit} loading={submitting}>
               ثبت

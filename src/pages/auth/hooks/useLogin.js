@@ -15,9 +15,6 @@ const useLogin = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  // نکته: چون AppForm خودش preventDefault می‌زنه و به‌جای event مقدار
-  // "values" داخلی‌ش رو پاس می‌ده (که اینجا استفاده نمی‌کنیم چون فیلدها
-  // state خودشون رو دارن)، این تابع دیگه به یک "event" واقعی نیاز نداره.
   const handleSubmit = async () => {
     setError('');
     setLoading(true);
@@ -31,7 +28,10 @@ const useLogin = () => {
         rememberMe,
       });
 
-      console.log('LOGIN SUCCESS:', result);
+      if (result.mustChangePassword) {
+        navigate('/change-password', { state: { username } });
+        return;
+      }
 
       navigate('/dashboard');
     } catch (err) {

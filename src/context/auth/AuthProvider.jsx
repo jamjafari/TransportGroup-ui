@@ -16,18 +16,45 @@ const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const login = useCallback(async (credentials) => {
-    const result = await AuthRepository.login(credentials);
-
-    tokenManager.setToken(result.accessToken, credentials.rememberMe);
-    tokenManager.setRefreshToken(result.refreshToken, credentials.rememberMe);
+  // ✅ منطق مشترک ذخیره‌ی نشست بعد از دریافت توکن معتبر (چه از لاگین عادی، چه از تغییر اجباری رمز)
+  const applySession = useCallback((result, rememberMe = false) => {
+    tokenManager.setToken(result.accessToken, rememberMe);
+    tokenManager.setRefreshToken(result.refreshToken, rememberMe);
 
     const decoded = decodeToken(result.accessToken);
     setToken(result.accessToken);
     setUser(decoded);
-
-    return result;
   }, []);
+
+  const login = useCallback(
+    async (credentials) => {
+      const result = await AuthRepository.login(credentials);
+
+      if (result.mustChangePassword) {
+        // توکنی صادر نشده؛ نباید چیزی در storage ذخیره بشه
+        return result;
+      }
+
+      applySession(result, credentials.rememberMe);
+      return result;
+    },
+    [applySession],
+  );
+
+  // ✅ جدید — برای حالت تغییر اجباری رمز (بدون توکن قبلی)
+  const forceChangePassword = useCallback(
+    async ({ userName, currentPassword, newPassword }) => {
+      const result = await AuthRepository.forceChangePassword({
+        userName,
+        currentPassword,
+        newPassword,
+      });
+
+      applySession(result, false);
+      return result;
+    },
+    [applySession],
+  );
 
   const logout = useCallback(() => {
     tokenManager.clear();
@@ -67,12 +94,13 @@ const AuthProvider = ({ children }) => {
       login,
       logout,
       restoreUser,
+      forceChangePassword, // ✅ اضافه شد
       isAuthenticated: !!token,
       can: (permission) => hasPermission(user, permission),
       canAny: (permissions) => hasAnyPermission(user, permissions),
       canAll: (permissions) => hasAllPermissions(user, permissions),
     }),
-    [user, token, loading, login, logout, restoreUser],
+    [user, token, loading, login, logout, restoreUser, forceChangePassword],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

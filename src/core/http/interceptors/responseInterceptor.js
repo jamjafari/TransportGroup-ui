@@ -26,14 +26,20 @@ const responseErrorInterceptor = async (error) => {
   const status = error.response?.status;
 
   const url = originalRequest?.url || '';
+  // --------------------------------------------------
+  // مدیریت غیرفعال بودن / انقضای اشتراک تننت
+  // --------------------------------------------------
+  if (
+    status === 403 &&
+    error.response?.data?.reason === 'SUBSCRIPTION_EXPIRED'
+  ) {
+    window.location.href = '/subscription-expired';
+    return Promise.reject(error);
+  }
 
   // --------------------------------------------------
   // Login و Refresh نباید وارد فرآیند refresh شوند
   // --------------------------------------------------
-
-  const isLoginRequest = url.includes('/auth/login');
-
-  const isRefreshRequest = url.includes('/auth/refresh-token');
 
   if (
     status !== 401 ||
@@ -43,7 +49,9 @@ const responseErrorInterceptor = async (error) => {
   ) {
     return Promise.reject(error);
   }
+  const isLoginRequest = url.includes('/auth/login');
 
+  const isRefreshRequest = url.includes('/auth/refresh-token');
   originalRequest._retry = true;
 
   // --------------------------------------------------

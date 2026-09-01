@@ -25,13 +25,15 @@ const LoginLogo = () => {
       </Avatar>
 
       <Stack spacing={0.5} alignItems="center">
-        <Typography variant="h5" fontWeight={700}>
-          گروه سرویس خودرو
+        <Typography variant="h3" fontWeight={700}>
+          سامانه نوابری هوشمند
         </Typography>
-
-        <Typography variant="body2" color="text.secondary">
-          شرکت مدیریت پسماندهای پرتوزا
-        </Typography>
+        <Typography
+          variant="h5"
+          fontWeight={700}
+          variant="body2"
+          color="text.secondary"
+        ></Typography>
       </Stack>
     </Stack>
   );

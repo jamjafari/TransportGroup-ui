@@ -2,7 +2,11 @@ import React, { memo } from 'react';
 
 import Grid from '@mui/material/Grid';
 
-import { AppFormSection, AppAutocompleteform } from '@/components';
+import {
+  AppFormSection,
+  AppAutocompleteform,
+  AppTextField,
+} from '@/components';
 
 const MissionGeneralSection = ({
   values,
@@ -59,6 +63,18 @@ const MissionGeneralSection = ({
             }}
             error={!!errors?.driverId}
             helperText={errors?.driverId}
+          />
+        </Grid>
+        <Grid size={{ xs: 12, md: 12 }}>
+          <AppTextField
+            fullWidth
+
+            label="  موضوع ماموریت و افراد حاظر "
+            name="description"
+            value={values.description}
+
+            error={!!errors?.description}
+            helperText={errors?.description}
           />
         </Grid>
       </Grid>

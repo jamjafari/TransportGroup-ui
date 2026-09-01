@@ -44,6 +44,13 @@ export const menuItems = [
     path: '/admin/users',
     permission: 'User.View',
   },
+  {
+    id: 'admin-tenants',
+    label: 'مدیریت سازمانها',
+    icon: <AdminPanelSettingsIcon />,
+    path: '/admin/tenants',
+    permission: 'Tenant.ManageAll',
+  },
 
   // =========================================================
   // ناوگان
@@ -74,7 +81,7 @@ export const menuItems = [
         label: 'ماموریت‌ها',
         icon: <LocalShippingIcon />,
         path: '/missions',
-        permission: 'Report.View',
+        permission: 'Mission.View',
       },
 
       {
@@ -98,7 +105,7 @@ export const menuItems = [
         label: 'بیمه',
         icon: <CreditCardIcon fontSize="small" />,
         path: '/insurances',
-        permission: 'Vehicle.View',
+        permission: 'Mission.View',
       },
 
       {
@@ -106,7 +113,7 @@ export const menuItems = [
         label: 'معاینه فنی',
         icon: <FactCheckIcon fontSize="small" />,
         path: '/inspections',
-        permission: 'Vehicle.View',
+        permission: 'Mission.View',
       },
       {
         id: 'accidents',
@@ -167,7 +174,7 @@ export const menuItems = [
         label: 'نوع هزینه',
         icon: <CategoryIcon fontSize="small" />,
         path: '/expensetypes',
-        permission: 'Expense.View',
+        permission: 'ExpenseType.View',
       },
     ],
   },
@@ -190,7 +197,7 @@ export const menuItems = [
         label: 'تامین‌کننده',
         icon: <StoreIcon fontSize="small" />,
         path: '/vendors',
-        permission: 'VehicleService.View',
+        permission: 'Vendor.View',
       },
 
       {
@@ -198,7 +205,7 @@ export const menuItems = [
         label: 'نوع سرویس',
         icon: <BuildIcon fontSize="small" />,
         path: '/serviceTypes',
-        permission: 'VehicleService.View',
+        permission: 'ServiceType.View',
       },
 
       {
@@ -206,7 +213,7 @@ export const menuItems = [
         label: 'مکان',
         icon: <PlaceIcon fontSize="small" />,
         path: '/locations',
-        permission: 'Report.View',
+        permission: 'Location.View',
       },
     ],
   },
