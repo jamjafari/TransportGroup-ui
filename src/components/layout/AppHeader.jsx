@@ -22,13 +22,13 @@ function AppHeader({ sidebarOpen, setSidebarOpen }) {
     <AppBar
       position="fixed"
       sx={{
-        bgcolor: colors.paper,
-        color: colors.textPrimary,
+        bgcolor: colors.sidebar,
+        color: colors.paper,
         boxShadow: 'none',
         borderBottom: `1px solid ${colors.border}`,
       }}
     >
-      <Toolbar sx={{ gap: 1.5 }}>
+      <Toolbar sx={{ gap: 1.7 }}>
         <IconButton onClick={() => setSidebarOpen(!sidebarOpen)}>
           <MenuIcon />
         </IconButton>
@@ -43,7 +43,7 @@ function AppHeader({ sidebarOpen, setSidebarOpen }) {
             sx={{
               display: 'flex',
               alignItems: 'center',
-              gap: 1.5,
+              gap: 1.7,
               flexGrow: 1,
               marginLeft: 27,
             }}
@@ -52,10 +52,10 @@ function AppHeader({ sidebarOpen, setSidebarOpen }) {
               src={tenant?.logoUrl ? getFileUrl(tenant.logoUrl) : undefined}
               name={tenant?.name}
               sx={{ marginLeft: 30 }}
-              size={32}
+              size={64}
             />
 
-            <Typography variant="h6">
+            <Typography variant="h3">
               {tenant?.name || 'گروه حمل‌ونقل'}
             </Typography>
           </Box>

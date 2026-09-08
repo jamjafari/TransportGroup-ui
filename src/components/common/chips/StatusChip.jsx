@@ -199,7 +199,7 @@ const StatusChip = ({
 
       variant="filled"
       sx={{
-        minWidth: 130,
+        minWidth: 100,
         marginLeft: 'auto', // قرار گرفتن Chip در سمت راست
 
         '& .MuiChip-label': {

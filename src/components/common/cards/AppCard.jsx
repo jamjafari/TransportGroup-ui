@@ -74,14 +74,14 @@ const AppCard = ({
         sx={{
           flexGrow: 1,
           alignItems: 'right',
-          direction: 'rtl',
+          direction: 'row-rewers',
         }}
       >
         {loading ? (
           <Box
             sx={{
               alignItems: 'right',
-              direction: 'rtl',
+              direction: 'row-rewers',
             }}
           >
             <Skeleton

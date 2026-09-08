@@ -37,6 +37,8 @@ const BaseChartWidget = (props) => {
           series={series}
 
           height={height}
+          tooltip
+          legend
         />
       }
     />

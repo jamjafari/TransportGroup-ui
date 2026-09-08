@@ -3,6 +3,7 @@ import React from 'react';
 import { AppDataGrid, StatusChip } from '@/components';
 
 import useDateRangeFinancialReport from './hooks/useDateRangeFinancialReport';
+import { formatJalaliDate } from '@/utils';
 
 const DateRangeFinancialTable = () => {
   const { data, loading } = useDateRangeFinancialReport();
@@ -11,6 +12,7 @@ const DateRangeFinancialTable = () => {
       field: 'expenseDate',
       headerName: 'تاریخ ',
       flex: 1,
+      renderCell: ({ value }) => formatJalaliDate(value),
     },
     {
       field: 'expenseType',

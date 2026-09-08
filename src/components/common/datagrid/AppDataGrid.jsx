@@ -12,6 +12,7 @@ import GridEmpty from './components/GridEmpty';
 import { AppPagination } from '@/components/common/navigation';
 
 import useDataGrid from './hooks/useDataGrid';
+import { useTenantContext } from '@/context/tenant'; // ✅ اضافه شد
 
 import { exportToExcel, exportToPdf } from './export';
 import { normalizeColumns } from './utils/columnManager';
@@ -25,29 +26,20 @@ const AppDataGrid = ({
   rows = [],
   columns = [],
   rowKey = 'id',
-
   loading,
-
   toolbar,
-
   pagination,
-
   rowSelection,
-
   sortable,
-
   stickyHeader,
-
   initialSortField,
   initialSortDirection,
   initialPage,
   initialPageSize,
-
   emptyTitle,
   emptyDescription,
   emptyIcon,
   emptyAction,
-
   onRowClick,
   onRowDoubleClick,
 }) => {
@@ -61,6 +53,8 @@ const AppDataGrid = ({
     initialPageSize,
   });
 
+  const { tenant } = useTenantContext(); // ✅ اضافه شد
+
   const handleExportExcel = () => {
     exportToExcel({
       rows: grid.visibleRows,
@@ -68,13 +62,19 @@ const AppDataGrid = ({
     });
   };
 
-  const handleExportPdf = () => {
-    exportToPdf({
+  const handleExportPdf = async () => {
+    // ✅ async شد
+    await exportToPdf({
       rows: grid.visibleRows,
       columns,
+      tenant: tenant
+        ? { name: tenant.name, logoUrl: tenant.logoUrl }
+        : undefined, // ✅ اطلاعات تننت پاس داده شد
     });
   };
+
   const normalizedColumns = useMemo(() => normalizeColumns(columns), [columns]);
+
   return (
     <Paper
       elevation={0}

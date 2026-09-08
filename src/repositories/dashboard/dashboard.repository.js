@@ -2,6 +2,8 @@ import BaseRepository from '../BaseRepository';
 import dashboardSearchFilter from '@/pages/dashboard/utils/DashboardSearchFilter';
 
 import dashboardService from '../../services/dashboard/dashboard.service';
+import { persianMonthNames } from '@/utils';
+import { getRollingJalaliMonths, getJalaliYearMonth } from '@/utils';
 
 class DashboardRepository extends BaseRepository {
   constructor() {
@@ -43,8 +45,10 @@ class DashboardRepository extends BaseRepository {
   // =========================================================
 
   getFuelConsumption = async (filters = {}) => {
+    // 1. دریافت رکوردهای واقعی از Backend
     const data = await this.service.getFuelConsumption();
 
+    // 2. اعمال فیلترهای داشبورد
     const filteredData = dashboardSearchFilter(
       data,
       filters,
@@ -54,24 +58,34 @@ class DashboardRepository extends BaseRepository {
       },
     );
 
-    const result = Array.from({ length: 12 }, (_, index) => ({
-      month: index + 1,
-      fuelAmount: 0,
-    }));
+    const result = getRollingJalaliMonths(12);
 
+    // 4. برای پیدا کردن سریع ماه مقصد
+    const indexByKey = new Map(
+      result.map((item, index) => [`${item.year}-${item.month}`, index]),
+    );
+
+    // 5. تجمیع مصرف سوخت هر ماه
     filteredData.forEach((item) => {
+      const jalali = getJalaliYearMonth(item.fuelDate);
+
       if (!item.fuelDate) return;
 
-      const month = new Date(item.fuelDate).getMonth();
+      const date = new Date(item.fuelDate);
 
-      if (month >= 0 && month < 12) {
-        result[month].fuelAmount += Number(item.fuelAmount) || 0;
-      }
+      if (Number.isNaN(date.getTime())) return;
+
+      const { year, month } = getJalaliYearMonth(date);
+
+      const index = indexByKey.get(`${year}-${month}`);
+
+      if (index === undefined) return;
+
+      result[index].fuelAmount += Number(item.fuelAmount) || 0;
     });
 
     return result;
   };
-
   getFuelRecordsDashboard = async (filters = {}) => {
     const data = await this.service.getFuelRecordsDashboard();
 
@@ -153,19 +167,34 @@ class DashboardRepository extends BaseRepository {
       },
     );
 
-    const result = Array.from({ length: 12 }, (_, index) => ({
-      month: index + 1,
+    // ۱۲ ماه اخیر شمسی
+    const result = getRollingJalaliMonths(12).map((item) => ({
+      year: item.year,
+      month: item.month,
+      monthName: item.monthName,
       amount: 0,
     }));
 
+    // پیدا کردن سریع ماه مقصد
+    const indexByKey = new Map(
+      result.map((item, index) => [`${item.year}-${item.month}`, index]),
+    );
+
+    // تجمیع هزینه‌های هر ماه
     filteredExpenses.forEach((expense) => {
       if (!expense.expenseDate) return;
 
-      const month = new Date(expense.expenseDate).getMonth();
+      const date = new Date(expense.expenseDate);
 
-      if (month >= 0 && month < 12) {
-        result[month].amount += Number(expense.amount) || 0;
-      }
+      if (Number.isNaN(date.getTime())) return;
+
+      const { year, month } = getJalaliYearMonth(date);
+
+      const index = indexByKey.get(`${year}-${month}`);
+
+      if (index === undefined) return;
+
+      result[index].amount += Number(expense.amount) || 0;
     });
 
     return result;
@@ -214,7 +243,6 @@ class DashboardRepository extends BaseRepository {
       },
     );
   };
-
   getMissionsDashboard = async (filters = {}) => {
     const data = await this.service.getMissionsDashboard();
 
@@ -227,7 +255,6 @@ class DashboardRepository extends BaseRepository {
       },
     );
   };
-
   getMissionTrend = async (filters = {}) => {
     const data = await this.service.getMissions();
 
@@ -240,19 +267,29 @@ class DashboardRepository extends BaseRepository {
       },
     );
 
-    const result = Array.from({ length: 12 }, (_, index) => ({
-      month: index + 1,
-      missionCount: 0,
-    }));
+    const result = getRollingJalaliMonths(12);
 
+    // پیدا کردن سریع ایندکس ماه
+    const indexByKey = new Map(
+      result.map((item, index) => [`${item.year}-${item.month}`, index]),
+    );
+
+    // شمارش مأموریت‌های هر ماه
     filteredData.forEach((item) => {
       if (!item.startDate) return;
 
-      const month = new Date(item.startDate).getMonth();
+      const date = new Date(item.startDate);
 
-      if (month >= 0 && month < 12) {
-        result[month].missionCount += 1;
-      }
+      if (Number.isNaN(date.getTime())) return;
+
+      const { year, month } = getJalaliYearMonth(date);
+
+      const index = indexByKey.get(`${year}-${month}`);
+
+      if (index === undefined) return;
+
+      // هر رکورد مأموریت = یک مأموریت
+      result[index].missionCount += 1;
     });
 
     return result;
@@ -270,19 +307,32 @@ class DashboardRepository extends BaseRepository {
       },
     );
 
-    const result = Array.from({ length: 12 }, (_, index) => ({
-      month: index + 1,
+    // 12 ماه اخیر شمسی
+    const result = getRollingJalaliMonths(12).map((item) => ({
+      ...item,
       distanceKm: 0,
     }));
 
+    // ایندکس سریع ماه
+    const indexByKey = new Map(
+      result.map((item, index) => [`${item.year}-${item.month}`, index]),
+    );
+
+    // تجمیع مسافت طی‌شده در هر ماه
     filteredData.forEach((item) => {
       if (!item.startDate) return;
 
-      const month = new Date(item.startDate).getMonth();
+      const date = new Date(item.startDate);
 
-      if (month >= 0 && month < 12) {
-        result[month].distanceKm += Number(item.distanceKm) || 0;
-      }
+      if (Number.isNaN(date.getTime())) return;
+
+      const { year, month } = getJalaliYearMonth(date);
+
+      const index = indexByKey.get(`${year}-${month}`);
+
+      if (index === undefined) return;
+
+      result[index].distanceKm += Number(item.distanceKm) || 0;
     });
 
     return result;

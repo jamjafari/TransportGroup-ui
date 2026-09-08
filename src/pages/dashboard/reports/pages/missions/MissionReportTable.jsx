@@ -1,8 +1,10 @@
 import React from 'react';
 
 import { AppDataGrid, StatusChip } from '@/components';
+import { getStatusLabel } from '@/utils/statusLabels'; // ✅ اضافه شد
 
 import useMissionReport from './hooks/useMissionReport';
+import { formatJalaliDate } from '@/utils';
 
 const MissionReportTable = () => {
   const { data, loading } = useMissionReport();
@@ -37,12 +39,14 @@ const MissionReportTable = () => {
       field: 'missionDate',
       headerName: 'تاریخ',
       flex: 1,
+      renderCell: ({ value }) => formatJalaliDate(value),
     },
     {
       field: 'status',
       headerName: 'وضعیت',
       renderCell: ({ value }) => <StatusChip status={value} />,
       flex: 1,
+      valueFormatter: (value) => getStatusLabel(value), // ✅ اضافه شد — فقط برای Export
     },
   ];
 

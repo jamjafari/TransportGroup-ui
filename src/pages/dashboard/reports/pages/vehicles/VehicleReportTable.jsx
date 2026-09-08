@@ -1,4 +1,5 @@
 import React from 'react';
+import { getStatusLabel } from '@/utils/statusLabels'; // ✅ اضافه شد
 
 import { AppDataGrid, StatusChip, AttachmentsButton } from '@/components';
 
@@ -24,6 +25,7 @@ const VehicleReportTable = () => {
       headerName: 'وضعیت',
       flex: 1,
       renderCell: ({ value }) => <StatusChip status={value} />,
+      valueFormatter: (value) => getStatusLabel(value), // ✅ اضافه شد — فقط برای Export
     },
     {
       field: 'attachments',

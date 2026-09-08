@@ -28,13 +28,17 @@ const useLogin = () => {
         rememberMe,
       });
 
+      console.log('LOGIN RESULT:', result); // ✅ اضافه شد
+
       if (result.mustChangePassword) {
-        navigate('/change-password', { state: { username } });
+        navigate('/force-change-password', { state: { username } }); // ✅ تغییر از /change-password
         return;
       }
 
+      console.log('REDIRECTING TO DASHBOARD'); // ✅ اضافه شد
       navigate('/dashboard');
     } catch (err) {
+      console.error('LOGIN ERROR:', err); // ✅ اضافه شد — این مهم‌ترین خطه
       if (err.response?.status === 401) {
         setError('نام کاربری یا رمز عبور صحیح نیست.');
       } else if (!err.response) {

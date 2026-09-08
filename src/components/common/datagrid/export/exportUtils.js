@@ -3,7 +3,10 @@ export const prepareExportData = ({ rows, columns }) => {
     const result = {};
 
     columns.forEach((col) => {
-      result[col.headerName] = row[col.field];
+      const rawValue = row[col.field];
+      result[col.headerName] = col.valueFormatter
+        ? col.valueFormatter(rawValue, row)
+        : rawValue;
     });
 
     return result;

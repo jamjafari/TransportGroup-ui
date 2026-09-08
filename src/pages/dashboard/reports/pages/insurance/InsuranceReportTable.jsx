@@ -5,6 +5,7 @@ import { AppDataGrid, StatusChip, AttachmentsButton } from '@/components';
 import { formatJalaliDate } from '@/utils';
 import { insuranceTypeOptions } from '@/modules';
 import { ATTACHMENT_OWNER_TYPE } from '@/constants/attachmentTypes';
+import { getStatusLabel } from '@/utils/statusLabels'; // ✅ اضافه شد
 
 const InsuranceReportTable = ({ rows = [], loading }) => {
   const insuranceLabel = useCallback(
@@ -47,6 +48,7 @@ const InsuranceReportTable = ({ rows = [], loading }) => {
           }
         />
       ),
+      valueFormatter: (value) => getStatusLabel(value), // ✅ اضافه شد — فقط برای Export
     },
     {
       field: 'attachments',

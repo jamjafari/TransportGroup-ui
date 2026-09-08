@@ -3,6 +3,7 @@ import React, { memo } from 'react';
 import { StatusChip, AppDataGrid, AttachmentsButton } from '@/components';
 import { formatJalaliDate } from '@/utils';
 import { ATTACHMENT_OWNER_TYPE } from '@/constants/attachmentTypes';
+import { getStatusLabel } from '@/utils/statusLabels'; // ✅ اضافه شد
 
 const columns = [
   { field: 'plateNumber', headerName: 'پلاک', flex: 1 },
@@ -34,6 +35,7 @@ const columns = [
     headerName: 'وضعیت',
     flex: 1,
     renderCell: ({ value }) => <StatusChip status={value} />,
+    valueFormatter: (value) => getStatusLabel(value), // ✅ اضافه شد — فقط برای Export
   },
   {
     field: 'attachments',

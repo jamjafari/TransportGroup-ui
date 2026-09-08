@@ -21,7 +21,7 @@ const useMonthlyDistanceChart = () => {
     widget.rows,
 
     {
-      categoryField: 'month',
+      categoryField: 'monthName',
 
       series: [
         {

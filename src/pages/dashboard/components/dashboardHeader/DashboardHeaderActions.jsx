@@ -17,7 +17,7 @@ const DashboardHeaderActions = ({
   console.log('onFilter :', onFilter);
   return (
     <Stack direction="row" spacing={1}>
-      <Button variant="outlined" onClick={onReports}>
+      {/* <Button variant="outlined" onClick={onReports}>
         <Stack direction="row" spacing={0.75}>
           <AssessmentIcon fontSize="small" />
           <span>گزارش ها</span>
@@ -29,7 +29,7 @@ const DashboardHeaderActions = ({
           <FileDownloadIcon fontSize="small" />
           <span>خروجی</span>
         </Stack>
-      </Button>
+      </Button> */}
 
       <Button variant="outlined" onClick={onFilter}>
         <Stack direction="row" spacing={0.75} alignItems="center">

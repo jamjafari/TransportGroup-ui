@@ -45,17 +45,19 @@ const AreaChart = ({
 }) => {
   const chartData = useMemo(
     () =>
-      categories.map((category, index) => {
-        const row = {
-          category,
-        };
+      categories
+        .map((category, index) => {
+          const row = {
+            category,
+          };
 
-        series.forEach((item) => {
-          row[item.name] = item.data[index];
-        });
+          series.forEach((item) => {
+            row[item.name] = item.data[index];
+          });
 
-        return row;
-      }),
+          return row;
+        })
+        .reverse(),
     [categories, series],
   );
   // console.log('categories in v u ch', categories);
@@ -69,7 +71,7 @@ const AreaChart = ({
         <RechartsAreaChart data={chartData}>
           {grid && <CartesianGrid strokeDasharray="3 3" />}
 
-          <XAxis dataKey="category" />
+          <XAxis dataKey="category" interval={2} />
 
           <YAxis />
 

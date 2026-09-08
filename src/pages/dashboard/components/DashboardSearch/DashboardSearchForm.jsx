@@ -32,7 +32,21 @@ const DashboardSearchForm = () => {
   return (
     <Stack spacing={3}>
       {/* Row 1 */}
+      <DashboardGrid>
+        <DashboardColumn md={6}></DashboardColumn>
+        <DashboardColumn md={6}>
+          <AppDateRangePicker
+            value={filters.dateRange}
+            onChange={(value) => {
+              console.log('DateRange', value);
 
+              updateFilters({
+                dateRange: value,
+              });
+            }}
+          />
+        </DashboardColumn>
+      </DashboardGrid>
       <DashboardGrid>
         <DashboardColumn md={6}>
           <AppAutocomplete
@@ -123,35 +137,6 @@ const DashboardSearchForm = () => {
       </DashboardGrid> */}
 
       {/* Row 4 */}
-
-      <DashboardGrid>
-        <DashboardColumn md={6}>
-          {/* <AppSelect
-            label="وضعیت سرویس"
-            value={filters.serviceStatus}
-            items={serviceStatusOptions}
-            onChange={(value) =>
-              updateFilters({
-                serviceStatus: value,
-              })
-            }
-          /> */}
-        </DashboardColumn>
-
-        <DashboardColumn md={6}>
-          <AppDateRangePicker
-            label="بازه زمانی"
-            value={filters.dateRange}
-            onChange={(value) => {
-              console.log('DateRange', value);
-
-              updateFilters({
-                dateRange: value,
-              });
-            }}
-          />
-        </DashboardColumn>
-      </DashboardGrid>
     </Stack>
   );
 };

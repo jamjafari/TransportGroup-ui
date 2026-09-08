@@ -55,14 +55,7 @@ const reportRoutes = [
 
     component: FinancialReportPage,
   },
-  {
-    id: 'fbv',
 
-    path: '/reports/fbv',
-    title: 'گزارش  مالی هر خودرو',
-
-    component: FBVReportPage,
-  },
   {
     id: 'fuelcost',
 
@@ -86,22 +79,6 @@ const reportRoutes = [
     title: 'گزارش   سرویس ',
 
     component: ServiceReportPage,
-  },
-  {
-    id: 'financial-date',
-
-    path: '/reports/financial-date',
-    title: 'گزارش  مالی',
-
-    component: DateRangeFinancialReportPage,
-  },
-  {
-    id: 'fuelcost-date',
-
-    path: '/reports/fuelcost-date',
-    title: 'گزارش  سوخت',
-
-    component: DateRangeFuelCostReportPage,
   },
 ];
 

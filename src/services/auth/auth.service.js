@@ -20,6 +20,11 @@ class AuthService extends BaseApiService {
   refreshToken(data) {
     return this.post(AUTH_ENDPOINTS.REFRESH_TOKEN, data);
   }
+
+  forceChangePassword(data) {
+    // ✅ اضافه شد
+    return this.post(AUTH_ENDPOINTS.FORCE_CHANGE_PASSWORD, data);
+  }
 }
 
 export default new AuthService();

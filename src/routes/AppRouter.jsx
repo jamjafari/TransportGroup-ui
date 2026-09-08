@@ -105,6 +105,11 @@ const AppRouter = () => {
       <Routes>
         <Route element={<GuestRoute />}>
           <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/force-change-password"
+            element={<ChangePasswordPage />}
+          />{' '}
+          {/* ✅ اضافه شد */}
         </Route>
 
         <Route path="/403" element={<Forbidden />} />

@@ -3,6 +3,8 @@ import React from 'react';
 import { AppDataGrid, StatusChip } from '@/components';
 
 import useLatestActivitiesReport from './hooks/useLatestActivitiesReport';
+import { formatJalaliDate } from '@/utils';
+import { getStatusLabel } from '@/utils/statusLabels'; // ✅ اضافه شد
 
 const LatestActivitiesReportTable = () => {
   const { data, loading } = useLatestActivitiesReport();
@@ -50,12 +52,14 @@ const LatestActivitiesReportTable = () => {
       renderCell: ({ value }) => <StatusChip status={value} />,
       flex: 1,
       align: 'right',
+      valueFormatter: (value) => getStatusLabel(value), // ✅ اضافه شد — فقط برای Export
     },
 
     {
       field: 'activityDate',
       headerName: 'تاریخ',
       flex: 1,
+      renderCell: ({ value }) => formatJalaliDate(value),
     },
 
     {

@@ -47,7 +47,7 @@ const LineChart = ({
         <ReLineChart data={data}>
           {grid && <CartesianGrid strokeDasharray="3 3" />}
 
-          <XAxis dataKey="category" />
+          <XAxis dataKey="category" interval={2} />
 
           <YAxis
             orientation="right"

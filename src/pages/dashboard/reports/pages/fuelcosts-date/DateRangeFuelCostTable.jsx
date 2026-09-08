@@ -3,6 +3,7 @@ import React from 'react';
 import { AppDataGrid, StatusChip } from '@/components';
 
 import useDateRangeFuelCostReport from './hooks/useDateRangeFuelCostReport';
+import { formatJalaliDate } from '@/utils';
 
 const DateRangeFuelCostTable = () => {
   const { data, loading } = useDateRangeFuelCostReport();
@@ -11,6 +12,7 @@ const DateRangeFuelCostTable = () => {
       field: 'fuelDate',
       headerName: 'تاریخ ',
       flex: 1,
+      renderCell: ({ value }) => formatJalaliDate(value),
     },
     {
       field: 'vehicleName',

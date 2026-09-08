@@ -2,10 +2,16 @@ import React from 'react';
 
 import { AppDataGrid, AttachmentsButton } from '@/components';
 import { ATTACHMENT_OWNER_TYPE } from '@/constants/attachmentTypes';
+import { formatJalaliDate } from '@/utils';
 
 const FinancialReportTable = ({ rows = [], loading }) => {
   const columns = [
-    { field: 'expenseDate', headerName: 'تاریخ', flex: 1 },
+    {
+      field: 'expenseDate',
+      headerName: 'تاریخ',
+      flex: 1,
+      renderCell: ({ value }) => formatJalaliDate(value),
+    },
     { field: 'expenseType', headerName: 'نوع هزینه', flex: 1 },
     { field: 'vehicleName', headerName: 'خودرو', flex: 1 },
     {

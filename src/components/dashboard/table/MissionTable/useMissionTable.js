@@ -40,13 +40,13 @@ const useMissionTable = () => {
       {
         field: 'originLocation',
         headerName: 'مبدأ',
-        flex: 1,
+        width: 100,
       },
 
       {
         field: 'destinationLocation',
         headerName: 'مقصد',
-        flex: 1,
+        width: 100,
       },
 
       {
@@ -59,7 +59,7 @@ const useMissionTable = () => {
       {
         field: 'status',
         headerName: 'وضعیت',
-        flex: 1,
+        width: 140,
         align: 'right',
       },
     ],

@@ -3,6 +3,7 @@ import React from 'react';
 import { AppDataGrid, StatusChip } from '@/components';
 
 import { formatJalaliDate } from '@/utils';
+import { getStatusLabel } from '@/utils/statusLabels'; // ✅ اضافه شد
 
 import {
   activityActionChipKey,
@@ -19,6 +20,7 @@ const ActivityReportTable = ({ rows = [], loading }) => {
       renderCell: ({ value }) => (
         <StatusChip status={activityActionChipKey(value)} />
       ),
+      valueFormatter: (value) => getStatusLabel(value), // ✅ اضافه شد — فقط برای Export
     },
     {
       field: 'type',

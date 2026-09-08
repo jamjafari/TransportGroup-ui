@@ -1,3 +1,5 @@
+import { formatJalaliDate } from '@/utils';
+
 const getOptionTitle = (id, options = []) => {
   const item = options.find((x) => x.id === id);
 
@@ -9,8 +11,32 @@ const getDateRangeTitle = (dateRange) => {
 
   const { from, to } = dateRange;
 
-  return `${from} - ${to}`;
+  // هیچ بازه‌ای انتخاب نشده
+  if (!from && !to) {
+    return '';
+  }
+
+  const fromTitle = from ? formatJalaliDate(from) : '';
+  const toTitle = to ? formatJalaliDate(to) : '';
+
+  // هر دو تاریخ وجود دارند
+  if (fromTitle && toTitle) {
+    return `${fromTitle} تا ${toTitle}`;
+  }
+
+  // فقط تاریخ شروع
+  if (fromTitle) {
+    return `از ${fromTitle}`;
+  }
+
+  // فقط تاریخ پایان
+  if (toTitle) {
+    return `تا ${toTitle}`;
+  }
+
+  return '';
 };
+
 const statusColorLabels = {
   success: 'سبز',
   warning: 'زرد',
@@ -41,12 +67,16 @@ export const buildDashboardSearchSummary = (
       value: getOptionTitle(filters.vehicleId, vehicleOptions),
     });
   }
+
   if (filters.statusColor) {
     summary.push({
       label: 'وضعیت',
-      value: getOptionTitle(filters.statusColor, statusColorOptions),
+      value:
+        statusColorLabels[filters.statusColor] ??
+        getOptionTitle(filters.statusColor, statusColorOptions),
     });
   }
+
   if (filters.driverId) {
     summary.push({
       label: 'راننده',
@@ -89,10 +119,12 @@ export const buildDashboardSearchSummary = (
     });
   }
 
-  if (filters.dateRange) {
+  const dateRangeTitle = getDateRangeTitle(filters.dateRange);
+
+  if (dateRangeTitle) {
     summary.push({
       label: 'بازه زمانی',
-      value: getDateRangeTitle(filters.dateRange),
+      value: dateRangeTitle,
     });
   }
 

@@ -6,6 +6,8 @@ export const AUTH_ENDPOINTS = {
   PROFILE: '/auth/profile',
 
   REFRESH_TOKEN: '/auth/refresh-token',
+
+  FORCE_CHANGE_PASSWORD: '/auth/force-change-password', // ✅ اضافه شد
 };
 
 export const DASHBOARD_ENDPOINTS = {

@@ -4,6 +4,7 @@ import { AppDataGrid, StatusChip, AttachmentsButton } from '@/components';
 
 import useDriverReport from './hooks/useDriverReport';
 import { ATTACHMENT_OWNER_TYPE } from '@/constants/attachmentTypes';
+import { getStatusLabel } from '@/utils/statusLabels'; // ✅ اضافه شد
 
 const DriverReportTable = () => {
   const { data, loading } = useDriverReport();
@@ -38,6 +39,8 @@ const DriverReportTable = () => {
       field: 'status',
       headerName: 'وضعیت',
       renderCell: ({ value }) => <StatusChip status={value} />,
+      valueFormatter: (value) => getStatusLabel(value), // ✅ اضافه شد — فقط برای Export
+
       flex: 1,
     },
     {

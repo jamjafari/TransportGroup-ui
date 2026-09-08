@@ -1,16 +1,19 @@
-import { useTenant } from '@/hooks';
-import { canAddVehicle, canAddUser } from '@/core/auth';
-import { useAuth } from '@/context';
+import { useTenantContext } from '@/context/tenant';
 
-const usePlanLimits = (currentVehicleCount = 0, currentUserCount = 0) => {
-  const { user } = useAuth();
-  const { tenant } = useTenant();
+const usePlanLimits = () => {
+  const { tenant } = useTenantContext();
 
-  return {
-    tenant,
-    canAddVehicle: canAddVehicle(user, currentVehicleCount),
-    canAddUser: canAddUser(user, currentUserCount),
-  };
+  const canAddVehicle =
+    !tenant ||
+    tenant.maxVehicles == null ||
+    tenant.currentVehicleCount < tenant.maxVehicles;
+
+  const canAddUser =
+    !tenant ||
+    tenant.maxUsers == null ||
+    tenant.currentUserCount < tenant.maxUsers;
+
+  return { tenant, canAddVehicle, canAddUser };
 };
 
 export default usePlanLimits;

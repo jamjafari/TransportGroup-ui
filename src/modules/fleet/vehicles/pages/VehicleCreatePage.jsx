@@ -1,7 +1,6 @@
 import React, { memo, useCallback } from 'react';
 
 import Box from '@mui/material/Box';
-
 import Typography from '@mui/material/Typography';
 
 import { useNavigate } from 'react-router-dom';
@@ -13,18 +12,9 @@ import { AppCard, AppAlert } from '@/components';
 import { usePlanLimits } from '@/hooks';
 
 const VehicleCreatePage = () => {
-  const { canAddVehicle, tenant } = usePlanLimits(vehicles.length);
+  const { canAddVehicle, tenant } = usePlanLimits();
 
-  {
-    !canAddVehicle && (
-      <AppAlert severity="warning">
-        به سقف مجاز {tenant.maxVehicles} خودرو در پلن فعلی رسیده‌اید. برای
-        افزودن بیشتر، اشتراک خود را ارتقا دهید.
-      </AppAlert>
-    );
-  }
   const navigate = useNavigate();
-
   const { createVehicle } = useVehicle();
 
   const handleSubmit = useCallback(
@@ -45,8 +35,15 @@ const VehicleCreatePage = () => {
         افزودن خودرو
       </Typography>
 
+      {!canAddVehicle && (
+        <AppAlert severity="warning" sx={{ mb: 3 }}>
+          به سقف مجاز {tenant?.maxVehicles} خودرو در پلن فعلی رسیده‌اید. برای
+          افزودن بیشتر، اشتراک خود را ارتقا دهید.
+        </AppAlert>
+      )}
+
       <AppCard sx={{ p: 4 }}>
-        <VehicleForm onSubmit={handleSubmit} />
+        <VehicleForm onSubmit={handleSubmit} disabled={!canAddVehicle} />
       </AppCard>
     </Box>
   );

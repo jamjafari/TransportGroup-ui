@@ -9,7 +9,7 @@ const DashboardHeaderTitle = () => {
       </Typography>
 
       <Typography variant="h5" color="text.secondary">
-        سامانه مدیریت نقلیه
+        سامانه ناوبری هوشمند
       </Typography>
     </Stack>
   );

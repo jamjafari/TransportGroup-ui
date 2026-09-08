@@ -1,6 +1,10 @@
 import { AppCard } from '@/components';
 const ReportCategoryCard = ({ title, icon, children }) => {
-  return <AppCard title={`${icon} ${title}`}>{children}</AppCard>;
+  return (
+    <AppCard dir="rtl" title={`${icon} ${title}`}>
+      {children}
+    </AppCard>
+  );
 };
 
 export default ReportCategoryCard;

@@ -5,6 +5,7 @@ import { AppDataGrid, StatusChip, AttachmentsButton } from '@/components';
 import { formatJalaliDate } from '@/utils';
 import { INSPECTION_RESULT_OPTIONS } from '@/modules';
 import { ATTACHMENT_OWNER_TYPE } from '@/constants/attachmentTypes';
+import { getStatusLabel } from '@/utils/statusLabels'; // ✅ اضافه شد
 
 const InspectionReportTable = ({ rows = [], loading }) => {
   const inspectionStatus = useCallback((value) => {
@@ -59,6 +60,7 @@ const InspectionReportTable = ({ rows = [], loading }) => {
       headerName: 'وضعیت',
       flex: 1,
       renderCell: ({ row }) => <StatusChip status={getComputedStatus(row)} />,
+      valueFormatter: (value) => getStatusLabel(value), // ✅ اضافه شد — فقط برای Export
     },
     {
       field: 'attachments',

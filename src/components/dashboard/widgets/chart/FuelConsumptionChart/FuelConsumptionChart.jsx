@@ -18,6 +18,8 @@ const FuelConsumptionChart = () => {
       series={chart.series}
 
       height={320}
+      tooltip
+      legend
     />
   );
 };

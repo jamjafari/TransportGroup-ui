@@ -17,14 +17,15 @@ import colors from '@/theme/colors';
 const itemSx = (collapsed, level) => ({
   pl: 2 + level * 2,
   justifyContent: collapsed ? 'center' : 'initial',
-  color: '#dbd7d4',
+  color: 'colors.paper',
   '&:hover': {
     bgcolor: colors.sidebarHover,
   },
   '&.active': {
     bgcolor: colors.sidebarActive,
-    color: '#d9a376',
+    color: 'colors.warning',
   },
+  font: 700,
 });
 
 const ItemMenu = ({ item, collapsed, level = 0 }) => {

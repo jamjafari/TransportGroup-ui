@@ -6,6 +6,7 @@ import DashboardHeaderActions from './DashboardHeaderActions';
 import DashboardSearchSummary from '../DashboardSearchSummary';
 import { useReportDialog } from '@/pages/dashboard/reports/hooks';
 import { ReportDialog } from '@/pages/dashboard/reports/dialogs';
+import colors from '@/theme/colors';
 
 const DashboardHeader = ({
   loading = false,
@@ -30,7 +31,7 @@ const DashboardHeader = ({
             px: 4,
             py: 3,
             borderRadius: 3,
-            bgcolor: 'grey.100',
+            bgcolor: 'colors.background',
             border: '1px solid',
             borderColor: 'divider',
           }}

@@ -1,5 +1,4 @@
 import BaseRepository from './BaseRepository';
-
 import authService from '@/services/auth/auth.service';
 
 class AuthRepository extends BaseRepository {
@@ -9,7 +8,6 @@ class AuthRepository extends BaseRepository {
 
   async login(credentials) {
     const response = await this.service.login(credentials);
-
     return response.data;
   }
 
@@ -19,7 +17,12 @@ class AuthRepository extends BaseRepository {
 
   async refreshToken(refreshToken) {
     const response = await this.service.refreshToken(refreshToken);
+    return response.data;
+  }
 
+  async forceChangePassword(payload) {
+    // ✅ اضافه شد
+    const response = await this.service.forceChangePassword(payload);
     return response.data;
   }
 }
