@@ -1,5 +1,5 @@
 const typography = {
-  fontFamily: 'Inter, sans-serif',
+  fontFamily: 'B Mitra, sans-serif',
 
   h1: {
     fontSize: 36,

@@ -75,7 +75,8 @@ const PieChart = ({
                   fill="#333"
                   textAnchor={x > cx ? 'start' : 'end'}
                   dominantBaseline="central"
-                  fontSize={12}
+                  fontSize={14}
+                  fontWeight={600}
                 >
                   {`${name} (${(percent * 100).toFixed(0)}%)`}
                 </text>

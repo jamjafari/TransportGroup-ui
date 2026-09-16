@@ -6,8 +6,11 @@ import { Alert, AlertTitle } from '@mui/material';
 
 const AppAlertItem = ({ severity, title, description }) => {
   return (
-    <Alert sx={{ width: '100%' }} severity={severity}>
-      <AlertTitle>{title}</AlertTitle>
+    <Alert
+      sx={{ width: '100%', fontSize: 16, fontWeight: 700 }}
+      severity={severity}
+    >
+      <AlertTitle sx={{ fontSize: 18, fontWeight: 800 }}>{title}</AlertTitle>
 
       {description}
     </Alert>

@@ -71,13 +71,25 @@ const AreaChart = ({
         <RechartsAreaChart data={chartData}>
           {grid && <CartesianGrid strokeDasharray="3 3" />}
 
-          <XAxis dataKey="category" interval={2} />
+          <XAxis
+            dataKey="category"
+            interval={2}
+            tick={{ fontSize: 16, fontWeight: 600 }}
+          />
 
-          <YAxis />
+          <YAxis tick={{ fontSize: 16, fontWeight: 600 }} />
 
-          {tooltip && <Tooltip />}
+          {tooltip && (
+            <Tooltip
+              contentStyle={{ fontSize: 14, fontWeight: 600 }}
+              labelStyle={{ fontSize: 14 }}
+              itemStyle={{ fontSize: 14 }}
+            />
+          )}
 
-          {legend && <Legend />}
+          {legend && (
+            <Legend wrapperStyle={{ fontSize: 16, fontWeight: 600 }} />
+          )}
 
           {series.map((item, index) => (
             <Area

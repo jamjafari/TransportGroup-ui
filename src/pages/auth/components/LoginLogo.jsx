@@ -26,7 +26,7 @@ const LoginLogo = () => {
 
       <Stack spacing={0.5} alignItems="center">
         <Typography variant="h3" fontWeight={700}>
-          سامانه نوابری هوشمند
+          سامانه ناوبری هوشمند
         </Typography>
         <Typography
           variant="h5"

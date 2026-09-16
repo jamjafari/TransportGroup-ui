@@ -10,7 +10,7 @@ const FleetFuelChart = ({
 }) => {
   return (
     <Paper sx={{ p: 2 }}>
-      <Typography variant="h6" mb={2}>
+      <Typography variant="h4" mb={2}>
         روند مصرف سوخت
       </Typography>
 

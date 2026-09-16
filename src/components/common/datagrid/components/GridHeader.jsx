@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-
+import colors from '@/theme/colors';
 const GridHeader = ({
   columns,
 
@@ -52,7 +52,7 @@ const GridHeader = ({
               top: 0,
               left: 0,
               zIndex: 10,
-              bgcolor: 'background.paper',
+              bgcolor: 'colors.sidbar',
             }}
           >
             <Checkbox
@@ -98,7 +98,7 @@ const GridHeader = ({
 
                 zIndex: 9,
 
-                bgcolor: 'background.paper',
+                bgcolor: colors.background,
               }}
             >
               <Box

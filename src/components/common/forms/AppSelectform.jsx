@@ -8,6 +8,8 @@ import {
   FormHelperText,
 } from '@mui/material';
 
+import colors from '@/theme/colors';
+
 import {
   AppSelectPropTypes,
   AppSelectDefaultProps,
@@ -31,6 +33,8 @@ const AppSelectform = ({
   onBlur,
   renderValue,
   children,
+  sx, // ✅ اضافه شد
+  MenuProps, // ✅ اضافه شد — برای امکان override دستی منو در صورت نیاز
   ...rest
 }) => {
   const labelId = `${id || name}-label`;
@@ -45,6 +49,29 @@ const AppSelectform = ({
       variant={variant}
       sx={{
         width: '100%',
+
+        // ✅ پیش‌فرض لیبل
+        '& .MuiInputLabel-root': {
+          fontSize: 15,
+          fontWeight: 700,
+          color: colors.textSecondary,
+        },
+
+        // ✅ پیش‌فرض متن انتخاب‌شده داخل خود Select
+        '& .MuiSelect-select': {
+          fontSize: 16,
+          fontWeight: 600,
+          color: colors.textPrimary,
+        },
+
+        // ✅ پیش‌فرض متن راهنما
+        '& .MuiFormHelperText-root': {
+          fontSize: 14,
+          fontWeight: 400,
+          color: colors.textSecondary,
+        },
+
+        ...sx, // ← override در سطح یک مورد خاص (برای لیبل/متن انتخاب‌شده/راهنما)
       }}
     >
       {label && <InputLabel id={labelId}>{label}</InputLabel>}
@@ -75,6 +102,19 @@ const AppSelectform = ({
             return option ? option.label : selected;
           })
         }
+        MenuProps={{
+          PaperProps: {
+            sx: {
+              // ✅ پیش‌فرض هر ردیف داخل منوی بازشونده (چون Portal است، اینجا جدا تعریف می‌شود)
+              '& .MuiMenuItem-root': {
+                fontSize: 16,
+                fontWeight: 600,
+                color: colors.textPrimary,
+              },
+            },
+          },
+          ...MenuProps, // ← override منو در صورت نیاز
+        }}
         {...rest}
       >
         {placeholder && <MenuItem value="">{placeholder}</MenuItem>}

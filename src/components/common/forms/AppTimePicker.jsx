@@ -23,35 +23,40 @@ const AppTimePicker = ({
   return (
     <TextField
       name={name}
-
       label={label}
-
       type="time"
-
       value={value}
-
       onChange={onChange}
-
       helperText={helperText}
-
       error={error}
-
       disabled={disabled}
-
       required={required}
-
       fullWidth={fullWidth}
-
       size={size}
-
       InputLabelProps={{
         shrink: true,
       }}
-
       inputProps={{
         step: 300,
       }}
+      sx={{
+        '& .MuiInputBase-input': {
+          fontSize: '16px',
+          fontWeight: 600,
+        },
 
+        '& .MuiInputLabel-root': {
+          fontSize: '16px',
+          fontWeight: 600,
+        },
+
+        '& .MuiFormHelperText-root': {
+          fontSize: '14px',
+          fontWeight: 400,
+        },
+
+        ...rest.sx,
+      }}
       {...rest}
     />
   );

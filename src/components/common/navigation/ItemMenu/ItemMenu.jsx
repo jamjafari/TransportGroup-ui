@@ -10,7 +10,7 @@ import {
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 import colors from '@/theme/colors';
 
@@ -21,26 +21,74 @@ const itemSx = (collapsed, level) => ({
   '&:hover': {
     bgcolor: colors.sidebarHover,
   },
+  '& .MuiListItemText-primary': {
+    fontSize: 18,
+    fontWeight: 1000,
+    transition: 'font-size 0.2s ease, color 0.2s ease', // ✅ برای تغییر نرم سایز/رنگ
+  },
   '&.active': {
     bgcolor: colors.sidebarActive,
-    color: 'colors.warning',
+    '& .MuiListItemText-primary': {
+      fontSize: 20, // ✅ فونت بزرگ‌تر برای آیتم فعال
+      fontWeight: 1000,
+      color: colors.warning, // ✅ رنگ متفاوت برای آیتم فعال
+    },
   },
-  font: 700,
 });
 
+// ✅ استایل جداگانه برای آیتم‌های والد وقتی یکی از زیرمنوهاشون فعال است (چون NavLink نیستند)
+const parentActiveSx = (isChildActive) =>
+  isChildActive
+    ? {
+        bgcolor: colors.sidebarActive,
+        '& .MuiListItemText-primary': {
+          fontSize: 20,
+          fontWeight: 900,
+          color: colors.warning,
+        },
+      }
+    : {};
+
+const pressSx = (pressed) => ({
+  transition: 'transform 0.2s ease',
+  transform: pressed ? 'scale(1.07)' : 'scale(1)',
+});
+
+// ✅ بررسی بازگشتی اینکه آیا مسیر فعلی داخل یکی از زیرمنوهای این آیتم است
+const isDescendantActive = (item, pathname) => {
+  if (!item.children) return false;
+  return item.children.some(
+    (child) => child.path === pathname || isDescendantActive(child, pathname),
+  );
+};
+
 const ItemMenu = ({ item, collapsed, level = 0 }) => {
+  const location = useLocation();
   const [open, setOpen] = useState(false);
+  const [pressed, setPressed] = useState(false);
+
+  const triggerPressEffect = () => {
+    setPressed(true);
+    setTimeout(() => setPressed(false), 200);
+  };
 
   const hasChildren = item.children && item.children.length > 0;
+  const childActive =
+    hasChildren && isDescendantActive(item, location.pathname);
 
   if (hasChildren) {
     return (
       <>
         <ListItemButton
-          onClick={() => setOpen((prev) => !prev)}
+          onClick={() => {
+            triggerPressEffect();
+            setOpen((prev) => !prev);
+          }}
           disabled={item.disabled}
           sx={{
             ...itemSx(collapsed, level),
+            ...parentActiveSx(childActive), // ✅ اضافه شد
+            ...pressSx(pressed),
             '&:hover': { bgcolor: colors.sidebarHover },
           }}
         >
@@ -49,7 +97,7 @@ const ItemMenu = ({ item, collapsed, level = 0 }) => {
               minWidth: 0,
               mr: collapsed ? 0 : 2,
               justifyContent: 'center',
-              color: '#d9a376',
+              color: '#fbd6b7',
             }}
           >
             {item.icon}
@@ -82,14 +130,18 @@ const ItemMenu = ({ item, collapsed, level = 0 }) => {
       component={NavLink}
       to={item.path}
       disabled={item.disabled}
-      sx={itemSx(collapsed, level)}
+      onClick={triggerPressEffect}
+      sx={{
+        ...itemSx(collapsed, level),
+        ...pressSx(pressed),
+      }}
     >
       <ListItemIcon
         sx={{
           minWidth: 0,
           mr: collapsed ? 0 : 2,
           justifyContent: 'center',
-          color: '#d9a376',
+          color: '#fbd6b7',
         }}
       >
         {item.icon}

@@ -9,6 +9,8 @@ import {
 
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
+import colors from '@/theme/colors'; // ✅ اضافه شد
+
 import { AppTextFieldPropTypes } from './AppTextField.types';
 
 const AppTextField = forwardRef(
@@ -74,7 +76,28 @@ const AppTextField = forwardRef(
             boxSizing: 'border-box',
           },
 
-          ...sx,
+          // ✅ پیش‌فرض متن ورودی
+          '& .MuiOutlinedInput-input': {
+            fontSize: 16,
+            fontWeight: 600,
+            color: colors.textPrimary,
+          },
+
+          // ✅ پیش‌فرض لیبل
+          '& .MuiInputLabel-root': {
+            fontSize: 15,
+            fontWeight: 700,
+            color: colors.textSecondary,
+          },
+
+          // ✅ پیش‌فرض متن راهنما (helperText)
+          '& .MuiFormHelperText-root': {
+            fontSize: 14,
+            fontWeight: 400,
+            color: colors.textSecondary,
+          },
+
+          ...sx, // ← هر مصرف‌کننده می‌تواند این‌ها را در یک مورد خاص override کند
         }}
       />
     );

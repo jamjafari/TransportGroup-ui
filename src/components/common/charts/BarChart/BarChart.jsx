@@ -67,9 +67,13 @@ const BarChart = ({
         <RechartsBarChart data={chartData}>
           {grid && <CartesianGrid strokeDasharray="3 3" />}
 
-          <XAxis dataKey="category" interval={2} />
+          <XAxis
+            dataKey="category"
+            interval={2}
+            tick={{ fontSize: 16, fontWeight: 600 }}
+          />
 
-          <YAxis />
+          <YAxis tick={{ fontSize: 16, fontWeight: 600 }} />
 
           {tooltip && <Tooltip />}
 

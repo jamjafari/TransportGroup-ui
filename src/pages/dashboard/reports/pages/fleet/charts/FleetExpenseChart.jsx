@@ -10,7 +10,7 @@ const FleetExpenseChart = ({
 }) => {
   return (
     <Paper sx={{ p: 2 }}>
-      <Typography variant="h6" mb={2}>
+      <Typography variant="h4" mb={2}>
         توزیع هزینه‌ها
       </Typography>
 

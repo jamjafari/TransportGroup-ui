@@ -11,11 +11,8 @@ import {
 } from './interceptors/responseInterceptor';
 
 const axiosClient = axios.create({
-  baseURL: 'https://localhost:7174/api',
-
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   timeout: 30000,
-
-  // withCredentials: true,
 });
 
 axiosClient.interceptors.request.use(

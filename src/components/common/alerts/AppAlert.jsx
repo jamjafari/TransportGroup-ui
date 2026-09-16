@@ -20,6 +20,7 @@ const AppAlert = ({
         variant={variant}
         action={action}
         onClose={onClose}
+        sx={{ fontSize: 18 }}
       >
         {title && <AlertTitle>{title}</AlertTitle>}
 

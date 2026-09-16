@@ -9,8 +9,8 @@ const DashboardHeaderInfo = ({ lastUpdate }) => {
     : '--:--:--';
 
   return (
-    <Stack alignItems="center" spacing={0.5}>
-      <Typography variant="caption" color="text.secondary">
+    <Stack fontWeight={700} alignItems="center" spacing={0.5}>
+      <Typography variant="h4" fontWeight={700} color="text.secondary">
         آخرین بروزرسانی
       </Typography>
 

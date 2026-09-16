@@ -47,9 +47,14 @@ const LineChart = ({
         <ReLineChart data={data}>
           {grid && <CartesianGrid strokeDasharray="3 3" />}
 
-          <XAxis dataKey="category" interval={2} />
+          <XAxis
+            dataKey="category"
+            interval={2}
+            tick={{ fontSize: 16, fontWeight: 600 }}
+          />
 
           <YAxis
+            tick={{ fontSize: 16, fontWeight: 600 }}
             orientation="right"
             mirror={false}
             width={60}

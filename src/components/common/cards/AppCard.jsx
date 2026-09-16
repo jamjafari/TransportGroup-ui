@@ -53,7 +53,7 @@ const AppCard = ({
 
             title={
               <Typography
-                variant="h6"
+                variant="h4"
 
                 fontWeight={600}
               >

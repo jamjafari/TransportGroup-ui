@@ -10,7 +10,7 @@ const LoginHeader = () => {
         ورود به سامانه
       </Typography>
 
-      <Typography variant="body2" color="text.secondary" align="center">
+      <Typography variant="body1" color="text.secondary" align="center">
         لطفاً نام کاربری و رمز عبور خود را وارد نمایید
       </Typography>
     </Stack>

@@ -55,7 +55,7 @@ function AppHeader({ sidebarOpen, setSidebarOpen }) {
               size={64}
             />
 
-            <Typography variant="h3">
+            <Typography variant="h2">
               {tenant?.name || 'گروه حمل‌ونقل'}
             </Typography>
           </Box>
