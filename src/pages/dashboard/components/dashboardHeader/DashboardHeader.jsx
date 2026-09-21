@@ -15,6 +15,7 @@ const DashboardHeader = ({
   onFilter,
   onExport,
   onReports,
+  onShowMap,
 }) => {
   const { open, openDialog, closeDialog } = useReportDialog();
 
@@ -45,6 +46,7 @@ const DashboardHeader = ({
             onFilter={onFilter}
             onExport={onExport}
             onReports={openDialog}
+            onShowMap={onShowMap}
           />
 
           <DashboardSearchSummary />

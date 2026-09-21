@@ -58,7 +58,7 @@ const DriverListPage = () => {
         renderCell: ({ row }) => formatJalaliDate(row.licenseExpireDate),
       },
       {
-        field: 'isActive',
+        field: 'status',
         headerName: 'فعال',
         width: 120,
         renderCell: ({ row }) => (

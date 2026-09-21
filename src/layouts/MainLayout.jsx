@@ -62,6 +62,7 @@ function MainLayout() {
           p: 3,
           bgcolor: colors.background,
           minHeight: '100vh',
+          position: 'relative', // ✅ اضافه شد — تا Overlay نقشه فقط همینجا محدود بمونه
         }}
       >
         <Toolbar />

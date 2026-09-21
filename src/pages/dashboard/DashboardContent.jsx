@@ -8,7 +8,6 @@ import {
 } from '@/components/dashboard';
 
 import useDashboardRefresh from './hooks/useDashboardRefresh';
-
 import useDashboardPage from './hooks/useDashboardPage';
 
 import { DashboardHeader } from './components/DashboardHeader';
@@ -17,33 +16,25 @@ import { DashboardCharts } from './components/DashboardCharts';
 import { DashboardTables } from './components/DashboardTables';
 import { DashboardAlerts } from './components/DashboardAlerts';
 import DashboardSearchDialog from './components/DashboardSearch/DashboardSearchDialog';
+import ActiveVehiclesMapPanel from './components/ActiveVehiclesMap/ActiveVehiclesMapPanel'; // ✅ اضافه شد
 
 const DashboardContent = () => {
   const { refreshDashboard, refreshing, lastRefreshTime } =
     useDashboardRefresh();
-
   const { loading, error, refresh } = useDashboardPage();
   const [searchOpen, setSearchOpen] = useState(false);
+  const [mapOpen, setMapOpen] = useState(false); // ✅ اضافه شد
 
-  const handleSearchOpen = () => {
-    setSearchOpen(true);
-  };
+  const handleSearchOpen = () => setSearchOpen(true);
+  const handleSearchClose = () => setSearchOpen(false);
 
-  const handleSearchClose = () => {
-    setSearchOpen(false);
-  };
-  // console.log('content:', lastRefreshTime);
-  if (loading) {
-    return <DashboardSkeleton />;
-  }
-
-  if (error) {
-    return <DashboardError onRetry={refresh} />;
-  }
+  if (loading) return <DashboardSkeleton />;
+  if (error) return <DashboardError onRetry={refresh} />;
 
   const handleExport = () => {
     console.log('Dashboard Export');
   };
+
   return (
     <DashboardLayout>
       <DashboardHeader
@@ -52,16 +43,20 @@ const DashboardContent = () => {
         onRefresh={refreshDashboard}
         onFilter={handleSearchOpen}
         onExport={handleExport}
+        onShowMap={() => setMapOpen(true)}
       />
       <DashboardStatistics />
-
       <DashboardAlerts />
-
       <DashboardCharts />
-
       <DashboardTables />
       <DashboardSearchDialog open={searchOpen} onClose={handleSearchClose} />
+      <ActiveVehiclesMapPanel
+        open={mapOpen}
+        onClose={() => setMapOpen(false)}
+      />{' '}
+      {/* ✅ اضافه شد */}
     </DashboardLayout>
   );
 };
+
 export default memo(DashboardContent);

@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useAuth } from '@/hooks';
+import { getPostLoginRedirect } from '@/utils/authRedirect'; // ✅ اضافه شد
 
 const useLogin = () => {
   const navigate = useNavigate();
-
   const { login } = useAuth();
 
   const [username, setUsername] = useState('');
@@ -20,25 +20,15 @@ const useLogin = () => {
     setLoading(true);
 
     try {
-      console.log('LOGIN START');
-
-      const result = await login({
-        username,
-        password,
-        rememberMe,
-      });
-
-      console.log('LOGIN RESULT:', result); // ✅ اضافه شد
+      const result = await login({ username, password, rememberMe });
 
       if (result.mustChangePassword) {
-        navigate('/force-change-password', { state: { username } }); // ✅ تغییر از /change-password
+        navigate('/force-change-password', { state: { username } });
         return;
       }
 
-      console.log('REDIRECTING TO DASHBOARD'); // ✅ اضافه شد
-      navigate('/dashboard');
+      navigate(getPostLoginRedirect(result.user)); // ✅ اصلاح شد
     } catch (err) {
-      console.error('LOGIN ERROR:', err); // ✅ اضافه شد — این مهم‌ترین خطه
       if (err.response?.status === 401) {
         setError('نام کاربری یا رمز عبور صحیح نیست.');
       } else if (!err.response) {
@@ -55,14 +45,11 @@ const useLogin = () => {
     username,
     password,
     rememberMe,
-
     loading,
     error,
-
     setUsername,
     setPassword,
     setRememberMe,
-
     handleSubmit,
   };
 };

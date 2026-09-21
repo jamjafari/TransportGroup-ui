@@ -7,6 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import DriverForm from '../components/DriverForm';
 import DriverDocumentsSection from '../sections/DriverDocumentsSection';
+import DriverUserAccountSection from '../sections/DriverUserAccountSection'; // ✅ اضافه شد
 
 import { gregorianYearToJalali } from '@/utils';
 import { AppCard } from '@/components';
@@ -15,9 +16,7 @@ import useDriver from '../hooks/useDriver';
 
 const DriverEditPage = () => {
   const { id } = useParams();
-
   const navigate = useNavigate();
-
   const { getDriverById, updateDriver } = useDriver();
 
   const [driver, setDriver] = useState(null);
@@ -28,7 +27,6 @@ const DriverEditPage = () => {
 
       setDriver({
         ...data,
-        licenseExpireDate: gregorianYearToJalali(data.licenseExpireDate),
         licenseExpireDate: data.licenseExpireDate
           ? new Date(data.licenseExpireDate)
           : null,
@@ -63,6 +61,13 @@ const DriverEditPage = () => {
       <AppCard sx={{ p: 4, mb: 3 }}>
         <DriverForm initialValues={driver} onSubmit={handleSubmit} />
       </AppCard>
+
+      <Box sx={{ mb: 3 }}>
+        <DriverUserAccountSection
+          driverId={id}
+          hasUserAccount={!!driver.userId}
+        />
+      </Box>
 
       <AppCard sx={{ p: 4 }}>
         <DriverDocumentsSection driverId={id} />

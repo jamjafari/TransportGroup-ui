@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import MissionForm from '../components/MissionForm';
+import MissionGpsHistorySection from '../sections/MissionGpsHistorySection'; // ✅ اضافه شد
 
 import { gregorianYearToJalali } from '@/utils';
 import { AppCard } from '@/components';
@@ -14,9 +15,7 @@ import useMission from '../hooks/useMission';
 
 const MissionEditPage = () => {
   const { id } = useParams();
-
   const navigate = useNavigate();
-
   const { getMissionById, updateMission } = useMission();
 
   const [mission, setMission] = useState(null);
@@ -27,9 +26,7 @@ const MissionEditPage = () => {
 
       setMission({
         ...data,
-        startDate: gregorianYearToJalali(data.startDate),
         startDate: data.startDate ? new Date(data.startDate) : null,
-        endDate: gregorianYearToJalali(data.endDate),
         endDate: data.endDate ? new Date(data.endDate) : null,
       });
     };
@@ -61,6 +58,10 @@ const MissionEditPage = () => {
 
       <AppCard sx={{ p: 4, mb: 3 }}>
         <MissionForm initialValues={mission} onSubmit={handleSubmit} />
+      </AppCard>
+
+      <AppCard sx={{ p: 4 }}>
+        <MissionGpsHistorySection missionId={id} />
       </AppCard>
     </Box>
   );

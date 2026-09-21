@@ -30,6 +30,8 @@ import {
   DriverListPage,
   DriverCreatePage,
   DriverEditPage,
+  DriverMissionsPage,
+  DriverMissionDetailPage,
   TireProvider,
   TireListPage,
   TireCreatePage,
@@ -114,6 +116,13 @@ const AppRouter = () => {
 
         <Route path="/403" element={<Forbidden />} />
         <Route path="/subscription-expired" element={<SubscriptionExpired />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/driver/missions" element={<DriverMissionsPage />} />
+          <Route
+            path="/driver/missions/:id"
+            element={<DriverMissionDetailPage />}
+          />
+        </Route>
         <Route element={<ProtectedRoute />}>
           <Route element={<SubscriptionRoute />}>
             <Route element={<MainLayout />}>

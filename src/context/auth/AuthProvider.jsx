@@ -16,7 +16,6 @@ const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // ✅ منطق مشترک ذخیره‌ی نشست بعد از دریافت توکن معتبر (چه از لاگین عادی، چه از تغییر اجباری رمز)
   const applySession = useCallback((result, rememberMe = false) => {
     tokenManager.setToken(result.accessToken, rememberMe);
     tokenManager.setRefreshToken(result.refreshToken, rememberMe);
@@ -24,6 +23,8 @@ const AuthProvider = ({ children }) => {
     const decoded = decodeToken(result.accessToken);
     setToken(result.accessToken);
     setUser(decoded);
+
+    return decoded; // ✅ اضافه شد
   }, []);
 
   const login = useCallback(
@@ -31,17 +32,15 @@ const AuthProvider = ({ children }) => {
       const result = await AuthRepository.login(credentials);
 
       if (result.mustChangePassword) {
-        // توکنی صادر نشده؛ نباید چیزی در storage ذخیره بشه
         return result;
       }
 
-      applySession(result, credentials.rememberMe);
-      return result;
+      const decodedUser = applySession(result, credentials.rememberMe);
+      return { ...result, user: decodedUser }; // ✅ اضافه شد
     },
     [applySession],
   );
 
-  // ✅ جدید — برای حالت تغییر اجباری رمز (بدون توکن قبلی)
   const forceChangePassword = useCallback(
     async ({ userName, currentPassword, newPassword }) => {
       const result = await AuthRepository.forceChangePassword({
@@ -50,8 +49,8 @@ const AuthProvider = ({ children }) => {
         newPassword,
       });
 
-      applySession(result, false);
-      return result;
+      const decodedUser = applySession(result, false);
+      return { ...result, user: decodedUser }; // ✅ اضافه شد
     },
     [applySession],
   );
@@ -94,7 +93,7 @@ const AuthProvider = ({ children }) => {
       login,
       logout,
       restoreUser,
-      forceChangePassword, // ✅ اضافه شد
+      forceChangePassword,
       isAuthenticated: !!token,
       can: (permission) => hasPermission(user, permission),
       canAny: (permissions) => hasAnyPermission(user, permissions),

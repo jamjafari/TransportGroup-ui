@@ -49,3 +49,10 @@ export const deleteDriver = async (id) => {
 
   return response;
 };
+export const createUserForDriver = async (driverId, payload) => {
+  const response = await apiClient.post(
+    `${BASE_URL}/${driverId}/create-user`,
+    payload,
+  );
+  return response;
+};

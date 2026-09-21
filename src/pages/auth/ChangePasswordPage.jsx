@@ -5,6 +5,7 @@ import { Box, Typography, Alert } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import { AppCard, AppTextField, AppButton } from '@/components';
+import { getPostLoginRedirect } from '@/utils/authRedirect'; // ✅ اضافه شد
 
 import { apiClient } from '@/services';
 import { useAuth } from '@/hooks';
@@ -49,7 +50,7 @@ const ChangePasswordPage = () => {
           newPassword,
         });
 
-        navigate('/dashboard');
+        navigate(getPostLoginRedirect(result.user)); // ✅ اصلاح شد (قبلاً '/dashboard' بود)
         return;
       }
 
