@@ -1,6 +1,7 @@
 import axiosClient from '../axiosClient';
 
 import { tokenManager } from '@/core/auth';
+import refreshSession from '../refreshSession';
 
 let isRefreshing = false;
 
@@ -40,6 +41,9 @@ const responseErrorInterceptor = async (error) => {
   // --------------------------------------------------
   // Login و Refresh نباید وارد فرآیند refresh شوند
   // --------------------------------------------------
+  const isLoginRequest = url.includes('/auth/login');
+
+  const isRefreshRequest = url.includes('/auth/refresh-token');
 
   if (
     status !== 401 ||
@@ -49,9 +53,6 @@ const responseErrorInterceptor = async (error) => {
   ) {
     return Promise.reject(error);
   }
-  const isLoginRequest = url.includes('/auth/login');
-
-  const isRefreshRequest = url.includes('/auth/refresh-token');
   originalRequest._retry = true;
 
   // --------------------------------------------------
@@ -77,19 +78,8 @@ const responseErrorInterceptor = async (error) => {
   isRefreshing = true;
 
   try {
-    const refreshToken = tokenManager.getRefreshToken();
-
-    if (!refreshToken) {
-      throw new Error('Refresh token وجود ندارد.');
-    }
-
-    const response = await axiosClient.post('/auth/refresh-token', {
-      refreshToken,
-    });
-
-    const newToken = response.data.accessToken;
-
-    tokenManager.setToken(newToken);
+    // ✅ Refresh Token در کوکی HttpOnly است؛ refreshSession آن را می‌فرستد و Access Token تازه را در حافظه می‌گذارد
+    const { accessToken: newToken } = await refreshSession();
 
     originalRequest.headers = {
       ...originalRequest.headers,

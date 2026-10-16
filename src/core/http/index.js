@@ -5,3 +5,5 @@ export * from './httpHeaders';
 export * from './endpoints';
 
 export { default as BaseApiService } from './BaseApiService';
+
+export { default as refreshSession } from './refreshSession';

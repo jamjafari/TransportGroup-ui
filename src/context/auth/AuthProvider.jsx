@@ -5,20 +5,20 @@ import { AuthRepository } from '@/repositories';
 import {
   tokenManager,
   decodeToken,
-  isTokenExpired,
   hasPermission,
   hasAnyPermission,
   hasAllPermissions,
 } from '@/core/auth';
+import { refreshSession } from '@/core/http';
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const applySession = useCallback((result, rememberMe = false) => {
-    tokenManager.setToken(result.accessToken, rememberMe);
-    tokenManager.setRefreshToken(result.refreshToken, rememberMe);
+  // ✅ Access Token فقط در حافظه؛ Refresh Token را سرور در کوکی HttpOnly گذاشته است
+  const applySession = useCallback((result) => {
+    tokenManager.setToken(result.accessToken);
 
     const decoded = decodeToken(result.accessToken);
     setToken(result.accessToken);
@@ -35,7 +35,7 @@ const AuthProvider = ({ children }) => {
         return result;
       }
 
-      const decodedUser = applySession(result, credentials.rememberMe);
+      const decodedUser = applySession(result);
       return { ...result, user: decodedUser }; // ✅ اضافه شد
     },
     [applySession],
@@ -49,37 +49,37 @@ const AuthProvider = ({ children }) => {
         newPassword,
       });
 
-      const decodedUser = applySession(result, false);
+      const decodedUser = applySession(result);
       return { ...result, user: decodedUser }; // ✅ اضافه شد
     },
     [applySession],
   );
 
-  const logout = useCallback(() => {
+  const logout = useCallback(async () => {
+    // کوکی HttpOnly را فقط سرور می‌تواند پاک کند؛ Refresh Token هم همان‌جا باطل می‌شود
+    try {
+      await AuthRepository.logout();
+    } catch {
+      // حتی اگر سرور در دسترس نبود، نشست سمت کاربر بسته می‌شود
+    }
+
     tokenManager.clear();
     setToken(null);
     setUser(null);
   }, []);
 
-  const restoreUser = useCallback(() => {
-    const savedToken = tokenManager.getToken();
-
-    if (!savedToken) {
-      setLoading(false);
-      return;
-    }
-
-    if (isTokenExpired(savedToken)) {
+  // ✅ بعد از بارگذاری صفحه Access Token در حافظه نیست؛ با کوکی Refresh یک توکن تازه می‌گیریم
+  const restoreUser = useCallback(async () => {
+    try {
+      const result = await refreshSession();
+      applySession(result);
+    } catch {
+      // کوکی معتبری وجود ندارد — کاربر وارد نشده است
       tokenManager.clear();
+    } finally {
       setLoading(false);
-      return;
     }
-
-    const decoded = decodeToken(savedToken);
-    setToken(savedToken);
-    setUser(decoded);
-    setLoading(false);
-  }, []);
+  }, [applySession]);
 
   useEffect(() => {
     restoreUser();

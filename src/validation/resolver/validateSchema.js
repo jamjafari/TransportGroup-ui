@@ -1,4 +1,4 @@
-import validationField from '../rules/validationField';
+import validateField from '../rules/validationField';
 
 const validateSchema = (
   values,

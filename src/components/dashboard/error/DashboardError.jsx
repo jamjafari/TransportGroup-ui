@@ -4,7 +4,7 @@ import { Box, Button, Typography } from '@mui/material';
 
 import Stack from '@mui/material/Stack';
 
-import ErrorIcon from '@mui/icons-material/Error';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
 import RefreshIcon from '@mui/icons-material/Refresh';
 

@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import colors from '@/theme/colors';
 const GridHeader = ({
   columns,
@@ -84,7 +85,6 @@ const GridHeader = ({
                 overflow: 'hidden',
 
                 whiteSpace: 'normal',
-                overflow: 'hidden',
                 wordBreak: 'normal',
                 overflowWrap: 'break-word',
 

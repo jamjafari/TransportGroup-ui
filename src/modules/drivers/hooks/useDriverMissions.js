@@ -38,6 +38,10 @@ const useDriverMissions = () => {
       const data = unwrap(response);
       setPoints(data);
       return data;
+    } catch (err) {
+      // تاریخچه حیاتی نیست — خطای آن نباید باعث unhandled rejection در صفحه شود
+      console.error(err);
+      return [];
     } finally {
       setLoading(false);
     }

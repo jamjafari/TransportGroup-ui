@@ -66,12 +66,13 @@ const DriverMissionDetailPage = () => {
   });
   // ✅ اضافه شد — هشدار قبل از بستن/ترک صفحه وقتی ثبت خودکار فعال است
   useEffect(() => {
+    if (!isTracking && autoError) {
+      setMessage(autoError);
+    }
+  }, [isTracking, autoError]);
+
+  useEffect(() => {
     if (!isTracking) return;
-    useEffect(() => {
-      if (!isTracking && autoError) {
-        setMessage(autoError);
-      }
-    }, [isTracking, autoError]);
 
     const handleBeforeUnload = (event) => {
       event.preventDefault();

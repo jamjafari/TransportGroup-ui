@@ -32,11 +32,12 @@ const emptyDraft = {
 const ServiceDocumentsSection = ({ serviceId }) => {
   const { attachments, loading, addAttachment, removeAttachment } =
     useAttachments(ATTACHMENT_OWNER_TYPE.VEHICLE_SERVICE, serviceId);
+  const [draft, setDraft] = useState(emptyDraft);
+  const [submitting, setSubmitting] = useState(false);
+
   if (!serviceId) {
     return null;
   }
-  const [draft, setDraft] = useState(emptyDraft);
-  const [submitting, setSubmitting] = useState(false);
 
   const handleFileChange = (event) => {
     setDraft((prev) => ({ ...prev, file: event.target.files?.[0] ?? null }));

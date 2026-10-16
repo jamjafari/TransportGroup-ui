@@ -44,7 +44,7 @@ const ChangePasswordPage = () => {
     try {
       if (isForced) {
         // ✅ حالت تغییر اجباری (بدون توکن) — این تابع خودش بعد از موفقیت وارد سیستم هم می‌کند
-        await forceChangePassword({
+        const result = await forceChangePassword({
           userName: forcedUsername,
           currentPassword,
           newPassword,

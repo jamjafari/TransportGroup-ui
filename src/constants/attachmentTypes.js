@@ -15,6 +15,41 @@ export const ATTACHMENT_OWNER_TYPE = {
   TENANT: 12,
 };
 
+// ✅ باید با AttachmentService.AllowedContentTypes در بک‌اند یکی باشد
+export const ALLOWED_ATTACHMENT_EXTENSIONS = [
+  '.jpg',
+  '.jpeg',
+  '.png',
+  '.gif',
+  '.webp',
+  '.pdf',
+  '.doc',
+  '.docx',
+  '.xls',
+  '.xlsx',
+];
+
+export const MAX_ATTACHMENT_SIZE_MB = 10;
+
+// پیام خطا برمی‌گرداند، یا null اگر فایل مجاز باشد
+export const validateAttachmentFile = (
+  file,
+  allowedExtensions = ALLOWED_ATTACHMENT_EXTENSIONS,
+) => {
+  const name = file?.name?.toLowerCase() ?? '';
+  const extension = name.includes('.') ? name.slice(name.lastIndexOf('.')) : '';
+
+  if (!allowedExtensions.includes(extension)) {
+    return `نوع فایل مجاز نیست. پسوندهای مجاز: ${allowedExtensions.join(' ')}`;
+  }
+
+  if (file.size > MAX_ATTACHMENT_SIZE_MB * 1024 * 1024) {
+    return `حجم فایل نباید بیشتر از ${MAX_ATTACHMENT_SIZE_MB} مگابایت باشد.`;
+  }
+
+  return null;
+};
+
 // export const attachmentCategoryOptions = [
 //   { value: 1, label: 'بیمه‌نامه' },
 //   { value: 2, label: 'معاینه فنی' },

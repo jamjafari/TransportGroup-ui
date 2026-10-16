@@ -28,7 +28,6 @@ const FuelRecordEditPage = () => {
 
       setFuelRecord({
         ...data,
-        fuelDate: gregorianYearToJalali(data.fuelDate),
         fuelDate: data.fuelDate ? new Date(data.fuelDate) : null,
       });
     };

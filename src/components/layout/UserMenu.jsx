@@ -24,9 +24,9 @@ function UserMenu() {
 
   const displayName = user?.unique_name || user?.UniqueName || 'کاربر';
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     setAnchorEl(null);
-    logout();
+    await logout(); // ✅ صبر تا نشست بسته شود، وگرنه GuestRoute کاربر را به داشبورد برمی‌گرداند
     navigate('/login', { replace: true });
   };
 

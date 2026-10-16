@@ -1,5 +1,8 @@
+import { tokenManager } from '@/core/auth';
+
+// ✅ قبلاً کلید اشتباه 'accessToken' را از localStorage می‌خواند و همیشه null بود
 export function getToken() {
-  return localStorage.getItem('accessToken');
+  return tokenManager.getToken();
 }
 
 export function getPayload() {

@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
 import * as vehicleApi from '@/modules/fleet/vehicles/api/vehicleApi';
-const useinsuranceVehicles = () => {
+const useInsuranceVehicles = () => {
   const [vehicles, setVehicles] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -32,4 +32,4 @@ const useinsuranceVehicles = () => {
   };
 };
 
-export default useinsuranceVehicles;
+export default useInsuranceVehicles;

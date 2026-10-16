@@ -16,6 +16,8 @@ export const recordGpsPoint = async (missionId, { latitude, longitude }) => {
 };
 
 export const getGpsPoints = async (missionId) => {
-  const response = await apiClient.get(`${BASE_URL}/${missionId}/gps-points`);
+  const response = await apiClient.get(
+    `${BASE_URL}/my/${missionId}/gps-points`,
+  );
   return response;
 };

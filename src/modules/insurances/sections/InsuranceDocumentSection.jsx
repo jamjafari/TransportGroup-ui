@@ -32,11 +32,12 @@ const emptyDraft = {
 const InsuranceDocumentsSection = ({ insuranceId }) => {
   const { attachments, loading, addAttachment, removeAttachment } =
     useAttachments(ATTACHMENT_OWNER_TYPE.INSURANCE, insuranceId);
+  const [draft, setDraft] = useState(emptyDraft);
+  const [submitting, setSubmitting] = useState(false);
+
   if (!insuranceId) {
     return null;
   }
-  const [draft, setDraft] = useState(emptyDraft);
-  const [submitting, setSubmitting] = useState(false);
 
   const handleFileChange = (event) => {
     setDraft((prev) => ({ ...prev, file: event.target.files?.[0] ?? null }));

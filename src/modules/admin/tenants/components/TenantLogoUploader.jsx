@@ -14,6 +14,9 @@ import {
   ATTACHMENT_OWNER_TYPE,
   ATTACHMENT_CATEGORY,
 } from '../constants/attachmentOwnerType';
+import { validateAttachmentFile } from '@/constants/attachmentTypes';
+
+const LOGO_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.webp', '.gif'];
 
 const TenantLogoUploader = ({ tenantId, tenantName }) => {
   const inputRef = useRef(null);
@@ -49,6 +52,13 @@ const TenantLogoUploader = ({ tenantId, tenantName }) => {
 
       if (!file) return;
 
+      // ✅ قبل از حذف لوگوی قبلی بررسی شود، وگرنه با فایل نامعتبر لوگو از بین می‌رود
+      const fileError = validateAttachmentFile(file, LOGO_EXTENSIONS);
+      if (fileError) {
+        setError(fileError);
+        return;
+      }
+
       setError('');
       setLoading(true);
 
@@ -67,8 +77,7 @@ const TenantLogoUploader = ({ tenantId, tenantName }) => {
 
         await loadLogo();
       } catch (err) {
-        console.error('Logo upload error:', err);
-        setError('خطا در آپلود لوگو');
+        setError(err.response?.data?.message || 'خطا در آپلود لوگو');
       } finally {
         setLoading(false);
       }
@@ -115,7 +124,7 @@ const TenantLogoUploader = ({ tenantId, tenantName }) => {
         <input
           ref={inputRef}
           type="file"
-          accept="image/*"
+          accept={LOGO_EXTENSIONS.join(',')}
           hidden
           onChange={handleFileSelect}
         />

@@ -1,55 +1,41 @@
-const ACCESS_TOKEN = 'access_token';
-const REFRESH_TOKEN = 'refresh_token';
+// ✅ Access Token فقط در حافظه نگه‌داری می‌شود (نه localStorage/sessionStorage)،
+// تا اسکریپت مخرب (XSS) نتواند آن را از storage بخواند.
+// Refresh Token در کوکی HttpOnly است که سرور تنظیم می‌کند و جاوااسکریپت اصلاً به آن دسترسی ندارد.
+// بعد از رفرش صفحه، AuthProvider با refreshSession() یک Access Token تازه می‌گیرد.
+
+// کلیدهای نسخه‌ی قبلی — فقط برای انتقال نشست‌های قدیمی و پاک‌سازی
+const LEGACY_ACCESS_TOKEN = 'access_token';
+const LEGACY_REFRESH_TOKEN = 'refresh_token';
+
+let accessToken = null;
 
 const TokenManager = {
   getToken() {
-    return (
-      localStorage.getItem(ACCESS_TOKEN) || sessionStorage.getItem(ACCESS_TOKEN)
-    );
+    return accessToken;
   },
 
-  setToken(token, rememberMe = false) {
-    // ابتدا از هر دو storage پاک می‌کنیم
-    localStorage.removeItem(ACCESS_TOKEN);
-    sessionStorage.removeItem(ACCESS_TOKEN);
-
-    const storage = rememberMe ? localStorage : sessionStorage;
-
-    storage.setItem(ACCESS_TOKEN, token);
-  },
-
-  removeToken() {
-    localStorage.removeItem(ACCESS_TOKEN);
-    sessionStorage.removeItem(ACCESS_TOKEN);
-  },
-
-  getRefreshToken() {
-    return (
-      localStorage.getItem(REFRESH_TOKEN) ||
-      sessionStorage.getItem(REFRESH_TOKEN)
-    );
-  },
-
-  setRefreshToken(token, rememberMe = false) {
-    localStorage.removeItem(REFRESH_TOKEN);
-    sessionStorage.removeItem(REFRESH_TOKEN);
-
-    const storage = rememberMe ? localStorage : sessionStorage;
-
-    storage.setItem(REFRESH_TOKEN, token);
-  },
-
-  removeRefreshToken() {
-    localStorage.removeItem(REFRESH_TOKEN);
-    sessionStorage.removeItem(REFRESH_TOKEN);
+  setToken(token) {
+    accessToken = token || null;
   },
 
   clear() {
-    localStorage.removeItem(ACCESS_TOKEN);
-    localStorage.removeItem(REFRESH_TOKEN);
+    accessToken = null;
+    TokenManager.clearLegacy();
+  },
 
-    sessionStorage.removeItem(ACCESS_TOKEN);
-    sessionStorage.removeItem(REFRESH_TOKEN);
+  // Refresh Token ذخیره‌شده توسط نسخه‌ی قبلی (اگر کاربر قبل از این تغییر وارد شده باشد)
+  getLegacyRefreshToken() {
+    return (
+      localStorage.getItem(LEGACY_REFRESH_TOKEN) ||
+      sessionStorage.getItem(LEGACY_REFRESH_TOKEN)
+    );
+  },
+
+  clearLegacy() {
+    localStorage.removeItem(LEGACY_ACCESS_TOKEN);
+    localStorage.removeItem(LEGACY_REFRESH_TOKEN);
+    sessionStorage.removeItem(LEGACY_ACCESS_TOKEN);
+    sessionStorage.removeItem(LEGACY_REFRESH_TOKEN);
   },
 };
 

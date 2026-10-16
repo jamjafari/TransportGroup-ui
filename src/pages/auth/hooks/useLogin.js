@@ -29,7 +29,13 @@ const useLogin = () => {
 
       navigate(getPostLoginRedirect(result.user)); // ✅ اصلاح شد
     } catch (err) {
-      if (err.response?.status === 401) {
+      if (err.response?.status === 429) {
+        // ✅ قفل موقت بعد از تلاش‌های ناموفق متعدد
+        setError(
+          err.response.data?.message ||
+            'تعداد تلاش‌ها زیاد است. لطفاً چند دقیقه‌ی دیگر دوباره تلاش کنید.',
+        );
+      } else if (err.response?.status === 401) {
         setError('نام کاربری یا رمز عبور صحیح نیست.');
       } else if (!err.response) {
         setError('خطا در برقراری ارتباط با سرور. اتصال اینترنت را بررسی کنید.');

@@ -2,6 +2,8 @@ import registerWidget from './registerWidget';
 
 import WidgetCategory from './WidgetCategory';
 
+import WidgetTypes from './WidgetTypes';
+
 /* ========================= */
 /* Charts */
 /* ========================= */
@@ -71,7 +73,7 @@ const DashboardWidgets = () => {
   registerWidget({
     id: 'monthly.chart',
 
-    component: MonthlyDistancetChart,
+    component: MonthlyDistanceChart,
 
     permission: 'Dashboard.Monthly.Chart.View',
 

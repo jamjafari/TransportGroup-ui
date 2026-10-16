@@ -28,7 +28,6 @@ const ExpenseEditPage = () => {
 
       setExpense({
         ...data,
-        expenseDate: gregorianYearToJalali(data.expenseDate),
         expenseDate: data.expenseDate ? new Date(data.expenseDate) : null,
       });
     };
