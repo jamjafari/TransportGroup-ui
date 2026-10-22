@@ -1,47 +1,49 @@
-import React, { memo } from 'react';
+import React, { memo } from "react";
 
-import { DashboardGrid, DashboardColumn, KpiCard } from '@/components';
+import { DashboardGrid, DashboardColumn, KpiCard } from "@/components";
+import { useTranslation } from "react-i18next";
 
 const ServiceReportKPI = ({ kpi = {} }) => {
+  const { t } = useTranslation();
   const items = [
     {
-      title: 'پرهزینه‌ترین خودرو',
+      title: "پرهزینه‌ترین خودرو",
 
-      value: kpi.mostExpensiveVehicle ?? '-',
+      value: kpi.mostExpensiveVehicle ?? "-",
 
-      color: 'error',
+      color: "error",
 
-      icon: 'vehicle',
+      icon: "vehicle",
     },
 
     {
-      title: 'هزینه پرهزینه‌ترین خودرو',
+      title: "هزینه پرهزینه‌ترین خودرو",
 
-      value: Number(kpi.mostExpensiveCost ?? 0).toLocaleString('en-US'),
+      value: Number(kpi.mostExpensiveCost ?? 0).toLocaleString("en-US"),
 
-      color: 'warning',
+      color: "warning",
 
-      icon: 'money',
+      icon: "money",
     },
 
     {
-      title: 'میانگین هزینه هر خودرو',
+      title: "میانگین هزینه هر خودرو",
 
-      value: Number(kpi.averageCostPerVehicle ?? 0).toLocaleString('en-US'),
+      value: Number(kpi.averageCostPerVehicle ?? 0).toLocaleString("en-US"),
 
-      color: 'primary',
+      color: "primary",
 
-      icon: 'report',
+      icon: "report",
     },
 
     {
-      title: 'میانگین هزینه هر سرویس',
+      title: "میانگین هزینه هر سرویس",
 
-      value: Number(kpi.averageCostPerService ?? 0).toLocaleString('en-US'),
+      value: Number(kpi.averageCostPerService ?? 0).toLocaleString("en-US"),
 
-      color: 'info',
+      color: "info",
 
-      icon: 'service',
+      icon: "service",
     },
   ];
 
@@ -50,7 +52,7 @@ const ServiceReportKPI = ({ kpi = {} }) => {
       {items.map((item) => (
         <DashboardColumn key={item.title} xs={12} md={6} lg={3}>
           <KpiCard
-            title={item.title}
+            title={t(item.title)}
             value={item.value}
             color={item.color}
             icon={item.icon}

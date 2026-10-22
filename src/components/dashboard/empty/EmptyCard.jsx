@@ -1,13 +1,16 @@
-import React from 'react';
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-import DashboardEmpty from './DashboardEmpty';
+import DashboardEmpty from "./DashboardEmpty";
 
-const EmptyCard = () => (
-  <DashboardEmpty
-    title="اطلاعاتی وجود ندارد"
-
-    description="کارت فاقد اطلاعات است."
-  />
-);
+const EmptyCard = () => {
+  const { t } = useTranslation();
+  return (
+    <DashboardEmpty
+      title={t("اطلاعاتی وجود ندارد")}
+      description={t("کارت فاقد اطلاعات است.")}
+    />
+  );
+};
 
 export default EmptyCard;

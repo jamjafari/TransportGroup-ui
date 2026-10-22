@@ -1,26 +1,28 @@
-import { Paper, Stack, Typography } from '@mui/material';
+import { Paper, Stack, Typography } from "@mui/material";
 
-import { DashboardGrid, DashboardColumn } from '@/components';
+import { DashboardGrid, DashboardColumn } from "@/components";
+import { useTranslation } from "react-i18next";
 
 const FBVReportSummary = ({ summary = {} }) => {
+  const { t } = useTranslation();
   const items = [
     {
-      title: 'کل هزینه ها',
+      title: "کل هزینه ها",
       value: summary.totalCost ?? 0,
     },
 
     {
-      title: 'هزینه های سوخت',
+      title: "هزینه های سوخت",
       value: summary.totalFuelCost ?? 0,
     },
 
     {
-      title: 'هزینه های کل سرویس ها ',
+      title: "هزینه های کل سرویس ها ",
       value: summary.totalExpenseCost ?? 0,
     },
 
     {
-      title: ' تعداد تراکنش ها ',
+      title: " تعداد تراکنش ها ",
       value: summary.transactionCount ?? 0,
     },
   ];
@@ -35,7 +37,7 @@ const FBVReportSummary = ({ summary = {} }) => {
             }}
           >
             <Stack spacing={1}>
-              <Typography variant="body2">{item.title}</Typography>
+              <Typography variant="body2">{t(item.title)}</Typography>
 
               <Typography variant="h4" fontWeight={700}>
                 {item.value}

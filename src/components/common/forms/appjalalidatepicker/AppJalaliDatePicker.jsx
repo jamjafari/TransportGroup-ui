@@ -3,10 +3,8 @@ import React, { memo } from 'react';
 import TextField from '@mui/material/TextField';
 
 import * as RMDPNamespace from 'react-multi-date-picker';
-import * as PersianCalendarNamespace from 'react-date-object/calendars/persian';
-import * as PersianFaLocaleNamespace from 'react-date-object/locales/persian_fa';
 
-import colors from '@/theme/colors';
+import { getDateLocale } from '@/utils/data/dateLocale';
 
 import {
   AppJalaliDatePickerPropTypes,
@@ -15,11 +13,9 @@ import {
 
 const DatePicker = RMDPNamespace.default?.default ?? RMDPNamespace.default;
 
-const persian =
-  PersianCalendarNamespace.default?.default ?? PersianCalendarNamespace.default;
-
-const persian_fa =
-  PersianFaLocaleNamespace.default?.default ?? PersianFaLocaleNamespace.default;
+// ✅ همین دو مقدار (calendar و locale) تقویم هر ۳۲ محل استفاده‌ی این کامپوننت را
+// تعیین می‌کنند؛ react-multi-date-picker هر دو تقویم شمسی و میلادی را پشتیبانی می‌کند.
+const unwrap = (module) => module?.default?.default ?? module?.default ?? module;
 
 const AppJalaliDatePicker = ({
   label,
@@ -34,11 +30,13 @@ const AppJalaliDatePicker = ({
   sx, // ✅ صریحاً جدا شد — تا به‌جای DatePicker، به TextField داخلی برسد
   ...props
 }) => {
+  const { calendar, locale } = getDateLocale();
+
   return (
     <DatePicker
       className="app-jalali-calendar" // ✅ اضافه شد
-      calendar={persian}
-      locale={persian_fa}
+      calendar={unwrap(calendar)}
+      locale={unwrap(locale)}
       containerStyle={{
         width: '100%',
       }}
@@ -50,8 +48,19 @@ const AppJalaliDatePicker = ({
         let converted = null;
 
         if (dateObject) {
-          converted = dateObject.toDate();
-          converted.setHours(0, 0, 0, 0);
+          // ✅ نیمه‌شب UTC، نه نیمه‌شب محلی.
+          // قبلاً setHours(0,0,0,0) روی وقت محلی اعمال می‌شد، ولی axios تاریخ را
+          // با toJSON به UTC می‌فرستد؛ در ایران (UTC+3:30) نیمه‌شب محلی به
+          // ساعت ۲۰:۳۰ روزِ *قبل* تبدیل می‌شد و سرور یک روز عقب‌تر را می‌دید.
+          const picked = dateObject.toDate();
+
+          converted = new Date(
+            Date.UTC(
+              picked.getFullYear(),
+              picked.getMonth(),
+              picked.getDate(),
+            ),
+          );
         }
 
         onChange?.(converted);
@@ -84,21 +93,21 @@ const AppJalaliDatePicker = ({
             '& .MuiInputLabel-root': {
               fontSize: 15,
               fontWeight: 700,
-              color: colors.textSecondary,
+              color: 'text.secondary',
             },
 
             // ✅ پیش‌فرض متن ورودی (تاریخ نمایش‌داده‌شده)
             '& .MuiOutlinedInput-input': {
               fontSize: 16,
               fontWeight: 600,
-              color: colors.textPrimary,
+              color: 'text.primary',
             },
 
             // ✅ پیش‌فرض متن راهنما
             '& .MuiFormHelperText-root': {
               fontSize: 14,
               fontWeight: 400,
-              color: colors.textSecondary,
+              color: 'text.secondary',
             },
 
             ...sx, // ← override در سطح یک مورد خاص

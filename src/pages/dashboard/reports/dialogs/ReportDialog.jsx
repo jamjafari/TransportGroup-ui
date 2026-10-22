@@ -31,7 +31,6 @@ const ReportDialog = ({ open, onClose }) => {
       maxWidth="lg"
       fullWidth
       onClose={onClose}
-      dir="rtl"
     >
       <DashboardGrid>
         {reportCategories.map((category) => (

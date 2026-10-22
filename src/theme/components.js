@@ -1,18 +1,14 @@
-import colors from './colors';
 import radius from './radius';
 import shadows from './shadows';
 
+// ✅ رنگ‌ها از tokens.js می‌آیند، نه به‌صورت ثابت در همین فایل.
+// الگوی (theme.vars || theme).palette باعث می‌شود مقدار به CSS Variable تبدیل شود
+// و با تغییر حالت روشن/تیره بدون رندر دوباره‌ی کامپوننت‌ها عوض شود.
+const palette = (theme) => (theme.vars || theme).palette;
+
+// نکته: برای body نیازی به override نیست — خودِ CssBaseline رنگ پس‌زمینه و متن را
+// از background.default و text.primary می‌خواند و با تغییر حالت خودکار عوض می‌شود.
 const components = {
-  MuiCssBaseline: {
-    styleOverrides: {
-      body: {
-        backgroundColor: colors.background,
-
-        color: colors.textPrimary,
-      },
-    },
-  },
-
   MuiPaper: {
     styleOverrides: {
       root: {
@@ -71,53 +67,53 @@ const components = {
 
   MuiDrawer: {
     styleOverrides: {
-      paper: {
-        backgroundColor: colors.sidebar,
+      paper: ({ theme }) => ({
+        backgroundColor: palette(theme).sidebar.main,
 
-        color: '#ffffff',
+        color: palette(theme).sidebar.text,
 
         borderRight: 'none',
-      },
+      }),
     },
   },
 
   MuiAppBar: {
     styleOverrides: {
-      root: {
-        backgroundColor: '#ffffff',
+      root: ({ theme }) => ({
+        backgroundColor: palette(theme).surface.header,
 
-        color: colors.textPrimary,
+        color: palette(theme).surface.headerText,
 
-        boxShadow: '0 2px 6px rgba(0,0,0,.06)',
-      },
+        boxShadow: 'none',
+      }),
     },
   },
 
   MuiListItemButton: {
     styleOverrides: {
-      root: {
+      root: ({ theme }) => ({
         borderRadius: 10,
 
         marginBottom: 4,
 
         '&.Mui-selected': {
-          backgroundColor: colors.sidebarActive,
+          backgroundColor: palette(theme).sidebar.active,
 
-          color: '#ffffff',
+          color: palette(theme).sidebar.text,
         },
 
         '&:hover': {
-          backgroundColor: colors.sidebarHover,
+          backgroundColor: palette(theme).sidebar.hover,
         },
-      },
+      }),
     },
   },
 
   MuiDivider: {
     styleOverrides: {
-      root: {
-        borderColor: colors.border,
-      },
+      root: ({ theme }) => ({
+        borderColor: palette(theme).divider,
+      }),
     },
   },
 };

@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LockResetIcon from '@mui/icons-material/LockReset';
+import { useTranslation } from 'react-i18next';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -19,10 +20,11 @@ import { useAuth } from '@/hooks';
 function UserMenu() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const displayName = user?.unique_name || user?.UniqueName || 'کاربر';
+  const displayName = user?.unique_name || user?.UniqueName || t('کاربر');
 
   const handleLogout = async () => {
     setAnchorEl(null);
@@ -54,14 +56,14 @@ function UserMenu() {
           <ListItemIcon>
             <LockResetIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText>تغییر رمز عبور</ListItemText>
+          <ListItemText>{t('تغییر رمز عبور')}</ListItemText>
         </MenuItem>
 
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <LogoutIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText>خروج</ListItemText>
+          <ListItemText>{t('خروج')}</ListItemText>
         </MenuItem>
       </Menu>
     </>

@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 
 import { Box, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 import Stack from '@mui/material/Stack';
 
@@ -12,6 +13,8 @@ import {
 } from './DashboardEmpty.types';
 
 const DashboardEmpty = ({ title, description }) => {
+  const { t } = useTranslation();
+
   return (
     <Box
       display="flex"
@@ -37,14 +40,14 @@ const DashboardEmpty = ({ title, description }) => {
           }}
         />
 
-        <Typography variant="h6">{title}</Typography>
+        <Typography variant="h6">{t(title)}</Typography>
 
         <Typography
           variant="body2"
 
           color="text.secondary"
         >
-          {description}
+          {t(description)}
         </Typography>
       </Stack>
     </Box>

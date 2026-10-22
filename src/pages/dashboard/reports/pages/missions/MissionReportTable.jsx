@@ -1,54 +1,55 @@
-import React from 'react';
+import React from "react";
 
-import { AppDataGrid, StatusChip } from '@/components';
-import { getStatusLabel } from '@/utils/statusLabels'; // ✅ اضافه شد
+import { AppDataGrid, StatusChip } from "@/components";
+import { getStatusLabel } from "@/utils/statusLabels"; // ✅ اضافه شد
 
-import useMissionReport from './hooks/useMissionReport';
-import { formatJalaliDate } from '@/utils';
-
+import useMissionReport from "./hooks/useMissionReport";
+import { formatJalaliDate } from "@/utils";
+import { useTranslatedColumns } from "../../../../../hooks";
 const MissionReportTable = () => {
   const { data, loading } = useMissionReport();
 
-  const columns = [
+  const baseColumns = [
     {
-      field: 'missionNumber',
-      headerName: 'شماره ماموریت',
+      field: "missionNumber",
+      headerName: "شماره ماموریت",
       flex: 1,
     },
     {
-      field: 'vehicleName',
-      headerName: 'خودرو',
+      field: "vehicleName",
+      headerName: "خودرو",
       flex: 1,
     },
     {
-      field: 'driverName',
-      headerName: 'راننده',
+      field: "driverName",
+      headerName: "راننده",
       flex: 1,
     },
     {
-      field: 'origin',
-      headerName: 'مبدا',
+      field: "origin",
+      headerName: "مبدا",
       flex: 1,
     },
     {
-      field: 'destination',
-      headerName: 'مقصد',
+      field: "destination",
+      headerName: "مقصد",
       flex: 1,
     },
     {
-      field: 'missionDate',
-      headerName: 'تاریخ',
+      field: "missionDate",
+      headerName: "تاریخ",
       flex: 1,
       renderCell: ({ value }) => formatJalaliDate(value),
     },
     {
-      field: 'status',
-      headerName: 'وضعیت',
+      field: "status",
+      headerName: "وضعیت",
       renderCell: ({ value }) => <StatusChip status={value} />,
       flex: 1,
       valueFormatter: (value) => getStatusLabel(value), // ✅ اضافه شد — فقط برای Export
     },
   ];
+  const columns = useTranslatedColumns(baseColumns);
 
   return (
     <AppDataGrid

@@ -1,57 +1,59 @@
-import React, { memo } from 'react';
+import React, { memo } from "react";
 
-import { DashboardGrid, DashboardColumn, KpiCard } from '@/components';
+import { DashboardGrid, DashboardColumn, KpiCard } from "@/components";
+import { useTranslation } from "react-i18next";
 
 const FleetKPI = ({ kpi = {} }) => {
+  const { t } = useTranslation();
   const items = [
     {
-      title: 'ضریب بهره‌وری',
+      title: "ضریب بهره‌وری",
 
       value: `${(kpi.utilization ?? 0).toFixed(2)}%`,
 
-      color: 'success',
+      color: "success",
 
-      icon: 'report',
+      icon: "report",
     },
 
     {
-      title: 'آماده به کار',
+      title: "آماده به کار",
 
       value: `${(kpi.availability ?? 0).toFixed(2)}%`,
 
-      color: 'primary',
+      color: "primary",
 
-      icon: 'check',
+      icon: "check",
     },
 
     {
-      title: 'میانگین مصرف',
+      title: "میانگین مصرف",
 
       value: `${(kpi.averageFuel ?? 0).toFixed(2)} L`,
 
-      color: 'warning',
+      color: "warning",
 
-      icon: 'fuel',
+      icon: "fuel",
     },
 
     {
-      title: 'میانگین کارکرد',
+      title: "میانگین کارکرد",
 
-      value: `${Number(kpi.averageKm ?? 0).toLocaleString('en-US')} Km`,
+      value: `${Number(kpi.averageKm ?? 0).toLocaleString("en-US")} Km`,
 
-      color: 'info',
+      color: "info",
 
-      icon: 'vehicle',
+      icon: "vehicle",
     },
 
     {
-      title: 'هزینه در هر 1000 کیلومتر',
+      title: "هزینه در هر 1000 کیلومتر",
 
-      value: Number(kpi.costPerKm ?? 0).toLocaleString('en-US'),
+      value: Number(kpi.costPerKm ?? 0).toLocaleString("en-US"),
 
-      color: 'error',
+      color: "error",
 
-      icon: 'money',
+      icon: "money",
     },
   ];
 
@@ -60,7 +62,7 @@ const FleetKPI = ({ kpi = {} }) => {
       {items.map((item) => (
         <DashboardColumn key={item.title} xs={12} md={6} lg={4}>
           <KpiCard
-            title={item.title}
+            title={t(item.title)}
             value={item.value}
             color={item.color}
             icon={item.icon}

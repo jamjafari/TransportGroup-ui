@@ -1,30 +1,26 @@
 import './polyfill'; // ✅ باید دقیقاً اولین import باشد
 
+// ✅ باید پیش از هر ماژول دیگری اجرا شود: بعضی فایل‌ها (اسکیمای اعتبارسنجی،
+// عنوان پیش‌فرض نمودارها) در زمان import متن ترجمه‌شده را می‌سازند.
+import i18n, { applyDocumentLocale } from './i18n';
+
 import ReactDOM from 'react-dom/client';
 
-import { ThemeProvider } from '@mui/material/styles';
-import { CacheProvider } from '@emotion/react';
-import createCache from '@emotion/cache';
-import { prefixer } from 'stylis';
-import rtlPlugin from 'stylis-plugin-rtl';
-import CssBaseline from '@mui/material/CssBaseline';
-
 import App from './App';
-import theme from './theme/theme';
-import './App.css'; // ✅ اضافه شد
+import { LocaleProvider } from './context/locale';
+import { setDateLocale } from './utils/data/dateLocale';
+import './App.css';
 
-document.documentElement.dir = 'rtl';
+// lang و dir را قبل از اولین رندر روی <html> می‌گذاریم تا صفحه بدون پرش بالا بیاید.
+// (index.html پیش‌فرض fa/rtl دارد؛ این خط اگر زبان ذخیره‌شده انگلیسی باشد اصلاحش می‌کند.)
+const locale = applyDocumentLocale(i18n.language);
 
-const rtlCache = createCache({
-  key: 'muirtl',
-  stylisPlugins: [prefixer, rtlPlugin],
-});
+// تقویم و قالب اعداد در سطح ماژول نگه‌داری می‌شوند، چون formatJalaliDate
+// یک تابع ساده است و از ~۴۴ جای مختلف داخل renderCell صدا زده می‌شود — نه از یک hook.
+setDateLocale(locale);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <CacheProvider value={rtlCache}>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <App />
-    </ThemeProvider>
-  </CacheProvider>,
+  <LocaleProvider>
+    <App />
+  </LocaleProvider>,
 );

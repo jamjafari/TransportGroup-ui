@@ -8,7 +8,6 @@ import {
   FormHelperText,
 } from '@mui/material';
 
-import colors from '@/theme/colors';
 
 import {
   AppSelectPropTypes,
@@ -54,21 +53,21 @@ const AppSelectform = ({
         '& .MuiInputLabel-root': {
           fontSize: 15,
           fontWeight: 700,
-          color: colors.textSecondary,
+          color: 'text.secondary',
         },
 
         // ✅ پیش‌فرض متن انتخاب‌شده داخل خود Select
         '& .MuiSelect-select': {
           fontSize: 16,
           fontWeight: 600,
-          color: colors.textPrimary,
+          color: 'text.primary',
         },
 
         // ✅ پیش‌فرض متن راهنما
         '& .MuiFormHelperText-root': {
           fontSize: 14,
           fontWeight: 400,
-          color: colors.textSecondary,
+          color: 'text.secondary',
         },
 
         ...sx, // ← override در سطح یک مورد خاص (برای لیبل/متن انتخاب‌شده/راهنما)
@@ -109,7 +108,7 @@ const AppSelectform = ({
               '& .MuiMenuItem-root': {
                 fontSize: 16,
                 fontWeight: 600,
-                color: colors.textPrimary,
+                color: 'text.primary',
               },
             },
           },

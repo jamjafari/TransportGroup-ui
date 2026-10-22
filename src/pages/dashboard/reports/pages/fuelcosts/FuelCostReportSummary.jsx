@@ -1,57 +1,58 @@
-import React, { memo } from 'react';
+import React, { memo } from "react";
 
-import { DashboardGrid, DashboardColumn, KpiCard } from '@/components';
-
+import { DashboardGrid, DashboardColumn, KpiCard } from "@/components";
+import { useTranslation } from "react-i18next";
 const FuelCostReportSummary = ({ summary = {} }) => {
+  const { t } = useTranslation();
   const items = [
     {
-      title: 'کل سوخت مصرف شده',
+      title: "کل سوخت مصرف شده",
 
-      value: Number(summary.totalFuel ?? 0).toLocaleString('en-US'),
+      value: Number(summary.totalFuel ?? 0).toLocaleString("en-US"),
 
-      color: 'primary',
+      color: "primary",
 
-      icon: 'fuel',
+      icon: "fuel",
     },
 
     {
-      title: 'کل پرداختی‌های سوخت',
+      title: "کل پرداختی‌های سوخت",
 
-      value: Number(summary.totalFuelCost ?? 0).toLocaleString('en-US'),
+      value: Number(summary.totalFuelCost ?? 0).toLocaleString("en-US"),
 
-      color: 'warning',
+      color: "warning",
 
-      icon: 'money',
+      icon: "money",
     },
 
     {
-      title: 'میانگین مصرف سوخت در هر ماه',
+      title: "میانگین مصرف سوخت در هر ماه",
 
       value: Number(summary.averageFuel ?? 0).toFixed(2),
 
-      color: 'info',
+      color: "info",
 
-      icon: 'fuel',
+      icon: "fuel",
     },
 
     {
-      title: 'میانگین هزینه سوخت در هر ماه',
+      title: "میانگین هزینه سوخت در هر ماه",
 
-      value: Number(summary.averageCost ?? 0).toLocaleString('en-US'),
+      value: Number(summary.averageCost ?? 0).toLocaleString("en-US"),
 
-      color: 'secondary',
+      color: "secondary",
 
-      icon: 'report',
+      icon: "report",
     },
 
     {
-      title: 'تعداد تراکنش‌های سوخت',
+      title: "تعداد تراکنش‌های سوخت",
 
-      value: Number(summary.transactionCount ?? 0).toLocaleString('en-US'),
+      value: Number(summary.transactionCount ?? 0).toLocaleString("en-US"),
 
-      color: 'success',
+      color: "success",
 
-      icon: 'report',
+      icon: "report",
     },
   ];
 
@@ -60,7 +61,7 @@ const FuelCostReportSummary = ({ summary = {} }) => {
       {items.map((item) => (
         <DashboardColumn key={item.title} xs={12} md={6} lg={2.4}>
           <KpiCard
-            title={item.title}
+            title={t(item.title)}
             value={item.value}
             color={item.color}
             icon={item.icon}

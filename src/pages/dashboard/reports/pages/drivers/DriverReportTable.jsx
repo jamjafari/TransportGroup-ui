@@ -1,51 +1,51 @@
-import React from 'react';
+import React from "react";
 
-import { AppDataGrid, StatusChip, AttachmentsButton } from '@/components';
+import { AppDataGrid, StatusChip, AttachmentsButton } from "@/components";
 
-import useDriverReport from './hooks/useDriverReport';
-import { ATTACHMENT_OWNER_TYPE } from '@/constants/attachmentTypes';
-import { getStatusLabel } from '@/utils/statusLabels'; // ✅ اضافه شد
-
+import useDriverReport from "./hooks/useDriverReport";
+import { ATTACHMENT_OWNER_TYPE } from "@/constants/attachmentTypes";
+import { getStatusLabel } from "@/utils/statusLabels"; // ✅ اضافه شد
+import { useTranslatedColumns } from "../../../../../hooks";
 const DriverReportTable = () => {
   const { data, loading } = useDriverReport();
 
-  const columns = [
+  const baseColumns = [
     {
-      field: 'fullName',
-      headerName: 'نام راننده',
+      field: "fullName",
+      headerName: "نام راننده",
       flex: 1,
     },
     {
-      field: 'nationalCode',
-      headerName: 'کد ملی',
+      field: "nationalCode",
+      headerName: "کد ملی",
       flex: 1,
     },
     {
-      field: 'phoneNumber',
-      headerName: 'موبایل',
+      field: "phoneNumber",
+      headerName: "موبایل",
       flex: 1,
     },
     {
-      field: 'licenseNumber',
-      headerName: 'گواهینامه',
+      field: "licenseNumber",
+      headerName: "گواهینامه",
       flex: 1,
     },
     {
-      field: 'missionCount',
-      headerName: 'ماموریت',
+      field: "missionCount",
+      headerName: "ماموریت",
       flex: 1,
     },
     {
-      field: 'status',
-      headerName: 'وضعیت',
+      field: "status",
+      headerName: "وضعیت",
       renderCell: ({ value }) => <StatusChip status={value} />,
       valueFormatter: (value) => getStatusLabel(value), // ✅ اضافه شد — فقط برای Export
 
       flex: 1,
     },
     {
-      field: 'attachments',
-      headerName: 'مدارک',
+      field: "attachments",
+      headerName: "مدارک",
       width: 90,
       renderCell: ({ row }) => (
         <AttachmentsButton
@@ -56,6 +56,7 @@ const DriverReportTable = () => {
       ),
     },
   ];
+  const columns = useTranslatedColumns(baseColumns);
 
   return (
     <AppDataGrid

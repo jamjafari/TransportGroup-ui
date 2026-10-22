@@ -11,15 +11,14 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import { NavLink, useLocation } from 'react-router-dom';
-
-import colors from '@/theme/colors';
+import { useTranslation } from 'react-i18next';
 
 const itemSx = (collapsed, level) => ({
   pl: 2 + level * 2,
   justifyContent: collapsed ? 'center' : 'initial',
-  color: 'colors.paper',
+  color: 'sidebar.text',
   '&:hover': {
-    bgcolor: colors.sidebarHover,
+    bgcolor: 'sidebar.hover',
   },
   '& .MuiListItemText-primary': {
     fontSize: 18,
@@ -27,11 +26,11 @@ const itemSx = (collapsed, level) => ({
     transition: 'font-size 0.2s ease, color 0.2s ease', // ✅ برای تغییر نرم سایز/رنگ
   },
   '&.active': {
-    bgcolor: colors.sidebarActive,
+    bgcolor: 'sidebar.active',
     '& .MuiListItemText-primary': {
       fontSize: 20, // ✅ فونت بزرگ‌تر برای آیتم فعال
       fontWeight: 1000,
-      color: colors.warning, // ✅ رنگ متفاوت برای آیتم فعال
+      color: 'sidebar.activeText', // ✅ رنگ متفاوت برای آیتم فعال
     },
   },
 });
@@ -40,11 +39,11 @@ const itemSx = (collapsed, level) => ({
 const parentActiveSx = (isChildActive) =>
   isChildActive
     ? {
-        bgcolor: colors.sidebarActive,
+        bgcolor: 'sidebar.active',
         '& .MuiListItemText-primary': {
           fontSize: 20,
           fontWeight: 900,
-          color: colors.warning,
+          color: 'sidebar.activeText',
         },
       }
     : {};
@@ -63,6 +62,10 @@ const isDescendantActive = (item, pathname) => {
 };
 
 const ItemMenu = ({ item, collapsed, level = 0 }) => {
+  // ✅ یک نقطه‌ی ترجمه برای کل منو: برچسب‌های menuItems فارسی‌اند و خودشان
+  // کلید ترجمه هستند، پس همین t() هر ۳۰ آیتم منو را پوشش می‌دهد.
+  const { t } = useTranslation();
+
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const [pressed, setPressed] = useState(false);
@@ -89,7 +92,7 @@ const ItemMenu = ({ item, collapsed, level = 0 }) => {
             ...itemSx(collapsed, level),
             ...parentActiveSx(childActive), // ✅ اضافه شد
             ...pressSx(pressed),
-            '&:hover': { bgcolor: colors.sidebarHover },
+            '&:hover': { bgcolor: 'sidebar.hover' },
           }}
         >
           <ListItemIcon
@@ -97,13 +100,13 @@ const ItemMenu = ({ item, collapsed, level = 0 }) => {
               minWidth: 0,
               mr: collapsed ? 0 : 2,
               justifyContent: 'center',
-              color: '#fbd6b7',
+              color: 'sidebar.icon',
             }}
           >
             {item.icon}
           </ListItemIcon>
 
-          {!collapsed && <ListItemText primary={item.label} />}
+          {!collapsed && <ListItemText primary={t(item.label)} />}
           {!collapsed && (open ? <ExpandLessIcon /> : <ExpandMoreIcon />)}
         </ListItemButton>
 
@@ -141,13 +144,13 @@ const ItemMenu = ({ item, collapsed, level = 0 }) => {
           minWidth: 0,
           mr: collapsed ? 0 : 2,
           justifyContent: 'center',
-          color: '#fbd6b7',
+          color: 'sidebar.icon',
         }}
       >
         {item.icon}
       </ListItemIcon>
 
-      {!collapsed && <ListItemText primary={item.label} />}
+      {!collapsed && <ListItemText primary={t(item.label)} />}
     </ListItemButton>
   );
 };

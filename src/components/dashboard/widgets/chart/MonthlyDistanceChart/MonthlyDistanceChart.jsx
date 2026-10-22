@@ -1,5 +1,7 @@
 import React, { memo } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { AreaChartWidget } from '../chartwidgets/AreaChartWidget';
 
 import useMonthlyDistanceChart from './useMonthlyDistanceChart';
@@ -16,13 +18,14 @@ const MonthlyDistanceChart = ({
 
   height,
 }) => {
+  const { t } = useTranslation();
   const chart = useMonthlyDistanceChart();
 
   return (
     <AreaChartWidget
-      title={title || chart.title}
+      title={title ? t(title) : t(chart.title)}
 
-      subtitle={subtitle || chart.subtitle}
+      subtitle={subtitle ? t(subtitle) : t(chart.subtitle)}
 
       categories={chart.categories}
 

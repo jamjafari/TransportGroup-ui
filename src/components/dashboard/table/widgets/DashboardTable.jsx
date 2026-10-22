@@ -1,15 +1,15 @@
-import React, { memo, useMemo } from 'react';
+import React, { memo, useMemo } from "react";
 
-import AppDataGrid from '@/components/common/datagrid/AppDataGrid';
+import AppDataGrid from "@/components/common/datagrid/AppDataGrid";
 
-import StatusChip from '@/components/common/chips/StatusChip';
+import StatusChip from "@/components/common/chips/StatusChip";
 
-import BaseTableWidget from './BaseTableWidget';
-
+import BaseTableWidget from "./BaseTableWidget";
+import { useTranslation } from "react-i18next";
 import {
   DashboardTablePropTypes,
   DashboardTableDefaultProps,
-} from './DashboardTable.types';
+} from "./DashboardTable.types";
 
 const DashboardTable = ({
   title,
@@ -44,10 +44,11 @@ const DashboardTable = ({
 
   actions,
 }) => {
+  const { t } = useTranslation();
   const gridColumns = useMemo(
     () =>
       columns.map((column) => {
-        if (column.field !== 'status') {
+        if (column.field !== "status") {
           return column;
         }
 
@@ -64,41 +65,25 @@ const DashboardTable = ({
   // console.log('dashboardTable row:', rows);
   return (
     <BaseTableWidget
-      title={title}
-
-      subtitle={subtitle}
-
+      title={t(title)}
+      subtitle={t(subtitle)}
       loading={loading}
-
       error={error}
-
       refresh={refresh}
-
       toolbar={toolbar}
-
       footer={footer}
-
       actions={actions}
-
       height={height}
     >
       <AppDataGrid
         rows={rows}
-
         columns={gridColumns}
-
         rowKey={rowKey}
-
         searchable={searchable}
-
         sortable={sortable}
-
         filterable={filterable}
-
         pagination={pagination}
-
         loading={loading}
-
         toolbar={null}
       />
     </BaseTableWidget>

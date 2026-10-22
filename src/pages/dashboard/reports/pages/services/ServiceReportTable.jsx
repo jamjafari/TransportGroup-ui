@@ -1,45 +1,45 @@
-import React, { memo } from 'react';
+import React, { memo } from "react";
 
-import { StatusChip, AppDataGrid, AttachmentsButton } from '@/components';
-import { formatJalaliDate } from '@/utils';
-import { ATTACHMENT_OWNER_TYPE } from '@/constants/attachmentTypes';
-import { getStatusLabel } from '@/utils/statusLabels'; // ✅ اضافه شد
-
-const columns = [
-  { field: 'plateNumber', headerName: 'پلاک', flex: 1 },
-  { field: 'vehicleName', headerName: 'نام خودرو', flex: 1.5 },
-  { field: 'serviceType', headerName: 'نوع سرویس', flex: 1.5 },
+import { StatusChip, AppDataGrid, AttachmentsButton } from "@/components";
+import { formatJalaliDate } from "@/utils";
+import { ATTACHMENT_OWNER_TYPE } from "@/constants/attachmentTypes";
+import { getStatusLabel } from "@/utils/statusLabels"; // ✅ اضافه شد
+import { useTranslatedColumns } from "../../../../../hooks";
+const baseColumns = [
+  { field: "plateNumber", headerName: "پلاک", flex: 1 },
+  { field: "vehicleName", headerName: "نام خودرو", flex: 1.5 },
+  { field: "serviceType", headerName: "نوع سرویس", flex: 1.5 },
   {
-    field: 'serviceDate',
-    headerName: 'تاریخ سرویس',
+    field: "serviceDate",
+    headerName: "تاریخ سرویس",
     flex: 1.2,
     renderCell: ({ value }) => formatJalaliDate(value),
   },
-  { field: 'odometerKm', headerName: 'کیلومتر سرویس', flex: 1, type: 'number' },
+  { field: "odometerKm", headerName: "کیلومتر سرویس", flex: 1, type: "number" },
   {
-    field: 'nextServiceKm',
-    headerName: 'کیلومتر بعدی',
+    field: "nextServiceKm",
+    headerName: "کیلومتر بعدی",
     flex: 1,
-    type: 'number',
+    type: "number",
   },
-  { field: 'remainingKm', headerName: 'باقی‌مانده', flex: 1, type: 'number' },
+  { field: "remainingKm", headerName: "باقی‌مانده", flex: 1, type: "number" },
   {
-    field: 'amount',
-    headerName: 'هزینه',
+    field: "amount",
+    headerName: "هزینه",
     flex: 1.2,
     renderCell: ({ value }) =>
-      value != null ? Number(value).toLocaleString('fa-IR') : '—',
+      value != null ? Number(value).toLocaleString("fa-IR") : "—",
   },
   {
-    field: 'status',
-    headerName: 'وضعیت',
+    field: "status",
+    headerName: "وضعیت",
     flex: 1,
     renderCell: ({ value }) => <StatusChip status={value} />,
     valueFormatter: (value) => getStatusLabel(value), // ✅ اضافه شد — فقط برای Export
   },
   {
-    field: 'attachments',
-    headerName: 'مدارک',
+    field: "attachments",
+    headerName: "مدارک",
     width: 90,
     renderCell: ({ row }) => (
       <AttachmentsButton
@@ -52,6 +52,8 @@ const columns = [
 ];
 
 const ServiceReportTable = ({ rows = [], loading }) => {
+  const columns = useTranslatedColumns(baseColumns);
+
   return (
     <AppDataGrid
       rows={rows}

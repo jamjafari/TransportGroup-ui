@@ -10,7 +10,6 @@ import {
 const AppFormSection = ({ title, subtitle, children, divider }) => {
   return (
     <Box
-      dir="rtl"
       sx={{
         width: '100%',
       }}

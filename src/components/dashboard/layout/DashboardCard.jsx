@@ -1,10 +1,12 @@
 // src/components/common/cards/DashboardCard.jsx
 
-import React, { memo } from 'react';
+import React, { memo } from "react";
+import { useTranslation } from "react-i18next";
 
-import { Card, CardContent, Divider, Stack, Typography } from '@mui/material';
+import { Card, CardContent, Divider, Stack, Typography } from "@mui/material";
 
-const DashboardCard = ({ title, subtitle, children, height = '100%' }) => {
+const DashboardCard = ({ title, subtitle, children, height = "100%" }) => {
+  const { t } = useTranslation();
   return (
     <Card
       elevation={1}
@@ -19,13 +21,13 @@ const DashboardCard = ({ title, subtitle, children, height = '100%' }) => {
             <Stack spacing={0.5}>
               {title && (
                 <Typography variant="h6" fontWeight={600}>
-                  {title}
+                  {t(title)}
                 </Typography>
               )}
 
               {subtitle && (
                 <Typography variant="body2" color="text.secondary">
-                  {subtitle}
+                  {t(subtitle)}
                 </Typography>
               )}
             </Stack>

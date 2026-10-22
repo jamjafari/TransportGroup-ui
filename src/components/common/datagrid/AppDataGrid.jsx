@@ -13,6 +13,7 @@ import { AppPagination } from '@/components/common/navigation';
 
 import useDataGrid from './hooks/useDataGrid';
 import { useTenantContext } from '@/context/tenant'; // ✅ اضافه شد
+import useLocale from '@/context/locale/useLocale';
 
 import { exportToExcel, exportToPdf } from './export';
 import { normalizeColumns } from './utils/columnManager';
@@ -54,6 +55,8 @@ const AppDataGrid = ({
   });
 
   const { tenant } = useTenantContext(); // ✅ اضافه شد
+
+  const { dir, isRtl } = useLocale();
 
   const handleExportExcel = () => {
     exportToExcel({
@@ -99,12 +102,14 @@ const AppDataGrid = ({
         />
       )}
 
+      {/* style درون‌خطی از Emotion عبور نمی‌کند، پس cssjanus آن را برنمی‌گرداند
+          و این مقدار واقعاً اعمال می‌شود — یعنی باید به زبان گره بخورد. */}
       <table
         style={{
           width: '100%',
           tableLayout: 'fixed',
           borderCollapse: 'collapse',
-          direction: 'rtl',
+          direction: dir,
         }}
         data-sticky-header={stickyHeader ? 'true' : undefined}
       >

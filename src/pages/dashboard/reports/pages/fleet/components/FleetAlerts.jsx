@@ -1,6 +1,7 @@
-import React, { memo } from 'react';
+import React, { memo } from "react";
 
-import { DashboardGrid, DashboardColumn, AppAlert } from '@/components';
+import { DashboardGrid, DashboardColumn, AppAlert } from "@/components";
+import { useTranslation } from "react-i18next";
 
 const FleetAlerts = ({
   alerts = {
@@ -9,23 +10,24 @@ const FleetAlerts = ({
     criticalService: 0,
   },
 }) => {
+  const { t } = useTranslation();
   const items = [
     {
-      title: 'بیمه منقضی',
+      title: "بیمه منقضی",
       value: alerts.expiredInsurance,
-      severity: 'error',
+      severity: "error",
     },
 
     {
-      title: 'سرویس ضروری',
+      title: "سرویس ضروری",
       value: alerts.requiredService,
-      severity: 'warning',
+      severity: "warning",
     },
 
     {
-      title: 'سرویس بحرانی',
+      title: "سرویس بحرانی",
       value: alerts.criticalService,
-      severity: 'error',
+      severity: "error",
     },
   ];
 
@@ -37,9 +39,9 @@ const FleetAlerts = ({
             open={item.value > 0}
             severity={item.severity}
             variant="filled"
-            title={item.title}
+            title={t(item.title)}
           >
-            تعداد موارد: {item.value}
+            {t("تعداد موارد:")} {item.value}
           </AppAlert>
         </DashboardColumn>
       ))}

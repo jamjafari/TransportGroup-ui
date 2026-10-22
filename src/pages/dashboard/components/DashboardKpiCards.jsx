@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 
 import { AppChartCard, StatusChip } from '@/components';
 import {
@@ -53,15 +53,16 @@ const DashboardKpiCards = ({
               </Grid>
 
               <Grid size={12}>
-                <span
-                  style={{
-                    color: '#757575',
+                <Box
+                  component="span"
+                  sx={{
+                    color: 'text.secondary',
 
                     fontSize: 14,
                   }}
                 >
                   {item.description}
-                </span>
+                </Box>
               </Grid>
             </Grid>
           </AppChartCard>

@@ -1,70 +1,71 @@
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
-import DashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
+import DashboardRepository from "../../../../repositories/dashboard/dashboard.repository";
 
-import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
-import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
-import { formatJalaliDate } from '@/utils';
-
+import useDashboardWidget from "@/pages/dashboard/hooks/useDashboardWidget";
+import useDashboardSearch from "@/pages/dashboard/hooks/useDashboardSearch";
+import { formatJalaliDate } from "@/utils";
+import { useTranslatedColumns } from "../../../../hooks";
 const useMissionTable = () => {
   const { filters } = useDashboardSearch();
 
   const widget = useDashboardWidget({
-    title: 'آخرین ماموریت ها',
+    title: "آخرین ماموریت ها",
 
-    subtitle: 'آخرین ماموریت های ثبت شده',
+    subtitle: "آخرین ماموریت های ثبت شده",
 
     fetcher: () => DashboardRepository.getMissionsDashboard(filters),
   });
 
-  const columns = useMemo(
+  const baseColumns = useMemo(
     () => [
       {
-        field: 'missionCode',
-        headerName: 'شماره',
+        field: "missionCode",
+        headerName: "شماره",
         flex: 1,
       },
 
       {
-        field: 'vehicleName',
-        headerName: 'خودرو',
+        field: "vehicleName",
+        headerName: "خودرو",
         flex: 1,
       },
 
       {
-        field: 'driverName',
-        headerName: 'راننده',
+        field: "driverName",
+        headerName: "راننده",
         flex: 1,
       },
 
       {
-        field: 'originLocation',
-        headerName: 'مبدأ',
+        field: "originLocation",
+        headerName: "مبدأ",
         width: 100,
       },
 
       {
-        field: 'destinationLocation',
-        headerName: 'مقصد',
+        field: "destinationLocation",
+        headerName: "مقصد",
         width: 100,
       },
 
       {
-        field: 'startDate',
-        headerName: 'تاریخ حرکت',
+        field: "startDate",
+        headerName: "تاریخ حرکت",
         flex: 1,
-        renderCell: ({ value }) => (value ? formatJalaliDate(value) : '—'),
+        renderCell: ({ value }) => (value ? formatJalaliDate(value) : "—"),
       },
 
       {
-        field: 'status',
-        headerName: 'وضعیت',
+        field: "status",
+        headerName: "وضعیت",
         width: 140,
-        align: 'right',
+        align: "right",
       },
     ],
     [],
   );
+  const columns = useTranslatedColumns(baseColumns);
 
   return {
     ...widget,

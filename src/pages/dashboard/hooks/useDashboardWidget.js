@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import useDashboardRefresh from './useDashboardRefresh';
+import useDashboardRefresh from "./useDashboardRefresh";
 
-const useDashboardWidget = ({ title = '', subtitle = '', fetcher }) => {
+const useDashboardWidget = ({ title = "", subtitle = "", fetcher }) => {
+  const { t } = useTranslation();
+
   const [rows, setRows] = useState([]);
-
   const [loading, setLoading] = useState(true);
-
   const [error, setError] = useState(null);
 
   const { refreshKey } = useDashboardRefresh();
@@ -14,15 +15,12 @@ const useDashboardWidget = ({ title = '', subtitle = '', fetcher }) => {
   const loadData = async () => {
     try {
       setLoading(true);
-
       setError(null);
 
       const result = await fetcher();
-
       setRows(result ?? []);
     } catch (error) {
       setRows([]);
-
       setError(error);
     } finally {
       setLoading(false);
@@ -34,15 +32,11 @@ const useDashboardWidget = ({ title = '', subtitle = '', fetcher }) => {
   }, [refreshKey]);
 
   return {
-    title,
-    subtitle,
-
+    title: title ? t(title) : "",
+    subtitle: subtitle ? t(subtitle) : "",
     rows,
-
     loading,
-
     error,
-
     refresh: loadData,
   };
 };

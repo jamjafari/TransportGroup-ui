@@ -1,29 +1,29 @@
-import React from 'react';
+import React from "react";
 
-import { AppDataGrid, AttachmentsButton } from '@/components';
-import { ATTACHMENT_OWNER_TYPE } from '@/constants/attachmentTypes';
-import { formatJalaliDate } from '@/utils';
-
+import { AppDataGrid, AttachmentsButton } from "@/components";
+import { ATTACHMENT_OWNER_TYPE } from "@/constants/attachmentTypes";
+import { formatJalaliDate } from "@/utils";
+import { useTranslatedColumns } from "../../../../../hooks";
 const FinancialReportTable = ({ rows = [], loading }) => {
-  const columns = [
+  const baseColumns = [
     {
-      field: 'expenseDate',
-      headerName: 'تاریخ',
+      field: "expenseDate",
+      headerName: "تاریخ",
       flex: 1,
       renderCell: ({ value }) => formatJalaliDate(value),
     },
-    { field: 'expenseType', headerName: 'نوع هزینه', flex: 1 },
-    { field: 'vehicleName', headerName: 'خودرو', flex: 1 },
+    { field: "expenseType", headerName: "نوع هزینه", flex: 1 },
+    { field: "vehicleName", headerName: "خودرو", flex: 1 },
     {
-      field: 'amount',
-      headerName: 'مبلغ',
+      field: "amount",
+      headerName: "مبلغ",
       flex: 1,
-      renderCell: ({ value }) => Number(value).toLocaleString('fa-IR'),
+      renderCell: ({ value }) => Number(value).toLocaleString("fa-IR"),
     },
-    { field: 'description', headerName: 'توضیحات', flex: 1 },
+    { field: "description", headerName: "توضیحات", flex: 1 },
     {
-      field: 'attachments',
-      headerName: 'مدارک',
+      field: "attachments",
+      headerName: "مدارک",
       width: 90,
       renderCell: ({ row }) => (
         <AttachmentsButton
@@ -34,6 +34,7 @@ const FinancialReportTable = ({ rows = [], loading }) => {
       ),
     },
   ];
+  const columns = useTranslatedColumns(baseColumns);
 
   return (
     <AppDataGrid

@@ -53,7 +53,7 @@ const AppLoader = ({
         sx={{
           zIndex: 1400,
 
-          bgcolor: 'rgba(255,255,255,.65)',
+          bgcolor: 'surface.scrim',
         }}
       >
         <LoaderContent
@@ -81,7 +81,7 @@ const AppLoader = ({
 
           alignItems: 'center',
 
-          bgcolor: 'rgba(255,255,255,.65)',
+          bgcolor: 'surface.scrim',
 
           zIndex: 10,
         }}

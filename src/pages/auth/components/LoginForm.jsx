@@ -1,5 +1,7 @@
 import React, { memo } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 // ✅ New
 import { AppForm } from '@/components/common/forms';
 
@@ -16,6 +18,8 @@ import { AppAlert } from '@/components/common/alerts';
 import useLogin from '../hooks/useLogin';
 
 const LoginForm = () => {
+  const { t } = useTranslation();
+
   const {
     username,
     password,
@@ -34,7 +38,7 @@ const LoginForm = () => {
     <AppForm onSubmit={handleSubmit}>
       <AppStack spacing={3}>
         {!!error && (
-          <AppAlert open severity="error" title="خطا">
+          <AppAlert open severity="error" title={t('خطا')}>
             {error}
           </AppAlert>
         )}
@@ -43,8 +47,8 @@ const LoginForm = () => {
           fullWidth
           required
           name="username"
-          label="نام کاربری"
-          placeholder="نام کاربری را وارد کنید"
+          label={t('نام کاربری')}
+          placeholder={t('نام کاربری را وارد کنید')}
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
@@ -54,21 +58,21 @@ const LoginForm = () => {
           required
           name="password"
           type="password"
-          label="رمز عبور"
-          placeholder="رمز عبور را وارد کنید"
+          label={t('رمز عبور')}
+          placeholder={t('رمز عبور را وارد کنید')}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
 
         <AppCheckbox
           name="rememberMe"
-          label="مرا به خاطر بسپار"
+          label={t('مرا به خاطر بسپار')}
           checked={rememberMe}
           onChange={(e) => setRememberMe(e.target.checked)}
         />
 
         <AppButton fullWidth size="large" type="submit" loading={loading}>
-          ورود به سامانه
+          {t('ورود به سامانه')}
         </AppButton>
       </AppStack>
     </AppForm>

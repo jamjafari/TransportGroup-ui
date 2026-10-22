@@ -12,8 +12,6 @@ import { filterMenuByPermission } from '@/utils/filterMenuByPermission';
 
 import { useAuth } from '@/hooks';
 
-import colors from '@/theme/colors';
-
 const expandedWidth = 260;
 const collapsedWidth = 72;
 
@@ -44,8 +42,9 @@ function MainLayout() {
             overflowX: 'hidden',
             transition: 'width .3s ease',
             boxSizing: 'border-box',
-            bgcolor: colors.sidebar,
-            borderLeft: `1px solid ${colors.border}`,
+            bgcolor: 'sidebar.main',
+            borderLeft: '1px solid',
+            borderLeftColor: 'divider',
             borderRight: 'none',
           },
         }}
@@ -60,7 +59,7 @@ function MainLayout() {
         sx={{
           flexGrow: 1,
           p: 3,
-          bgcolor: colors.background,
+          bgcolor: 'background.default',
           minHeight: '100vh',
           position: 'relative', // ✅ اضافه شد — تا Overlay نقشه فقط همینجا محدود بمونه
         }}

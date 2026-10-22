@@ -37,7 +37,7 @@ const LoginPage = () => {
         sx={{
           position: 'absolute',
           inset: 0,
-          backgroundColor: 'rgba(255, 255, 255, 0.20)',
+          backgroundColor: 'surface.glass',
         }}
       />
 
@@ -63,17 +63,18 @@ const LoginPage = () => {
             py: 5,
 
             // کارت نیمه‌شفاف
-            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+            backgroundColor: 'surface.glass',
 
             // ایجاد حس شیشه‌ای
             backdropFilter: 'blur(8px)',
             WebkitBackdropFilter: 'blur(5px)',
 
             // کنتراست و عمق بیشتر
-            border: '1px solid rgba(211, 208, 208, 0.65)',
+            border: '1px solid',
+            borderColor: 'surface.glassBorder',
 
             boxShadow: `
-      0 10px 35px rgba(30, 1, 1, 0.18),
+      0 10px 35px rgba(0, 0, 0, 0.18),
       0 2px 8px rgba(0, 0, 0, 0.08)
     `,
           }}

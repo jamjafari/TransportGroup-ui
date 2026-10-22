@@ -1,33 +1,49 @@
-// src/utils/date/jalaliYear.js — نسخه‌ی کامل با تابع جدید
+// تبدیل و قالب‌بندی تاریخ، وابسته به تقویم فعال (شمسی یا میلادی).
+//
+// نام‌های صادرشده عمداً تغییر نکرده‌اند تا حدود ۴۴ محل استفاده‌ی formatJalaliDate
+// و سایر توابع دست‌نخورده بمانند. برای کد جدید از formatDate استفاده کنید.
 
-import DateObject from 'react-date-object';
-import persian from 'react-date-object/calendars/persian';
-import persian_fa from 'react-date-object/locales/persian_fa';
-import gregorian from 'react-date-object/calendars/gregorian';
-import gregorian_en from 'react-date-object/locales/gregorian_en';
-import { persianMonthNames } from '../persianMonthNames';
+import * as DateObjectNs from 'react-date-object';
+
+import {
+  getDateLocale,
+  SOURCE_CALENDAR,
+  SOURCE_LOCALE,
+} from './dateLocale';
+
+// بسته به باندلر، default این بسته‌ی CJS یک لایه تودرتو می‌شود
+const DateObject =
+  DateObjectNs?.default?.default ?? DateObjectNs?.default ?? DateObjectNs;
+
 /**
- * تبدیل سال شمسی (مثلاً 1401) به سال میلادی معادل.
- * مبنا: اول فروردین همون سال شمسی (تخمین استاندارد برای فیلدهایی که فقط «سال» دارن، نه تاریخ کامل).
+ * تبدیل «سال» تقویم فعال به سال میلادی.
+ * در حالت انگلیسی تقویم فعال خودش میلادی است، پس تبدیلی لازم نیست.
+ * مبنا: اول فروردین همان سال (تخمین استاندارد برای فیلدهایی که فقط «سال» دارند).
  */
-export const jalaliYearToGregorian = (jalaliYear) => {
-  if (jalaliYear === null || jalaliYear === undefined || jalaliYear === '') {
+export const jalaliYearToGregorian = (year) => {
+  if (year === null || year === undefined || year === '') {
     return null;
   }
 
+  const { calendar, locale } = getDateLocale();
+
+  if (calendar === SOURCE_CALENDAR) {
+    return Number(year);
+  }
+
   const date = new DateObject({
-    calendar: persian,
-    locale: persian_fa,
-    year: Number(jalaliYear),
+    calendar,
+    locale,
+    year: Number(year),
     month: 1,
     day: 1,
   });
 
-  return date.convert(gregorian, gregorian_en).year;
+  return date.convert(SOURCE_CALENDAR, SOURCE_LOCALE).year;
 };
 
 /**
- * تبدیل سال میلادی به سال شمسی معادل (برای نمایش مقدار موجود موقع ادیت).
+ * تبدیل سال میلادی به سال تقویم فعال (برای نمایش مقدار ذخیره‌شده موقع ویرایش).
  */
 export const gregorianYearToJalali = (gregorianYear) => {
   if (
@@ -38,40 +54,54 @@ export const gregorianYearToJalali = (gregorianYear) => {
     return null;
   }
 
+  const { calendar, locale } = getDateLocale();
+
+  if (calendar === SOURCE_CALENDAR) {
+    return Number(gregorianYear);
+  }
+
   const date = new DateObject({
-    calendar: gregorian,
-    locale: gregorian_en,
+    calendar: SOURCE_CALENDAR,
+    locale: SOURCE_LOCALE,
     year: Number(gregorianYear),
     month: 1,
     day: 1,
   });
 
-  return date.convert(persian, persian_fa).year;
+  return date.convert(calendar, locale).year;
 };
 
 /**
- * تبدیل یک تاریخ کامل میلادی (Date یا رشته‌ی ISO) به رشته‌ی شمسی خوانا (YYYY/MM/DD).
- * برای نمایش تاریخ‌هایی مثل purchaseDate تو جدول‌ها و بخش‌های فقط-نمایشی.
+ * قالب‌بندی یک تاریخ میلادی (Date یا رشته‌ی ISO) به رشته‌ی خوانا YYYY/MM/DD
+ * در تقویم فعال. ارقام هم از locale می‌آید: فارسی در حالت شمسی، لاتین در حالت میلادی.
  */
-export const formatJalaliDate = (value) => {
+export const formatDate = (value) => {
   if (!value) return '—';
+
+  const { calendar, locale } = getDateLocale();
 
   const date = new DateObject({
     date: new Date(value),
-    calendar: gregorian,
-    locale: gregorian_en,
-  }).convert(persian, persian_fa);
+    calendar: SOURCE_CALENDAR,
+    locale: SOURCE_LOCALE,
+  }).convert(calendar, locale);
 
   return date.format('YYYY/MM/DD');
 };
-export const getJalaliYearMonth = (value = new Date()) => {
+
+// نام قدیمی — برای سازگاری با محل‌های استفاده‌ی موجود حفظ شده است
+export const formatJalaliDate = formatDate;
+
+export const getYearMonth = (value = new Date()) => {
   if (!value) return null;
+
+  const { calendar, locale } = getDateLocale();
 
   const date = new DateObject({
     date: new Date(value),
-    calendar: gregorian,
-    locale: gregorian_en,
-  }).convert(persian, persian_fa);
+    calendar: SOURCE_CALENDAR,
+    locale: SOURCE_LOCALE,
+  }).convert(calendar, locale);
 
   return {
     year: Number(date.year),
@@ -79,8 +109,12 @@ export const getJalaliYearMonth = (value = new Date()) => {
   };
 };
 
-export const getRollingJalaliMonths = (count = 12) => {
-  const { year: currentYear, month: currentMonth } = getJalaliYearMonth();
+export const getJalaliYearMonth = getYearMonth;
+
+export const getRollingMonths = (count = 12) => {
+  const { monthNames } = getDateLocale();
+
+  const { year: currentYear, month: currentMonth } = getYearMonth();
 
   return Array.from({ length: count }, (_, index) => {
     const absoluteMonth = currentYear * 12 + (currentMonth - 1) - index;
@@ -91,7 +125,7 @@ export const getRollingJalaliMonths = (count = 12) => {
     return {
       year,
       month,
-      monthName: persianMonthNames[month - 1],
+      monthName: monthNames[month - 1],
       fuelAmount: 0,
       missionCount: 0,
       distanceKm: 0,
@@ -99,3 +133,5 @@ export const getRollingJalaliMonths = (count = 12) => {
     };
   });
 };
+
+export const getRollingJalaliMonths = getRollingMonths;

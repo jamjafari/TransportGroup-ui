@@ -32,6 +32,9 @@ const FilterDrawer = ({
   onClose,
 }) => {
   return (
+    // anchor دست‌نخورده ماند: MUI خودش در RTL جهت را عوض می‌کند و cssjanus هم
+    // CSS تولیدشده را برمی‌گرداند؛ نتیجه‌ی این دو لایه بدون دیدن مرورگر قابل
+    // پیش‌بینی نیست. 'right' در هر دو زبان سمت پایانی (inline-end) است.
     <Drawer
       anchor="right"
 

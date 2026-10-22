@@ -1,22 +1,24 @@
-import { ListItemButton, ListItemText } from '@mui/material';
+import { ListItemButton, ListItemText } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const ReportItem = ({ title, onClick }) => {
+  const { t } = useTranslation();
   return (
     <ListItemButton
       sx={{
-        textAlign: 'right',
+        textAlign: "right",
         borderRadius: 2,
-        transition: 'all .2s ease',
+        transition: "all .2s ease",
 
-        '&:hover': {
-          bgcolor: 'primary.light',
-          color: '#fff',
-          transform: 'translateX(-4px)',
+        "&:hover": {
+          bgcolor: "primary.light",
+          color: "primary.contrastText",
+          transform: "translateX(-4px)",
         },
       }}
       onClick={onClick}
     >
-      <ListItemText primary={title} />
+      <ListItemText primary={t(title)} />
     </ListItemButton>
   );
 };

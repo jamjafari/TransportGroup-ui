@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { useAuth } from '@/hooks';
 import { getPostLoginRedirect } from '@/utils/authRedirect'; // ✅ اضافه شد
@@ -8,6 +9,7 @@ import { getPostLoginRedirect } from '@/utils/authRedirect'; // ✅ اضافه �
 const useLogin = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
+  const { t } = useTranslation();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -30,17 +32,24 @@ const useLogin = () => {
       navigate(getPostLoginRedirect(result.user)); // ✅ اصلاح شد
     } catch (err) {
       if (err.response?.status === 429) {
-        // ✅ قفل موقت بعد از تلاش‌های ناموفق متعدد
+        // ✅ قفل موقت بعد از تلاش‌های ناموفق متعدد.
+        // پیام err.response.data?.message از سرور می‌آید و هنوز فقط فارسی است
+        // (بخش بعدی — Accept-Language سمت بک‌اند — آن را هم ترجمه می‌کند)؛
+        // پیام‌های fallback زیر که فقط سمت کلاینت هستند از همین حالا ترجمه می‌شوند.
         setError(
           err.response.data?.message ||
-            'تعداد تلاش‌ها زیاد است. لطفاً چند دقیقه‌ی دیگر دوباره تلاش کنید.',
+            t('تعداد تلاش‌ها زیاد است. لطفاً چند دقیقه‌ی دیگر دوباره تلاش کنید.'),
         );
       } else if (err.response?.status === 401) {
-        setError('نام کاربری یا رمز عبور صحیح نیست.');
+        setError(
+          err.response.data?.message || t('نام کاربری یا رمز عبور صحیح نیست.'),
+        );
       } else if (!err.response) {
-        setError('خطا در برقراری ارتباط با سرور. اتصال اینترنت را بررسی کنید.');
+        setError(t('خطا در برقراری ارتباط با سرور. اتصال اینترنت را بررسی کنید.'));
       } else {
-        setError('خطایی رخ داد. لطفاً دوباره تلاش کنید.');
+        setError(
+          err.response.data?.message || t('خطایی رخ داد. لطفاً دوباره تلاش کنید.'),
+        );
       }
     } finally {
       setLoading(false);

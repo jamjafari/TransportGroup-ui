@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 
 import { Box, Button, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 import Stack from '@mui/material/Stack';
 
@@ -14,6 +15,8 @@ import {
 } from './DashboardError.types';
 
 const DashboardError = ({ title, description, onRetry }) => {
+  const { t } = useTranslation();
+
   return (
     <Box
       display="flex"
@@ -39,7 +42,7 @@ const DashboardError = ({ title, description, onRetry }) => {
           }}
         />
 
-        <Typography variant="h6">{title}</Typography>
+        <Typography variant="h6">{t(title)}</Typography>
 
         <Typography
           variant="body2"
@@ -48,7 +51,7 @@ const DashboardError = ({ title, description, onRetry }) => {
 
           align="center"
         >
-          {description}
+          {t(description)}
         </Typography>
 
         {onRetry && (
@@ -59,7 +62,7 @@ const DashboardError = ({ title, description, onRetry }) => {
 
             onClick={onRetry}
           >
-            تلاش مجدد
+            {t('تلاش مجدد')}
           </Button>
         )}
       </Stack>

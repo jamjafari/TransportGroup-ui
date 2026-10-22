@@ -1,12 +1,14 @@
-import { Paper, Stack, Typography } from '@mui/material';
+import { Paper, Stack, Typography } from "@mui/material";
 
-import { DashboardGrid, DashboardColumn } from '@/components';
+import { DashboardGrid, DashboardColumn } from "@/components";
+import { useTranslation } from "react-i18next";
 
 const FinancialReportSummary = ({ summary = {} }) => {
+  const { t } = useTranslation();
   const items = [
-    { title: 'کل هزینه‌ها', value: summary.total ?? 0 },
-    { title: 'هزینه‌های سوخت', value: summary.totalFuel ?? 0 },
-    { title: 'سایر هزینه‌ها', value: summary.totalExpense ?? 0 },
+    { title: "کل هزینه‌ها", value: summary.total ?? 0 },
+    { title: "هزینه‌های سوخت", value: summary.totalFuel ?? 0 },
+    { title: "سایر هزینه‌ها", value: summary.totalExpense ?? 0 },
   ];
 
   return (
@@ -15,9 +17,9 @@ const FinancialReportSummary = ({ summary = {} }) => {
         <DashboardColumn key={item.title} md={4}>
           <Paper sx={{ p: 2, borderRadius: 2 }}>
             <Stack spacing={1}>
-              <Typography variant="body2">{item.title}</Typography>
+              <Typography variant="body2">{t(item.title)}</Typography>
               <Typography variant="h4" fontWeight={700}>
-                {Number(item.value).toLocaleString('fa-IR')}
+                {Number(item.value).toLocaleString("fa-IR")}
               </Typography>
             </Stack>
           </Paper>

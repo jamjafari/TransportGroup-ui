@@ -12,7 +12,6 @@ import {
 
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
-import colors from '@/theme/colors';
 const GridHeader = ({
   columns,
 
@@ -53,7 +52,7 @@ const GridHeader = ({
               top: 0,
               left: 0,
               zIndex: 10,
-              bgcolor: 'colors.sidbar',
+              bgcolor: 'surface.gridHeader',
             }}
           >
             <Checkbox
@@ -98,7 +97,7 @@ const GridHeader = ({
 
                 zIndex: 9,
 
-                bgcolor: colors.background,
+                bgcolor: 'surface.gridHeader',
               }}
             >
               <Box

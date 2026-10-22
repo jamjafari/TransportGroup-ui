@@ -1,53 +1,55 @@
-import React, { memo } from 'react';
+import React, { memo } from "react";
 
-import { DashboardGrid, DashboardColumn, KpiCard } from '@/components';
+import { DashboardGrid, DashboardColumn, KpiCard } from "@/components";
 
-import useLatestActivitiesSummary from './hooks/useLatestActivitiesSummary';
+import useLatestActivitiesSummary from "./hooks/useLatestActivitiesSummary";
+import { useTranslation } from "react-i18next";
 
 const LatestActivitiesReportSummary = () => {
+  const { t } = useTranslation();
   const { data = {} } = useLatestActivitiesSummary();
 
   const summaryItems = [
     {
-      title: 'کل فعالیت‌ها',
-      value: Number(data.total ?? 0).toLocaleString('en-US'),
-      color: 'primary',
-      icon: 'report',
+      title: "کل فعالیت‌ها",
+      value: Number(data.total ?? 0).toLocaleString("en-US"),
+      color: "primary",
+      icon: "report",
     },
 
     {
-      title: 'فعالیت‌های مأموریت',
-      value: Number(data.mission ?? 0).toLocaleString('en-US'),
-      color: 'info',
-      icon: 'report',
+      title: "فعالیت‌های مأموریت",
+      value: Number(data.mission ?? 0).toLocaleString("en-US"),
+      color: "info",
+      icon: "report",
     },
 
     {
-      title: 'فعالیت‌های سوخت',
-      value: Number(data.fuel ?? 0).toLocaleString('en-US'),
-      color: 'warning',
-      icon: 'fuel',
+      title: "فعالیت‌های سوخت",
+      value: Number(data.fuel ?? 0).toLocaleString("en-US"),
+      color: "warning",
+      icon: "fuel",
     },
 
     {
-      title: 'فعالیت‌های هزینه',
-      value: Number(data.expense ?? 0).toLocaleString('en-US'),
-      color: 'secondary',
-      icon: 'money',
+      title: "فعالیت‌های هزینه",
+      value: Number(data.expense ?? 0).toLocaleString("en-US"),
+      color: "secondary",
+      icon: "money",
     },
 
     {
-      title: 'فعالیت‌های بیمه',
-      value: Number(data.insurance ?? 0).toLocaleString('en-US'),
-      color: 'success',
-      icon: 'insurance',
+      title: "فعالیت‌های بیمه",
+      value: Number(data.insurance ?? 0).toLocaleString("en-US"),
+      color: "success",
+      icon: "insurance",
     },
 
     {
-      title: 'فعالیت‌های سرویس',
-      value: Number(data.service ?? 0).toLocaleString('en-US'),
-      color: 'error',
-      icon: 'service',
+      title: "فعالیت‌های سرویس",
+      value: Number(data.service ?? 0).toLocaleString("en-US"),
+      color: "error",
+      icon: "service",
     },
   ];
 
@@ -56,7 +58,7 @@ const LatestActivitiesReportSummary = () => {
       {summaryItems.map((item) => (
         <DashboardColumn key={item.title} xs={12} md={6} lg={4}>
           <KpiCard
-            title={item.title}
+            title={t(item.title)}
             value={item.value}
             color={item.color}
             icon={item.icon}

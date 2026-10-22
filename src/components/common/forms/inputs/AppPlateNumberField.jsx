@@ -87,16 +87,23 @@ const AppPlateNumberField = ({
     <Box>
       {label && (
         <Typography variant="body2" fontWeight={600} mb={0.5}>
-          {label} {required && <span style={{ color: 'red' }}>*</span>}
+          {label}{' '}
+          {required && (
+            <Box component="span" sx={{ color: 'error.main' }}>
+              *
+            </Box>
+          )}
         </Typography>
       )}
 
+      {/* ✅ dir به‌جای sx={{ direction: 'ltr' }} — cssjanus مقدار را برمی‌گرداند.
+          خانه‌های شماره پلاک باید همیشه چپ‌به‌راست خوانده شوند. */}
       <Box
+        dir="ltr"
         sx={{
           display: 'flex',
           alignItems: 'center',
           gap: 1,
-          direction: 'ltr',
           justifyContent: 'flex-start',
         }}
       >

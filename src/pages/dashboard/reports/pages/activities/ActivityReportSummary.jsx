@@ -1,32 +1,33 @@
-import React, { memo } from 'react';
+import React, { memo } from "react";
 
-import { DashboardGrid, DashboardColumn, KpiCard } from '@/components';
-
+import { DashboardGrid, DashboardColumn, KpiCard } from "@/components";
+import { useTranslation } from "react-i18next";
 const ActivityReportSummary = ({ summary = {} }) => {
+  const { t } = useTranslation();
   const items = [
     {
-      title: 'کل فعالیت‌ها',
+      title: "کل فعالیت‌ها",
       value: summary.total ?? 0,
-      color: 'primary',
-      icon: 'report',
+      color: "primary",
+      icon: "report",
     },
     {
-      title: 'ایجاد',
+      title: "ایجاد",
       value: summary.createCount ?? 0,
-      color: 'success',
-      icon: 'check',
+      color: "success",
+      icon: "check",
     },
     {
-      title: 'ویرایش',
+      title: "ویرایش",
       value: summary.updateCount ?? 0,
-      color: 'warning',
-      icon: 'service',
+      color: "warning",
+      icon: "service",
     },
     {
-      title: 'حذف',
+      title: "حذف",
       value: summary.deleteCount ?? 0,
-      color: 'error',
-      icon: 'expired',
+      color: "error",
+      icon: "expired",
     },
   ];
 
@@ -35,8 +36,8 @@ const ActivityReportSummary = ({ summary = {} }) => {
       {items.map((item) => (
         <DashboardColumn key={item.title} xs={12} md={6} lg={3}>
           <KpiCard
-            title={item.title}
-            value={Number(item.value).toLocaleString('fa-IR')}
+            title={t(item.title)}
+            value={Number(item.value).toLocaleString("fa-IR")}
             color={item.color}
             icon={item.icon}
           />

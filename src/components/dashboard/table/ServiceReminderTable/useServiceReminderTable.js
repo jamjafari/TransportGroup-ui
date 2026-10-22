@@ -1,68 +1,69 @@
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
-import DashboardRepository from '../../../../repositories/dashboard/dashboard.repository';
+import DashboardRepository from "../../../../repositories/dashboard/dashboard.repository";
 
-import useDashboardWidget from '@/pages/dashboard/hooks/useDashboardWidget';
-import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
-import { formatJalaliDate } from '@/utils';
-
+import useDashboardWidget from "@/pages/dashboard/hooks/useDashboardWidget";
+import useDashboardSearch from "@/pages/dashboard/hooks/useDashboardSearch";
+import { formatJalaliDate } from "@/utils";
+import { useTranslatedColumns } from "../../../../hooks";
 const useServiceReminderTable = () => {
   const { filters } = useDashboardSearch();
   const widget = useDashboardWidget({
-    title: 'سرویس های دوره ای',
+    title: "سرویس های دوره ای",
 
-    subtitle: 'سرویس های نزدیک به موعد',
+    subtitle: "سرویس های نزدیک به موعد",
 
     fetcher: () => DashboardRepository.getServiceDashboard(filters),
   });
 
-  const columns = useMemo(
+  const baseColumns = useMemo(
     () => [
       {
-        field: 'plateNumber',
-        headerName: 'خودرو',
+        field: "plateNumber",
+        headerName: "خودرو",
         flex: 1,
       },
 
       {
-        field: 'serviceType',
-        headerName: 'نوع سرویس',
+        field: "serviceType",
+        headerName: "نوع سرویس",
         flex: 1,
       },
       {
-        field: 'serviceDate',
-        headerName: 'تاریخ سرویس',
+        field: "serviceDate",
+        headerName: "تاریخ سرویس",
         flex: 1,
-        renderCell: ({ value }) => (value ? formatJalaliDate(value) : '—'),
+        renderCell: ({ value }) => (value ? formatJalaliDate(value) : "—"),
       },
       {
-        field: 'odometerKm',
-        headerName: 'کارکرد در سرویس',
+        field: "odometerKm",
+        headerName: "کارکرد در سرویس",
         flex: 1,
-        align: 'right',
+        align: "right",
       },
 
       {
-        field: 'remainingKm',
-        headerName: ' کیلومتر باقیمانده',
+        field: "remainingKm",
+        headerName: " کیلومتر باقیمانده",
         flex: 1,
-        align: 'right',
+        align: "right",
       },
       {
-        field: 'remainingDays',
-        headerName: ' روز باقیماده',
+        field: "remainingDays",
+        headerName: " روز باقیماده",
         flex: 1,
-        align: 'right',
+        align: "right",
       },
       {
-        field: 'status',
-        headerName: 'وضعیت',
+        field: "status",
+        headerName: "وضعیت",
         flex: 1,
-        align: 'right',
+        align: "right",
       },
     ],
     [],
   );
+  const columns = useTranslatedColumns(baseColumns);
 
   return {
     ...widget,

@@ -1,6 +1,8 @@
-import { Paper, Typography, Stack } from '@mui/material';
+import { Paper, Typography, Stack } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const DashboardSection = ({ title, children }) => {
+  const { t } = useTranslation();
   return (
     <Paper
       elevation={1}
@@ -8,13 +10,13 @@ const DashboardSection = ({ title, children }) => {
         p: 3,
         mb: 3,
         borderRadius: 3,
-        border: '1px solid',
-        borderColor: 'divider',
+        border: "1px solid",
+        borderColor: "divider",
       }}
     >
       {title && (
         <Typography variant="h6" fontWeight={700} sx={{ mb: 2 }}>
-          {title}
+          {t(title)}
         </Typography>
       )}
 

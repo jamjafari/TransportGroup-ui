@@ -1,26 +1,33 @@
-import React, { forwardRef, memo } from 'react';
+import React, { forwardRef, memo } from "react";
+import { Button, CircularProgress } from "@mui/material";
 
-import { Button, CircularProgress } from '@mui/material';
-
-import { AppButtonPropTypes } from './AppButton.types';
+import { useTranslate } from "@/hooks";
+import { AppButtonPropTypes } from "./AppButton.types";
 
 const AppButton = forwardRef(
   (
     {
       children,
+      labelKey,
       loading = false,
-      variant = 'contained',
-      color = 'primary',
-      size = 'medium',
+      variant = "contained",
+      color = "primary",
+      size = "medium",
       disabled = false,
       fullWidth = false,
       startIcon,
       endIcon,
-      type = 'button',
+      type = "button",
+      translationOptions,
       ...props
     },
     ref,
   ) => {
+    const { t } = useTranslate();
+
+    const content =
+      labelKey != null ? t(labelKey, translationOptions) : children;
+
     return (
       <Button
         ref={ref}
@@ -33,21 +40,19 @@ const AppButton = forwardRef(
         endIcon={!loading ? endIcon : null}
         type={type}
         sx={{
-          // fontFamily: 'Vazirmatn, sans-serif',
-          fontSize: '18',
+          fontSize: "18px",
           fontWeight: 900,
           ...props.sx,
         }}
         {...props}
       >
-        {loading ? <CircularProgress size={22} color="inherit" /> : children}
+        {loading ? <CircularProgress size={22} color="inherit" /> : content}
       </Button>
     );
   },
 );
 
-AppButton.displayName = 'AppButton';
-
+AppButton.displayName = "AppButton";
 AppButton.propTypes = AppButtonPropTypes;
 
 export default memo(AppButton);

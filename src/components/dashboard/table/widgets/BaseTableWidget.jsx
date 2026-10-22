@@ -1,5 +1,5 @@
-import React, { memo } from 'react';
-
+import React, { memo } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Card,
   CardHeader,
@@ -11,16 +11,16 @@ import {
   Box,
   Alert,
   CircularProgress,
-} from '@mui/material';
+} from "@mui/material";
 
-import Stack from '@mui/material/Stack';
+import Stack from "@mui/material/Stack";
 
-import RefreshIcon from '@mui/icons-material/Refresh';
+import RefreshIcon from "@mui/icons-material/Refresh";
 
 import {
   BaseTableWidgetPropTypes,
   BaseTableWidgetDefaultProps,
-} from './BaseTableWidget.types';
+} from "./BaseTableWidget.types";
 
 const BaseTableWidget = ({
   title,
@@ -43,27 +43,26 @@ const BaseTableWidget = ({
 
   height,
 }) => {
+  const { t } = useTranslation();
   return (
     <Card
       sx={{
         height,
-        display: 'flex',
-        flexDirection: 'column',
-        width: '100%',
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
       }}
     >
       <CardHeader
         title={
           <Typography variant="h6" fontWeight={600}>
-            {title}
+            {t(title)}
           </Typography>
         }
-
-        subheader={subtitle}
-
+        subheader={t(subtitle)}
         action={
           <Stack direction="row" spacing={1} alignItems="center">
-            {actions}
+            {t(actions)}
 
             {refresh && (
               <IconButton size="small" onClick={refresh}>
@@ -88,7 +87,7 @@ const BaseTableWidget = ({
         sx={{
           flex: 1,
           p: 0,
-          overflow: 'hidden',
+          overflow: "hidden",
         }}
       >
         {loading ? (
@@ -98,7 +97,7 @@ const BaseTableWidget = ({
         ) : error ? (
           <Box p={2}>
             <Alert severity="error">
-              {typeof error === 'string' ? error : 'خطا در دریافت اطلاعات'}
+              {typeof error === "string" ? error : "خطا در دریافت اطلاعات"}
             </Alert>
           </Box>
         ) : (

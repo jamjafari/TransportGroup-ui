@@ -33,8 +33,13 @@ const AppChartCard = ({
   footer,
 }) => {
   return (
+    // ✅ dir به‌جای sx={{ direction: 'ltr' }}: cssjanus مقدار direction را
+    // برمی‌گرداند، پس آن اعلان در عمل کارت را RTL می‌کرد. صفت dir هیچ‌وقت
+    // توسط افزونه تغییر نمی‌کند. (نمودارها به LTR نیاز دارند.)
     <Card
       elevation={0}
+
+      dir="ltr"
 
       sx={{
         height,
@@ -42,7 +47,6 @@ const AppChartCard = ({
         display: 'flex',
 
         flexDirection: 'column',
-        direction: 'ltr',
       }}
     >
       <CardHeader

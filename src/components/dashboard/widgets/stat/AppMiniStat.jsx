@@ -1,10 +1,17 @@
-import React from 'react';
+import React from "react";
 
-import { Paper, Box, Typography, Skeleton } from '@mui/material';
+import { Paper, Box, Typography, Skeleton } from "@mui/material";
 
-import { AppStatCardPropTypes, AppStatCardDefaultProps } from './AppStat.types';
+import useLocale from "@/context/locale/useLocale";
+import { useTranslation } from "react-i18next";
+
+import { AppStatCardPropTypes, AppStatCardDefaultProps } from "./AppStat.types";
 
 const AppMiniStat = ({ title, value, icon, loading }) => {
+  // flex-direction توسط cssjanus برنمی‌گردد، پس باید خودمان به جهت زبان گره بزنیم.
+  // در فارسی همان چیدمان قبلی حفظ می‌شود.
+  const { isRtl } = useLocale();
+  const { t } = useTranslation();
   return (
     <Paper
       elevation={1}
@@ -12,25 +19,25 @@ const AppMiniStat = ({ title, value, icon, loading }) => {
         p: 2,
         borderRadius: 2,
 
-        width: '100%',
+        width: "100%",
       }}
     >
       <Box
         display="flex"
-        flexDirection="row-reverse"
+        flexDirection={isRtl ? "row-reverse" : "row"}
         alignItems="center"
         justifyContent="space-between"
       >
         <Box>
           <Typography fontWeight={800} variant="h4" color="text.secondary">
-            {title}
+            {t(title)}
           </Typography>
 
           {loading ? (
             <Skeleton width={45} />
           ) : (
             <Typography variant="h4" fontWeight={700}>
-              {value}
+              {t(value)}
             </Typography>
           )}
         </Box>

@@ -1,58 +1,49 @@
 import { createTheme } from '@mui/material/styles';
 
-import colors from './colors';
+import tokens from './tokens';
 import typography from './typography';
 import components from './components';
+import radius from './radius';
 
-const theme = createTheme({
-  direction: 'rtl',
-  palette: {
-    mode: 'light',
+// ✅ یک تم با دو طرح رنگ (روشن و تیره) و دو جهت (راست‌به‌چپ و چپ‌به‌راست).
+//
+// colorSchemeSelector اجباری است: اگر تعیین نشود، MUI وقتی هر دو طرح تعریف شده باشند
+// به‌طور پیش‌فرض 'media' را انتخاب می‌کند و در آن حالت فقط تنظیم سیستم‌عامل اثر دارد
+// و دکمه‌ی تغییر حالت کار نمی‌کند.
+// مقدار 'data-mui-color-scheme' باعث تولید [data-mui-color-scheme="dark"] می‌شود.
+//
+// با فعال بودن cssVariables، رشته‌هایی مثل sx={{ bgcolor: 'sidebar.main' }}
+// به var(--mui-palette-sidebar-main) تبدیل می‌شوند؛ پس تغییر حالت فقط
+// متغیرهای CSS را عوض می‌کند و نیازی به رندر دوباره‌ی کامپوننت‌ها نیست.
+//
+// جهت و فونت به زبان وابسته‌اند، پس تم به‌جای یک شیء ثابت، از یک سازنده می‌آید.
+// تغییر زبان صفحه را بازگذاری می‌کند، بنابراین این سازنده یک‌بار در هر بارگذاری اجرا می‌شود.
+export const createAppTheme = ({ direction = 'rtl', fontFamily } = {}) =>
+  createTheme({
+    direction,
 
-    primary: {
-      main: colors.primary,
+    cssVariables: {
+      colorSchemeSelector: 'data-mui-color-scheme',
     },
 
-    secondary: {
-      main: colors.secondary,
+    colorSchemes: {
+      light: { palette: tokens.light },
+
+      dark: { palette: tokens.dark },
     },
 
-    success: {
-      main: colors.success,
+    typography: {
+      ...typography,
+
+      // فونت فارسی و لاتین متفاوت است؛ بقیه‌ی مقیاس تایپوگرافی مشترک می‌ماند
+      ...(fontFamily ? { fontFamily } : null),
     },
 
-    warning: {
-      main: colors.warning,
+    shape: {
+      borderRadius: radius.md,
     },
 
-    error: {
-      main: colors.error,
-    },
+    components,
+  });
 
-    info: {
-      main: colors.info,
-    },
-
-    background: {
-      default: colors.background,
-
-      paper: colors.paper,
-    },
-
-    text: {
-      primary: colors.textPrimary,
-
-      secondary: colors.textSecondary,
-    },
-  },
-
-  typography,
-
-  shape: {
-    borderRadius: 12,
-  },
-
-  components,
-});
-
-export default theme;
+export default createAppTheme;

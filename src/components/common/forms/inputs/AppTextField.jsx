@@ -9,7 +9,6 @@ import {
 
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
-import colors from '@/theme/colors'; // ✅ اضافه شد
 
 import { AppTextFieldPropTypes } from './AppTextField.types';
 
@@ -36,7 +35,6 @@ const AppTextField = forwardRef(
     return (
       <TextField
         {...restProps}
-        dir="rtl"
         ref={ref}
         type={isPassword && showPassword ? 'text' : type}
         size={size}
@@ -80,21 +78,21 @@ const AppTextField = forwardRef(
           '& .MuiOutlinedInput-input': {
             fontSize: 16,
             fontWeight: 600,
-            color: colors.textPrimary,
+            color: 'text.primary',
           },
 
           // ✅ پیش‌فرض لیبل
           '& .MuiInputLabel-root': {
             fontSize: 15,
             fontWeight: 700,
-            color: colors.textSecondary,
+            color: 'text.secondary',
           },
 
           // ✅ پیش‌فرض متن راهنما (helperText)
           '& .MuiFormHelperText-root': {
             fontSize: 14,
             fontWeight: 400,
-            color: colors.textSecondary,
+            color: 'text.secondary',
           },
 
           ...sx, // ← هر مصرف‌کننده می‌تواند این‌ها را در یک مورد خاص override کند

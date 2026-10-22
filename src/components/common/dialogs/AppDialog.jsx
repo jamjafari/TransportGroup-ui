@@ -70,20 +70,16 @@ const AppDialog = ({
         </DialogTitle>
       )}
 
-      <DialogContent
-        dividers={dividers}
-        sx={{
-          direction: 'rtl',
-        }}
-      >
+      {/* ✅ sx={{ direction: 'rtl' }} حذف شد.
+          stylis-plugin-rtl (از طریق cssjanus) مقدار direction را برمی‌گرداند،
+          پس این سه اعلان دقیقاً برعکس کار می‌کردند و محتوای دیالوگ LTR می‌شد.
+          دیالوگ در Portal رندر می‌شود و جهت را از <html dir> به ارث می‌برد. */}
+      <DialogContent dividers={dividers}>
         {loading ? (
           <Box
             display="flex"
             justifyContent="space-between"
             alignItems="center"
-            sx={{
-              direction: 'rtl',
-            }}
           >
             <CircularProgress />
           </Box>
@@ -92,15 +88,7 @@ const AppDialog = ({
         )}
       </DialogContent>
 
-      {actions && (
-        <DialogActions
-          sx={{
-            direction: 'rtl',
-          }}
-        >
-          {actions}
-        </DialogActions>
-      )}
+      {actions && <DialogActions>{actions}</DialogActions>}
     </Dialog>
   );
 };

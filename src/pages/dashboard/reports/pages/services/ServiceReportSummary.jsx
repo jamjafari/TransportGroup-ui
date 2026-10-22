@@ -1,27 +1,29 @@
-import React, { memo } from 'react';
+import React, { memo } from "react";
 
-import { DashboardGrid, DashboardColumn, KpiCard } from '@/components';
+import { DashboardGrid, DashboardColumn, KpiCard } from "@/components";
+import { useTranslation } from "react-i18next";
 
 const ServiceReportSummary = ({ summary = {} }) => {
+  const { t } = useTranslation();
   const items = [
     {
-      title: 'کل سرویس‌ها',
+      title: "کل سرویس‌ها",
 
-      value: Number(summary.totalServices ?? 0).toLocaleString('en-US'),
+      value: Number(summary.totalServices ?? 0).toLocaleString("en-US"),
 
-      color: 'primary',
+      color: "primary",
 
-      icon: 'service',
+      icon: "service",
     },
 
     {
-      title: 'کل هزینه سرویس‌ها',
+      title: "کل هزینه سرویس‌ها",
 
-      value: Number(summary.totalServiceCost ?? 0).toLocaleString('en-US'),
+      value: Number(summary.totalServiceCost ?? 0).toLocaleString("en-US"),
 
-      color: 'warning',
+      color: "warning",
 
-      icon: 'money',
+      icon: "money",
     },
 
     // {
@@ -35,23 +37,23 @@ const ServiceReportSummary = ({ summary = {} }) => {
     // },
 
     {
-      title: 'سرویس‌های فعال',
+      title: "سرویس‌های فعال",
 
-      value: Number(summary.activeCount ?? 0).toLocaleString('en-US'),
+      value: Number(summary.activeCount ?? 0).toLocaleString("en-US"),
 
-      color: 'success',
+      color: "success",
 
-      icon: 'check',
+      icon: "check",
     },
 
     {
-      title: 'سرویس‌های معوق',
+      title: "سرویس‌های معوق",
 
-      value: Number(summary.overdueCount ?? 0).toLocaleString('en-US'),
+      value: Number(summary.overdueCount ?? 0).toLocaleString("en-US"),
 
-      color: 'error',
+      color: "error",
 
-      icon: 'expired',
+      icon: "expired",
     },
   ];
 
@@ -60,7 +62,7 @@ const ServiceReportSummary = ({ summary = {} }) => {
       {items.map((item) => (
         <DashboardColumn key={item.title} xs={12} md={6} lg={2.4}>
           <KpiCard
-            title={item.title}
+            title={t(item.title)}
             value={item.value}
             color={item.color}
             icon={item.icon}

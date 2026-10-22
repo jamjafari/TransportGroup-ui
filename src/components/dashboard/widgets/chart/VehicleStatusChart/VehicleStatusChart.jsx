@@ -1,5 +1,7 @@
 import React, { memo } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { DonutChartWidget } from '../chartwidgets/DonutChartWidget';
 
 import useVehicleStatusChart from './useVehicleStatusChart';
@@ -16,13 +18,14 @@ const VehicleStatusChart = ({
 
   height,
 }) => {
+  const { t } = useTranslation();
   const chart = useVehicleStatusChart();
 
   return (
     <DonutChartWidget
-      title={title || chart.title}
+      title={title ? t(title) : t(chart.title)}
 
-      subtitle={subtitle || chart.subtitle}
+      subtitle={subtitle ? t(subtitle) : t(chart.subtitle)}
 
       data={chart.data}
 

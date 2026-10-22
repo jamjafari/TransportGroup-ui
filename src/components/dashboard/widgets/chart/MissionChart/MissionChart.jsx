@@ -1,5 +1,7 @@
 import React, { memo } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { BarChartWidget } from '../chartwidgets/BarChartWidget';
 
 import useMissionChart from './useMissionChart';
@@ -16,13 +18,14 @@ const MissionChart = ({
 
   height,
 }) => {
+  const { t } = useTranslation();
   const chart = useMissionChart();
 
   return (
     <BarChartWidget
-      title={title || chart.title}
+      title={title ? t(title) : t(chart.title)}
 
-      subtitle={subtitle || chart.subtitle}
+      subtitle={subtitle ? t(subtitle) : t(chart.subtitle)}
 
       categories={chart.categories}
 

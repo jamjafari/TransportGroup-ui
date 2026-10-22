@@ -1,13 +1,16 @@
-import React from 'react';
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-import DashboardEmpty from './DashboardEmpty';
+import DashboardEmpty from "./DashboardEmpty";
 
-const EmptyStat = () => (
-  <DashboardEmpty
-    title="آماری موجود نیست"
+const EmptyStat = () => {
+  const { t } = useTranslation();
 
-    description="اطلاعات آماری یافت نشد."
-  />
-);
-
+  return (
+    <DashboardEmpty
+      title={t("آماری موجود نیست")}
+      description={t("اطلاعات آماری یافت نشد.")}
+    />
+  );
+};
 export default EmptyStat;

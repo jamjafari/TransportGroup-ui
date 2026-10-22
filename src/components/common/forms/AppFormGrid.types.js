@@ -39,7 +39,8 @@ export const AppFormGridDefaultProps = {
 
   columnSpacing: undefined,
 
-  direction: 'row-reverse',
+  // ✅ undefined تا کامپوننت بر اساس جهت زبان تصمیم بگیرد
+  direction: undefined,
 
   sx: {},
 

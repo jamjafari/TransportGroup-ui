@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 
 import { IconButton, Tooltip } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
@@ -22,6 +23,7 @@ const AppBackButton = ({
 
   ...rest
 }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const renderedIcon = icon ?? <ArrowBackIcon />;
 
@@ -40,7 +42,7 @@ const AppBackButton = ({
   };
 
   return (
-    <Tooltip title={tooltip}>
+    <Tooltip title={t(tooltip)}>
       <IconButton
         onClick={handleClick}
 

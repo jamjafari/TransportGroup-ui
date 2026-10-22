@@ -1,21 +1,21 @@
-import React from 'react';
+import React from "react";
 
-import { AppDataGrid, StatusChip } from '@/components';
+import { AppDataGrid, StatusChip } from "@/components";
 
-import { formatJalaliDate } from '@/utils';
-import { getStatusLabel } from '@/utils/statusLabels'; // ✅ اضافه شد
-
+import { formatJalaliDate } from "@/utils";
+import { getStatusLabel } from "@/utils/statusLabels"; // ✅ اضافه شد
+import { useTranslatedColumns } from "../../../../../hooks";
 import {
   activityActionChipKey,
   ACTIVITY_ACTION_LABELS,
   ACTIVITY_TYPE_LABELS,
-} from './constants';
+} from "./constants";
 
 const ActivityReportTable = ({ rows = [], loading }) => {
-  const columns = [
+  const baseColumns = [
     {
-      field: 'action',
-      headerName: 'نوع عملیات',
+      field: "action",
+      headerName: "نوع عملیات",
       width: 180,
       renderCell: ({ value }) => (
         <StatusChip status={activityActionChipKey(value)} />
@@ -23,32 +23,33 @@ const ActivityReportTable = ({ rows = [], loading }) => {
       valueFormatter: (value) => getStatusLabel(value), // ✅ اضافه شد — فقط برای Export
     },
     {
-      field: 'type',
-      headerName: 'دسته',
+      field: "type",
+      headerName: "دسته",
       width: 130,
       renderCell: ({ value }) => ACTIVITY_TYPE_LABELS[value] ?? value,
     },
-    { field: 'activity', headerName: 'شرح فعالیت', flex: 1 },
-    { field: 'user', headerName: 'کاربر', width: 160 },
+    { field: "activity", headerName: "شرح فعالیت", flex: 1 },
+    { field: "user", headerName: "کاربر", width: 160 },
     {
-      field: 'date',
-      headerName: 'تاریخ',
+      field: "date",
+      headerName: "تاریخ",
       width: 140,
       renderCell: ({ value }) => formatJalaliDate(value),
     },
     {
-      field: 'date',
-      headerName: 'ساعت',
+      field: "date",
+      headerName: "ساعت",
       width: 100,
       renderCell: ({ row }) =>
         row.date
-          ? new Date(row.date).toLocaleTimeString('fa-IR', {
-              hour: '2-digit',
-              minute: '2-digit',
+          ? new Date(row.date).toLocaleTimeString("fa-IR", {
+              hour: "2-digit",
+              minute: "2-digit",
             })
-          : '—',
+          : "—",
     },
   ];
+  const columns = useTranslatedColumns(baseColumns);
 
   return (
     <AppDataGrid

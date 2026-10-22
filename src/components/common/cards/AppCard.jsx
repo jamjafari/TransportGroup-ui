@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo } from "react";
 
 import {
   Card,
@@ -9,9 +9,10 @@ import {
   Skeleton,
   Typography,
   Box,
-} from '@mui/material';
+} from "@mui/material";
 
-import { AppCardPropTypes } from './AppCard.types';
+import { AppCardPropTypes } from "./AppCard.types";
+import { useTranslation } from "react-i18next";
 
 const AppCard = ({
   title,
@@ -32,16 +33,16 @@ const AppCard = ({
 
   children,
 }) => {
+  const { t } = useTranslation;
   return (
     <Card
       elevation={elevation}
-
       sx={{
-        height: '100%',
+        height: "100%",
 
-        display: 'flex',
+        display: "flex",
 
-        flexDirection: 'column',
+        flexDirection: "column",
 
         ...sx,
       }}
@@ -50,19 +51,12 @@ const AppCard = ({
         <>
           <CardHeader
             avatar={icon}
-
             title={
-              <Typography
-                variant="h4"
-
-                fontWeight={600}
-              >
-                {title}
+              <Typography variant="h4" fontWeight={600}>
+                {t(title)}
               </Typography>
             }
-
-            subheader={subtitle}
-
+            subheader={t(subtitle)}
             action={actions}
           />
 
@@ -70,31 +64,20 @@ const AppCard = ({
         </>
       )}
 
+      {/* ✅ alignItems:'right' و direction:'row-rewers' حذف شدند —
+          هر دو CSS نامعتبر بودند (align-items مقدار right ندارد و
+          'row-rewers' غلط املایی row-reverse است که اصلاً مقدار direction نیست)،
+          پس مرورگر آن‌ها را کنار می‌گذاشت و هیچ اثری نداشتند. */}
       <CardContent
         sx={{
           flexGrow: 1,
-          alignItems: 'right',
-          direction: 'row-rewers',
         }}
       >
         {loading ? (
-          <Box
-            sx={{
-              alignItems: 'right',
-              direction: 'row-rewers',
-            }}
-          >
-            <Skeleton
-              variant="text"
+          <Box>
+            <Skeleton variant="text" height={40} />
 
-              height={40}
-            />
-
-            <Skeleton
-              variant="rounded"
-
-              height={120}
-            />
+            <Skeleton variant="rounded" height={120} />
           </Box>
         ) : (
           children
@@ -105,7 +88,7 @@ const AppCard = ({
         <>
           <Divider />
 
-          <CardActions>{footer}</CardActions>
+          <CardActions>{t(footer)}</CardActions>
         </>
       )}
     </Card>

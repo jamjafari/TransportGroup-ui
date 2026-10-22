@@ -1,7 +1,7 @@
-import React, { memo } from 'react';
+import React, { memo } from "react";
 
-import { DashboardGrid, DashboardColumn, KpiCard } from '@/components';
-
+import { DashboardGrid, DashboardColumn, KpiCard } from "@/components";
+import { useTranslation } from "react-i18next";
 const FleetFinancial = ({
   financial = {
     totalFuel: 0,
@@ -11,35 +11,36 @@ const FleetFinancial = ({
     costPerVehicle: 0,
   },
 }) => {
+  const { t } = useTranslation();
   const items = [
     {
-      title: 'هزینه سوخت',
+      title: "هزینه سوخت",
 
-      value: Number(financial.totalFuel ?? 0).toLocaleString('en-US'),
+      value: Number(financial.totalFuel ?? 0).toLocaleString("en-US"),
 
-      color: 'warning',
+      color: "warning",
 
-      icon: 'fuel',
+      icon: "fuel",
     },
 
     {
-      title: 'هزینه‌های جاری',
+      title: "هزینه‌های جاری",
 
-      value: Number(financial.totalExpense ?? 0).toLocaleString('en-US'),
+      value: Number(financial.totalExpense ?? 0).toLocaleString("en-US"),
 
-      color: 'info',
+      color: "info",
 
-      icon: 'money',
+      icon: "money",
     },
 
     {
-      title: 'هزینه هر خودرو',
+      title: "هزینه هر خودرو",
 
-      value: Number(financial.costPerVehicle ?? 0).toLocaleString('en-US'),
+      value: Number(financial.costPerVehicle ?? 0).toLocaleString("en-US"),
 
-      color: 'primary',
+      color: "primary",
 
-      icon: 'vehicle',
+      icon: "vehicle",
     },
   ];
 
@@ -48,7 +49,7 @@ const FleetFinancial = ({
       {items.map((item) => (
         <DashboardColumn key={item.title} xs={12} md={4}>
           <KpiCard
-            title={item.title}
+            title={t(item.title)}
             value={item.value}
             color={item.color}
             icon={item.icon}

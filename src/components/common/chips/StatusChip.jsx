@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 
 import { Chip } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import BuildCircleIcon from '@mui/icons-material/BuildCircle';
@@ -14,189 +15,58 @@ import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import PendingActionsIcon from '@mui/icons-material/PendingActions';
 import CancelIcon from '@mui/icons-material/Cancel';
+
+import { statusLabels } from '@/utils/statusLabels';
 import { StatusChipPropTypes } from './StatusChip.types';
 
+// ✅ برچسب از statusLabels.js می‌آید (تنها منبع)، این‌جا فقط رنگ و آیکن هر وضعیت است.
 const statusMap = {
-  TankFull: {
-    label: 'باک پر',
-    color: 'success',
-    icon: <CheckCircleIcon />,
-  },
-
-  TankNotFull: {
-    label: 'باک پر نیست',
-    color: 'warning',
-    icon: <WarningAmberIcon />,
-  },
-  Approved: {
-    label: 'تایید شده',
-    color: 'success',
-    icon: <CheckCircleIcon />,
-  },
-
-  Pending: {
-    label: 'در انتظار تایید',
-    color: 'warning',
-    icon: <PendingActionsIcon />,
-  },
-  Planned: {
-    label: 'برنامه‌ریزی‌شده',
-    color: 'info',
-    icon: <PendingActionsIcon />,
-  },
-  Rejected: {
-    label: 'رد شده',
-    color: 'error',
-    icon: <CancelIcon />,
-  },
-  Conditional: {
-    label: 'مشروط ',
-    color: 'warning',
-    icon: <PendingActionsIcon />,
-  },
-  Active: {
-    label: 'فعال',
-    color: 'success',
-    icon: <CheckCircleIcon />,
-  },
-
-  Inactive: {
-    label: 'غیرفعال',
-    color: 'default',
-    icon: <HighlightOffIcon />,
-  },
-
-  Running: {
-    label: 'در حال انجام',
-    color: 'primary',
-    icon: <LocalShippingIcon />,
-  },
-
-  Completed: {
-    label: 'تکمیل شده',
-    color: 'success',
-    icon: <TaskAltIcon />,
-  },
-
-  Mission: {
-    label: 'در مأموریت',
-    color: 'primary',
-    icon: <LocalShippingIcon />,
-  },
-
-  Repair: {
-    label: 'در تعمیرگاه',
-    color: 'warning',
-    icon: <EngineeringIcon />,
-  },
-
-  Canceled: {
-    label: 'لغو شده',
-    color: 'error',
-    icon: <HighlightOffIcon />,
-  },
-  Cancelled: {
-    label: 'لغو شده',
-    color: 'error',
-    icon: <HighlightOffIcon />,
-  },
-  Warning: {
-    label: 'هشدار',
-    color: 'warning',
-    icon: <WarningAmberIcon />,
-  },
-
-  Critical: {
-    label: 'هشدار آخر',
-    color: 'error',
-    icon: <WarningAmberIcon />,
-  },
-
-  Expired: {
-    label: 'منقضی شده',
-    color: 'error',
-    icon: <HighlightOffIcon />,
-  },
-
-  Required: {
-    label: 'نیازمند سرویس',
-    color: 'warning',
-    icon: <BuildCircleIcon />,
-  },
-  Overdue: {
-    label: ' معوق',
-    color: 'error',
-    icon: <MiscellaneousServicesIcon />,
-  },
-  ServiceCompleted: {
-    label: 'انجام شده',
-    color: 'success',
-    icon: <CheckCircleIcon />,
-  },
-  Success: {
-    label: 'تایید شده',
-    color: 'success',
-    icon: <CheckCircleIcon />,
-  },
-
-  warning: {
-    label: 'هشدار',
-    color: 'warning',
-    icon: <BuildCircleIcon />,
-  },
-
-  error: {
-    label: 'هشدار جدی',
-    color: 'error',
-    icon: <HighlightOffIcon />,
-  },
-
-  primary: {
-    label: 'در عملیات',
-    color: 'primary',
-    icon: <LocalShippingIcon />,
-  },
-  InRepair: {
-    label: 'در حال تعمیر',
-    color: 'warning',
-    icon: <EngineeringIcon />,
-  },
-
-  Sold: {
-    label: 'فروخته‌شده',
-    color: 'default',
-    icon: <HighlightOffIcon />,
-  },
-  ExpiringSoon: {
-    label: 'نزدیک به انقضا',
-    color: 'warning',
-    icon: <WarningAmberIcon />,
-  },
+  TankFull: { color: 'success', icon: <CheckCircleIcon /> },
+  TankNotFull: { color: 'warning', icon: <WarningAmberIcon /> },
+  Approved: { color: 'success', icon: <CheckCircleIcon /> },
+  Pending: { color: 'warning', icon: <PendingActionsIcon /> },
+  Planned: { color: 'info', icon: <PendingActionsIcon /> },
+  Rejected: { color: 'error', icon: <CancelIcon /> },
+  Conditional: { color: 'warning', icon: <PendingActionsIcon /> },
+  Active: { color: 'success', icon: <CheckCircleIcon /> },
+  Inactive: { color: 'default', icon: <HighlightOffIcon /> },
+  Running: { color: 'primary', icon: <LocalShippingIcon /> },
+  Completed: { color: 'success', icon: <TaskAltIcon /> },
+  Mission: { color: 'primary', icon: <LocalShippingIcon /> },
+  Repair: { color: 'warning', icon: <EngineeringIcon /> },
+  Canceled: { color: 'error', icon: <HighlightOffIcon /> },
+  Cancelled: { color: 'error', icon: <HighlightOffIcon /> },
+  Warning: { color: 'warning', icon: <WarningAmberIcon /> },
+  Critical: { color: 'error', icon: <WarningAmberIcon /> },
+  Expired: { color: 'error', icon: <HighlightOffIcon /> },
+  Required: { color: 'warning', icon: <BuildCircleIcon /> },
+  Overdue: { color: 'error', icon: <MiscellaneousServicesIcon /> },
+  ServiceCompleted: { color: 'success', icon: <CheckCircleIcon /> },
+  Success: { color: 'success', icon: <CheckCircleIcon /> },
+  warning: { color: 'warning', icon: <BuildCircleIcon /> },
+  error: { color: 'error', icon: <HighlightOffIcon /> },
+  primary: { color: 'primary', icon: <LocalShippingIcon /> },
+  InRepair: { color: 'warning', icon: <EngineeringIcon /> },
+  Sold: { color: 'default', icon: <HighlightOffIcon /> },
+  ExpiringSoon: { color: 'warning', icon: <WarningAmberIcon /> },
 };
 
-const StatusChip = ({
-  status,
+const StatusChip = ({ status, size = 'small' }) => {
+  const { t } = useTranslation();
 
-  size = 'small',
-}) => {
-  const item = statusMap[status] ?? {
-    label: status,
-
+  const meta = statusMap[status] ?? {
     color: 'info',
-
     icon: <HelpOutlineIcon />,
   };
+
+  const label = t(statusLabels[status] ?? status);
 
   return (
     <Chip
       size={size}
-
-      label={item.label}
-
-      color={item.color}
-
-      icon={item.icon}
-
+      label={label}
+      color={meta.color}
+      icon={meta.icon}
       variant="filled"
       sx={{
         minWidth: 100,

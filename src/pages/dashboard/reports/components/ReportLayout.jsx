@@ -1,25 +1,27 @@
-import React from 'react';
-import { Paper, Stack, Typography, Divider } from '@mui/material';
+import React from "react";
+import { Paper, Stack, Typography, Divider } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const ReportLayout = ({ title, subtitle, children }) => {
+  const { t } = useTranslation();
   return (
     <Paper
       elevation={0}
       sx={{
         p: 3,
         borderRadius: 2,
-        border: '1px solid',
-        borderColor: 'divider',
+        border: "1px solid",
+        borderColor: "divider",
       }}
     >
       <Stack spacing={2}>
         <Stack spacing={0.5}>
           <Typography variant="h5" fontWeight={700}>
-            {title}
+            {t(title)}
           </Typography>
 
           <Typography variant="body2" color="text.secondary">
-            {subtitle}
+            {t(subtitle)}
           </Typography>
         </Stack>
 

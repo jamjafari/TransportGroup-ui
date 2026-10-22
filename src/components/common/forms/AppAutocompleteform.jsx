@@ -2,7 +2,6 @@ import React, { memo } from 'react';
 
 import { Autocomplete, TextField } from '@mui/material';
 
-import colors from '@/theme/colors';
 
 import {
   AppAutocompletePropTypes,
@@ -54,7 +53,7 @@ const AppAutocompleteform = ({
             '& .MuiAutocomplete-option': {
               fontSize: 16,
               fontWeight: 600,
-              color: colors.textPrimary,
+              color: 'text.primary',
             },
           },
         },
@@ -78,21 +77,21 @@ const AppAutocompleteform = ({
             '& .MuiInputLabel-root': {
               fontSize: 15,
               fontWeight: 700,
-              color: colors.textSecondary,
+              color: 'text.secondary',
             },
 
             // ✅ پیش‌فرض متن ورودی
             '& .MuiOutlinedInput-input': {
               fontSize: 16,
               fontWeight: 600,
-              color: colors.textPrimary,
+              color: 'text.primary',
             },
 
             // ✅ پیش‌فرض متن راهنما
             '& .MuiFormHelperText-root': {
               fontSize: 14,
               fontWeight: 400,
-              color: colors.textSecondary,
+              color: 'text.secondary',
             },
 
             ...sx, // ← override لیبل/متن/راهنما در یک مورد خاص

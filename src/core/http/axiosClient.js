@@ -13,6 +13,9 @@ import {
 const axiosClient = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
   timeout: 30000,
+  // ✅ کوکی HttpOnly رفرش‌توکن باید همراه درخواست‌ها برود؛
+  // بدون این گزینه refresh-token بدون کوکی می‌رسد و کاربر بیرون انداخته می‌شود
+  withCredentials: true,
 });
 
 axiosClient.interceptors.request.use(

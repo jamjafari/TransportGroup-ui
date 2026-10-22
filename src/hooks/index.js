@@ -1,6 +1,8 @@
-export * from './useAuth';
+export * from "./useAuth";
 
-export * from './useAsyncData';
+export * from "./useAsyncData";
 
-export * from './useAttachments';
-export { default as usePlanLimits } from './usePlanLimits';
+export * from "./useAttachments";
+export { default as usePlanLimits } from "./usePlanLimits";
+export { default as useTranslatedColumns } from "./useTranslatedColumns";
+export { default as useTranslate } from "./useTranslate";

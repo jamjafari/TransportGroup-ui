@@ -1,7 +1,8 @@
-import React, { memo } from 'react';
-import { Alert, AlertTitle, Collapse } from '@mui/material';
+import React, { memo } from "react";
+import { Alert, AlertTitle, Collapse } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
-import { AppAlertPropTypes, AppAlertDefaultProps } from './AppAlert.types';
+import { AppAlertPropTypes, AppAlertDefaultProps } from "./AppAlert.types";
 
 const AppAlert = ({
   open,
@@ -12,17 +13,17 @@ const AppAlert = ({
   variant,
   onClose,
 }) => {
+  const { t } = useTranslation();
   return (
     <Collapse in={open}>
       <Alert
-        dir="rtl"
         severity={severity}
         variant={variant}
         action={action}
         onClose={onClose}
         sx={{ fontSize: 18 }}
       >
-        {title && <AlertTitle>{title}</AlertTitle>}
+        {title && <AlertTitle>{t(title)}</AlertTitle>}
 
         {children}
       </Alert>

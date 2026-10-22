@@ -1,65 +1,65 @@
-import React from 'react';
+import React from "react";
 
-import { AppDataGrid, AttachmentsButton } from '@/components';
+import { AppDataGrid, AttachmentsButton } from "@/components";
 
-import { formatJalaliDate } from '@/utils';
-import { ATTACHMENT_OWNER_TYPE } from '@/constants/attachmentTypes';
-
+import { formatJalaliDate } from "@/utils";
+import { ATTACHMENT_OWNER_TYPE } from "@/constants/attachmentTypes";
+import { useTranslatedColumns } from "../../../../../hooks";
 const FuelCostReportTable = ({ rows = [], loading }) => {
-  const columns = [
+  const baseColumns = [
     {
-      field: 'vehicleName',
-      headerName: 'خودرو',
+      field: "vehicleName",
+      headerName: "خودرو",
       width: 180,
-      align: 'center',
-      headerAlign: 'center',
+      align: "center",
+      headerAlign: "center",
     },
     {
-      field: 'fuelDate',
-      headerName: 'تاریخ سوخت‌گیری',
+      field: "fuelDate",
+      headerName: "تاریخ سوخت‌گیری",
       width: 180,
-      align: 'center',
-      headerAlign: 'center',
+      align: "center",
+      headerAlign: "center",
       renderCell: ({ value }) => formatJalaliDate(value),
     },
     {
-      field: 'unitCost',
-      headerName: 'قیمت واحد',
+      field: "unitCost",
+      headerName: "قیمت واحد",
       width: 180,
-      align: 'center',
-      headerAlign: 'center',
+      align: "center",
+      headerAlign: "center",
     },
     {
-      field: 'fuelAmount',
-      headerName: 'مقدار سوخت‌گیری (لیتر)',
+      field: "fuelAmount",
+      headerName: "مقدار سوخت‌گیری (لیتر)",
       width: 220,
-      align: 'center',
-      headerAlign: 'center',
+      align: "center",
+      headerAlign: "center",
     },
     {
-      field: 'totalCost',
-      headerName: 'هزینه پرداختی',
+      field: "totalCost",
+      headerName: "هزینه پرداختی",
       width: 200,
-      align: 'center',
-      headerAlign: 'center',
+      align: "center",
+      headerAlign: "center",
     },
     {
-      field: 'odometerKM',
-      headerName: 'کیلومتر در سوخت‌گیری',
+      field: "odometerKM",
+      headerName: "کیلومتر در سوخت‌گیری",
       width: 220,
-      align: 'center',
-      headerAlign: 'center',
+      align: "center",
+      headerAlign: "center",
     },
     {
-      field: 'stationName',
-      headerName: 'جایگاه',
+      field: "stationName",
+      headerName: "جایگاه",
       width: 200,
-      align: 'center',
-      headerAlign: 'center',
+      align: "center",
+      headerAlign: "center",
     },
     {
-      field: 'attachments',
-      headerName: 'مدارک',
+      field: "attachments",
+      headerName: "مدارک",
       width: 90,
       renderCell: ({ row }) => (
         <AttachmentsButton
@@ -70,6 +70,7 @@ const FuelCostReportTable = ({ rows = [], loading }) => {
       ),
     },
   ];
+  const columns = useTranslatedColumns(baseColumns);
 
   return (
     <AppDataGrid

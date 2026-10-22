@@ -1,37 +1,39 @@
-import React, { memo } from 'react';
+import React, { memo } from "react";
 
-import { DashboardGrid, DashboardColumn, KpiCard } from '@/components';
+import { DashboardGrid, DashboardColumn, KpiCard } from "@/components";
+import { useTranslation } from "react-i18next";
 
 const FinancialReportKPI = ({ kpi = {} }) => {
+  const { t } = useTranslation();
   const items = [
     {
-      title: 'میانگین هزینه برای هر خودرو',
+      title: "میانگین هزینه برای هر خودرو",
 
-      value: Number(kpi.costPerVehicle ?? 0).toLocaleString('en-US'),
+      value: Number(kpi.costPerVehicle ?? 0).toLocaleString("en-US"),
 
-      color: 'primary',
+      color: "primary",
 
-      icon: 'vehicle',
+      icon: "vehicle",
     },
 
     {
-      title: 'میانگین هزینه ماهانه',
+      title: "میانگین هزینه ماهانه",
 
-      value: Number(kpi.monthlyAverage ?? 0).toLocaleString('en-US'),
+      value: Number(kpi.monthlyAverage ?? 0).toLocaleString("en-US"),
 
-      color: 'info',
+      color: "info",
 
-      icon: 'money',
+      icon: "money",
     },
 
     {
-      title: 'درصد هزینه سوخت به کل هزینه',
+      title: "درصد هزینه سوخت به کل هزینه",
 
       value: `${(kpi.fuelPercent ?? 0).toFixed(2)} %`,
 
-      color: 'warning',
+      color: "warning",
 
-      icon: 'fuel',
+      icon: "fuel",
     },
   ];
 
@@ -40,7 +42,7 @@ const FinancialReportKPI = ({ kpi = {} }) => {
       {items.map((item) => (
         <DashboardColumn key={item.title} xs={12} md={6} lg={4}>
           <KpiCard
-            title={item.title}
+            title={t(item.title)}
             value={item.value}
             color={item.color}
             icon={item.icon}

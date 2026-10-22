@@ -1,78 +1,78 @@
-import React from 'react';
+import React from "react";
 
-import { AppDataGrid, StatusChip } from '@/components';
+import { AppDataGrid, StatusChip } from "@/components";
 
-import useLatestActivitiesReport from './hooks/useLatestActivitiesReport';
-import { formatJalaliDate } from '@/utils';
-import { getStatusLabel } from '@/utils/statusLabels'; // ✅ اضافه شد
-
+import useLatestActivitiesReport from "./hooks/useLatestActivitiesReport";
+import { formatJalaliDate } from "@/utils";
+import { getStatusLabel } from "@/utils/statusLabels"; // ✅ اضافه شد
+import { useTranslatedColumns } from "../../../../../hooks";
 const LatestActivitiesReportTable = () => {
   const { data, loading } = useLatestActivitiesReport();
 
-  const columns = [
+  const baseColumns = [
     {
-      field: 'title',
-      headerName: 'عنوان',
+      field: "title",
+      headerName: "عنوان",
       flex: 1,
     },
 
     {
-      field: 'type',
-      headerName: 'نوع',
+      field: "type",
+      headerName: "نوع",
       flex: 1,
     },
 
     {
-      field: 'user',
-      headerName: 'کاربر',
+      field: "user",
+      headerName: "کاربر",
       flex: 1,
     },
 
     {
-      field: 'driverName',
-      headerName: 'راننده',
+      field: "driverName",
+      headerName: "راننده",
       flex: 1,
     },
 
     {
-      field: 'vehicleName',
-      headerName: 'خودرو',
+      field: "vehicleName",
+      headerName: "خودرو",
       flex: 1,
     },
 
     {
-      field: 'missionNumber',
-      headerName: 'ماموریت',
+      field: "missionNumber",
+      headerName: "ماموریت",
       flex: 1,
     },
 
     {
-      field: 'status',
-      headerName: 'وضعیت',
+      field: "status",
+      headerName: "وضعیت",
       renderCell: ({ value }) => <StatusChip status={value} />,
       flex: 1,
-      align: 'right',
+      align: "right",
       valueFormatter: (value) => getStatusLabel(value), // ✅ اضافه شد — فقط برای Export
     },
 
     {
-      field: 'activityDate',
-      headerName: 'تاریخ',
+      field: "activityDate",
+      headerName: "تاریخ",
       flex: 1,
       renderCell: ({ value }) => formatJalaliDate(value),
     },
 
     {
-      field: 'activityTime',
-      headerName: 'زمان',
+      field: "activityTime",
+      headerName: "زمان",
       flex: 1,
     },
   ];
+  const columns = useTranslatedColumns(baseColumns);
 
   return (
     <AppDataGrid
       toolbar
-
       pagination
       rows={data}
       columns={columns}

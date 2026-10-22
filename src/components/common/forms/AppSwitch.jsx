@@ -7,7 +7,6 @@ import {
   FormHelperText,
 } from '@mui/material';
 
-import colors from '@/theme/colors';
 
 import { AppSwitchPropTypes, AppSwitchDefaultProps } from './AppSwitch.types';
 
@@ -32,14 +31,14 @@ const AppSwitch = ({
         '& .MuiFormControlLabel-label': {
           fontSize: 16,
           fontWeight: 600,
-          color: colors.textPrimary,
+          color: 'text.primary',
         },
 
         // ✅ پیش‌فرض متن راهنما
         '& .MuiFormHelperText-root': {
           fontSize: 14,
           fontWeight: 400,
-          color: colors.textSecondary,
+          color: 'text.secondary',
         },
 
         ...sx, // ← override در یک مورد خاص

@@ -1,13 +1,17 @@
-import React from 'react';
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-import DashboardEmpty from './DashboardEmpty';
+import DashboardEmpty from "./DashboardEmpty";
 
-const EmptyChart = () => (
-  <DashboardEmpty
-    title="نموداری برای نمایش وجود ندارد"
+const EmptyChart = () => {
+  const { t } = useTranslation();
 
-    description="داده‌ای برای رسم نمودار یافت نشد."
-  />
-);
+  return (
+    <DashboardEmpty
+      title={t("نموداری برای نمایش وجود ندارد")}
+      description={t("داده‌ای برای رسم نمودار یافت نشد.")}
+    />
+  );
+};
 
 export default EmptyChart;

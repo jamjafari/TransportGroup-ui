@@ -1,55 +1,55 @@
-import React from 'react';
+import React from "react";
 
-import { AppDataGrid, StatusChip } from '@/components';
-
+import { AppDataGrid, StatusChip } from "@/components";
+import { useTranslatedColumns } from "../../../../../hooks";
 const FinancialTransactionsTable = ({ rows = [], loading }) => {
-  const columns = [
+  const baseColumns = [
     {
-      field: 'expenseDate',
-      headerName: 'تاریخ ',
+      field: "expenseDate",
+      headerName: "تاریخ ",
       width: 180,
-      align: 'center',
-      headerAlign: 'center',
+      align: "center",
+      headerAlign: "center",
     },
     {
-      field: 'expenseType',
-      headerName: 'نوع هزینه ',
+      field: "expenseType",
+      headerName: "نوع هزینه ",
       width: 180,
-      align: 'left',
-      headerAlign: 'right',
+      align: "left",
+      headerAlign: "right",
     },
     {
-      field: 'vehicleName',
-      headerName: 'خودرو',
+      field: "vehicleName",
+      headerName: "خودرو",
       width: 180,
-      align: 'center',
-      headerAlign: 'center',
+      align: "center",
+      headerAlign: "center",
     },
     {
-      field: 'amount',
-      headerName: 'مبلغ',
+      field: "amount",
+      headerName: "مبلغ",
       width: 280,
-      align: 'center',
-      headerAlign: 'center',
+      align: "center",
+      headerAlign: "center",
     },
     {
-      field: 'description',
-      headerName: 'توضیحات',
+      field: "description",
+      headerName: "توضیحات",
       width: 280,
-      align: 'center',
-      headerAlign: 'center',
+      align: "center",
+      headerAlign: "center",
     },
     {
-      field: 'status',
-      headerName: 'وضعیت',
+      field: "status",
+      headerName: "وضعیت",
       renderCell: ({ value }) => <StatusChip status={value} />,
       width: 280,
-      align: 'center',
-      headerAlign: 'center',
+      align: "center",
+      headerAlign: "center",
     },
   ];
-  console.log('=======', rows);
-  console.log(Array.isArray(rows));
+  const columns = useTranslatedColumns(baseColumns);
+
   return (
     <AppDataGrid
       rows={rows}

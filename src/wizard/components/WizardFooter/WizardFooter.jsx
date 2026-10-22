@@ -1,12 +1,14 @@
 import React, { memo } from 'react';
 
 import { Box, Button } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 import { useFormContext } from 'react-hook-form';
 
 import useWizard from '../../useWizard';
 
 const WizardFooter = () => {
+  const { t } = useTranslation();
   const { handleSubmit } = useFormContext();
 
   const {
@@ -32,11 +34,11 @@ const WizardFooter = () => {
   return (
     <Box display="flex" justifyContent="space-between" mt={4}>
       <Button variant="outlined" disabled={isFirst} onClick={previous}>
-        Previous
+        {t('قبلی')}
       </Button>
 
       <Button variant="contained" onClick={handleSubmit(submit)}>
-        {isLast ? 'Finish' : 'Next'}
+        {isLast ? t('ثبت نهایی') : t('بعدی')}
       </Button>
     </Box>
   );
