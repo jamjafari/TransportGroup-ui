@@ -1,35 +1,35 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState } from "react";
 
-import { Alert, Stack } from '@mui/material';
+import { Alert, Stack } from "@mui/material";
 
-import AppDialog from '@/components/common/dialogs/AppDialog';
-import { AppTextField, AppButton } from '@/components';
+import AppDialog from "@/components/common/dialogs/AppDialog";
+import { AppTextField, AppButton } from "@/components";
 
-import useTenant from '../hooks/useTenant';
+import useTenant from "../hooks/useTenant";
 
 const AddTenantAdminDialog = ({ open, tenant, onClose }) => {
   const { createTenantAdmin } = useTenant();
 
-  const [userName, setUserName] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [password, setPassword] = useState('');
+  const [userName, setUserName] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleSubmit = async () => {
     if (!userName || !fullName || password.length < 6) {
-      setError('همه‌ی فیلدها الزامی هستند و رمز باید حداقل ۶ کاراکتر باشد');
+      setError("همه‌ی فیلدها الزامی هستند و رمز باید حداقل ۶ کاراکتر باشد");
       return;
     }
 
     setSubmitting(true);
-    setError('');
+    setError("");
 
     try {
       await createTenantAdmin(tenant.id, { userName, fullName, password });
-      setUserName('');
-      setFullName('');
-      setPassword('');
+      setUserName("");
+      setFullName("");
+      setPassword("");
       onClose();
     } catch (err) {
       setError(err.message);
@@ -41,17 +41,18 @@ const AddTenantAdminDialog = ({ open, tenant, onClose }) => {
   return (
     <AppDialog
       open={open}
-      title={`افزودن ادمین — ${tenant?.name || ''}`}
+      title={`افزودن ادمین — ${tenant?.name || ""}`}
       onClose={onClose}
       maxWidth="xs"
       actions={
         <Stack direction="row" spacing={2}>
-          <AppButton variant="outlined" onClick={onClose}>
-            انصراف
-          </AppButton>
-          <AppButton loading={submitting} onClick={handleSubmit}>
-            ثبت
-          </AppButton>
+          <AppButton variant="outlined" onClick={onClose} lableKey="انصراف" />
+
+          <AppButton
+            loading={submitting}
+            onClick={handleSubmit}
+            lableKey="ثبت"
+          />
         </Stack>
       }
     >

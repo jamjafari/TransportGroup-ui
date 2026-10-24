@@ -18,7 +18,7 @@ const TireGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
           <AppTextField
             fullWidth
             required
-            label="برند "
+            label="برند"
             name="brand"
             value={values.brand}
             onChange={onChange}
@@ -31,7 +31,7 @@ const TireGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
           <AppTextField
             fullWidth
             required
-            label="مدل "
+            label="مدل"
             name="model"
             value={values.model}
             onChange={onChange}
@@ -44,7 +44,7 @@ const TireGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
           <AppTextField
             fullWidth
             required
-            label="شماره سریال "
+            label="شماره سریال"
             name="serialNumber"
             value={values.serialNumber}
             onChange={onChange}
@@ -57,7 +57,7 @@ const TireGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
           <AppTextField
             fullWidth
             required
-            label="  سایز "
+            label="سایز"
             name="size"
             value={values.size}
             onChange={onChange}
@@ -81,7 +81,7 @@ const TireGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
             fullWidth
             required
             type="number"
-            label="  هزینه خرید "
+            label="هزینه خرید"
             name="purchasePrice"
             value={values.purchasePrice}
             onChange={onChange}

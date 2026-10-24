@@ -41,7 +41,7 @@ const InsuranceGeneralSection = ({
           <AppAutocompleteform
             fullWidth
             required
-            label="نام شرکت بیمه گذار "
+            label="نام شرکت بیمه گذار"
             name="vendorId"
             options={vendors}
             loading={vendorsLoading}

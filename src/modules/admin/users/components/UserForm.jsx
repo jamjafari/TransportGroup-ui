@@ -1,18 +1,18 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from "react";
 
-import Stack from '@mui/material/Stack';
+import Stack from "@mui/material/Stack";
 
-import { AppForm, AppFormActions, AppButton } from '@/components';
-import { validate, hasErrors } from '@/validation';
+import { AppForm, AppFormActions, AppButton } from "@/components";
+import { validate, hasErrors } from "@/validation";
 
-import UserGeneralSection from '../sections/UserGeneralSection';
-import useRoles from '../hooks/useRoles';
-import userSchema from '../schemas/userSchema';
+import UserGeneralSection from "../sections/UserGeneralSection";
+import useRoles from "../hooks/useRoles";
+import userSchema from "../schemas/userSchema";
 
 const defaultValues = {
-  userName: '',
-  fullName: '',
-  password: '',
+  userName: "",
+  fullName: "",
+  password: "",
   roleIds: [],
   isActive: true,
   isLock: false,
@@ -27,7 +27,7 @@ const UserForm = ({
   const { roles, getRoles } = useRoles();
 
   useEffect(() => {
-    getRoles().then((data) => console.log('Roles loaded:', data));
+    getRoles().then((data) => console.log("Roles loaded:", data));
   }, [getRoles]);
 
   const handleValidatedSubmit = useCallback(
@@ -66,13 +66,10 @@ const UserForm = ({
                 resetForm();
                 setErrors({});
               }}
-            >
-              انصراف
-            </AppButton>
+              labelKey="انصراف"
+            ></AppButton>
 
-            <AppButton type="submit" variant="contained">
-              ذخیره
-            </AppButton>
+            <AppButton type="submit" variant="contained" labelKey="ذخیره" />
           </AppFormActions>
         </Stack>
       )}

@@ -6,12 +6,12 @@ const FBVReportTable = ({ rows = [], loading }) => {
   const columns = [
     {
       field: 'vehicleName',
-      headerName: 'نام خودرو ',
+      headerName: 'نام خودرو',
       flex: 1,
     },
     {
       field: 'fuelCost',
-      headerName: ' هزینه سوخت ',
+      headerName: 'هزینه سوخت',
       flex: 1,
     },
     {

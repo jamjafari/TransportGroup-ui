@@ -72,7 +72,7 @@ const ExpenseGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
           <AppAutocompleteform
             fullWidth
             required
-            label=" نوع هزینه"
+            label="نوع هزینه"
             name="expenseTypeId"
             options={expenseTypes}
             loading={expenseTypesLoading}
@@ -107,7 +107,7 @@ const ExpenseGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
             fullWidth
             required
             type="number"
-            label="مقدار هزینه (تومان) "
+            label="مقدار هزینه (تومان)"
             name="amount"
             value={values.amount}
             onChange={onChange}
@@ -121,7 +121,7 @@ const ExpenseGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
             fullWidth
             required
 
-            label="  شماره فاکتور"
+            label="شماره فاکتور"
             name="invoiceNumber"
             value={values.invoiceNumber}
             onChange={onChange}
@@ -133,7 +133,7 @@ const ExpenseGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
           <AppAutocompleteform
             fullWidth
             required
-            label="نام تامین کننده "
+            label="نام تامین کننده"
             name="vendorId"
             options={vendors}
             loading={vendorsLoading}

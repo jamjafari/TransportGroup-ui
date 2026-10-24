@@ -7,23 +7,23 @@ const DateRangeFinancialSummary = () => {
   console.log('data summary in daterange:', data);
   const items = [
     {
-      title: ' تعداد هزینه ها  ',
+      title: 'تعداد هزینه ها',
       value: data?.total ?? 0,
       color: 'primary',
     },
     {
-      title: '  تعداد هزینه های تایید شده',
+      title: 'تعداد هزینه های تایید شده',
       value: data?.Approved ?? 0,
       color: 'success',
     },
     {
-      title: ' تعداد هزینه های رد شده ',
+      title: 'تعداد هزینه های رد شده',
       value: data?.Rejected ?? 0,
       color: 'error',
     },
 
     {
-      title: '  تعداد هزینه های در حال رسیدگی',
+      title: 'تعداد هزینه های در حال رسیدگی',
       value: data?.Pending ?? 0,
       color: 'info',
     },

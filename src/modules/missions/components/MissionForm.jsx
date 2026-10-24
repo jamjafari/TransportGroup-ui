@@ -1,19 +1,19 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
-import Stack from '@mui/material/Stack';
+import React, { memo, useCallback, useEffect, useState } from "react";
+import Stack from "@mui/material/Stack";
 
-import { AppForm, AppFormActions, AppButton } from '@/components';
-import { hasErrors, validate } from '@/validation';
+import { AppForm, AppFormActions, AppButton } from "@/components";
+import { hasErrors, validate } from "@/validation";
 
-import MissionGeneralSection from '../sections/MissionGeneralSection';
-import MissionLocationSection from '../sections/MissionLocationSection';
-import MissionStartEndSection from '../sections/MissionStartEndSection';
+import MissionGeneralSection from "../sections/MissionGeneralSection";
+import MissionLocationSection from "../sections/MissionLocationSection";
+import MissionStartEndSection from "../sections/MissionStartEndSection";
 
-import useMissionVehicles from '../hooks/useMissionVehicles';
-import useMissionDriver from '../hooks/useMissionDriver';
+import useMissionVehicles from "../hooks/useMissionVehicles";
+import useMissionDriver from "../hooks/useMissionDriver";
 
-import { sanitizeNumericFields } from '@/utils';
+import { sanitizeNumericFields } from "@/utils";
 
-import missionSchema from '../validation/missionSchema';
+import missionSchema from "../validation/missionSchema";
 
 const defaultValues = {
   vehicleId: null,
@@ -26,7 +26,7 @@ const defaultValues = {
   endTime: null,
   startOdometerKm: null,
   endOdometerKm: null,
-  description: '',
+  description: "",
   distanceKm: null,
   status: null,
 };
@@ -54,9 +54,9 @@ const MissionForm = ({ initialValues = defaultValues, onSubmit }) => {
       if (!hasErrors(validationErrors)) {
         onSubmit?.(
           sanitizeNumericFields(values, [
-            'startOdometerKm',
-            'endOdometerKm',
-            'distanceKm',
+            "startOdometerKm",
+            "endOdometerKm",
+            "distanceKm",
           ]),
         );
       }
@@ -106,13 +106,10 @@ const MissionForm = ({ initialValues = defaultValues, onSubmit }) => {
                 resetForm();
                 setErrors({});
               }}
-            >
-              انصراف
-            </AppButton>
+              labelKey="انصراف"
+            />
 
-            <AppButton type="submit" variant="contained">
-              ذخیره
-            </AppButton>
+            <AppButton type="submit" variant="contained" labelKey="ذخیره" />
           </AppFormActions>
         </Stack>
       )}

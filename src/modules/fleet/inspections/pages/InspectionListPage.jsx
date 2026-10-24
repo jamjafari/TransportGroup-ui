@@ -1,18 +1,18 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 import {
   AppDataGrid,
   AppButton,
   ConfirmDialog,
   StatusChip,
-} from '@/components';
-import { formatJalaliDate } from '@/utils';
+} from "@/components";
+import { formatJalaliDate } from "@/utils";
 
-import useInspection from '../hooks/useInspection';
-import { inspectionResultChipKey } from '../constants';
-
+import useInspection from "../hooks/useInspection";
+import { inspectionResultChipKey } from "../constants";
+import { useTranslatedColumns } from "../../../../hooks";
 const InspectionListPage = () => {
   const navigate = useNavigate();
   const { inspections, loading, getInspections, deleteInspection } =
@@ -30,33 +30,33 @@ const InspectionListPage = () => {
     getInspections();
   }, [deleteTarget, deleteInspection, getInspections]);
 
-  const columns = useMemo(
+  const baseColumns = useMemo(
     () => [
-      { field: 'plateNumber', headerName: 'خودرو', width: 140 },
-      { field: 'vendorName', headerName: 'مرکز معاینه', width: 160 },
+      { field: "plateNumber", headerName: "خودرو", width: 140 },
+      { field: "vendorName", headerName: "مرکز معاینه", width: 160 },
       {
-        field: 'inspectionDate',
-        headerName: 'تاریخ انجام',
+        field: "inspectionDate",
+        headerName: "تاریخ انجام",
         width: 130,
         renderCell: ({ row }) => formatJalaliDate(row.inspectionDate),
       },
       {
-        field: 'expiryDate',
-        headerName: 'تاریخ انقضا',
+        field: "expiryDate",
+        headerName: "تاریخ انقضا",
         width: 130,
         renderCell: ({ row }) => formatJalaliDate(row.expiryDate),
       },
       {
-        field: 'result',
-        headerName: 'نتیجه',
+        field: "result",
+        headerName: "نتیجه",
         width: 120,
         renderCell: ({ row }) => (
           <StatusChip status={inspectionResultChipKey(row.result)} />
         ),
       },
       {
-        field: 'actions',
-        headerName: 'عملیات',
+        field: "actions",
+        headerName: "عملیات",
         width: 140,
         renderCell: ({ row }) => (
           <>
@@ -66,9 +66,9 @@ const InspectionListPage = () => {
                 e.stopPropagation();
                 navigate(`/inspections/edit/${row.id}`);
               }}
-            >
-              ویرایش
-            </AppButton>
+              labelKey="ویرایش"
+            />
+
             <AppButton
               size="small"
               color="error"
@@ -76,21 +76,23 @@ const InspectionListPage = () => {
                 e.stopPropagation();
                 setDeleteTarget(row);
               }}
-            >
-              حذف
-            </AppButton>
+              labelKey="حذف"
+            />
           </>
         ),
       },
     ],
     [navigate],
   );
+  const columns = useTranslatedColumns(baseColumns);
 
   return (
     <>
-      <AppButton onClick={() => navigate('/inspections/create')} sx={{ mb: 2 }}>
-        ثبت معاینه فنی
-      </AppButton>
+      <AppButton
+        onClick={() => navigate("/inspections/create")}
+        sx={{ mb: 2 }}
+        labelKey="ثبت معاینه فنی"
+      />
 
       <AppDataGrid
         rows={inspections}

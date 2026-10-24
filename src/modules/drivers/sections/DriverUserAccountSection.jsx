@@ -1,26 +1,26 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState } from "react";
 
-import { Alert, Stack, Typography } from '@mui/material';
+import { Alert, Stack, Typography } from "@mui/material";
 
-import { AppTextField, AppButton, AppCard } from '@/components';
+import { AppTextField, AppButton, AppCard } from "@/components";
 
-import * as driverApi from '../api/driverApi';
+import * as driverApi from "../api/driverApi";
 
 const DriverUserAccountSection = ({ driverId, hasUserAccount }) => {
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
   const handleSubmit = async () => {
     if (!userName || password.length < 6) {
-      setError('نام کاربری الزامی و رمز عبور باید حداقل ۶ کاراکتر باشد');
+      setError("نام کاربری الزامی و رمز عبور باید حداقل ۶ کاراکتر باشد");
       return;
     }
 
     setSubmitting(true);
-    setError('');
+    setError("");
 
     try {
       const response = await driverApi.createUserForDriver(driverId, {
@@ -29,12 +29,12 @@ const DriverUserAccountSection = ({ driverId, hasUserAccount }) => {
       });
 
       if (!response.success) {
-        throw new Error(response.errors?.[0] || 'خطا در ساخت حساب کاربری');
+        throw new Error(response.errors?.[0] || "خطا در ساخت حساب کاربری");
       }
 
       setSuccess(true);
-      setUserName('');
-      setPassword('');
+      setUserName("");
+      setPassword("");
     } catch (err) {
       setError(err.message);
     } finally {
@@ -90,10 +90,9 @@ const DriverUserAccountSection = ({ driverId, hasUserAccount }) => {
         <AppButton
           loading={submitting}
           onClick={handleSubmit}
-          sx={{ alignSelf: 'flex-start' }}
-        >
-          ساخت حساب کاربری
-        </AppButton>
+          sx={{ alignSelf: "flex-start" }}
+          labelKey="ساخت حساب کاربری"
+        ></AppButton>
       </Stack>
     </AppCard>
   );

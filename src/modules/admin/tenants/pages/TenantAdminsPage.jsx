@@ -1,13 +1,13 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 
 import {
   AppDataGrid,
   AppButton,
   ConfirmDialog,
   StatusChip,
-} from '@/components';
+} from "@/components";
 
-import useTenant from '../hooks/useTenant';
+import useTenant from "../hooks/useTenant";
 
 const TenantAdminsPage = () => {
   const { admins, loading, getTenantAdmins, setAdminStatus, deleteAdmin } =
@@ -36,28 +36,28 @@ const TenantAdminsPage = () => {
 
   const columns = useMemo(
     () => [
-      { field: 'tenantName', headerName: 'سازمان', width: 200 },
-      { field: 'userName', headerName: 'نام کاربری', width: 150 },
-      { field: 'fullName', headerName: 'نام و نام‌خانوادگی', width: 180 },
+      { field: "tenantName", headerName: "سازمان", width: 200 },
+      { field: "userName", headerName: "نام کاربری", width: 150 },
+      { field: "fullName", headerName: "نام و نام‌خانوادگی", width: 180 },
       {
-        field: 'isActive',
-        headerName: 'وضعیت',
+        field: "isActive",
+        headerName: "وضعیت",
         width: 110,
         renderCell: ({ row }) => (
-          <StatusChip status={row.isActive ? 'Active' : 'Inactive'} />
+          <StatusChip status={row.isActive ? "Active" : "Inactive"} />
         ),
       },
       {
-        field: 'isLocked',
-        headerName: 'قفل',
+        field: "isLocked",
+        headerName: "قفل",
         width: 100,
         renderCell: ({ row }) => (
-          <StatusChip status={row.isLocked ? 'error' : 'Active'} />
+          <StatusChip status={row.isLocked ? "error" : "Active"} />
         ),
       },
       {
-        field: 'actions',
-        headerName: 'عملیات',
+        field: "actions",
+        headerName: "عملیات",
         width: 220,
         renderCell: ({ row }) => (
           <>
@@ -68,7 +68,7 @@ const TenantAdminsPage = () => {
                 handleToggleActive(row);
               }}
             >
-              {row.isActive ? 'غیرفعال کردن' : 'فعال کردن'}
+              {row.isActive ? "غیرفعال کردن" : "فعال کردن"}
             </AppButton>
 
             <AppButton
@@ -78,9 +78,8 @@ const TenantAdminsPage = () => {
                 e.stopPropagation();
                 setDeleteTarget(row);
               }}
-            >
-              حذف
-            </AppButton>
+              labelKey="حذف"
+            />
           </>
         ),
       },

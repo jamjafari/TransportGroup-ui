@@ -39,7 +39,7 @@ const MissionLocationSection = ({
           <AppAutocompleteform
             fullWidth
             required
-            label="مبدا "
+            label="مبدا"
             name="originLocationId"
             options={locations}
             loading={locationsLoading}
@@ -61,7 +61,7 @@ const MissionLocationSection = ({
           <AppAutocompleteform
             fullWidth
             required
-            label="مقصد "
+            label="مقصد"
             name="destinationLocationId"
             options={locations}
             loading={locationsLoading}

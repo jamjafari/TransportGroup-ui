@@ -1,11 +1,11 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import { AppDataGrid } from '@/components';
-import { AppButton, ConfirmDialog, StatusChip } from '@/components';
+import { AppDataGrid } from "@/components";
+import { AppButton, ConfirmDialog, StatusChip } from "@/components";
 
-import useLocation from '../hooks/useLocation';
+import useLocation from "../hooks/useLocation";
 const LocationListPage = () => {
   const navigate = useNavigate();
 
@@ -28,35 +28,35 @@ const LocationListPage = () => {
   const columns = useMemo(
     () => [
       {
-        field: 'name',
-        headerName: 'نام مکان  ',
+        field: "name",
+        headerName: "نام مکان",
         width: 130,
       },
       {
-        field: 'code',
-        headerName: ' کد مکان',
+        field: "code",
+        headerName: "کد مکان",
         width: 120,
       },
       {
-        field: 'address',
-        headerName: ' آدرس ',
+        field: "address",
+        headerName: "آدرس",
         width: 120,
       },
       {
-        field: 'latitude',
-        headerName: 'عرض جغرافیایی ',
+        field: "latitude",
+        headerName: "عرض جغرافیایی",
         width: 120,
       },
-      { field: 'longitude', headerName: '   طول جغرافیایی', width: 140 },
+      { field: "longitude", headerName: "طول جغرافیایی", width: 140 },
       {
-        field: 'description',
-        headerName: '  توضیحات ',
+        field: "description",
+        headerName: "توضیحات",
         width: 130,
       },
 
       {
-        field: 'actions',
-        headerName: 'عملیات',
+        field: "actions",
+        headerName: "عملیات",
         width: 140,
         renderCell: ({ row }) => (
           <>
@@ -66,9 +66,8 @@ const LocationListPage = () => {
                 event.stopPropagation();
                 navigate(`/locations/edit/${row.id}`);
               }}
-            >
-              ویرایش
-            </AppButton>
+              labelKey="ویرایش"
+            />
 
             <AppButton
               size="small"
@@ -77,9 +76,8 @@ const LocationListPage = () => {
                 event.stopPropagation();
                 setDeleteTarget(row);
               }}
-            >
-              حذف
-            </AppButton>
+              labelKey="حذف"
+            ></AppButton>
           </>
         ),
       },
@@ -89,9 +87,11 @@ const LocationListPage = () => {
 
   return (
     <>
-      <AppButton onClick={() => navigate('/locations/create')} sx={{ mb: 2 }}>
-        افزودن مکان
-      </AppButton>
+      <AppButton
+        onClick={() => navigate("/locations/create")}
+        sx={{ mb: 2 }}
+        labelKey="افزودن مکان"
+      />
 
       <AppDataGrid
         rows={locations}

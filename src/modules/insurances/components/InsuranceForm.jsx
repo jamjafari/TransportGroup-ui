@@ -1,32 +1,32 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
-import Stack from '@mui/material/Stack';
+import React, { memo, useCallback, useEffect, useState } from "react";
+import Stack from "@mui/material/Stack";
 
-import { AppForm, AppFormActions, AppButton } from '@/components';
-import { hasErrors, validate } from '@/validation';
+import { AppForm, AppFormActions, AppButton } from "@/components";
+import { hasErrors, validate } from "@/validation";
 
-import InsuranceGeneralSection from '../sections/InsuranceGeneralSection';
-import InsuranceTechnicalSection from '../sections/InsuranceTechnicalSection';
+import InsuranceGeneralSection from "../sections/InsuranceGeneralSection";
+import InsuranceTechnicalSection from "../sections/InsuranceTechnicalSection";
 
-import useInsuranceVehicles from '../hooks/useInsuranceVehicles';
-import useInsuranceVendors from '../hooks/useInsuranceVendors';
+import useInsuranceVehicles from "../hooks/useInsuranceVehicles";
+import useInsuranceVendors from "../hooks/useInsuranceVendors";
 
-import { sanitizeNumericFields } from '@/utils';
+import { sanitizeNumericFields } from "@/utils";
 
-import insuranceSchema from '../validation/insuranceSchema';
+import insuranceSchema from "../validation/insuranceSchema";
 
 const defaultValues = {
   vehicleId: null,
   vendorId: null,
-  premiumAmount: '',
-  coverageAmount: '',
+  premiumAmount: "",
+  coverageAmount: "",
 
   startDate: null,
   endDate: null,
-  insuranceType: '',
-  status: '',
-  policyNumber: '',
+  insuranceType: "",
+  status: "",
+  policyNumber: "",
 
-  description: '',
+  description: "",
 };
 
 const InsuranceForm = ({ initialValues = defaultValues, onSubmit }) => {
@@ -56,7 +56,7 @@ const InsuranceForm = ({ initialValues = defaultValues, onSubmit }) => {
 
       if (!hasErrors(validationErrors)) {
         onSubmit?.(
-          sanitizeNumericFields(values, ['premiumAmount', 'coverageAmount']),
+          sanitizeNumericFields(values, ["premiumAmount", "coverageAmount"]),
         );
       }
     },
@@ -98,13 +98,10 @@ const InsuranceForm = ({ initialValues = defaultValues, onSubmit }) => {
                 resetForm();
                 setErrors({});
               }}
-            >
-              انصراف
-            </AppButton>
+              labelKey="انصراف"
+            />
 
-            <AppButton type="submit" variant="contained">
-              ذخیره
-            </AppButton>
+            <AppButton type="submit" variant="contained" labelKey="ذخیره" />
           </AppFormActions>
         </Stack>
       )}

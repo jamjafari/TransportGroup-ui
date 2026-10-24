@@ -5,4 +5,3 @@ export * from "./useAsyncData";
 export * from "./useAttachments";
 export { default as usePlanLimits } from "./usePlanLimits";
 export { default as useTranslatedColumns } from "./useTranslatedColumns";
-export { default as useTranslate } from "./useTranslate";

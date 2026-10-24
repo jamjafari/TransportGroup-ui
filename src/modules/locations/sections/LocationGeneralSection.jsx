@@ -22,7 +22,7 @@ const LocationGeneralSection = ({
           <AppTextField
             fullWidth
             required
-            label="نام مکان "
+            label="نام مکان"
             name="name"
             value={values.name}
             onChange={onChange}
@@ -35,7 +35,7 @@ const LocationGeneralSection = ({
           <AppTextField
             fullWidth
             required
-            label="کد مکان "
+            label="کد مکان"
             name="code"
             value={values.code}
             onChange={onChange}
@@ -48,7 +48,7 @@ const LocationGeneralSection = ({
           <AppTextField
             fullWidth
 
-            label="آدرس "
+            label="آدرس"
             name="address"
             value={values.address}
             onChange={onChange}
@@ -62,7 +62,7 @@ const LocationGeneralSection = ({
             fullWidth
 
             type="number"
-            label="  عرض جغرافیایی "
+            label="عرض جغرافیایی"
             name="latitude"
             value={values.latitude}
             onChange={onChange}
@@ -75,7 +75,7 @@ const LocationGeneralSection = ({
             fullWidth
 
             type="number"
-            label="  طول جغرافیای "
+            label="طول جغرافیای"
             name="longitude"
             value={values.longitude}
             onChange={onChange}
@@ -87,7 +87,7 @@ const LocationGeneralSection = ({
           <AppTextField
             fullWidth
 
-            label="  توضیحات "
+            label="توضیحات"
             name="description"
             value={values.description}
             onChange={onChange}

@@ -69,7 +69,7 @@ const MissionGeneralSection = ({
           <AppTextField
             fullWidth
 
-            label="  موضوع ماموریت و افراد حاظر "
+            label="موضوع ماموریت و افراد حاظر"
             name="description"
             value={values.description}
 

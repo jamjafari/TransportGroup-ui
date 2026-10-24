@@ -6,14 +6,14 @@ const FinancialTransactionsTable = ({ rows = [], loading }) => {
   const baseColumns = [
     {
       field: "expenseDate",
-      headerName: "تاریخ ",
+      headerName: "تاریخ",
       width: 180,
       align: "center",
       headerAlign: "center",
     },
     {
       field: "expenseType",
-      headerName: "نوع هزینه ",
+      headerName: "نوع هزینه",
       width: 180,
       align: "left",
       headerAlign: "right",

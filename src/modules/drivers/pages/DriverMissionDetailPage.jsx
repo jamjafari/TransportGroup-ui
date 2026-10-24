@@ -1,25 +1,25 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from "react";
 
-import { useParams } from 'react-router-dom';
-import { Box, Typography, Stack, Alert, Chip } from '@mui/material';
-import MyLocationIcon from '@mui/icons-material/MyLocation';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import StopIcon from '@mui/icons-material/Stop';
-import { missionStatusOptions } from '../constants';
+import { useParams } from "react-router-dom";
+import { Box, Typography, Stack, Alert, Chip } from "@mui/material";
+import MyLocationIcon from "@mui/icons-material/MyLocation";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import StopIcon from "@mui/icons-material/Stop";
+import { missionStatusOptions } from "../constants";
 
-import { AppCard, AppButton, StatusChip, AppSelect } from '@/components';
+import { AppCard, AppButton, StatusChip, AppSelect } from "@/components";
 
-import useDriverMissions from '../hooks/useDriverMissions';
-import useGeolocation from '../hooks/useGeolocation';
-import useAutoGpsTracking from '../hooks/useAutoGpsTracking';
+import useDriverMissions from "../hooks/useDriverMissions";
+import useGeolocation from "../hooks/useGeolocation";
+import useAutoGpsTracking from "../hooks/useAutoGpsTracking";
 const ENDED_STATUSES = [3, 4]; // Completed, Canceled
 
 const INTERVAL_OPTIONS = [
-  { id: 1, title: 'هر ۱ دقیقه' },
-  { id: 5, title: 'هر ۵ دقیقه' },
-  { id: 10, title: 'هر ۱۰ دقیقه' },
-  { id: 15, title: 'هر ۱۵ دقیقه' },
-  { id: 30, title: 'هر ۳۰ دقیقه' },
+  { id: 1, title: "هر ۱ دقیقه" },
+  { id: 5, title: "هر ۵ دقیقه" },
+  { id: 10, title: "هر ۱۰ دقیقه" },
+  { id: 15, title: "هر ۱۵ دقیقه" },
+  { id: 30, title: "هر ۳۰ دقیقه" },
 ];
 
 const DriverMissionDetailPage = () => {
@@ -29,7 +29,7 @@ const DriverMissionDetailPage = () => {
   const missionLabel = useCallback(
     (value) =>
       missionStatusOptions.find((option) => option.value === value)?.label ??
-      '—',
+      "—",
     [],
   );
   const {
@@ -39,7 +39,7 @@ const DriverMissionDetailPage = () => {
   } = useGeolocation();
 
   const [submitting, setSubmitting] = useState(false);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [intervalMinutes, setIntervalMinutes] = useState(5); // ✅ اضافه شد
 
   const mission = missions.find((m) => String(m.id) === String(id));
@@ -76,14 +76,14 @@ const DriverMissionDetailPage = () => {
 
     const handleBeforeUnload = (event) => {
       event.preventDefault();
-      event.returnValue = ''; // مرورگرهای مدرن پیام سفارشی رو نادیده می‌گیرن و متن پیش‌فرض خودشون رو نشون می‌دن
-      return '';
+      event.returnValue = ""; // مرورگرهای مدرن پیام سفارشی رو نادیده می‌گیرن و متن پیش‌فرض خودشون رو نشون می‌دن
+      return "";
     };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener("beforeunload", handleBeforeUnload);
 
     return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, [isTracking]);
 
@@ -95,16 +95,16 @@ const DriverMissionDetailPage = () => {
   }, [lastRecordedAt, id, getGpsPoints]);
 
   const handleRecord = useCallback(async () => {
-    setMessage('');
+    setMessage("");
     setSubmitting(true);
 
     try {
       const coords = await getCurrentPosition();
       await recordGpsPoint(id, coords);
-      setMessage('موقعیت با موفقیت ثبت شد.');
+      setMessage("موقعیت با موفقیت ثبت شد.");
       getGpsPoints(id);
     } catch (err) {
-      setMessage(err.message || 'خطا در ثبت موقعیت');
+      setMessage(err.message || "خطا در ثبت موقعیت");
     } finally {
       setSubmitting(false);
     }
@@ -112,9 +112,9 @@ const DriverMissionDetailPage = () => {
   const isEnded = mission ? ENDED_STATUSES.includes(mission.status) : false; // ✅ اضافه شد
 
   return (
-    <Box sx={{ maxWidth: 480, mx: 'auto', p: 2 }}>
+    <Box sx={{ maxWidth: 480, mx: "auto", p: 2 }}>
       <Typography variant="h6" fontWeight={700} mb={2}>
-        {mission?.missionCode || 'مأموریت'}
+        {mission?.missionCode || "مأموریت"}
       </Typography>
 
       {mission && (
@@ -147,7 +147,7 @@ const DriverMissionDetailPage = () => {
         <>
           {message && (
             <Alert
-              severity={message.includes('موفقیت') ? 'success' : 'error'}
+              severity={message.includes("موفقیت") ? "success" : "error"}
               sx={{ mb: 2 }}
             >
               {message}
@@ -166,9 +166,8 @@ const DriverMissionDetailPage = () => {
             loading={submitting || geoLoading}
             onClick={handleRecord}
             sx={{ mb: 3 }}
-          >
-            ثبت موقعیت فعلی (دستی)
-          </AppButton>
+            labelKey="ثبت موقعیت فعلی (دستی)"
+          />
 
           {/* ✅ بخش جدید: ثبت خودکار */}
           <AppCard sx={{ p: 2, mb: 3 }}>
@@ -185,7 +184,7 @@ const DriverMissionDetailPage = () => {
 
                 {lastRecordedAt && (
                   <Typography variant="caption" color="text.secondary">
-                    آخرین ثبت: {lastRecordedAt.toLocaleTimeString('fa-IR')}
+                    آخرین ثبت: {lastRecordedAt.toLocaleTimeString("fa-IR")}
                   </Typography>
                 )}
 
@@ -197,9 +196,8 @@ const DriverMissionDetailPage = () => {
                   variant="outlined"
                   startIcon={<StopIcon />}
                   onClick={stopAutoTracking}
-                >
-                  توقف ثبت خودکار
-                </AppButton>
+                  labelKey="توقف ثبت خودکار"
+                ></AppButton>
 
                 <Alert severity="info" sx={{ fontSize: 12 }}>
                   توجه: تا وقتی این صفحه باز و روشن باشد، ثبت خودکار ادامه دارد.
@@ -221,9 +219,8 @@ const DriverMissionDetailPage = () => {
                   color="success"
                   startIcon={<PlayArrowIcon />}
                   onClick={startAutoTracking}
-                >
-                  شروع ثبت خودکار
-                </AppButton>
+                  labelKey="شروع ثبت خودکار"
+                ></AppButton>
               </Stack>
             )}
           </AppCard>
@@ -237,7 +234,7 @@ const DriverMissionDetailPage = () => {
         {points.map((point) => (
           <AppCard key={point.id} sx={{ p: 1.5 }}>
             <Typography variant="caption" color="text.secondary">
-              {new Date(point.recordedAt).toLocaleString('fa-IR')}
+              {new Date(point.recordedAt).toLocaleString("fa-IR")}
             </Typography>
             <Typography variant="body2">
               {point.latitude.toFixed(5)}, {point.longitude.toFixed(5)}

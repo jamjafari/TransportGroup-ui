@@ -10,13 +10,13 @@ const DateRangeFinancialTable = () => {
   const columns = [
     {
       field: 'expenseDate',
-      headerName: 'تاریخ ',
+      headerName: 'تاریخ',
       flex: 1,
       renderCell: ({ value }) => formatJalaliDate(value),
     },
     {
       field: 'expenseType',
-      headerName: 'نوع هزینه ',
+      headerName: 'نوع هزینه',
       flex: 1,
     },
     {

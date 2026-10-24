@@ -1,12 +1,12 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import { AppDataGrid } from '@/components';
-import { AppButton, ConfirmDialog, StatusChip } from '@/components';
+import { AppDataGrid } from "@/components";
+import { AppButton, ConfirmDialog, StatusChip } from "@/components";
 
-import useServiceType from '../hooks/useServiceType';
-import { gregorianYearToJalali, formatJalaliDate } from '@/utils';
+import useServiceType from "../hooks/useServiceType";
+import { gregorianYearToJalali, formatJalaliDate } from "@/utils";
 const ServiceTypeListPage = () => {
   const navigate = useNavigate();
 
@@ -30,29 +30,29 @@ const ServiceTypeListPage = () => {
   const columns = useMemo(
     () => [
       {
-        field: 'code',
-        headerName: ' کد ',
+        field: "code",
+        headerName: "کد",
         width: 130,
       },
       {
-        field: 'title',
-        headerName: ' عنوان سرویس ',
+        field: "title",
+        headerName: "عنوان سرویس",
         width: 130,
       },
       {
-        field: 'serviceIntervalKM',
-        headerName: ' سرویس دوره ای کیلومتر ',
+        field: "serviceIntervalKM",
+        headerName: "سرویس دوره ای کیلومتر",
         width: 120,
       },
       {
-        field: 'serviceIntervalDays',
-        headerName: 'سرویس دوره ای روزانه ',
+        field: "serviceIntervalDays",
+        headerName: "سرویس دوره ای روزانه",
         width: 130,
       },
 
       {
-        field: 'actions',
-        headerName: 'عملیات',
+        field: "actions",
+        headerName: "عملیات",
         width: 140,
         renderCell: ({ row }) => (
           <>
@@ -62,9 +62,8 @@ const ServiceTypeListPage = () => {
                 event.stopPropagation();
                 navigate(`/serviceTypes/edit/${row.id}`);
               }}
-            >
-              ویرایش
-            </AppButton>
+              labelKey="ویرایش"
+            />
 
             <AppButton
               size="small"
@@ -73,9 +72,8 @@ const ServiceTypeListPage = () => {
                 event.stopPropagation();
                 setDeleteTarget(row);
               }}
-            >
-              حذف
-            </AppButton>
+              labelKey="حذف"
+            />
           </>
         ),
       },
@@ -86,11 +84,10 @@ const ServiceTypeListPage = () => {
   return (
     <>
       <AppButton
-        onClick={() => navigate('/serviceTypes/create')}
+        onClick={() => navigate("/serviceTypes/create")}
         sx={{ mb: 2 }}
-      >
-        افزودن نوع سرویس
-      </AppButton>
+        labelKey="افزودن نوع سرویس"
+      />
 
       <AppDataGrid
         rows={serviceTypes}

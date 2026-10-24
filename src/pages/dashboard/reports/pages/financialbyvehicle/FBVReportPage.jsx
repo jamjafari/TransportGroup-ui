@@ -72,7 +72,7 @@ const FBVReportPage = () => {
           <FBVReportTable rows={data.financialByVehicle} loading={loading} />
         </DashboardCard>
         <DashboardCard
-          title="   تراکنش ها"
+          title="تراکنش ها"
           subtitle="   هزینه  خودروهای موجود در نقلیه"
         >
           <FinancialTransactionsTable rows={data.table} loading={loading} />

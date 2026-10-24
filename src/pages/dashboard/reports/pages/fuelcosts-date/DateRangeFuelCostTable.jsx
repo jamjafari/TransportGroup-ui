@@ -10,7 +10,7 @@ const DateRangeFuelCostTable = () => {
   const columns = [
     {
       field: 'fuelDate',
-      headerName: 'تاریخ ',
+      headerName: 'تاریخ',
       flex: 1,
       renderCell: ({ value }) => formatJalaliDate(value),
     },
@@ -21,12 +21,12 @@ const DateRangeFuelCostTable = () => {
     },
     {
       field: 'driverName',
-      headerName: 'نام راننده  ',
+      headerName: 'نام راننده',
       flex: 1,
     },
     {
       field: 'unitCost',
-      headerName: 'هزینه واحد  ',
+      headerName: 'هزینه واحد',
       flex: 1,
     },
     {
@@ -41,7 +41,7 @@ const DateRangeFuelCostTable = () => {
     },
     {
       field: 'stationName',
-      headerName: 'نام جایگاه ',
+      headerName: 'نام جایگاه',
       flex: 1,
     },
   ];

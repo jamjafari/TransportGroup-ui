@@ -18,7 +18,7 @@ const VendorGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
           <AppTextField
             fullWidth
             required
-            label="نام تامین کننده "
+            label="نام تامین کننده"
             name="vendorName"
             value={values.vendorName}
             onChange={onChange}
@@ -31,7 +31,7 @@ const VendorGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
           <AppTextField
             fullWidth
 
-            label=" کد تامین کننده"
+            label="کد تامین کننده"
             name="vendorCode"
             value={values.vendorCode}
             onChange={onChange}
@@ -59,7 +59,7 @@ const VendorGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
             fullWidth
             required
 
-            label="  شماره موبایل"
+            label="شماره موبایل"
             name="mobileNumber"
             value={values.mobileNumber}
             onChange={onChange}
@@ -95,7 +95,7 @@ const VendorGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
           <AppTextField
             fullWidth
 
-            label="ایمیل "
+            label="ایمیل"
             name="email"
             value={values.email}
             onChange={onChange}

@@ -1,13 +1,13 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import { AppDataGrid } from '@/components';
-import { AppButton, ConfirmDialog, StatusChip } from '@/components';
+import { AppDataGrid } from "@/components";
+import { AppButton, ConfirmDialog, StatusChip } from "@/components";
 
-import useTire from '../hooks/useTire';
-import { tireStatusChipKey } from '../constants';
-import { gregorianYearToJalali, formatJalaliDate } from '@/utils';
+import useTire from "../hooks/useTire";
+import { tireStatusChipKey } from "../constants";
+import { gregorianYearToJalali, formatJalaliDate } from "@/utils";
 const TireListPage = () => {
   const navigate = useNavigate();
 
@@ -30,43 +30,43 @@ const TireListPage = () => {
   const columns = useMemo(
     () => [
       {
-        field: 'brand',
-        headerName: '   برند  ',
+        field: "brand",
+        headerName: "برند",
         width: 130,
       },
       {
-        field: 'model',
-        headerName: ' مدل ',
+        field: "model",
+        headerName: "مدل",
         width: 130,
       },
       {
-        field: 'serialNumber',
-        headerName: '  شماره سریال',
+        field: "serialNumber",
+        headerName: "شماره سریال",
         width: 120,
       },
       {
-        field: 'size',
-        headerName: 'اندازه ',
+        field: "size",
+        headerName: "اندازه",
         width: 130,
       },
       {
-        field: 'purchaseDate',
-        headerName: ' تاریخ خرید ',
+        field: "purchaseDate",
+        headerName: "تاریخ خرید",
         width: 130,
         renderCell: ({ row }) => formatJalaliDate(row.purchaseDate),
       },
 
       {
-        field: 'isActive',
-        headerName: 'فعال',
+        field: "isActive",
+        headerName: "فعال",
         width: 120,
         renderCell: ({ row }) => (
           <StatusChip status={tireStatusChipKey(row.isActive)} />
         ),
       },
       {
-        field: 'actions',
-        headerName: 'عملیات',
+        field: "actions",
+        headerName: "عملیات",
         width: 140,
         renderCell: ({ row }) => (
           <>
@@ -76,9 +76,8 @@ const TireListPage = () => {
                 event.stopPropagation();
                 navigate(`/tires/edit/${row.id}`);
               }}
-            >
-              ویرایش
-            </AppButton>
+              labelKey="ویرایش"
+            />
 
             <AppButton
               size="small"
@@ -87,9 +86,8 @@ const TireListPage = () => {
                 event.stopPropagation();
                 setDeleteTarget(row);
               }}
-            >
-              حذف
-            </AppButton>
+              labelKey="حذف"
+            />
           </>
         ),
       },
@@ -99,9 +97,11 @@ const TireListPage = () => {
 
   return (
     <>
-      <AppButton onClick={() => navigate('/tires/create')} sx={{ mb: 2 }}>
-        افزودن تایر
-      </AppButton>
+      <AppButton
+        onClick={() => navigate("/tires/create")}
+        sx={{ mb: 2 }}
+        labelKey="افزودن تایر"
+      />
 
       <AppDataGrid
         rows={tires}

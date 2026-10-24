@@ -1,17 +1,17 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import { AppDataGrid } from '@/components';
-import { AppButton, ConfirmDialog, StatusChip } from '@/components';
-
-import useVehicle from '../hooks/useVehicle';
+import { AppDataGrid } from "@/components";
+import { AppButton, ConfirmDialog, StatusChip } from "@/components";
+import { useTranslatedColumns } from "../../../../hooks";
+import useVehicle from "../hooks/useVehicle";
 import {
   vehicleStatusOptions,
   fuelTypeOptions,
   vehicleStatusChipKey,
-} from '../constants';
-import { gregorianYearToJalali, formatJalaliDate } from '@/utils';
+} from "../constants";
+import { gregorianYearToJalali, formatJalaliDate } from "@/utils";
 const VehicleListPage = () => {
   const navigate = useNavigate();
 
@@ -26,13 +26,13 @@ const VehicleListPage = () => {
   const statusLabel = useCallback(
     (value) =>
       vehicleStatusOptions.find((option) => option.value === value)?.label ??
-      '—',
+      "—",
     [],
   );
 
   const fuelTypeLabel = useCallback(
     (value) =>
-      fuelTypeOptions.find((option) => option.value === value)?.label ?? '—',
+      fuelTypeOptions.find((option) => option.value === value)?.label ?? "—",
     [],
   );
 
@@ -44,41 +44,41 @@ const VehicleListPage = () => {
     getVehicles();
   }, [deleteTarget, deleteVehicle, getVehicles]);
 
-  const columns = useMemo(
+  const baseColumns = useMemo(
     () => [
-      { field: 'plateNumber', headerName: 'شماره پلاک', width: 140 },
-      { field: 'brand', headerName: 'برند', width: 120 },
-      { field: 'model', headerName: 'مدل', width: 120 },
+      { field: "plateNumber", headerName: "شماره پلاک", width: 140 },
+      { field: "brand", headerName: "برند", width: 120 },
+      { field: "model", headerName: "مدل", width: 120 },
       {
-        field: 'productionYear',
-        headerName: 'سال ساخت (شمسی)',
+        field: "productionYear",
+        headerName: "سال ساخت (شمسی)",
         width: 130,
         renderCell: ({ row }) => gregorianYearToJalali(row.productionYear),
       },
       {
-        field: 'purchaseDate',
-        headerName: 'تاریخ خرید',
+        field: "purchaseDate",
+        headerName: "تاریخ خرید",
         width: 130,
         renderCell: ({ row }) => formatJalaliDate(row.purchaseDate),
       },
       {
-        field: 'fuelType',
-        headerName: 'نوع سوخت',
+        field: "fuelType",
+        headerName: "نوع سوخت",
         width: 120,
         renderCell: ({ row }) => fuelTypeLabel(row.fuelType),
       },
       {
-        field: 'status',
-        headerName: 'وضعیت',
+        field: "status",
+        headerName: "وضعیت",
         width: 130,
         renderCell: ({ row }) => (
           <StatusChip status={vehicleStatusChipKey(row.status)} />
         ),
       },
-      { field: 'currentKM', headerName: 'کارکرد (کیلومتر)', width: 140 },
+      { field: "currentKM", headerName: "کارکرد (کیلومتر)", width: 140 },
       {
-        field: 'actions',
-        headerName: 'عملیات',
+        field: "actions",
+        headerName: "عملیات",
         width: 140,
         renderCell: ({ row }) => (
           <>
@@ -88,9 +88,8 @@ const VehicleListPage = () => {
                 event.stopPropagation();
                 navigate(`/fleet/vehicles/edit/${row.id}`);
               }}
-            >
-              ویرایش
-            </AppButton>
+              labelKey="ویرایش"
+            />
 
             <AppButton
               size="small"
@@ -99,24 +98,23 @@ const VehicleListPage = () => {
                 event.stopPropagation();
                 setDeleteTarget(row);
               }}
-            >
-              حذف
-            </AppButton>
+              labelKey="حذف"
+            />
           </>
         ),
       },
     ],
     [navigate, statusLabel, fuelTypeLabel],
   );
+  const columns = useTranslatedColumns(baseColumns);
 
   return (
     <>
       <AppButton
-        onClick={() => navigate('/fleet/vehicles/create')}
+        onClick={() => navigate("/fleet/vehicles/create")}
         sx={{ mb: 2 }}
-      >
-        افزودن خودرو
-      </AppButton>
+        labelKey="افزودن خودرو"
+      />
 
       <AppDataGrid
         rows={vehicles}
@@ -124,7 +122,7 @@ const VehicleListPage = () => {
         loading={loading}
         toolbar
         pagination
-        onRowClick={(row) => navigate('/fleet/vehicles/create')}
+        onRowClick={(row) => navigate("/fleet/vehicles/create")}
         emptyTitle="خودرویی ثبت نشده است"
       />
 

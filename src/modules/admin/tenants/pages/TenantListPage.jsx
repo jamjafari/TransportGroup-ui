@@ -1,16 +1,16 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 
-import { useNavigate } from 'react-router-dom';
-import { Box } from '@mui/material';
+import { useNavigate } from "react-router-dom";
+import { Box } from "@mui/material";
 import {
   AppDataGrid,
   AppButton,
   ConfirmDialog,
   StatusChip,
-} from '@/components';
+} from "@/components";
 
-import useTenant from '../hooks/useTenant';
-import AddTenantAdminDialog from '../components/AddTenantAdminDialog';
+import useTenant from "../hooks/useTenant";
+import AddTenantAdminDialog from "../components/AddTenantAdminDialog";
 
 const TenantListPage = () => {
   const navigate = useNavigate();
@@ -32,34 +32,34 @@ const TenantListPage = () => {
 
   const columns = useMemo(
     () => [
-      { field: 'name', headerName: 'نام سازمان', width: 200 },
-      { field: 'slug', headerName: 'Slug', width: 130 },
-      { field: 'subscriptionPlan', headerName: 'پلن', width: 110 },
+      { field: "name", headerName: "نام سازمان", width: 200 },
+      { field: "slug", headerName: "Slug", width: 130 },
+      { field: "subscriptionPlan", headerName: "پلن", width: 110 },
       {
-        field: 'currentVehicleCount',
-        headerName: 'خودرو',
+        field: "currentVehicleCount",
+        headerName: "خودرو",
         width: 100,
         renderCell: ({ row }) =>
-          `${row.currentVehicleCount} / ${row.maxVehicles ?? '∞'}`,
+          `${row.currentVehicleCount} / ${row.maxVehicles ?? "∞"}`,
       },
       {
-        field: 'currentUserCount',
-        headerName: 'کاربر',
+        field: "currentUserCount",
+        headerName: "کاربر",
         width: 100,
         renderCell: ({ row }) =>
-          `${row.currentUserCount} / ${row.maxUsers ?? '∞'}`,
+          `${row.currentUserCount} / ${row.maxUsers ?? "∞"}`,
       },
       {
-        field: 'isActive',
-        headerName: 'وضعیت',
+        field: "isActive",
+        headerName: "وضعیت",
         width: 110,
         renderCell: ({ row }) => (
-          <StatusChip status={row.isActive ? 'Active' : 'Inactive'} />
+          <StatusChip status={row.isActive ? "Active" : "Inactive"} />
         ),
       },
       {
-        field: 'actions',
-        headerName: 'عملیات',
+        field: "actions",
+        headerName: "عملیات",
         width: 220,
         renderCell: ({ row }) => (
           <>
@@ -69,9 +69,8 @@ const TenantListPage = () => {
                 e.stopPropagation();
                 navigate(`/admin/tenants/edit/${row.id}`);
               }}
-            >
-              ویرایش
-            </AppButton>
+              labelKey="ویرایش"
+            />
 
             <AppButton
               size="small"
@@ -80,9 +79,8 @@ const TenantListPage = () => {
                 e.stopPropagation();
                 setDeleteTarget(row);
               }}
-            >
-              حذف
-            </AppButton>
+              labelKey="حذف"
+            />
           </>
         ),
       },
@@ -92,14 +90,14 @@ const TenantListPage = () => {
 
   return (
     <>
-      <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
-        <AppButton onClick={() => navigate('/admin/tenants/create')}>
+      <Box sx={{ display: "flex", gap: 1, mb: 2 }}>
+        <AppButton onClick={() => navigate("/admin/tenants/create")}>
           افزودن سازمان
         </AppButton>
 
         <AppButton
           variant="outlined"
-          onClick={() => navigate('/admin/tenants/admins')}
+          onClick={() => navigate("/admin/tenants/admins")}
         >
           مشاهده‌ی ادمین‌های سازمان‌ها
         </AppButton>

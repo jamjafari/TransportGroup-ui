@@ -22,7 +22,7 @@ const serviceTypeGeneralSection = ({
           <AppTextField
             fullWidth
             required
-            label="کد "
+            label="کد"
             name="code"
             value={values.code}
             onChange={onChange}
@@ -35,7 +35,7 @@ const serviceTypeGeneralSection = ({
           <AppTextField
             fullWidth
             required
-            label=" عنوان سرویس"
+            label="عنوان سرویس"
             name="title"
             value={values.title}
             onChange={onChange}
@@ -49,7 +49,7 @@ const serviceTypeGeneralSection = ({
             fullWidth
             required
             type="number"
-            label="  سرویس دوره ای کیلومتر "
+            label="سرویس دوره ای کیلومتر"
             name="serviceIntervalKM"
             value={values.serviceIntervalKM}
             onChange={onChange}
@@ -62,7 +62,7 @@ const serviceTypeGeneralSection = ({
             fullWidth
             required
             type="number"
-            label="   سرویس دوره ای روزانه"
+            label="سرویس دوره ای روزانه"
             name="serviceIntervalDays"
             value={values.serviceIntervalDays}
             onChange={onChange}

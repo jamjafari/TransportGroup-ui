@@ -1,12 +1,12 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import { AppDataGrid } from '@/components';
-import { AppButton, ConfirmDialog, StatusChip } from '@/components';
+import { AppDataGrid } from "@/components";
+import { AppButton, ConfirmDialog, StatusChip } from "@/components";
 
-import useService from '../hooks/useService';
-import { gregorianYearToJalali, formatJalaliDate } from '@/utils';
+import useService from "../hooks/useService";
+import { gregorianYearToJalali, formatJalaliDate } from "@/utils";
 const ServiceListPage = () => {
   const navigate = useNavigate();
 
@@ -29,36 +29,36 @@ const ServiceListPage = () => {
   const columns = useMemo(
     () => [
       {
-        field: 'plateNumber',
-        headerName: 'پلاک خودرو',
+        field: "plateNumber",
+        headerName: "پلاک خودرو",
         width: 120,
       },
       {
-        field: 'vendorName',
-        headerName: 'نام تامین کننده',
+        field: "vendorName",
+        headerName: "نام تامین کننده",
         width: 130,
       },
       {
-        field: 'servicType',
-        headerName: 'نوع سرویس',
+        field: "servicType",
+        headerName: "نوع سرویس",
         width: 130,
       },
       {
-        field: 'odometerKM',
-        headerName: ' کیلومتر خودرو',
+        field: "odometerKM",
+        headerName: "کیلومتر خودرو",
         width: 140,
       },
 
       {
-        field: 'serviceDate',
-        headerName: 'تاریخ سرویس  ',
+        field: "serviceDate",
+        headerName: "تاریخ سرویس",
         width: 130,
         renderCell: ({ row }) => formatJalaliDate(row.serviceDate),
       },
 
       {
-        field: 'actions',
-        headerName: 'عملیات',
+        field: "actions",
+        headerName: "عملیات",
         width: 140,
         renderCell: ({ row }) => (
           <>
@@ -68,9 +68,8 @@ const ServiceListPage = () => {
                 event.stopPropagation();
                 navigate(`/services/edit/${row.id}`);
               }}
-            >
-              ویرایش
-            </AppButton>
+              labelKey="ویرایش"
+            />
 
             <AppButton
               size="small"
@@ -79,9 +78,8 @@ const ServiceListPage = () => {
                 event.stopPropagation();
                 setDeleteTarget(row);
               }}
-            >
-              حذف
-            </AppButton>
+              labelKey="حذف"
+            />
           </>
         ),
       },
@@ -91,9 +89,11 @@ const ServiceListPage = () => {
 
   return (
     <>
-      <AppButton onClick={() => navigate('/services/create')} sx={{ mb: 2 }}>
-        سرویس جدید
-      </AppButton>
+      <AppButton
+        onClick={() => navigate("/services/create")}
+        sx={{ mb: 2 }}
+        labelKey="سرویس جدید"
+      />
 
       <AppDataGrid
         rows={services}

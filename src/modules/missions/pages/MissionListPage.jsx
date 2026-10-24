@@ -1,13 +1,13 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import { AppDataGrid } from '@/components';
-import { AppButton, ConfirmDialog, StatusChip } from '@/components';
+import { AppDataGrid } from "@/components";
+import { AppButton, ConfirmDialog, StatusChip } from "@/components";
 
-import useMission from '../hooks/useMission';
-import { missionStatusOptions } from '../constants';
-import { gregorianYearToJalali, formatJalaliDate } from '@/utils';
+import useMission from "../hooks/useMission";
+import { missionStatusOptions } from "../constants";
+import { gregorianYearToJalali, formatJalaliDate } from "@/utils";
 const MissionListPage = () => {
   const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ const MissionListPage = () => {
   const missionLabel = useCallback(
     (value) =>
       missionStatusOptions.find((option) => option.value === value)?.label ??
-      '—',
+      "—",
     [],
   );
   useEffect(() => {
@@ -35,79 +35,79 @@ const MissionListPage = () => {
   const columns = useMemo(
     () => [
       {
-        field: 'missionCode',
-        headerName: ' کد ماموریت',
+        field: "missionCode",
+        headerName: "کد ماموریت",
         width: 130,
       },
       {
-        field: 'vehicleName',
-        headerName: 'پلاک خودرو',
+        field: "vehicleName",
+        headerName: "پلاک خودرو",
         width: 120,
       },
       {
-        field: 'driverName',
-        headerName: 'نام راننده',
+        field: "driverName",
+        headerName: "نام راننده",
         width: 130,
       },
       {
-        field: 'originLocationName',
-        headerName: ' مبدا',
+        field: "originLocationName",
+        headerName: "مبدا",
         width: 140,
       },
       {
-        field: 'destinationLocationName',
-        headerName: ' مقصد  ',
+        field: "destinationLocationName",
+        headerName: "مقصد",
         width: 130,
       },
 
       {
-        field: 'startDate',
-        headerName: 'تاریخ شروع  ',
+        field: "startDate",
+        headerName: "تاریخ شروع",
         width: 130,
         renderCell: ({ row }) => formatJalaliDate(row.startDate),
       },
       {
-        field: 'endtDate',
-        headerName: 'تاریخ پایان  ',
+        field: "endtDate",
+        headerName: "تاریخ پایان",
         width: 130,
         renderCell: ({ row }) => formatJalaliDate(row.endDate),
       },
       {
-        field: 'startTime',
-        headerName: 'ساعت شروع  ',
+        field: "startTime",
+        headerName: "ساعت شروع",
         width: 130,
       },
       {
-        field: 'endTime',
-        headerName: 'ساعت پایان  ',
+        field: "endTime",
+        headerName: "ساعت پایان",
         width: 130,
       },
       {
-        field: 'startOdometerKm',
-        headerName: 'کیلومتر خودرو در شروع  ',
+        field: "startOdometerKm",
+        headerName: "کیلومتر خودرو در شروع",
         width: 130,
       },
       {
-        field: 'endOdometerKm',
-        headerName: 'کیلومتر خودرو در پایان  ',
+        field: "endOdometerKm",
+        headerName: "کیلومتر خودرو در پایان",
         width: 130,
       },
       {
-        field: 'distanceKm',
-        headerName: 'مسافت مبدا از مقصد (KM)',
+        field: "distanceKm",
+        headerName: "مسافت مبدا از مقصد (KM)",
         width: 130,
       },
 
       {
-        field: 'status',
-        headerName: 'وضعیت ماموریت',
+        field: "status",
+        headerName: "وضعیت ماموریت",
         width: 120,
         renderCell: ({ row }) => missionLabel(row.status),
       },
 
       {
-        field: 'actions',
-        headerName: 'عملیات',
+        field: "actions",
+        headerName: "عملیات",
         width: 140,
         renderCell: ({ row }) => (
           <>
@@ -117,9 +117,8 @@ const MissionListPage = () => {
                 event.stopPropagation();
                 navigate(`/missions/edit/${row.id}`);
               }}
-            >
-              ویرایش
-            </AppButton>
+              labelKey="ویرایش"
+            />
 
             <AppButton
               size="small"
@@ -128,9 +127,8 @@ const MissionListPage = () => {
                 event.stopPropagation();
                 setDeleteTarget(row);
               }}
-            >
-              حذف
-            </AppButton>
+              labelKey="حذف"
+            />
           </>
         ),
       },
@@ -140,9 +138,11 @@ const MissionListPage = () => {
 
   return (
     <>
-      <AppButton onClick={() => navigate('/missions/create')} sx={{ mb: 2 }}>
-        ماموریت جدید
-      </AppButton>
+      <AppButton
+        onClick={() => navigate("/missions/create")}
+        sx={{ mb: 2 }}
+        labelKey="ماموریت جدید"
+      />
 
       <AppDataGrid
         rows={missions}

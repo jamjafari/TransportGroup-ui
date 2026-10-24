@@ -1,13 +1,13 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import { AppDataGrid } from '@/components';
-import { AppButton, ConfirmDialog, StatusChip } from '@/components';
+import { AppDataGrid } from "@/components";
+import { AppButton, ConfirmDialog, StatusChip } from "@/components";
 
-import useDriver from '../hooks/useDriver';
-import { driverStatusChipKey } from '../constants';
-import { gregorianYearToJalali, formatJalaliDate } from '@/utils';
+import useDriver from "../hooks/useDriver";
+import { driverStatusChipKey } from "../constants";
+import { gregorianYearToJalali, formatJalaliDate } from "@/utils";
 const DriverListPage = () => {
   const navigate = useNavigate();
 
@@ -30,45 +30,45 @@ const DriverListPage = () => {
   const columns = useMemo(
     () => [
       {
-        field: 'fullName',
-        headerName: '  نام و نام خانوادگی',
+        field: "fullName",
+        headerName: "نام و نام خانوادگی",
         width: 130,
         renderCell: ({ row }) => `${row.firstName} ${row.lastName}`,
       },
       {
-        field: 'nationalCode',
-        headerName: ' کد ملی',
+        field: "nationalCode",
+        headerName: "کد ملی",
         width: 130,
       },
       {
-        field: 'mobileNumber',
-        headerName: ' شماره موبایل',
+        field: "mobileNumber",
+        headerName: "شماره موبایل",
         width: 120,
       },
       {
-        field: 'personnelCode',
-        headerName: 'کد پرسنلی',
+        field: "personnelCode",
+        headerName: "کد پرسنلی",
         width: 130,
       },
-      { field: 'licenseNumber', headerName: ' شماره گواهی نامه', width: 140 },
+      { field: "licenseNumber", headerName: "شماره گواهی نامه", width: 140 },
       {
-        field: 'licenseExpireDate',
-        headerName: ' تاریخ اعتبار ',
+        field: "licenseExpireDate",
+        headerName: "تاریخ اعتبار",
         width: 130,
         renderCell: ({ row }) => formatJalaliDate(row.licenseExpireDate),
       },
       {
-        field: 'status',
-        headerName: 'فعال',
+        field: "status",
+        headerName: "فعال",
         width: 120,
         renderCell: ({ row }) => (
           <StatusChip status={driverStatusChipKey(row.isActive)} />
         ),
       },
-      { field: 'description', headerName: 'توضیحات', width: 120 },
+      { field: "description", headerName: "توضیحات", width: 120 },
       {
-        field: 'actions',
-        headerName: 'عملیات',
+        field: "actions",
+        headerName: "عملیات",
         width: 140,
         renderCell: ({ row }) => (
           <>
@@ -78,9 +78,8 @@ const DriverListPage = () => {
                 event.stopPropagation();
                 navigate(`/drivers/edit/${row.id}`);
               }}
-            >
-              ویرایش
-            </AppButton>
+              labelKey="ویرایش"
+            />
 
             <AppButton
               size="small"
@@ -89,9 +88,8 @@ const DriverListPage = () => {
                 event.stopPropagation();
                 setDeleteTarget(row);
               }}
-            >
-              حذف
-            </AppButton>
+              labelKey="حذف"
+            ></AppButton>
           </>
         ),
       },
@@ -101,9 +99,11 @@ const DriverListPage = () => {
 
   return (
     <>
-      <AppButton onClick={() => navigate('/drivers/create')} sx={{ mb: 2 }}>
-        افزودن راننده
-      </AppButton>
+      <AppButton
+        onClick={() => navigate("/drivers/create")}
+        sx={{ mb: 2 }}
+        labelKey="افزودن راننده"
+      />
 
       <AppDataGrid
         rows={drivers}

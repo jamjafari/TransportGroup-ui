@@ -17,7 +17,7 @@ const DriverGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
           <AppTextField
             fullWidth
             required
-            label="نام "
+            label="نام"
             name="firstName"
             value={values.firstName}
             onChange={onChange}
@@ -57,7 +57,7 @@ const DriverGeneralSection = ({ values, errors, onChange, setFieldValue }) => {
             fullWidth
             required
             type="number"
-            label="  شماره موبایل"
+            label="شماره موبایل"
             name="mobileNumber"
             value={values.mobileNumber}
             onChange={onChange}

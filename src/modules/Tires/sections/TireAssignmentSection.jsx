@@ -1,11 +1,11 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from "react";
 
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import Typography from '@mui/material/Typography';
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import Typography from "@mui/material/Typography";
 
 import {
   AppFormSection,
@@ -13,20 +13,20 @@ import {
   AppJalaliDatePicker,
   AppTextField,
   AppButton,
-} from '@/components';
+} from "@/components";
 
-import { validate, hasErrors } from '@/validation';
+import { validate, hasErrors } from "@/validation";
 
-import useTire from '../hooks/useTire';
-import useTireAssignments from '../hooks/useTireAssignments';
-import { tirePositionOptions } from '../constants';
+import useTire from "../hooks/useTire";
+import useTireAssignments from "../hooks/useTireAssignments";
+import { tirePositionOptions } from "../constants";
 
 const assignmentSchema = {};
 
 const emptyDraft = {
-  tireId: '',
-  position: '',
-  installKM: '',
+  tireId: "",
+  position: "",
+  installKM: "",
   installDate: null,
 };
 
@@ -62,12 +62,12 @@ const TireAssignmentSection = ({ vehicleId }) => {
   const handleAssign = async () => {
     const validationErrors = validate(
       {
-        tireId: [(v) => (v ? null : 'انتخاب لاستیک الزامی است')],
-        position: [(v) => (v ? null : 'موقعیت نصب را انتخاب کنید')],
+        tireId: [(v) => (v ? null : "انتخاب لاستیک الزامی است")],
+        position: [(v) => (v ? null : "موقعیت نصب را انتخاب کنید")],
         installKM: [
-          (v) => (v !== '' && v != null ? null : 'کارکرد نصب الزامی است'),
+          (v) => (v !== "" && v != null ? null : "کارکرد نصب الزامی است"),
         ],
-        installDate: [(v) => (v ? null : 'تاریخ نصب الزامی است')],
+        installDate: [(v) => (v ? null : "تاریخ نصب الزامی است")],
       },
       draft,
     );
@@ -91,7 +91,7 @@ const TireAssignmentSection = ({ vehicleId }) => {
 
   const handleUnassign = async (assignmentId) => {
     const removeKM = window.prompt(
-      'کارکرد فعلی خودرو در لحظه‌ی خارج کردن (کیلومتر):',
+      "کارکرد فعلی خودرو در لحظه‌ی خارج کردن (کیلومتر):",
     );
     if (removeKM === null) return;
 
@@ -146,7 +146,7 @@ const TireAssignmentSection = ({ vehicleId }) => {
             type="number"
             label="کارکرد نصب (KM)"
             value={draft.installKM}
-            onChange={handleFieldChange('installKM')}
+            onChange={handleFieldChange("installKM")}
             error={!!errors.installKM}
             helperText={errors.installKM}
           />
@@ -166,9 +166,11 @@ const TireAssignmentSection = ({ vehicleId }) => {
       </Grid>
 
       <Box mt={2}>
-        <AppButton onClick={handleAssign} disabled={submitting}>
-          تخصیص لاستیک
-        </AppButton>
+        <AppButton
+          onClick={handleAssign}
+          disabled={submitting}
+          labelKey="تخصیص لاستیک"
+        />
       </Box>
 
       <Box mt={3}>

@@ -1,12 +1,12 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import { AppDataGrid } from '@/components';
-import { AppButton, ConfirmDialog, StatusChip } from '@/components';
-
-import useFuelCard from '../hooks/useFuelCard';
-import { gregorianYearToJalali, formatJalaliDate } from '@/utils';
+import { AppDataGrid } from "@/components";
+import { AppButton, ConfirmDialog, StatusChip } from "@/components";
+import { useTranslatedColumns } from "../../../hooks";
+import useFuelCard from "../hooks/useFuelCard";
+import { gregorianYearToJalali, formatJalaliDate } from "@/utils";
 const FuelCardListPage = () => {
   const navigate = useNavigate();
 
@@ -26,29 +26,29 @@ const FuelCardListPage = () => {
     getFuelCards();
   }, [deleteTarget, deleteFuelCard, getFuelCards]);
 
-  const columns = useMemo(
+  const baseColumns = useMemo(
     () => [
       {
-        field: 'cardNumber',
-        headerName: '   شماره کارت سوخت',
+        field: "cardNumber",
+        headerName: "شماره کارت سوخت",
         width: 130,
       },
       {
-        field: 'plateNumber',
-        headerName: '  پلاک خودرو',
+        field: "plateNumber",
+        headerName: "پلاک خودرو",
         width: 130,
       },
 
       {
-        field: 'expireDate',
-        headerName: ' تاریخ اعتبار ',
+        field: "expireDate",
+        headerName: "تاریخ اعتبار",
         width: 130,
         renderCell: ({ row }) => formatJalaliDate(row.expireDate),
       },
 
       {
-        field: 'actions',
-        headerName: 'عملیات',
+        field: "actions",
+        headerName: "عملیات",
         width: 140,
         renderCell: ({ row }) => (
           <>
@@ -58,9 +58,8 @@ const FuelCardListPage = () => {
                 event.stopPropagation();
                 navigate(`/fuelCards/edit/${row.id}`);
               }}
-            >
-              ویرایش
-            </AppButton>
+              labelKey="ویرایش"
+            />
 
             <AppButton
               size="small"
@@ -69,21 +68,23 @@ const FuelCardListPage = () => {
                 event.stopPropagation();
                 setDeleteTarget(row);
               }}
-            >
-              حذف
-            </AppButton>
+              labelKey="حذف"
+            />
           </>
         ),
       },
     ],
     [navigate],
   );
+  const columns = useTranslatedColumns(baseColumns);
 
   return (
     <>
-      <AppButton onClick={() => navigate('/fuelCards/create')} sx={{ mb: 2 }}>
-        افزودن کارت سوخت
-      </AppButton>
+      <AppButton
+        onClick={() => navigate("/fuelCards/create")}
+        sx={{ mb: 2 }}
+        labelKey="افزودن کارت سوخت"
+      />
 
       <AppDataGrid
         rows={fuelCards}

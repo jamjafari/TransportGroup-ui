@@ -1,15 +1,15 @@
-import React, { memo, useCallback, useState } from 'react';
-import Stack from '@mui/material/Stack';
+import React, { memo, useCallback, useState } from "react";
+import Stack from "@mui/material/Stack";
 
-import { AppForm, AppFormActions, AppButton } from '@/components';
-import { hasErrors, validate } from '@/validation';
+import { AppForm, AppFormActions, AppButton } from "@/components";
+import { hasErrors, validate } from "@/validation";
 
-import FuelCardGeneralSection from '../sections/FuelCardGeneralSection';
+import FuelCardGeneralSection from "../sections/FuelCardGeneralSection";
 
-import fuelCardSchema from '../validation/fuelCardSchema';
+import fuelCardSchema from "../validation/fuelCardSchema";
 
 const defaultValues = {
-  cardNumber: '',
+  cardNumber: "",
   vehicleId: null,
 
   expireDate: null,
@@ -20,14 +20,14 @@ const FuelCardForm = ({ initialValues = defaultValues, onSubmit }) => {
 
   const handleValidatedSubmit = useCallback(
     (values) => {
-      console.log('FuelCardForm submit');
+      console.log("FuelCardForm submit");
       console.log(values);
       const validationErrors = validate(fuelCardSchema, values);
-      console.log('Validation errors:', validationErrors);
+      console.log("Validation errors:", validationErrors);
       setErrors(validationErrors);
 
       if (!hasErrors(validationErrors)) {
-        console.log('Validation passed');
+        console.log("Validation passed");
         onSubmit?.({
           ...values,
         });
@@ -59,13 +59,10 @@ const FuelCardForm = ({ initialValues = defaultValues, onSubmit }) => {
                 resetForm();
                 setErrors({});
               }}
-            >
-              انصراف
-            </AppButton>
+              labelKey="انصراف"
+            />
 
-            <AppButton type="submit" variant="contained">
-              ذخیره
-            </AppButton>
+            <AppButton type="submit" variant="contained" labelKey="ذخیره" />
           </AppFormActions>
         </Stack>
       )}

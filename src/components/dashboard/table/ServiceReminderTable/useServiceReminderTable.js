@@ -44,13 +44,13 @@ const useServiceReminderTable = () => {
 
       {
         field: "remainingKm",
-        headerName: " کیلومتر باقیمانده",
+        headerName: "کیلومتر باقیمانده",
         flex: 1,
         align: "right",
       },
       {
         field: "remainingDays",
-        headerName: " روز باقیماده",
+        headerName: "روز باقیماده",
         flex: 1,
         align: "right",
       },

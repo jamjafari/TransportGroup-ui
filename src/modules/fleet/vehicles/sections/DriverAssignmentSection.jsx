@@ -1,11 +1,11 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from "react";
 
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import Typography from '@mui/material/Typography';
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import Typography from "@mui/material/Typography";
 
 import {
   AppFormSection,
@@ -13,17 +13,17 @@ import {
   AppJalaliDatePicker,
   AppButton,
   AppTextField,
-} from '@/components';
-import { formatJalaliDate } from '@/utils';
-import { validate, hasErrors } from '@/validation';
+} from "@/components";
+import { formatJalaliDate } from "@/utils";
+import { validate, hasErrors } from "@/validation";
 
-import useDriver from '../../../drivers/hooks/useDriver';
-import useVehicleAssignments from '../hooks/useVehicleAssignments';
+import useDriver from "../../../drivers/hooks/useDriver";
+import useVehicleAssignments from "../hooks/useVehicleAssignments";
 
 const emptyDraft = {
-  driverId: '',
+  driverId: "",
   fromDate: null,
-  description: '',
+  description: "",
 };
 
 const DriverAssignmentSection = ({ vehicleId }) => {
@@ -51,8 +51,8 @@ const DriverAssignmentSection = ({ vehicleId }) => {
   const handleAssign = async () => {
     const validationErrors = validate(
       {
-        driverId: [(v) => (v ? null : 'انتخاب راننده الزامی است')],
-        fromDate: [(v) => (v ? null : 'تاریخ شروع الزامی است')],
+        driverId: [(v) => (v ? null : "انتخاب راننده الزامی است")],
+        fromDate: [(v) => (v ? null : "تاریخ شروع الزامی است")],
       },
       draft,
     );
@@ -127,9 +127,11 @@ const DriverAssignmentSection = ({ vehicleId }) => {
 
       {!currentAssignment && (
         <Box mt={2}>
-          <AppButton onClick={handleAssign} disabled={submitting}>
-            تخصیص راننده
-          </AppButton>
+          <AppButton
+            onClick={handleAssign}
+            disabled={submitting}
+            labelKey="تخصیص راننده"
+          />
         </Box>
       )}
 

@@ -20,7 +20,7 @@ const MissionStartEndSection = ({
   vehicles,
 }) => {
   return (
-    <AppFormSection title="اطلاعات  فنی بیمه ">
+    <AppFormSection title="اطلاعات  فنی بیمه">
       <Grid container spacing={2}>
         <Grid size={{ xs: 12, md: 6 }}>
           <AppSelectform
@@ -39,7 +39,7 @@ const MissionStartEndSection = ({
           <AppTextField
             fullWidth
 
-            label=" شماره بیمه "
+            label="شماره بیمه"
             name="policyNumber"
             value={values.policyNumber}
             onChange={onChange}

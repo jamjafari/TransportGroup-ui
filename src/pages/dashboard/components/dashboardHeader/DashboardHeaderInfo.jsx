@@ -1,17 +1,17 @@
-import { Typography } from '@mui/material';
-import Stack from '@mui/material/Stack';
-
-import dayjs from 'dayjs';
+import { Typography } from "@mui/material";
+import Stack from "@mui/material/Stack";
+import { useTranslation } from "react-i18next";
+import dayjs from "dayjs";
 
 const DashboardHeaderInfo = ({ lastUpdate }) => {
   const formattedTime = lastUpdate
-    ? dayjs(lastUpdate).format('HH:mm:ss')
-    : '--:--:--';
-
+    ? dayjs(lastUpdate).format("HH:mm:ss")
+    : "--:--:--";
+  const { t } = useTranslation();
   return (
     <Stack fontWeight={700} alignItems="center" spacing={0.5}>
       <Typography variant="h4" fontWeight={700} color="text.secondary">
-        آخرین بروزرسانی
+        {t("آخرین بروزرسانی")}
       </Typography>
 
       <Typography variant="body2" fontWeight={600}>

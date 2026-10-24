@@ -1,17 +1,17 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
-import Stack from '@mui/material/Stack';
-import { sanitizeNumericFields } from '@/utils';
+import React, { memo, useCallback, useEffect, useState } from "react";
+import Stack from "@mui/material/Stack";
+import { sanitizeNumericFields } from "@/utils";
 
-import { AppForm, AppFormActions, AppButton } from '@/components';
-import { hasErrors, validate } from '@/validation';
+import { AppForm, AppFormActions, AppButton } from "@/components";
+import { hasErrors, validate } from "@/validation";
 
-import AccidentGeneralSection from '../sections/AccidentGeneralSection';
-import AccidentDetailsSection from '../sections/AccidentDetailsSection';
+import AccidentGeneralSection from "../sections/AccidentGeneralSection";
+import AccidentDetailsSection from "../sections/AccidentDetailsSection";
 
-import * as vehicleApi from '@/modules/fleet/vehicles/api/vehicleApi';
-import * as driverApi from '@/modules/drivers/api/driverApi'; // مسیر را با اسم واقعی هماهنگ کن
+import * as vehicleApi from "@/modules/fleet/vehicles/api/vehicleApi";
+import * as driverApi from "@/modules/drivers/api/driverApi"; // مسیر را با اسم واقعی هماهنگ کن
 
-import accidentSchema from '../schemas/accidentSchema';
+import accidentSchema from "../schemas/accidentSchema";
 
 const defaultValues = {
   vehicleId: null,
@@ -19,14 +19,14 @@ const defaultValues = {
   missionId: null,
   accidentDate: null,
   accidentTime: null,
-  severity: '',
-  description: '',
+  severity: "",
+  description: "",
   odometerKm: null,
   thirdPartyInvolved: false,
-  thirdPartyDetails: '',
-  estimatedDamageCost: '',
-  policeReportNumber: '',
-  insuranceClaimNumber: '',
+  thirdPartyDetails: "",
+  estimatedDamageCost: "",
+  policeReportNumber: "",
+  insuranceClaimNumber: "",
 };
 
 const AccidentForm = ({ initialValues = defaultValues, onSubmit }) => {
@@ -59,7 +59,7 @@ const AccidentForm = ({ initialValues = defaultValues, onSubmit }) => {
 
       if (!hasErrors(validationErrors)) {
         onSubmit?.(
-          sanitizeNumericFields(values, ['odometerKm', 'estimatedDamageCost']),
+          sanitizeNumericFields(values, ["odometerKm", "estimatedDamageCost"]),
         );
       }
     },
@@ -99,13 +99,10 @@ const AccidentForm = ({ initialValues = defaultValues, onSubmit }) => {
                 resetForm();
                 setErrors({});
               }}
-            >
-              انصراف
-            </AppButton>
+              labelKey="انصراف"
+            />
 
-            <AppButton type="submit" variant="contained">
-              ذخیره
-            </AppButton>
+            <AppButton type="submit" variant="contained" labelKey="ذخیره" />
           </AppFormActions>
         </Stack>
       )}

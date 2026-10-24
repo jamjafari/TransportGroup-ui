@@ -1,24 +1,24 @@
-import React, { memo, useCallback, useState } from 'react';
-import Stack from '@mui/material/Stack';
+import React, { memo, useCallback, useState } from "react";
+import Stack from "@mui/material/Stack";
 
-import { AppForm, AppFormActions, AppButton } from '@/components';
-import { hasErrors, validate } from '@/validation';
+import { AppForm, AppFormActions, AppButton } from "@/components";
+import { hasErrors, validate } from "@/validation";
 
-import VendorGeneralSection from '../sections/VendorGeneralSection';
+import VendorGeneralSection from "../sections/VendorGeneralSection";
 
-import vendorSchema from '../validation/vendorSchema';
+import vendorSchema from "../validation/vendorSchema";
 
 const defaultValues = {
   id: null,
-  vendorCode: '',
-  vendorName: '',
-  vendorType: '',
-  contactPerson: '',
+  vendorCode: "",
+  vendorName: "",
+  vendorType: "",
+  contactPerson: "",
 
-  phoneNumber: '',
-  mobileNumber: '',
-  email: '',
-  address: '',
+  phoneNumber: "",
+  mobileNumber: "",
+  email: "",
+  address: "",
 };
 
 const VendorForm = ({ initialValues = defaultValues, onSubmit }) => {
@@ -26,14 +26,14 @@ const VendorForm = ({ initialValues = defaultValues, onSubmit }) => {
 
   const handleValidatedSubmit = useCallback(
     (values) => {
-      console.log('VendorForm submit');
+      console.log("VendorForm submit");
       console.log(values);
       const validationErrors = validate(vendorSchema, values);
-      console.log('Validation errors:', validationErrors);
+      console.log("Validation errors:", validationErrors);
       setErrors(validationErrors);
 
       if (!hasErrors(validationErrors)) {
-        console.log('Validation passed');
+        console.log("Validation passed");
         onSubmit?.({
           ...values,
         });
@@ -65,13 +65,10 @@ const VendorForm = ({ initialValues = defaultValues, onSubmit }) => {
                 resetForm();
                 setErrors({});
               }}
-            >
-              انصراف
-            </AppButton>
+              labelKey="انصراف"
+            />
 
-            <AppButton type="submit" variant="contained">
-              ذخیره
-            </AppButton>
+            <AppButton type="submit" variant="contained" labelKey="ذخیره" />
           </AppFormActions>
         </Stack>
       )}

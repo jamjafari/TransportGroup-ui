@@ -1,13 +1,13 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import { AppDataGrid } from '@/components';
-import { AppButton, ConfirmDialog, StatusChip } from '@/components';
+import { AppDataGrid } from "@/components";
+import { AppButton, ConfirmDialog, StatusChip } from "@/components";
 
-import useVendor from '../hooks/useVendor';
-import { attachmentCategoryOptions } from '../constants';
-import { gregorianYearToJalali, formatJalaliDate } from '@/utils';
+import useVendor from "../hooks/useVendor";
+import { attachmentCategoryOptions } from "../constants";
+import { gregorianYearToJalali, formatJalaliDate } from "@/utils";
 const VendorListPage = () => {
   const navigate = useNavigate();
 
@@ -29,52 +29,52 @@ const VendorListPage = () => {
   const vendorTypeLabel = useCallback(
     (value) =>
       attachmentCategoryOptions.find((option) => option.value === value)
-        ?.label ?? '—',
+        ?.label ?? "—",
     [],
   );
   const columns = useMemo(
     () => [
       {
-        field: 'vendorName',
-        headerName: ' نام تامین کننده  ',
+        field: "vendorName",
+        headerName: "نام تامین کننده",
         width: 130,
       },
       {
-        field: 'vendorCode',
-        headerName: ' کد تامین کننده',
+        field: "vendorCode",
+        headerName: "کد تامین کننده",
         width: 130,
       },
       {
-        field: 'mobileNumber',
-        headerName: ' شماره موبایل',
+        field: "mobileNumber",
+        headerName: "شماره موبایل",
         width: 120,
       },
       {
-        field: 'mobileNumber',
-        headerName: ' شماره موبایل',
+        field: "mobileNumber",
+        headerName: "شماره موبایل",
         width: 120,
         renderCell: ({ row }) => vendorTypeLabel(row.vendorType),
       },
       {
-        field: 'contactPerson',
-        headerName: 'شخص مرتبط ',
+        field: "contactPerson",
+        headerName: "شخص مرتبط",
         width: 130,
       },
 
       {
-        field: 'phoneNumber',
-        headerName: ' شماره تلفن  ',
+        field: "phoneNumber",
+        headerName: "شماره تلفن",
         width: 130,
       },
       {
-        field: 'email',
-        headerName: 'ایمیل',
+        field: "email",
+        headerName: "ایمیل",
         width: 120,
       },
-      { field: 'addess', headerName: 'آدرس', width: 150 },
+      { field: "addess", headerName: "آدرس", width: 150 },
       {
-        field: 'actions',
-        headerName: 'عملیات',
+        field: "actions",
+        headerName: "عملیات",
         width: 140,
         renderCell: ({ row }) => (
           <>
@@ -84,9 +84,8 @@ const VendorListPage = () => {
                 event.stopPropagation();
                 navigate(`/vendors/edit/${row.id}`);
               }}
-            >
-              ویرایش
-            </AppButton>
+              labelKey="ویرایش"
+            />
 
             <AppButton
               size="small"
@@ -95,9 +94,8 @@ const VendorListPage = () => {
                 event.stopPropagation();
                 setDeleteTarget(row);
               }}
-            >
-              حذف
-            </AppButton>
+              labelKey="حذف"
+            />
           </>
         ),
       },
@@ -107,9 +105,11 @@ const VendorListPage = () => {
 
   return (
     <>
-      <AppButton onClick={() => navigate('/vendors/create')} sx={{ mb: 2 }}>
-        افزودن تامین کننده جدید
-      </AppButton>
+      <AppButton
+        onClick={() => navigate("/vendors/create")}
+        sx={{ mb: 2 }}
+        labelKey="افزودن تامین کننده جدید"
+      />
 
       <AppDataGrid
         rows={vendors}

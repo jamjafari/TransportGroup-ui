@@ -1,26 +1,26 @@
-import React, { memo, useCallback, useState } from 'react';
-import Stack from '@mui/material/Stack';
+import React, { memo, useCallback, useState } from "react";
+import Stack from "@mui/material/Stack";
 
-import { AppForm, AppFormActions, AppButton } from '@/components';
-import { hasErrors, validate } from '@/validation';
+import { AppForm, AppFormActions, AppButton } from "@/components";
+import { hasErrors, validate } from "@/validation";
 
-import VehicleGeneralSection from '../sections/VehicleGeneralSection';
-import VehicleTechnicalSection from '../sections/VehicleTechnicalSection';
-import { jalaliYearToGregorian, sanitizeNumericFields } from '@/utils';
+import VehicleGeneralSection from "../sections/VehicleGeneralSection";
+import VehicleTechnicalSection from "../sections/VehicleTechnicalSection";
+import { jalaliYearToGregorian, sanitizeNumericFields } from "@/utils";
 
-import vehicleSchema from '../validation/vehicleSchema';
+import vehicleSchema from "../validation/vehicleSchema";
 
 const defaultValues = {
-  plateNumber: '',
-  brand: '',
-  model: '',
-  productionYear: '',
+  plateNumber: "",
+  brand: "",
+  model: "",
+  productionYear: "",
   purchaseDate: null,
-  status: '',
-  engineNumber: '',
-  chassisNumber: '',
-  fuelType: '',
-  currentKM: '',
+  status: "",
+  engineNumber: "",
+  chassisNumber: "",
+  fuelType: "",
+  currentKM: "",
 };
 
 const VehicleForm = ({ initialValues = defaultValues, onSubmit }) => {
@@ -33,7 +33,7 @@ const VehicleForm = ({ initialValues = defaultValues, onSubmit }) => {
       setErrors(validationErrors);
 
       if (!hasErrors(validationErrors)) {
-        const sanitized = sanitizeNumericFields(values, ['currentKM']);
+        const sanitized = sanitizeNumericFields(values, ["currentKM"]);
 
         onSubmit?.({
           ...sanitized,
@@ -74,13 +74,10 @@ const VehicleForm = ({ initialValues = defaultValues, onSubmit }) => {
                 resetForm();
                 setErrors({});
               }}
-            >
-              انصراف
-            </AppButton>
+              labelKey="انصراف"
+            />
 
-            <AppButton type="submit" variant="contained">
-              ذخیره
-            </AppButton>
+            <AppButton type="submit" variant="contained" labelKey="ذخیره" />
           </AppFormActions>
         </Stack>
       )}

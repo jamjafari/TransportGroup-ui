@@ -1,22 +1,22 @@
-import React, { memo, useCallback, useState } from 'react';
-import Stack from '@mui/material/Stack';
+import React, { memo, useCallback, useState } from "react";
+import Stack from "@mui/material/Stack";
 
-import { AppForm, AppFormActions, AppButton } from '@/components';
-import { hasErrors, validate } from '@/validation';
+import { AppForm, AppFormActions, AppButton } from "@/components";
+import { hasErrors, validate } from "@/validation";
 
-import LocationGeneralSection from '../sections/LocationGeneralSection';
+import LocationGeneralSection from "../sections/LocationGeneralSection";
 // import LocationTechnicalSection from '../sections/LocationTechnicalSection';
-import { sanitizeNumericFields } from '@/utils';
+import { sanitizeNumericFields } from "@/utils";
 
-import locationSchema from '../validation/locationSchema';
+import locationSchema from "../validation/locationSchema";
 
 const defaultValues = {
-  name: '',
-  code: '',
-  address: '',
-  latitude: '',
-  longitude: '',
-  desctiption: '',
+  name: "",
+  code: "",
+  address: "",
+  latitude: "",
+  longitude: "",
+  desctiption: "",
 };
 
 const LocationForm = ({ initialValues = defaultValues, onSubmit }) => {
@@ -24,14 +24,14 @@ const LocationForm = ({ initialValues = defaultValues, onSubmit }) => {
 
   const handleValidatedSubmit = useCallback(
     (values) => {
-      console.log('LocationForm submit');
+      console.log("LocationForm submit");
       console.log(values);
       const validationErrors = validate(locationSchema, values);
-      console.log('Validation errors:', validationErrors);
+      console.log("Validation errors:", validationErrors);
       setErrors(validationErrors);
 
       if (!hasErrors(validationErrors)) {
-        onSubmit?.(sanitizeNumericFields(values, ['latitude', 'longitude']));
+        onSubmit?.(sanitizeNumericFields(values, ["latitude", "longitude"]));
       }
     },
     [onSubmit],
@@ -67,13 +67,10 @@ const LocationForm = ({ initialValues = defaultValues, onSubmit }) => {
                 resetForm();
                 setErrors({});
               }}
-            >
-              انصراف
-            </AppButton>
+              labelKey="انصراف"
+            />
 
-            <AppButton type="submit" variant="contained">
-              ذخیره
-            </AppButton>
+            <AppButton type="submit" variant="contained" labelKey="ذخیره" />
           </AppFormActions>
         </Stack>
       )}

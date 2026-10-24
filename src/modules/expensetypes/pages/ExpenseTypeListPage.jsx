@@ -1,13 +1,13 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import { AppDataGrid } from '@/components';
-import { AppButton, ConfirmDialog, StatusChip } from '@/components';
-import { expenseTypeStatusChipKey } from '../constants';
+import { AppDataGrid } from "@/components";
+import { AppButton, ConfirmDialog, StatusChip } from "@/components";
+import { expenseTypeStatusChipKey } from "../constants";
 
-import useExpenseType from '../hooks/useExpenseType';
-import { gregorianYearToJalali, formatJalaliDate } from '@/utils';
+import useExpenseType from "../hooks/useExpenseType";
+import { gregorianYearToJalali, formatJalaliDate } from "@/utils";
 const ExpenseTypeListPage = () => {
   const navigate = useNavigate();
 
@@ -31,19 +31,19 @@ const ExpenseTypeListPage = () => {
   const columns = useMemo(
     () => [
       {
-        field: 'code',
-        headerName: '   کد انحصاری  ',
+        field: "code",
+        headerName: "کد انحصاری",
         width: 130,
       },
       {
-        field: 'title',
-        headerName: '  عنوان هزینه ',
+        field: "title",
+        headerName: "عنوان هزینه",
         width: 130,
       },
 
       {
-        field: 'isActive',
-        headerName: ' فعال  ',
+        field: "isActive",
+        headerName: "فعال",
         width: 130,
         renderCell: ({ row }) => (
           <StatusChip status={expenseTypeStatusChipKey(row.isActive)} />
@@ -51,8 +51,8 @@ const ExpenseTypeListPage = () => {
       },
 
       {
-        field: 'actions',
-        headerName: 'عملیات',
+        field: "actions",
+        headerName: "عملیات",
         width: 140,
         renderCell: ({ row }) => (
           <>
@@ -62,9 +62,8 @@ const ExpenseTypeListPage = () => {
                 event.stopPropagation();
                 navigate(`/expenseTypes/edit/${row.id}`);
               }}
-            >
-              ویرایش
-            </AppButton>
+              labelKey="ویرایش"
+            />
 
             <AppButton
               size="small"
@@ -73,9 +72,8 @@ const ExpenseTypeListPage = () => {
                 event.stopPropagation();
                 setDeleteTarget(row);
               }}
-            >
-              حذف
-            </AppButton>
+              labelKey="حذف"
+            />
           </>
         ),
       },
@@ -86,11 +84,10 @@ const ExpenseTypeListPage = () => {
   return (
     <>
       <AppButton
-        onClick={() => navigate('/expenseTypes/create')}
+        onClick={() => navigate("/expenseTypes/create")}
         sx={{ mb: 2 }}
-      >
-        افزودن نوع هزینه
-      </AppButton>
+        labelKey="افزودن نوع هزینه"
+      />
 
       <AppDataGrid
         rows={expenseTypes}

@@ -1,20 +1,20 @@
-import React, { memo, useCallback, useState } from 'react';
-import Stack from '@mui/material/Stack';
+import React, { memo, useCallback, useState } from "react";
+import Stack from "@mui/material/Stack";
 
-import { AppForm, AppFormActions, AppButton } from '@/components';
-import { hasErrors, validate } from '@/validation';
+import { AppForm, AppFormActions, AppButton } from "@/components";
+import { hasErrors, validate } from "@/validation";
 
-import ServiceTypeGeneralSection from '../sections/ServiceTypeGeneralSection';
+import ServiceTypeGeneralSection from "../sections/ServiceTypeGeneralSection";
 
-import serviceTypeSchema from '../validation/serviceTypeSchema';
+import serviceTypeSchema from "../validation/serviceTypeSchema";
 
 const defaultValues = {
-  code: '',
-  title: '',
+  code: "",
+  title: "",
 
-  serviceIntervalKM: '',
+  serviceIntervalKM: "",
 
-  serviceIntervalDays: '',
+  serviceIntervalDays: "",
 };
 
 const ServiceTypeForm = ({ initialValues = defaultValues, onSubmit }) => {
@@ -22,14 +22,14 @@ const ServiceTypeForm = ({ initialValues = defaultValues, onSubmit }) => {
 
   const handleValidatedSubmit = useCallback(
     (values) => {
-      console.log('ServiceTypeForm submit');
+      console.log("ServiceTypeForm submit");
       console.log(values);
       const validationErrors = validate(serviceTypeSchema, values);
-      console.log('Validation errors:', validationErrors);
+      console.log("Validation errors:", validationErrors);
       setErrors(validationErrors);
 
       if (!hasErrors(validationErrors)) {
-        console.log('Validation passed');
+        console.log("Validation passed");
         onSubmit?.({
           ...values,
         });
@@ -61,13 +61,10 @@ const ServiceTypeForm = ({ initialValues = defaultValues, onSubmit }) => {
                 resetForm();
                 setErrors({});
               }}
-            >
-              انصراف
-            </AppButton>
+              labelKey="انصراف"
+            />
 
-            <AppButton type="submit" variant="contained">
-              ذخیره
-            </AppButton>
+            <AppButton type="submit" variant="contained" labelKey="ذخیره" />
           </AppFormActions>
         </Stack>
       )}

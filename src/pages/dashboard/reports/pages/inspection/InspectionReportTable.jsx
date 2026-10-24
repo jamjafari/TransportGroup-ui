@@ -48,7 +48,7 @@ const InspectionReportTable = ({ rows = [], loading }) => {
 
     {
       field: "result",
-      headerName: "تاییدیه ",
+      headerName: "تاییدیه",
       flex: 1,
 
       renderCell: ({ row }) => (

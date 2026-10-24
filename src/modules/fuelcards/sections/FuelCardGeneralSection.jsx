@@ -38,7 +38,7 @@ const FuelCardGeneralSection = ({
           <AppTextField
             fullWidth
             required
-            label="شماره کارت "
+            label="شماره کارت"
             name="cardNumber"
             value={values.cardNumber}
             onChange={onChange}

@@ -60,7 +60,7 @@ const reportRoutes = [
     id: 'fuelcost',
 
     path: '/reports/fuelcost',
-    title: 'گزارش  مالی سوخت ',
+    title: 'گزارش  مالی سوخت',
 
     component: FuelCostReportPage,
   },
@@ -68,7 +68,7 @@ const reportRoutes = [
     id: 'insurance',
 
     path: '/reports/insurance',
-    title: 'گزارش   بیمه ',
+    title: 'گزارش   بیمه',
 
     component: InsuranceReportPage,
   },
@@ -76,7 +76,7 @@ const reportRoutes = [
     id: 'service',
 
     path: '/reports/service',
-    title: 'گزارش   سرویس ',
+    title: 'گزارش   سرویس',
 
     component: ServiceReportPage,
   },

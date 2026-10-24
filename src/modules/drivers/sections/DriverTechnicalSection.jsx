@@ -23,7 +23,7 @@ const DriverTechnicalSection = ({
           <AppTextField
             fullWidth
             requiredl
-            label="شماره پرسنلی "
+            label="شماره پرسنلی"
             name="personnelCode"
             value={values.personnelCode}
             onChange={onChange}
@@ -36,7 +36,7 @@ const DriverTechnicalSection = ({
           <AppTextField
             fullWidth
             required
-            label="شماره گواهی نامه "
+            label="شماره گواهی نامه"
             name="licenseNumber"
             value={values.licenseNumber}
             onChange={onChange}

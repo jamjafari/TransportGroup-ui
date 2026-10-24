@@ -79,7 +79,7 @@ const ServiceGeneralSection = ({
           <AppAutocompleteform
             fullWidth
             required
-            label="نوع سرویس "
+            label="نوع سرویس"
             name="serviceTypeId"
             options={serviceTypes}
             loading={serviceTypesLoading}
@@ -102,7 +102,7 @@ const ServiceGeneralSection = ({
             fullWidth
             required
             type="number"
-            label="کیلومتر خودرو  "
+            label="کیلومتر خودرو"
             name="odometerKM"
             value={values.odometerKM}
             onChange={onChange}

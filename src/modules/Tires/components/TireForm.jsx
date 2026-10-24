@@ -1,21 +1,21 @@
-import React, { memo, useCallback, useState } from 'react';
-import Stack from '@mui/material/Stack';
+import React, { memo, useCallback, useState } from "react";
+import Stack from "@mui/material/Stack";
 
-import { AppForm, AppFormActions, AppButton } from '@/components';
-import { hasErrors, validate } from '@/validation';
-import { sanitizeNumericFields } from '@/utils';
+import { AppForm, AppFormActions, AppButton } from "@/components";
+import { hasErrors, validate } from "@/validation";
+import { sanitizeNumericFields } from "@/utils";
 
-import TireGeneralSection from '../sections/TireGeneralSection';
+import TireGeneralSection from "../sections/TireGeneralSection";
 
-import tireSchema from '../validation/tireSchema';
+import tireSchema from "../validation/tireSchema";
 
 const defaultValues = {
-  brand: '',
-  model: '',
-  serialNumber: '',
-  size: '',
+  brand: "",
+  model: "",
+  serialNumber: "",
+  size: "",
   purchaseDate: null,
-  purchasePrice: '',
+  purchasePrice: "",
   isActive: true,
 };
 
@@ -28,7 +28,7 @@ const TireForm = ({ initialValues = defaultValues, onSubmit }) => {
       setErrors(validationErrors);
 
       if (!hasErrors(validationErrors)) {
-        onSubmit?.(sanitizeNumericFields(values, ['purchasePrice']));
+        onSubmit?.(sanitizeNumericFields(values, ["purchasePrice"]));
       }
     },
     [onSubmit],
@@ -57,13 +57,10 @@ const TireForm = ({ initialValues = defaultValues, onSubmit }) => {
                 resetForm();
                 setErrors({});
               }}
-            >
-              انصراف
-            </AppButton>
+              labelKey="انصراف"
+            />
 
-            <AppButton type="submit" variant="contained">
-              ذخیره
-            </AppButton>
+            <AppButton type="submit" variant="contained" labelKey="ذخیره" />
           </AppFormActions>
         </Stack>
       )}

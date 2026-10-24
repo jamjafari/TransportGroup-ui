@@ -1,13 +1,13 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState } from "react";
 
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import DeleteIcon from '@mui/icons-material/Delete';
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 import {
   AppFormSection,
@@ -15,15 +15,15 @@ import {
   AppJalaliDatePicker,
   AppFileUpload,
   AppButton,
-} from '@/components';
-import { formatJalaliDate } from '@/utils';
+} from "@/components";
+import { formatJalaliDate } from "@/utils";
 
-import { attachmentCategoryOptions } from '../constants';
-import useAttachments from '@/hooks/useAttachments';
-import { ATTACHMENT_OWNER_TYPE } from '@/constants/attachmentTypes';
+import { attachmentCategoryOptions } from "../constants";
+import useAttachments from "@/hooks/useAttachments";
+import { ATTACHMENT_OWNER_TYPE } from "@/constants/attachmentTypes";
 
 const emptyDraft = {
-  category: '',
+  category: "",
   issueDate: null,
   expiryDate: null,
   file: null,
@@ -55,7 +55,7 @@ const VehicleDocumentsSection = ({ vehicleId }) => {
 
   const categoryLabel = (value) =>
     attachmentCategoryOptions.find((option) => option.value === value)?.label ??
-    '';
+    "";
 
   return (
     <AppFormSection title="مدارک خودرو">
@@ -106,9 +106,8 @@ const VehicleDocumentsSection = ({ vehicleId }) => {
         <AppButton
           onClick={handleAdd}
           disabled={submitting || !draft.file || !draft.category}
-        >
-          افزودن مدرک
-        </AppButton>
+          labelKey="افزودن مدرک"
+        />
       </Box>
 
       <List sx={{ mt: 2 }}>
@@ -123,7 +122,7 @@ const VehicleDocumentsSection = ({ vehicleId }) => {
           >
             <ListItemText
               primary={item.originalFileName}
-              secondary={`${categoryLabel(item.category)} — انقضا: ${formatJalaliDate(item.expiryDate ?? '—')}`}
+              secondary={`${categoryLabel(item.category)} — انقضا: ${formatJalaliDate(item.expiryDate ?? "—")}`}
             />
           </ListItem>
         ))}

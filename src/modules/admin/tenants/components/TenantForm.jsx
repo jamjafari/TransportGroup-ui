@@ -1,27 +1,27 @@
-import React, { memo, useCallback, useState } from 'react';
+import React, { memo, useCallback, useState } from "react";
 
-import Stack from '@mui/material/Stack';
+import Stack from "@mui/material/Stack";
 
 import {
   AppForm,
   AppFormActions,
   AppButton,
   AttachmentsButton,
-} from '@/components';
-import { validate, hasErrors } from '@/validation';
-import { sanitizeNumericFields } from '@/utils';
+} from "@/components";
+import { validate, hasErrors } from "@/validation";
+import { sanitizeNumericFields } from "@/utils";
 
-import TenantGeneralSection from '../sections/TenantGeneralSection';
-import tenantSchema from '../schemas/tenantSchema';
-import Box from '@mui/material/Box';
-import TenantLogoUploader from './TenantLogoUploader';
+import TenantGeneralSection from "../sections/TenantGeneralSection";
+import tenantSchema from "../schemas/tenantSchema";
+import Box from "@mui/material/Box";
+import TenantLogoUploader from "./TenantLogoUploader";
 const defaultValues = {
-  name: '',
-  slug: '',
-  subscriptionPlan: '',
+  name: "",
+  slug: "",
+  subscriptionPlan: "",
   subscriptionExpiresAt: null,
-  maxVehicles: '',
-  maxUsers: '',
+  maxVehicles: "",
+  maxUsers: "",
   isActive: true,
 };
 
@@ -38,7 +38,7 @@ const TenantForm = ({
       setErrors(validationErrors);
 
       if (!hasErrors(validationErrors)) {
-        onSubmit?.(sanitizeNumericFields(values, ['maxVehicles', 'maxUsers']));
+        onSubmit?.(sanitizeNumericFields(values, ["maxVehicles", "maxUsers"]));
       }
     },
     [onSubmit],
@@ -61,7 +61,7 @@ const TenantForm = ({
           />
 
           {isEdit && values.id && (
-            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+            <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
               <TenantLogoUploader
                 tenantId={values.id}
                 tenantName={values.name}
@@ -75,13 +75,10 @@ const TenantForm = ({
                 resetForm();
                 setErrors({});
               }}
-            >
-              انصراف
-            </AppButton>
+              labelKey="انصراف"
+            />
 
-            <AppButton type="submit" variant="contained">
-              ذخیره
-            </AppButton>
+            <AppButton type="submit" variant="contained" labelKey="ذخیره" />
           </AppFormActions>
         </Stack>
       )}

@@ -1,13 +1,13 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import { AppDataGrid } from '@/components';
-import { AppButton, ConfirmDialog, StatusChip } from '@/components';
+import { AppDataGrid } from "@/components";
+import { AppButton, ConfirmDialog, StatusChip } from "@/components";
 
-import useExpense from '../hooks/useExpense';
+import useExpense from "../hooks/useExpense";
 //import { expenseStatusChipKey } from '../constants';
-import { gregorianYearToJalali, formatJalaliDate } from '@/utils';
+import { gregorianYearToJalali, formatJalaliDate } from "@/utils";
 const ExpenseListPage = () => {
   const navigate = useNavigate();
 
@@ -30,40 +30,40 @@ const ExpenseListPage = () => {
   const columns = useMemo(
     () => [
       {
-        field: 'vehiclePlateNumber',
-        headerName: 'پلاک خودرو',
+        field: "vehiclePlateNumber",
+        headerName: "پلاک خودرو",
         width: 130,
       },
       {
-        field: 'expensTypeName',
-        headerName: '  نوع هزینه',
+        field: "expensTypeName",
+        headerName: "نوع هزینه",
         width: 130,
       },
       {
-        field: 'amount',
-        headerName: '  مقدار هزینه (تومان)',
+        field: "amount",
+        headerName: "مقدار هزینه (تومان)",
         width: 120,
       },
       {
-        field: 'invoiceNumber',
-        headerName: 'شماره فاکتور ',
+        field: "invoiceNumber",
+        headerName: "شماره فاکتور",
         width: 130,
       },
       {
-        field: 'vendorName',
-        headerName: '  نام  تعمیرگاه  یا مغازه',
+        field: "vendorName",
+        headerName: "نام  تعمیرگاه  یا مغازه",
         width: 140,
       },
       {
-        field: 'expenseDate',
-        headerName: ' تاریخ هزینه ',
+        field: "expenseDate",
+        headerName: "تاریخ هزینه",
         width: 130,
         renderCell: ({ row }) => formatJalaliDate(row.expenseDate),
       },
 
       {
-        field: 'actions',
-        headerName: 'عملیات',
+        field: "actions",
+        headerName: "عملیات",
         width: 140,
         renderCell: ({ row }) => (
           <>
@@ -73,9 +73,8 @@ const ExpenseListPage = () => {
                 event.stopPropagation();
                 navigate(`/expenses/edit/${row.id}`);
               }}
-            >
-              ویرایش
-            </AppButton>
+              labelKey="ویرایش"
+            />
 
             <AppButton
               size="small"
@@ -84,9 +83,8 @@ const ExpenseListPage = () => {
                 event.stopPropagation();
                 setDeleteTarget(row);
               }}
-            >
-              حذف
-            </AppButton>
+              labelKey="حذف"
+            />
           </>
         ),
       },
@@ -96,9 +94,11 @@ const ExpenseListPage = () => {
 
   return (
     <>
-      <AppButton onClick={() => navigate('/expenses/create')} sx={{ mb: 2 }}>
-        هزینه جدید
-      </AppButton>
+      <AppButton
+        onClick={() => navigate("/expenses/create")}
+        sx={{ mb: 2 }}
+        labelKey="هزینه جدید"
+      ></AppButton>
 
       <AppDataGrid
         rows={expenses}

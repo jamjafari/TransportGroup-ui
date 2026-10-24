@@ -53,7 +53,7 @@ const DashboardStatistics = () => {
 
         <DashboardColumn xl={3}>
           <AppMiniStat
-            title="ماموریت "
+            title="ماموریت"
 
             value={statistics.missionCount}
 

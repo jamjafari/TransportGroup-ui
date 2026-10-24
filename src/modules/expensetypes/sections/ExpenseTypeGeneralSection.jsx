@@ -22,7 +22,7 @@ const ExpenseTypeGeneralSection = ({
           <AppTextField
             fullWidth
             required
-            label=" کد انحصاری "
+            label="کد انحصاری"
             name="code"
             value={values.code}
             onChange={onChange}
@@ -34,7 +34,7 @@ const ExpenseTypeGeneralSection = ({
           <AppTextField
             fullWidth
             required
-            label=" عنوان نوع هزینه  "
+            label="عنوان نوع هزینه"
             name="title"
             value={values.title}
             onChange={onChange}
@@ -44,7 +44,7 @@ const ExpenseTypeGeneralSection = ({
         </Grid>
         <Grid size={{ xs: 12, md: 6 }}>
           <AppSwitch
-            label="  فعال"
+            label="فعال"
             name="isActive"
             checked={values.isActive}
             onChange={(event) =>

@@ -1,13 +1,13 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState } from "react";
 
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import DeleteIcon from '@mui/icons-material/Delete';
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 import {
   AppFormSection,
@@ -15,15 +15,15 @@ import {
   AppJalaliDatePicker,
   AppFileUpload,
   AppButton,
-} from '@/components';
-import { formatJalaliDate } from '@/utils';
+} from "@/components";
+import { formatJalaliDate } from "@/utils";
 
-import { attachmentCategoryOptions } from '../constants';
-import useAttachments from '@/hooks/useAttachments';
-import { ATTACHMENT_OWNER_TYPE } from '@/constants/attachmentTypes';
+import { attachmentCategoryOptions } from "../constants";
+import useAttachments from "@/hooks/useAttachments";
+import { ATTACHMENT_OWNER_TYPE } from "@/constants/attachmentTypes";
 
 const emptyDraft = {
-  category: '',
+  category: "",
   issueDate: null,
   expiryDate: null,
   file: null,
@@ -55,15 +55,15 @@ const VendorDocumentSection = ({ vendorId }) => {
 
   const categoryLabel = (value) =>
     attachmentCategoryOptions.find((option) => option.value === value)?.label ??
-    '';
+    "";
 
   return (
-    <AppFormSection title="تصاویر ">
+    <AppFormSection title="تصاویر">
       <Grid container spacing={2} alignItems="flex-end">
         <Grid size={{ xs: 12, md: 4 }}>
           <AppSelectform
             fullWidth
-            label=" محل تصویر"
+            label="محل تصویر"
             name="category"
             value={draft.category}
             options={attachmentCategoryOptions}
@@ -96,9 +96,8 @@ const VendorDocumentSection = ({ vendorId }) => {
         <AppButton
           onClick={handleAdd}
           disabled={submitting || !draft.file || !draft.category}
-        >
-          افزودن تصویر
-        </AppButton>
+          labelKey="افزودن تصویر"
+        />
       </Box>
 
       <List sx={{ mt: 2 }}>
@@ -113,7 +112,7 @@ const VendorDocumentSection = ({ vendorId }) => {
           >
             <ListItemText
               primary={item.originalFileName}
-              secondary={`${categoryLabel(item.category)} — تصویر: ${formatJalaliDate(item.issueDate ?? '—')}`}
+              secondary={`${categoryLabel(item.category)} — تصویر: ${formatJalaliDate(item.issueDate ?? "—")}`}
             />
           </ListItem>
         ))}

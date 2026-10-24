@@ -17,12 +17,12 @@ const FBVReportSummary = ({ summary = {} }) => {
     },
 
     {
-      title: "هزینه های کل سرویس ها ",
+      title: "هزینه های کل سرویس ها",
       value: summary.totalExpenseCost ?? 0,
     },
 
     {
-      title: " تعداد تراکنش ها ",
+      title: "تعداد تراکنش ها",
       value: summary.transactionCount ?? 0,
     },
   ];

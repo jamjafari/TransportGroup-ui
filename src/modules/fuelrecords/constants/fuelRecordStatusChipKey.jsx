@@ -8,7 +8,7 @@ export const FUEL_TYPE = {
 export const fuelTypeOptions = [
   { value: FUEL_TYPE.GASOLINE, label: 'بنزین' },
   { value: FUEL_TYPE.DIESEL, label: 'گازوئیل' },
-  { value: FUEL_TYPE.HYBRID, label: ' سی ان جی' },
+  { value: FUEL_TYPE.HYBRID, label: 'سی ان جی' },
   { value: FUEL_TYPE.ELECTRIC, label: 'برق' },
 ];
 

@@ -1,30 +1,30 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
-import Stack from '@mui/material/Stack';
+import React, { memo, useCallback, useEffect, useState } from "react";
+import Stack from "@mui/material/Stack";
 
-import { AppForm, AppFormActions, AppButton } from '@/components';
-import { hasErrors, validate } from '@/validation';
+import { AppForm, AppFormActions, AppButton } from "@/components";
+import { hasErrors, validate } from "@/validation";
 
-import FuelRecordGeneralSection from '../sections/FuelRecordGeneralSection';
-import FuelRecordTechnicalSection from '../sections/FuelRecordTechnicalSection';
+import FuelRecordGeneralSection from "../sections/FuelRecordGeneralSection";
+import FuelRecordTechnicalSection from "../sections/FuelRecordTechnicalSection";
 
-import useFuelRecordVehicles from '../hooks/useFuelRecordVehicles';
-import useFuelRecordDrivers from '../hooks/useFuelRecordDrivers';
+import useFuelRecordVehicles from "../hooks/useFuelRecordVehicles";
+import useFuelRecordDrivers from "../hooks/useFuelRecordDrivers";
 
-import { sanitizeNumericFields } from '@/utils';
+import { sanitizeNumericFields } from "@/utils";
 
-import fuelRecordSchema from '../validation/fuelRecordSchema';
+import fuelRecordSchema from "../validation/fuelRecordSchema";
 
 const defaultValues = {
   vehicleId: null,
   driverId: null,
-  fuelAmount: '',
-  unitPrice: '',
+  fuelAmount: "",
+  unitPrice: "",
   fuelDate: null,
   fullTank: null,
-  odometerKM: '',
-  fuelType: '',
-  fuelStationName: '',
-  description: '--',
+  odometerKM: "",
+  fuelType: "",
+  fuelStationName: "",
+  description: "--",
 };
 
 const FuelRecordForm = ({ initialValues = defaultValues, onSubmit }) => {
@@ -55,9 +55,9 @@ const FuelRecordForm = ({ initialValues = defaultValues, onSubmit }) => {
       if (!hasErrors(validationErrors)) {
         onSubmit?.(
           sanitizeNumericFields(values, [
-            'fuelAmount',
-            'unitPrice',
-            'odometerKM',
+            "fuelAmount",
+            "unitPrice",
+            "odometerKM",
           ]),
         );
       }
@@ -100,13 +100,10 @@ const FuelRecordForm = ({ initialValues = defaultValues, onSubmit }) => {
                 resetForm();
                 setErrors({});
               }}
-            >
-              انصراف
-            </AppButton>
+              labelKey="انصراف"
+            />
 
-            <AppButton type="submit" variant="contained">
-              ذخیره
-            </AppButton>
+            <AppButton type="submit" variant="contained" labelKey="ذخیره" />
           </AppFormActions>
         </Stack>
       )}

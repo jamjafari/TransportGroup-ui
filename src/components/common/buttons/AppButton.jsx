@@ -1,7 +1,8 @@
 import React, { forwardRef, memo } from "react";
 import { Button, CircularProgress } from "@mui/material";
 
-import { useTranslate } from "@/hooks";
+import { useTranslation } from "react-i18next";
+
 import { AppButtonPropTypes } from "./AppButton.types";
 
 const AppButton = forwardRef(
@@ -23,7 +24,7 @@ const AppButton = forwardRef(
     },
     ref,
   ) => {
-    const { t } = useTranslate();
+    const { t } = useTranslation();
 
     const content =
       labelKey != null ? t(labelKey, translationOptions) : children;

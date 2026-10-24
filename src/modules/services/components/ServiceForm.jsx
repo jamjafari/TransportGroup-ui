@@ -1,18 +1,18 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
-import Stack from '@mui/material/Stack';
+import React, { memo, useCallback, useEffect, useState } from "react";
+import Stack from "@mui/material/Stack";
 
-import { AppForm, AppFormActions, AppButton } from '@/components';
-import { hasErrors, validate } from '@/validation';
+import { AppForm, AppFormActions, AppButton } from "@/components";
+import { hasErrors, validate } from "@/validation";
 
-import ServiceGeneralSection from '../sections/ServiceGeneralSection';
+import ServiceGeneralSection from "../sections/ServiceGeneralSection";
 
-import useServiceVehicles from '../hooks/useServiceVehicles';
-import useServiceVendors from '../hooks/useServiceVendors';
-import useServiceServiceTypes from '../hooks/useServiceServiceTypes';
+import useServiceVehicles from "../hooks/useServiceVehicles";
+import useServiceVendors from "../hooks/useServiceVendors";
+import useServiceServiceTypes from "../hooks/useServiceServiceTypes";
 
-import { sanitizeNumericFields } from '@/utils';
+import { sanitizeNumericFields } from "@/utils";
 
-import serviceSchema from '../validation/serviceSchema';
+import serviceSchema from "../validation/serviceSchema";
 
 const defaultValues = {
   vehicleId: null,
@@ -21,8 +21,8 @@ const defaultValues = {
 
   serviceDate: null,
 
-  odometerKM: '',
-  cost: '',
+  odometerKM: "",
+  cost: "",
 };
 
 const ServiceForm = ({ initialValues = defaultValues, onSubmit }) => {
@@ -52,7 +52,7 @@ const ServiceForm = ({ initialValues = defaultValues, onSubmit }) => {
       setErrors(validationErrors);
 
       if (!hasErrors(validationErrors)) {
-        onSubmit?.(sanitizeNumericFields(values, ['odometerKM', 'cost']));
+        onSubmit?.(sanitizeNumericFields(values, ["odometerKM", "cost"]));
       }
     },
     [onSubmit],
@@ -87,13 +87,10 @@ const ServiceForm = ({ initialValues = defaultValues, onSubmit }) => {
                 resetForm();
                 setErrors({});
               }}
-            >
-              انصراف
-            </AppButton>
+              labelKey="انصراف"
+            />
 
-            <AppButton type="submit" variant="contained">
-              ذخیره
-            </AppButton>
+            <AppButton type="submit" variant="contained" labelKey="ذخیره" />
           </AppFormActions>
         </Stack>
       )}

@@ -1,29 +1,29 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
-import Stack from '@mui/material/Stack';
+import React, { memo, useCallback, useEffect, useState } from "react";
+import Stack from "@mui/material/Stack";
 
-import { AppForm, AppFormActions, AppButton } from '@/components';
-import { hasErrors, validate } from '@/validation';
+import { AppForm, AppFormActions, AppButton } from "@/components";
+import { hasErrors, validate } from "@/validation";
 
-import InspectionGeneralSection from '../sections/InspectionGeneralSection';
-import InspectionDetailsSection from '../sections/InspectionDetailsSection';
+import InspectionGeneralSection from "../sections/InspectionGeneralSection";
+import InspectionDetailsSection from "../sections/InspectionDetailsSection";
 
-import * as vehicleApi from '@/modules/fleet/vehicles/api/vehicleApi';
-import * as vendorApi from '@/modules/vendors/api/vendorApi'; // مسیر رو با اسم واقعی هماهنگ کن
+import * as vehicleApi from "@/modules/fleet/vehicles/api/vehicleApi";
+import * as vendorApi from "@/modules/vendors/api/vendorApi"; // مسیر رو با اسم واقعی هماهنگ کن
 
-import { sanitizeNumericFields } from '@/utils';
+import { sanitizeNumericFields } from "@/utils";
 
-import inspectionSchema from '../schemas/inspectionSchema';
+import inspectionSchema from "../schemas/inspectionSchema";
 
 const defaultValues = {
   vehicleId: null,
   vendorId: null,
   inspectionDate: null,
   expiryDate: null,
-  result: '',
-  cost: '',
-  certificateNumber: '',
-  odometerKM: '',
-  description: '',
+  result: "",
+  cost: "",
+  certificateNumber: "",
+  odometerKM: "",
+  description: "",
 };
 
 const InspectionForm = ({ initialValues = defaultValues, onSubmit }) => {
@@ -55,7 +55,7 @@ const InspectionForm = ({ initialValues = defaultValues, onSubmit }) => {
       setErrors(validationErrors);
 
       if (!hasErrors(validationErrors)) {
-        onSubmit?.(sanitizeNumericFields(values, ['cost', 'odometerKM']));
+        onSubmit?.(sanitizeNumericFields(values, ["cost", "odometerKM"]));
       }
     },
     [onSubmit],
@@ -93,13 +93,10 @@ const InspectionForm = ({ initialValues = defaultValues, onSubmit }) => {
                 resetForm();
                 setErrors({});
               }}
-            >
-              انصراف
-            </AppButton>
+              labelKey="انصراف"
+            />
 
-            <AppButton type="submit" variant="contained">
-              ذخیره
-            </AppButton>
+            <AppButton type="submit" variant="contained" labelKey="ذخیره" />
           </AppFormActions>
         </Stack>
       )}

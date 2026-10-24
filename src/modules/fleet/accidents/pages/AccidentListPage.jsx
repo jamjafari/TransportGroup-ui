@@ -1,21 +1,21 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
+import { useTranslatedColumns } from "../../../../hooks";
 import {
   AppDataGrid,
   AppButton,
   ConfirmDialog,
   StatusChip,
-} from '@/components';
-import { formatJalaliDate } from '@/utils';
+} from "@/components";
+import { formatJalaliDate } from "@/utils";
 
-import useAccident from '../hooks/useAccident';
+import useAccident from "../hooks/useAccident";
 import {
   accidentSeverityOptions,
   accidentStatusOptions,
   accidentStatusChipKey,
-} from '../constants';
+} from "../constants";
 
 const AccidentListPage = () => {
   const navigate = useNavigate();
@@ -38,34 +38,34 @@ const AccidentListPage = () => {
     getAccidents();
   }, [deleteTarget, deleteAccident, getAccidents]);
 
-  const columns = useMemo(
+  const baseColumns = useMemo(
     () => [
-      { field: 'plateNumber', headerName: 'خودرو', width: 130 },
-      { field: 'driverName', headerName: 'راننده', width: 150 },
+      { field: "plateNumber", headerName: "خودرو", width: 130 },
+      { field: "driverName", headerName: "راننده", width: 150 },
       {
-        field: 'accidentDate',
-        headerName: 'تاریخ تصادف',
+        field: "accidentDate",
+        headerName: "تاریخ تصادف",
         width: 130,
         renderCell: ({ row }) => formatJalaliDate(row.accidentDate),
       },
       {
-        field: 'severity',
-        headerName: 'شدت',
+        field: "severity",
+        headerName: "شدت",
         width: 110,
         renderCell: ({ row }) => severityLabel(row.severity),
       },
       {
-        field: 'status',
-        headerName: 'وضعیت',
+        field: "status",
+        headerName: "وضعیت",
         width: 130,
         renderCell: ({ row }) => (
           <StatusChip status={accidentStatusChipKey(row.status)} />
         ),
       },
-      { field: 'missionCode', headerName: 'ماموریت', width: 120 },
+      { field: "missionCode", headerName: "ماموریت", width: 120 },
       {
-        field: 'actions',
-        headerName: 'عملیات',
+        field: "actions",
+        headerName: "عملیات",
         width: 140,
         renderCell: ({ row }) => (
           <>
@@ -75,9 +75,9 @@ const AccidentListPage = () => {
                 e.stopPropagation();
                 navigate(`/accidents/edit/${row.id}`);
               }}
-            >
-              ویرایش
-            </AppButton>
+              labelKey="ویرایش"
+            />
+
             <AppButton
               size="small"
               color="error"
@@ -85,21 +85,23 @@ const AccidentListPage = () => {
                 e.stopPropagation();
                 setDeleteTarget(row);
               }}
-            >
-              حذف
-            </AppButton>
+              labelKey="حذف"
+            />
           </>
         ),
       },
     ],
     [navigate],
   );
+  const columns = useTranslatedColumns(baseColumns);
 
   return (
     <>
-      <AppButton onClick={() => navigate('/accidents/create')} sx={{ mb: 2 }}>
-        ثبت تصادف
-      </AppButton>
+      <AppButton
+        onClick={() => navigate("/accidents/create")}
+        sx={{ mb: 2 }}
+        labelKey="ثبت تصادف"
+      />
 
       <AppDataGrid
         rows={accidents}
