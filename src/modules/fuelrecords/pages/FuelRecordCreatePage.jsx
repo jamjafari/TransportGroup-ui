@@ -1,24 +1,25 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback } from "react";
 
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 
-import Typography from '@mui/material/Typography';
+import Typography from "@mui/material/Typography";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import FuelRecordForm from '../components/FuelRecordForm';
+import FuelRecordForm from "../components/FuelRecordForm";
 
-import useFuelRecord from '../hooks/useFuelRecord';
-import { AppCard } from '@/components';
-
+import useFuelRecord from "../hooks/useFuelRecord";
+import { AppCard } from "@/components";
+import { useTranslation } from "react-i18next";
 const FuelRecordCreatePage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { createFuelRecord } = useFuelRecord();
 
   const handleSubmit = useCallback(
     async (values) => {
-      console.log('Submit clicked');
+      console.log("Submit clicked");
       console.log(values);
       try {
         const createdId = await createFuelRecord(values);
@@ -31,9 +32,9 @@ const FuelRecordCreatePage = () => {
   );
 
   return (
-    <Box sx={{ maxWidth: 900, mx: 'auto', py: 3 }}>
+    <Box sx={{ maxWidth: 900, mx: "auto", py: 3 }}>
       <Typography variant="h5" fontWeight={700} mb={3}>
-        سوختگیری جدید
+        {t("سوختگیری جدید")}
       </Typography>
 
       <AppCard sx={{ p: 4 }}>

@@ -1,17 +1,18 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback } from "react";
 
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import VehicleForm from '../components/VehicleForm';
+import VehicleForm from "../components/VehicleForm";
 
-import useVehicle from '../hooks/useVehicle';
-import { AppCard, AppAlert } from '@/components';
-import { usePlanLimits } from '@/hooks';
-
+import useVehicle from "../hooks/useVehicle";
+import { AppCard, AppAlert } from "@/components";
+import { usePlanLimits } from "@/hooks";
+import { useTranslation } from "react-i18next";
 const VehicleCreatePage = () => {
+  const { t } = useTranslation();
   const { canAddVehicle, tenant } = usePlanLimits();
 
   const navigate = useNavigate();
@@ -30,9 +31,9 @@ const VehicleCreatePage = () => {
   );
 
   return (
-    <Box sx={{ maxWidth: 900, mx: 'auto', py: 3 }}>
+    <Box sx={{ maxWidth: 900, mx: "auto", py: 3 }}>
       <Typography variant="h5" fontWeight={700} mb={3}>
-        افزودن خودرو
+        {t("افزودن خودرو")}
       </Typography>
 
       {!canAddVehicle && (

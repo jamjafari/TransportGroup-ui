@@ -9,7 +9,10 @@ import {
 
 import useTenant from "../hooks/useTenant";
 
+import { useTranslatedColumns } from "@/hooks";
+import { useTranslation } from "react-i18next";
 const TenantAdminsPage = () => {
+  const { t } = useTranslation();
   const { admins, loading, getTenantAdmins, setAdminStatus, deleteAdmin } =
     useTenant();
 
@@ -34,7 +37,7 @@ const TenantAdminsPage = () => {
     getTenantAdmins();
   }, [deleteTarget, deleteAdmin, getTenantAdmins]);
 
-  const columns = useMemo(
+  const baseColumns = useMemo(
     () => [
       { field: "tenantName", headerName: "سازمان", width: 200 },
       { field: "userName", headerName: "نام کاربری", width: 150 },
@@ -87,6 +90,9 @@ const TenantAdminsPage = () => {
     [handleToggleActive],
   );
 
+  // ✅ عنوان ستون‌ها ترجمه می‌شود (متن فارسی خودش کلید ترجمه است)
+  const columns = useTranslatedColumns(baseColumns);
+
   return (
     <>
       <AppDataGrid
@@ -101,7 +107,10 @@ const TenantAdminsPage = () => {
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف ادمین"
-        message={`مطمئن هستید؟ آیا از حذف ادمین «${deleteTarget?.userName}»`}
+        message={t('آیا از حذف {{entity}} «{{name}}» مطمئن هستید؟', {
+          entity: t('ادمین'),
+          name: deleteTarget?.userName,
+        })}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

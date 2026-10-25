@@ -7,7 +7,10 @@ import { AppButton, ConfirmDialog, StatusChip } from "@/components";
 
 import useService from "../hooks/useService";
 import { gregorianYearToJalali, formatJalaliDate } from "@/utils";
+import { useTranslatedColumns } from "@/hooks";
+import { useTranslation } from "react-i18next";
 const ServiceListPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { services, loading, getServices, deleteService } = useService();
@@ -26,7 +29,7 @@ const ServiceListPage = () => {
     getServices();
   }, [deleteTarget, deleteService, getServices]);
 
-  const columns = useMemo(
+  const baseColumns = useMemo(
     () => [
       {
         field: "plateNumber",
@@ -87,6 +90,9 @@ const ServiceListPage = () => {
     [navigate],
   );
 
+  // ✅ عنوان ستون‌ها ترجمه می‌شود (متن فارسی خودش کلید ترجمه است)
+  const columns = useTranslatedColumns(baseColumns);
+
   return (
     <>
       <AppButton
@@ -108,7 +114,10 @@ const ServiceListPage = () => {
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف سرویس"
-        message={` مطمئن هستید؟   «${deleteTarget?.plateNumber}»  آیا از حذف سرویس`}
+        message={t('آیا از حذف {{entity}} «{{name}}» مطمئن هستید؟', {
+          entity: t('سرویس'),
+          name: deleteTarget?.plateNumber,
+        })}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

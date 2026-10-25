@@ -7,6 +7,8 @@ import {
   FormControl,
 } from '@mui/material';
 
+import useTranslatedField from './useTranslatedField';
+
 import {
   AppCheckboxPropTypes,
   AppCheckboxDefaultProps,
@@ -24,6 +26,8 @@ const AppCheckbox = ({
   color,
   size,
 }) => {
+  const { tr } = useTranslatedField();
+
   return (
     <FormControl
       error={error}
@@ -47,10 +51,10 @@ const AppCheckbox = ({
           />
         }
 
-        label={label}
+        label={tr(label)}
       />
 
-      {helperText && <FormHelperText>{helperText}</FormHelperText>}
+      {helperText && <FormHelperText>{tr(helperText)}</FormHelperText>}
     </FormControl>
   );
 };

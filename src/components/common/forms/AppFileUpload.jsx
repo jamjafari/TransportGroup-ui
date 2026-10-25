@@ -11,6 +11,8 @@ import {
   validateAttachmentFile,
 } from '@/constants/attachmentTypes';
 
+import useTranslatedField from './useTranslatedField';
+
 const AppFileUpload = ({
   label,
   accept,
@@ -22,6 +24,8 @@ const AppFileUpload = ({
   value,
 }) => {
   const [fileError, setFileError] = useState('');
+
+  const { t, tr } = useTranslatedField();
 
   // ✅ نوع و حجم فایل پیش از ارسال بررسی می‌شود (سرور هم دوباره بررسی می‌کند)
   const handleChange = (event) => {
@@ -45,7 +49,7 @@ const AppFileUpload = ({
     <Box>
       {label && (
         <Typography variant="body2" fontWeight={600} mb={1}>
-          {label}
+          {tr(label)}
         </Typography>
       )}
 
@@ -58,7 +62,9 @@ const AppFileUpload = ({
 
         color={shownError ? 'error' : 'primary'}
       >
-        Upload File
+        {/* ✅ قبلاً عیناً «Upload File» بود — یعنی در حالت فارسی هم انگلیسی
+            نمایش داده می‌شد. الان مثل بقیه‌ی برنامه کلید فارسی دارد. */}
+        {t('انتخاب فایل')}
         <input
           hidden
 
@@ -79,16 +85,18 @@ const AppFileUpload = ({
           display="block"
           mt={1}
         >
-          {shownHelperText}
+          {tr(shownHelperText)}
         </Typography>
       )}
 
       {value && (
         <Box mt={1}>
-          <Typography variant="caption">Selected:</Typography>
+          <Typography variant="caption">{t('انتخاب‌شده:')}</Typography>
 
           <Typography variant="body2">
-            {multiple ? `${value.length} files` : value?.name || value}
+            {multiple
+              ? t('{{count}} فایل', { count: value.length })
+              : value?.name || value}
           </Typography>
         </Box>
       )}

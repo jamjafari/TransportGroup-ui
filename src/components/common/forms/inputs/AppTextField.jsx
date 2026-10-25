@@ -9,6 +9,7 @@ import {
 
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
+import useTranslatedField from '../useTranslatedField';
 
 import { AppTextFieldPropTypes } from './AppTextField.types';
 
@@ -24,17 +25,26 @@ const AppTextField = forwardRef(
       size = 'medium',
       fullWidth = true,
       sx,
+      // ✅ صریحاً جدا شدند تا ترجمه شوند؛ قبلاً داخل restProps رد می‌شدند
+      label,
+      placeholder,
+      helperText,
       ...restProps
     },
     ref,
   ) => {
     const [showPassword, setShowPassword] = useState(false);
 
+    const { tr } = useTranslatedField();
+
     const isPassword = type === 'password';
 
     return (
       <TextField
         {...restProps}
+        label={tr(label)}
+        placeholder={tr(placeholder)}
+        helperText={tr(helperText)}
         ref={ref}
         type={isPassword && showPassword ? 'text' : type}
         size={size}

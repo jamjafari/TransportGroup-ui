@@ -7,7 +7,9 @@ import { AppButton, ConfirmDialog, StatusChip } from "@/components";
 import { useTranslatedColumns } from "../../../hooks";
 import useFuelCard from "../hooks/useFuelCard";
 import { gregorianYearToJalali, formatJalaliDate } from "@/utils";
+import { useTranslation } from "react-i18next";
 const FuelCardListPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { fuelCards, loading, getFuelCards, deleteFuelCard } = useFuelCard();
@@ -99,7 +101,10 @@ const FuelCardListPage = () => {
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف کارت سوخت"
-        message={` مطمئن هستید؟ «${deleteTarget?.cardNumber} »  آیا از حذف کارت سوخت`}
+        message={t('آیا از حذف {{entity}} «{{name}}» مطمئن هستید؟', {
+          entity: t('کارت سوخت'),
+          name: deleteTarget?.cardNumber,
+        })}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

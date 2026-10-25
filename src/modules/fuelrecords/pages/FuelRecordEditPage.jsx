@@ -1,19 +1,20 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from "react";
 
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
 
-import FuelRecordForm from '../components/FuelRecordForm';
-import FuelRecordDocumentSection from '../sections/FuelRecordDocumentSection';
+import FuelRecordForm from "../components/FuelRecordForm";
+import FuelRecordDocumentSection from "../sections/FuelRecordDocumentSection";
 
-import { gregorianYearToJalali } from '@/utils';
-import { AppCard } from '@/components';
+import { gregorianYearToJalali } from "@/utils";
+import { AppCard } from "@/components";
 
-import useFuelRecord from '../hooks/useFuelRecord';
-
+import useFuelRecord from "../hooks/useFuelRecord";
+import { useTranslation } from "react-i18next";
 const FuelRecordEditPage = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
 
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ const FuelRecordEditPage = () => {
     async (values) => {
       try {
         await updateFuelRecord(values);
-        navigate('/fuelRecords');
+        navigate("/fuelRecords");
       } catch (error) {
         console.error(error);
       }
@@ -52,9 +53,9 @@ const FuelRecordEditPage = () => {
   }
 
   return (
-    <Box sx={{ maxWidth: 900, mx: 'auto', py: 3 }}>
+    <Box sx={{ maxWidth: 900, mx: "auto", py: 3 }}>
       <Typography variant="h5" fontWeight={700} mb={3}>
-        ویرایش سوختگیری
+        {t("ویرایش سوختگیری")}
       </Typography>
 
       <AppCard sx={{ p: 4, mb: 3 }}>

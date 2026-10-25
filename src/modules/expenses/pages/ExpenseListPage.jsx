@@ -8,7 +8,10 @@ import { AppButton, ConfirmDialog, StatusChip } from "@/components";
 import useExpense from "../hooks/useExpense";
 //import { expenseStatusChipKey } from '../constants';
 import { gregorianYearToJalali, formatJalaliDate } from "@/utils";
+import { useTranslatedColumns } from "@/hooks";
+import { useTranslation } from "react-i18next";
 const ExpenseListPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { expenses, loading, getExpenses, deleteExpense } = useExpense();
@@ -27,7 +30,7 @@ const ExpenseListPage = () => {
     getExpenses();
   }, [deleteTarget, deleteExpense, getExpenses]);
 
-  const columns = useMemo(
+  const baseColumns = useMemo(
     () => [
       {
         field: "vehiclePlateNumber",
@@ -92,6 +95,9 @@ const ExpenseListPage = () => {
     [navigate],
   );
 
+  // ✅ عنوان ستون‌ها ترجمه می‌شود (متن فارسی خودش کلید ترجمه است)
+  const columns = useTranslatedColumns(baseColumns);
+
   return (
     <>
       <AppButton
@@ -113,7 +119,10 @@ const ExpenseListPage = () => {
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف هزینه"
-        message={`مطمئن هستید؟ « ${deleteTarget?.invoiceNumber}» آیا از حذف هزینه `}
+        message={t('آیا از حذف {{entity}} «{{name}}» مطمئن هستید؟', {
+          entity: t('هزینه'),
+          name: deleteTarget?.invoiceNumber,
+        })}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

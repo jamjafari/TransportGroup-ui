@@ -1,19 +1,20 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from "react";
 
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
 
-import ServiceForm from '../components/ServiceForm';
-import ServiceDocumentsSection from '../sections/ServiceDocumentsSection';
+import ServiceForm from "../components/ServiceForm";
+import ServiceDocumentsSection from "../sections/ServiceDocumentsSection";
 
-import { gregorianYearToJalali } from '@/utils';
-import { AppCard } from '@/components';
+import { gregorianYearToJalali } from "@/utils";
+import { AppCard } from "@/components";
 
-import useService from '../hooks/useService';
-
+import useService from "../hooks/useService";
+import { useTranslation } from "react-i18next";
 const ServiceEditPage = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
 
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ const ServiceEditPage = () => {
         ...data,
         serviceDate: data.serviceDate ? new Date(data.serviceDate) : null,
 
-        odometerKM: data.odometerKM ?? '',
+        odometerKM: data.odometerKM ?? "",
       });
     };
 
@@ -41,7 +42,7 @@ const ServiceEditPage = () => {
     async (values) => {
       try {
         await updateService(values);
-        navigate('/services');
+        navigate("/services");
       } catch (error) {
         console.error(error);
       }
@@ -54,9 +55,9 @@ const ServiceEditPage = () => {
   }
 
   return (
-    <Box sx={{ maxWidth: 900, mx: 'auto', py: 3 }}>
+    <Box sx={{ maxWidth: 900, mx: "auto", py: 3 }}>
       <Typography variant="h5" fontWeight={700} mb={3}>
-        ویرایش سرویس خودرو
+        {t("ویرایش سرویس خودرو")}
       </Typography>
 
       <AppCard sx={{ p: 4, mb: 3 }}>

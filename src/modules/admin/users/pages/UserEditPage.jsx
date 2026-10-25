@@ -1,15 +1,17 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from "react";
 
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
 
-import UserForm from '../components/UserForm';
-import useUser from '../hooks/useUser';
-import { AppCard } from '@/components';
+import UserForm from "../components/UserForm";
+import useUser from "../hooks/useUser";
+import { AppCard } from "@/components";
+import { useTranslation } from "react-i18next";
 
 const UserEditPage = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const { getUserById, updateUser } = useUser();
@@ -22,7 +24,7 @@ const UserEditPage = () => {
 
       setUser({
         ...data,
-        password: '', // فیلد رمز همیشه خالی شروع می‌شه؛ چون در ویرایش استفاده نمی‌شه (isEdit=true آن را مخفی می‌کند)
+        password: "", // فیلد رمز همیشه خالی شروع می‌شه؛ چون در ویرایش استفاده نمی‌شه (isEdit=true آن را مخفی می‌کند)
       });
     };
 
@@ -33,7 +35,7 @@ const UserEditPage = () => {
     async (values) => {
       try {
         await updateUser({ ...values, id });
-        navigate('/admin/users');
+        navigate("/admin/users");
       } catch (error) {
         console.error(error);
       }
@@ -44,9 +46,9 @@ const UserEditPage = () => {
   if (!user) return null;
 
   return (
-    <Box sx={{ maxWidth: 900, mx: 'auto', py: 3 }}>
+    <Box sx={{ maxWidth: 900, mx: "auto", py: 3 }}>
       <Typography variant="h5" fontWeight={700} mb={3}>
-        ویرایش کاربر
+        {t("ویرایش کاربر")}
       </Typography>
 
       <AppCard sx={{ p: 4 }}>

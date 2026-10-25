@@ -2,6 +2,8 @@ import React, { memo } from 'react';
 
 import { TextField } from '@mui/material';
 
+import useTranslatedField from './useTranslatedField';
+
 import {
   AppTimePickerPropTypes,
   AppTimePickerDefaultProps,
@@ -20,14 +22,16 @@ const AppTimePicker = ({
   size,
   ...rest
 }) => {
+  const { tr } = useTranslatedField();
+
   return (
     <TextField
       name={name}
-      label={label}
+      label={tr(label)}
       type="time"
       value={value}
       onChange={onChange}
-      helperText={helperText}
+      helperText={tr(helperText)}
       error={error}
       disabled={disabled}
       required={required}

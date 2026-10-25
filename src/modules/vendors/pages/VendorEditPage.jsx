@@ -1,19 +1,20 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from "react";
 
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
 
-import VendorForm from '../components/VendorForm';
-import VendorDocumentSection from '../sections/VendorDocumentSection';
+import VendorForm from "../components/VendorForm";
+import VendorDocumentSection from "../sections/VendorDocumentSection";
 
-import { gregorianYearToJalali } from '@/utils';
-import { AppCard } from '@/components';
+import { gregorianYearToJalali } from "@/utils";
+import { AppCard } from "@/components";
 
-import useVendor from '../hooks/useVendor';
-
+import useVendor from "../hooks/useVendor";
+import { useTranslation } from "react-i18next";
 const VendorEditPage = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
 
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const VendorEditPage = () => {
   useEffect(() => {
     const loadVendor = async () => {
       const data = await getVendorById(id);
-      console.log('Vendor ID from API:', data?.id);
+      console.log("Vendor ID from API:", data?.id);
       setVendor({
         ...data,
       });
@@ -38,7 +39,7 @@ const VendorEditPage = () => {
     async (values) => {
       try {
         await updateVendor(values);
-        navigate('/vendors');
+        navigate("/vendors");
       } catch (error) {
         console.error(error);
       }
@@ -51,9 +52,9 @@ const VendorEditPage = () => {
   }
 
   return (
-    <Box sx={{ maxWidth: 900, mx: 'auto', py: 3 }}>
+    <Box sx={{ maxWidth: 900, mx: "auto", py: 3 }}>
       <Typography variant="h5" fontWeight={700} mb={3}>
-        ویرایش تامین کننده
+        {t("ویرایش تامین کننده")}
       </Typography>
 
       <AppCard sx={{ p: 4, mb: 3 }}>

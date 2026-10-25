@@ -1,13 +1,13 @@
-import React, { memo } from 'react';
+import React, { memo } from "react";
 
-import Grid from '@mui/material/Grid';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Typography from '@mui/material/Typography';
+import Grid from "@mui/material/Grid";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Typography from "@mui/material/Typography";
 
-import { AppFormSection, AppTextField, AppSwitch } from '@/components';
-
+import { AppFormSection, AppTextField, AppSwitch } from "@/components";
+import { useTranslation } from "react-i18next";
 const UserGeneralSection = ({
   values,
   errors,
@@ -16,6 +16,7 @@ const UserGeneralSection = ({
   roles,
   isEdit,
 }) => {
+  const { t } = useTranslation();
   const selectedRoleIds = values.roleIds || [];
 
   const toggleRole = (roleId) => {
@@ -23,7 +24,7 @@ const UserGeneralSection = ({
       ? selectedRoleIds.filter((id) => id !== roleId)
       : [...selectedRoleIds, roleId];
 
-    setFieldValue('roleIds', next);
+    setFieldValue("roleIds", next);
   };
 
   return (
@@ -76,7 +77,7 @@ const UserGeneralSection = ({
             label="کاربر فعال است"
             name="isActive"
             checked={values.isActive}
-            onChange={(e) => setFieldValue('isActive', e.target.checked)}
+            onChange={(e) => setFieldValue("isActive", e.target.checked)}
           />
         </Grid>
 
@@ -85,13 +86,13 @@ const UserGeneralSection = ({
             label="حساب قفل باشد"
             name="isLock"
             checked={values.isLock}
-            onChange={(e) => setFieldValue('isLock', e.target.checked)}
+            onChange={(e) => setFieldValue("isLock", e.target.checked)}
           />
         </Grid>
 
         <Grid size={{ xs: 12 }}>
           <Typography variant="subtitle2" mb={1}>
-            نقش‌ها
+            {t("نقش‌ها")}
           </Typography>
 
           <FormGroup row>

@@ -1,15 +1,16 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from "react";
 
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
 
-import TenantForm from '../components/TenantForm';
-import useTenant from '../hooks/useTenant';
-import { AppCard } from '@/components';
-
+import TenantForm from "../components/TenantForm";
+import useTenant from "../hooks/useTenant";
+import { AppCard } from "@/components";
+import { useTranslation } from "react-i18next";
 const TenantEditPage = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const { getTenantById, updateTenant } = useTenant();
@@ -32,7 +33,7 @@ const TenantEditPage = () => {
     async (values) => {
       try {
         await updateTenant({ ...values, id });
-        navigate('/admin/tenants');
+        navigate("/admin/tenants");
       } catch (error) {
         console.error(error);
       }
@@ -43,9 +44,9 @@ const TenantEditPage = () => {
   if (!tenant) return null;
 
   return (
-    <Box sx={{ maxWidth: 900, mx: 'auto', py: 3 }}>
+    <Box sx={{ maxWidth: 900, mx: "auto", py: 3 }}>
       <Typography variant="h5" fontWeight={700} mb={3}>
-        ویرایش سازمان
+        {t("ویرایش سازمان")}
       </Typography>
 
       <AppCard sx={{ p: 4 }}>

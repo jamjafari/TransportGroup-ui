@@ -8,6 +8,8 @@ import {
 } from '@mui/material';
 
 
+import useTranslatedField from './useTranslatedField';
+
 import { AppSwitchPropTypes, AppSwitchDefaultProps } from './AppSwitch.types';
 
 const AppSwitch = ({
@@ -22,6 +24,8 @@ const AppSwitch = ({
   error,
   sx, // ✅ اضافه شد
 }) => {
+  const { tr } = useTranslatedField();
+
   return (
     <FormControl
       error={error}
@@ -54,10 +58,10 @@ const AppSwitch = ({
             size={size}
           />
         }
-        label={label}
+        label={tr(label)}
       />
 
-      {helperText && <FormHelperText>{helperText}</FormHelperText>}
+      {helperText && <FormHelperText>{tr(helperText)}</FormHelperText>}
     </FormControl>
   );
 };

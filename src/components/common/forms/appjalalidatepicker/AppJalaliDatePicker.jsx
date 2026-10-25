@@ -6,6 +6,8 @@ import * as RMDPNamespace from 'react-multi-date-picker';
 
 import { getDateLocale } from '@/utils/data/dateLocale';
 
+import useTranslatedField from '../useTranslatedField';
+
 import {
   AppJalaliDatePickerPropTypes,
   AppJalaliDatePickerDefaultProps,
@@ -31,6 +33,8 @@ const AppJalaliDatePicker = ({
   ...props
 }) => {
   const { calendar, locale } = getDateLocale();
+
+  const { tr } = useTranslatedField();
 
   return (
     <DatePicker
@@ -68,14 +72,14 @@ const AppJalaliDatePicker = ({
       disabled={disabled}
       render={(inputValue, openCalendar) => (
         <TextField
-          label={label}
+          label={tr(label)}
           value={inputValue || ''}
           onFocus={openCalendar}
           onClick={openCalendar}
           fullWidth
           size="medium"
           error={error}
-          helperText={helperText}
+          helperText={tr(helperText)}
           disabled={disabled}
           required={required}
           InputProps={{

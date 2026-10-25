@@ -8,7 +8,9 @@ import { useTranslatedColumns } from "../../../hooks";
 import useFuelRecord from "../hooks/useFuelRecord";
 import { fuelTypeOptions, fuelTankStatusChipKey } from "../constants";
 import { gregorianYearToJalali, formatJalaliDate } from "@/utils";
+import { useTranslation } from "react-i18next";
 const FuelRecordListPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { fuelRecords, loading, getFuelRecords, deleteFuelRecord } =
@@ -155,7 +157,10 @@ const FuelRecordListPage = () => {
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف سوختگیری"
-        message={`مطمئن هستید؟ «${deleteTarget?.fuelAmount}»  آیا از حذف سوختگیری`}
+        message={t('آیا از حذف {{entity}} «{{name}}» مطمئن هستید؟', {
+          entity: t('سوخت‌گیری'),
+          name: deleteTarget?.fuelAmount,
+        })}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

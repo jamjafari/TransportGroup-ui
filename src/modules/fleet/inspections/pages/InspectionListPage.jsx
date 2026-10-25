@@ -13,7 +13,9 @@ import { formatJalaliDate } from "@/utils";
 import useInspection from "../hooks/useInspection";
 import { inspectionResultChipKey } from "../constants";
 import { useTranslatedColumns } from "../../../../hooks";
+import { useTranslation } from "react-i18next";
 const InspectionListPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { inspections, loading, getInspections, deleteInspection } =
     useInspection();
@@ -107,7 +109,10 @@ const InspectionListPage = () => {
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف رکورد معاینه فنی"
-        message={`مطمئن هستید؟ « ${deleteTarget?.plateNumber}» آیا از حذف رکورد پلاک خودرو `}
+        message={t('آیا از حذف {{entity}} «{{name}}» مطمئن هستید؟', {
+          entity: t('معاینه فنی'),
+          name: deleteTarget?.plateNumber,
+        })}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

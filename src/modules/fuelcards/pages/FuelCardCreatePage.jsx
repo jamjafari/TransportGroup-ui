@@ -1,24 +1,25 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback } from "react";
 
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 
-import Typography from '@mui/material/Typography';
+import Typography from "@mui/material/Typography";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import FuelCardForm from '../components/FuelCardForm';
+import FuelCardForm from "../components/FuelCardForm";
 
-import useFuelCard from '../hooks/useFuelCard';
-import { AppCard } from '@/components';
-
+import useFuelCard from "../hooks/useFuelCard";
+import { AppCard } from "@/components";
+import { useTranslation } from "react-i18next";
 const FuelCardCreatePage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { createFuelCard } = useFuelCard();
 
   const handleSubmit = useCallback(
     async (values) => {
-      console.log('Submit clicked');
+      console.log("Submit clicked");
       console.log(values);
       try {
         const createdId = await createFuelCard(values);
@@ -31,9 +32,9 @@ const FuelCardCreatePage = () => {
   );
 
   return (
-    <Box sx={{ maxWidth: 900, mx: 'auto', py: 3 }}>
+    <Box sx={{ maxWidth: 900, mx: "auto", py: 3 }}>
       <Typography variant="h5" fontWeight={700} mb={3}>
-        افزودن کارت سوخت
+        {t("افزودن کارت سوخت")}
       </Typography>
 
       <AppCard sx={{ p: 4 }}>

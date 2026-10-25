@@ -8,7 +8,10 @@ import { AppButton, ConfirmDialog, StatusChip } from "@/components";
 import useDriver from "../hooks/useDriver";
 import { driverStatusChipKey } from "../constants";
 import { gregorianYearToJalali, formatJalaliDate } from "@/utils";
+import { useTranslatedColumns } from "@/hooks";
+import { useTranslation } from "react-i18next";
 const DriverListPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { drivers, loading, getDrivers, deleteDriver } = useDriver();
@@ -27,7 +30,7 @@ const DriverListPage = () => {
     getDrivers();
   }, [deleteTarget, deleteDriver, getDrivers]);
 
-  const columns = useMemo(
+  const baseColumns = useMemo(
     () => [
       {
         field: "fullName",
@@ -97,6 +100,9 @@ const DriverListPage = () => {
     [navigate],
   );
 
+  // ✅ عنوان ستون‌ها ترجمه می‌شود (متن فارسی خودش کلید ترجمه است)
+  const columns = useTranslatedColumns(baseColumns);
+
   return (
     <>
       <AppButton
@@ -118,7 +124,10 @@ const DriverListPage = () => {
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف راننده"
-        message={`مطمئن هستید؟ «${deleteTarget?.firstName} ${deleteTarget?.lastName}» آیا از حذف راننده `}
+        message={t('آیا از حذف {{entity}} «{{name}}» مطمئن هستید؟', {
+          entity: t('راننده'),
+          name: `${deleteTarget?.firstName ?? ""} ${deleteTarget?.lastName ?? ""}`.trim(),
+        })}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

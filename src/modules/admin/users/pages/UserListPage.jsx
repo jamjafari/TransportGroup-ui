@@ -12,7 +12,10 @@ import {
 import useUser from '../hooks/useUser';
 import ResetPasswordDialog from '../components/ResetPasswordDialog';
 
+import { useTranslatedColumns } from "@/hooks";
+import { useTranslation } from "react-i18next";
 const UserListPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { users, loading, getUsers, deleteUser } = useUser();
 
@@ -30,7 +33,7 @@ const UserListPage = () => {
     getUsers();
   }, [deleteTarget, deleteUser, getUsers]);
 
-  const columns = useMemo(
+  const baseColumns = useMemo(
     () => [
       { field: 'userName', headerName: 'نام کاربری', width: 140 },
       { field: 'fullName', headerName: 'نام و نام‌خانوادگی', width: 180 },
@@ -100,6 +103,9 @@ const UserListPage = () => {
     [navigate],
   );
 
+  // ✅ عنوان ستون‌ها ترجمه می‌شود (متن فارسی خودش کلید ترجمه است)
+  const columns = useTranslatedColumns(baseColumns);
+
   return (
     <>
       <AppButton onClick={() => navigate('/admin/users/create')} sx={{ mb: 2 }}>
@@ -119,7 +125,10 @@ const UserListPage = () => {
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف کاربر"
-        message={`مطمئن هستید؟ «${deleteTarget?.userName}» آیا از حذف کاربر`}
+        message={t('آیا از حذف {{entity}} «{{name}}» مطمئن هستید؟', {
+          entity: t('کاربر'),
+          name: deleteTarget?.userName,
+        })}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

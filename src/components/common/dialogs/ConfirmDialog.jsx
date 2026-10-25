@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 
 import { Alert, Stack } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 import AppDialog from './AppDialog';
 
@@ -8,16 +9,18 @@ import { AppButton } from '@/components';
 
 import { ConfirmDialogPropTypes } from './ConfirmDialog.types';
 
+// ✅ پیش‌فرض‌ها از انگلیسی ('Confirmation'، 'Are you sure?'، ...) به کلید فارسی
+// تغییر کردند — قبلاً در حالت فارسی هم انگلیسی نمایش داده می‌شدند.
 const ConfirmDialog = ({
   open,
 
-  title = 'Confirmation',
+  title = 'تایید عملیات',
 
-  message = 'Are you sure?',
+  message = 'مطمئن هستید؟',
 
-  confirmText = 'Confirm',
+  confirmText = 'تایید',
 
-  cancelText = 'Cancel',
+  cancelText = 'انصراف',
 
   loading = false,
 
@@ -27,11 +30,13 @@ const ConfirmDialog = ({
 
   onCancel,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <AppDialog
       open={open}
 
-      title={title}
+      title={t(title)}
 
       onClose={onCancel}
 
@@ -48,7 +53,7 @@ const ConfirmDialog = ({
 
             onClick={onCancel}
           >
-            {cancelText}
+            {t(cancelText)}
           </AppButton>
 
           <AppButton
@@ -58,12 +63,12 @@ const ConfirmDialog = ({
 
             onClick={onConfirm}
           >
-            {confirmText}
+            {t(confirmText)}
           </AppButton>
         </Stack>
       }
     >
-      <Alert severity={severity}>{message}</Alert>
+      <Alert severity={severity}>{t(message)}</Alert>
     </AppDialog>
   );
 };

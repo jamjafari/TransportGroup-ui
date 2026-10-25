@@ -9,6 +9,8 @@ import {
   FormHelperText,
 } from '@mui/material';
 
+import useTranslatedField from './useTranslatedField';
+
 import {
   AppRadioGroupPropTypes,
   AppRadioGroupDefaultProps,
@@ -27,13 +29,15 @@ const AppRadioGroup = ({
   color,
   size,
 }) => {
+  const { tr, trOptions } = useTranslatedField();
+
   return (
     <FormControl
       error={error}
 
       disabled={disabled}
     >
-      {label && <FormLabel>{label}</FormLabel>}
+      {label && <FormLabel>{tr(label)}</FormLabel>}
 
       <RadioGroup
         name={name}
@@ -44,7 +48,7 @@ const AppRadioGroup = ({
 
         row={row}
       >
-        {options.map((option) => (
+        {trOptions(options).map((option) => (
           <FormControlLabel
             key={option.value}
 
@@ -65,7 +69,7 @@ const AppRadioGroup = ({
         ))}
       </RadioGroup>
 
-      {helperText && <FormHelperText>{helperText}</FormHelperText>}
+      {helperText && <FormHelperText>{tr(helperText)}</FormHelperText>}
     </FormControl>
   );
 };

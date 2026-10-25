@@ -8,7 +8,10 @@ import { AppButton, ConfirmDialog, StatusChip } from "@/components";
 import useMission from "../hooks/useMission";
 import { missionStatusOptions } from "../constants";
 import { gregorianYearToJalali, formatJalaliDate } from "@/utils";
+import { useTranslatedColumns } from "@/hooks";
+import { useTranslation } from "react-i18next";
 const MissionListPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { missions, loading, getMissions, deleteMission } = useMission();
@@ -32,7 +35,7 @@ const MissionListPage = () => {
     getMissions();
   }, [deleteTarget, deleteMission, getMissions]);
 
-  const columns = useMemo(
+  const baseColumns = useMemo(
     () => [
       {
         field: "missionCode",
@@ -136,6 +139,9 @@ const MissionListPage = () => {
     [navigate],
   );
 
+  // ✅ عنوان ستون‌ها ترجمه می‌شود (متن فارسی خودش کلید ترجمه است)
+  const columns = useTranslatedColumns(baseColumns);
+
   return (
     <>
       <AppButton
@@ -157,7 +163,10 @@ const MissionListPage = () => {
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف ماموریت"
-        message={` مطمئن هستید؟   «${deleteTarget?.missionCode}»  آیا از حذف ماموریت`}
+        message={t('آیا از حذف {{entity}} «{{name}}» مطمئن هستید؟', {
+          entity: t('ماموریت'),
+          name: deleteTarget?.missionCode,
+        })}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

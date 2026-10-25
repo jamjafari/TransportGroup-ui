@@ -1,18 +1,19 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from "react";
 
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
 
-import ExpenseTypeForm from '../components/ExpenseTypeForm';
+import ExpenseTypeForm from "../components/ExpenseTypeForm";
 
-import { gregorianYearToJalali } from '@/utils';
-import { AppCard } from '@/components';
+import { gregorianYearToJalali } from "@/utils";
+import { AppCard } from "@/components";
 
-import useExpenseType from '../hooks/useExpenseType';
-
+import useExpenseType from "../hooks/useExpenseType";
+import { useTranslation } from "react-i18next";
 const ExpenseTypeEditPage = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
 
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ const ExpenseTypeEditPage = () => {
     async (values) => {
       try {
         await updateExpenseType(values);
-        navigate('/expenseTypes');
+        navigate("/expenseTypes");
       } catch (error) {
         console.error(error);
       }
@@ -50,9 +51,9 @@ const ExpenseTypeEditPage = () => {
   }
 
   return (
-    <Box sx={{ maxWidth: 900, mx: 'auto', py: 3 }}>
+    <Box sx={{ maxWidth: 900, mx: "auto", py: 3 }}>
       <Typography variant="h5" fontWeight={700} mb={3}>
-        ویرایش نوع هزینه
+        {t("ویرایش نوع هزینه")}
       </Typography>
 
       <AppCard sx={{ p: 4, mb: 3 }}>

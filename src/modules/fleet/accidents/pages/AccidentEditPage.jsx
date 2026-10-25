@@ -1,23 +1,24 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from "react";
 
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Alert from '@mui/material/Alert';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Alert from "@mui/material/Alert";
 
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
 
-import AccidentForm from '../components/AccidentForm';
-import AccidentDocumentsSection from '../sections/AccidentDocumentsSection';
-import useAccident from '../hooks/useAccident';
-import { AppCard } from '@/components';
-
+import AccidentForm from "../components/AccidentForm";
+import AccidentDocumentsSection from "../sections/AccidentDocumentsSection";
+import useAccident from "../hooks/useAccident";
+import { AppCard } from "@/components";
+import { useTranslation } from "react-i18next";
 const AccidentEditPage = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const { getAccidentById, updateAccident } = useAccident();
 
   const [accident, setAccident] = useState(null);
-  const [submitError, setSubmitError] = useState('');
+  const [submitError, setSubmitError] = useState("");
 
   useEffect(() => {
     getAccidentById(id).then((data) => {
@@ -31,9 +32,9 @@ const AccidentEditPage = () => {
   const handleSubmit = useCallback(
     async (values) => {
       try {
-        setSubmitError('');
+        setSubmitError("");
         await updateAccident({ ...values, id });
-        navigate('/accidents');
+        navigate("/accidents");
       } catch (error) {
         setSubmitError(error.message);
       }
@@ -44,9 +45,9 @@ const AccidentEditPage = () => {
   if (!accident) return null;
 
   return (
-    <Box sx={{ maxWidth: 900, mx: 'auto', py: 3 }}>
+    <Box sx={{ maxWidth: 900, mx: "auto", py: 3 }}>
       <Typography variant="h5" fontWeight={700} mb={3}>
-        ویرایش تصادف
+        {t("ویرایش تصادف")}
       </Typography>
 
       {submitError && (

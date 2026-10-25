@@ -8,7 +8,10 @@ import { AppButton, ConfirmDialog, StatusChip } from "@/components";
 import useVendor from "../hooks/useVendor";
 import { attachmentCategoryOptions } from "../constants";
 import { gregorianYearToJalali, formatJalaliDate } from "@/utils";
+import { useTranslatedColumns } from "@/hooks";
+import { useTranslation } from "react-i18next";
 const VendorListPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { vendors, loading, getVendors, deleteVendor } = useVendor();
@@ -32,7 +35,7 @@ const VendorListPage = () => {
         ?.label ?? "—",
     [],
   );
-  const columns = useMemo(
+  const baseColumns = useMemo(
     () => [
       {
         field: "vendorName",
@@ -103,6 +106,9 @@ const VendorListPage = () => {
     [navigate],
   );
 
+  // ✅ عنوان ستون‌ها ترجمه می‌شود (متن فارسی خودش کلید ترجمه است)
+  const columns = useTranslatedColumns(baseColumns);
+
   return (
     <>
       <AppButton
@@ -124,7 +130,10 @@ const VendorListPage = () => {
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف تامین کننده"
-        message={`مطمئن هستید؟«${deleteTarget?.vendorName}» آیا از حذف تامین کننده`}
+        message={t('آیا از حذف {{entity}} «{{name}}» مطمئن هستید؟', {
+          entity: t('تامین کننده'),
+          name: deleteTarget?.vendorName,
+        })}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

@@ -1,25 +1,26 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback } from "react";
 
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Alert from '@mui/material/Alert';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Alert from "@mui/material/Alert";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import AccidentForm from '../components/AccidentForm';
-import useAccident from '../hooks/useAccident';
-import { AppCard } from '@/components';
-import { useState } from 'react';
-
+import AccidentForm from "../components/AccidentForm";
+import useAccident from "../hooks/useAccident";
+import { AppCard } from "@/components";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 const AccidentCreatePage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { createAccident } = useAccident();
-  const [submitError, setSubmitError] = useState('');
+  const [submitError, setSubmitError] = useState("");
 
   const handleSubmit = useCallback(
     async (values) => {
       try {
-        setSubmitError('');
+        setSubmitError("");
 
         const createdId = await createAccident(values);
         navigate(`/accidents/edit/${createdId}`);
@@ -31,9 +32,9 @@ const AccidentCreatePage = () => {
   );
 
   return (
-    <Box sx={{ maxWidth: 900, mx: 'auto', py: 3 }}>
+    <Box sx={{ maxWidth: 900, mx: "auto", py: 3 }}>
       <Typography variant="h5" fontWeight={700} mb={3}>
-        ثبت تصادف
+        {t("ثبت تصادف")}
       </Typography>
 
       {submitError && (

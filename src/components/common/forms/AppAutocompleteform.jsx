@@ -3,6 +3,8 @@ import React, { memo } from 'react';
 import { Autocomplete, TextField } from '@mui/material';
 
 
+import useTranslatedField from './useTranslatedField';
+
 import {
   AppAutocompletePropTypes,
   AppAutocompleteDefaultProps,
@@ -32,6 +34,16 @@ const AppAutocompleteform = ({
   slotProps, // ✅ اضافه شد — برای override لیست گزینه‌ها (Portal)
   ...rest
 }) => {
+  const { tr } = useTranslatedField();
+
+  // ✅ برچسب گزینه‌ها در getOptionLabel ترجمه می‌شود، نه با تغییر آرایه‌ی options —
+  // چون Autocomplete گزینه‌ها را با هویت شیء مقایسه می‌کند و ساختن آرایه‌ی تازه
+  // باعث می‌شد مقدار انتخاب‌شده دیگر با گزینه‌ها مطابقت پیدا نکند.
+  const translatedGetOptionLabel = (option) => {
+    const raw = getOptionLabel ? getOptionLabel(option) : option?.label;
+    return tr(raw) ?? '';
+  };
+
   return (
     <Autocomplete
       id={id}
@@ -42,7 +54,7 @@ const AppAutocompleteform = ({
       multiple={multiple}
       disabled={disabled}
       disableClearable={disableClearable}
-      getOptionLabel={getOptionLabel}
+      getOptionLabel={translatedGetOptionLabel}
       isOptionEqualToValue={isOptionEqualToValue}
       onChange={onChange}
       onInputChange={onInputChange}
@@ -63,10 +75,10 @@ const AppAutocompleteform = ({
         <TextField
           {...params}
           name={name}
-          label={label}
-          placeholder={placeholder}
+          label={tr(label)}
+          placeholder={tr(placeholder)}
           error={error}
-          helperText={helperText}
+          helperText={tr(helperText)}
           required={required}
           fullWidth
           size={size}

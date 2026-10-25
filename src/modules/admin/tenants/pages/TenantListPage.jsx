@@ -12,7 +12,10 @@ import {
 import useTenant from "../hooks/useTenant";
 import AddTenantAdminDialog from "../components/AddTenantAdminDialog";
 
+import { useTranslatedColumns } from "@/hooks";
+import { useTranslation } from "react-i18next";
 const TenantListPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { tenants, loading, getTenants, deleteTenant } = useTenant();
 
@@ -30,7 +33,7 @@ const TenantListPage = () => {
     getTenants();
   }, [deleteTarget, deleteTenant, getTenants]);
 
-  const columns = useMemo(
+  const baseColumns = useMemo(
     () => [
       { field: "name", headerName: "نام سازمان", width: 200 },
       { field: "slug", headerName: "Slug", width: 130 },
@@ -88,6 +91,9 @@ const TenantListPage = () => {
     [navigate],
   );
 
+  // ✅ عنوان ستون‌ها ترجمه می‌شود (متن فارسی خودش کلید ترجمه است)
+  const columns = useTranslatedColumns(baseColumns);
+
   return (
     <>
       <Box sx={{ display: "flex", gap: 1, mb: 2 }}>
@@ -116,7 +122,10 @@ const TenantListPage = () => {
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف سازمان"
-        message={`مطمئن هستید؟ آیا از حذف سازمان «${deleteTarget?.name}»`}
+        message={t('آیا از حذف {{entity}} «{{name}}» مطمئن هستید؟', {
+          entity: t('سازمان'),
+          name: deleteTarget?.name,
+        })}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

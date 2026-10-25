@@ -1,18 +1,19 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from "react";
 
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
 
-import TireForm from '../components/TireForm';
+import TireForm from "../components/TireForm";
 
-import { gregorianYearToJalali } from '@/utils';
-import { AppCard } from '@/components';
+import { gregorianYearToJalali } from "@/utils";
+import { AppCard } from "@/components";
 
-import useTire from '../hooks/useTire';
-
+import useTire from "../hooks/useTire";
+import { useTranslation } from "react-i18next";
 const TireEditPage = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
 
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ const TireEditPage = () => {
     async (values) => {
       try {
         await updateTire(values);
-        navigate('/tires');
+        navigate("/tires");
       } catch (error) {
         console.error(error);
       }
@@ -52,9 +53,9 @@ const TireEditPage = () => {
   }
 
   return (
-    <Box sx={{ maxWidth: 900, mx: 'auto', py: 3 }}>
+    <Box sx={{ maxWidth: 900, mx: "auto", py: 3 }}>
       <Typography variant="h5" fontWeight={700} mb={3}>
-        ویرایش تایر
+        {t("ویرایش تایر")}
       </Typography>
 
       <AppCard sx={{ p: 4, mb: 3 }}>

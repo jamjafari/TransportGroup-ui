@@ -8,7 +8,10 @@ import { AppButton, ConfirmDialog, StatusChip } from "@/components";
 import useTire from "../hooks/useTire";
 import { tireStatusChipKey } from "../constants";
 import { gregorianYearToJalali, formatJalaliDate } from "@/utils";
+import { useTranslatedColumns } from "@/hooks";
+import { useTranslation } from "react-i18next";
 const TireListPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { tires, loading, getTires, deleteTire } = useTire();
@@ -27,7 +30,7 @@ const TireListPage = () => {
     getTires();
   }, [deleteTarget, deleteTire, getTires]);
 
-  const columns = useMemo(
+  const baseColumns = useMemo(
     () => [
       {
         field: "brand",
@@ -95,6 +98,9 @@ const TireListPage = () => {
     [navigate],
   );
 
+  // ✅ عنوان ستون‌ها ترجمه می‌شود (متن فارسی خودش کلید ترجمه است)
+  const columns = useTranslatedColumns(baseColumns);
+
   return (
     <>
       <AppButton
@@ -116,7 +122,10 @@ const TireListPage = () => {
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف تایر"
-        message={`مطمئن هستید؟ «${deleteTarget?.model} »  آیا از حذف تایر`}
+        message={t('آیا از حذف {{entity}} «{{name}}» مطمئن هستید؟', {
+          entity: t('تایر'),
+          name: deleteTarget?.model,
+        })}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

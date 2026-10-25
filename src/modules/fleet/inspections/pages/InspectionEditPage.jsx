@@ -1,24 +1,25 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from "react";
 
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Alert from '@mui/material/Alert';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Alert from "@mui/material/Alert";
 
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
 
-import InspectionForm from '../components/InspectionForm';
-import InspectionDocumentsSection from '../sections/InspectionDocumentsSection';
+import InspectionForm from "../components/InspectionForm";
+import InspectionDocumentsSection from "../sections/InspectionDocumentsSection";
 
-import useInspection from '../hooks/useInspection';
-import { AppCard } from '@/components';
-
+import useInspection from "../hooks/useInspection";
+import { AppCard } from "@/components";
+import { useTranslation } from "react-i18next";
 const InspectionEditPage = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const { getInspectionById, updateInspection } = useInspection();
 
   const [inspection, setInspection] = useState(null);
-  const [submitError, setSubmitError] = useState('');
+  const [submitError, setSubmitError] = useState("");
 
   useEffect(() => {
     getInspectionById(id).then((data) => {
@@ -29,10 +30,10 @@ const InspectionEditPage = () => {
           : null,
         expiryDate: data.expiryDate ? new Date(data.expiryDate) : null,
         vendorId: data.vendorId ?? null,
-        cost: data.cost ?? '',
-        certificateNumber: data.certificateNumber ?? '',
-        odometerKM: data.odometerKM ?? '',
-        description: data.description ?? '',
+        cost: data.cost ?? "",
+        certificateNumber: data.certificateNumber ?? "",
+        odometerKM: data.odometerKM ?? "",
+        description: data.description ?? "",
       });
     });
   }, [id, getInspectionById]);
@@ -40,9 +41,9 @@ const InspectionEditPage = () => {
   const handleSubmit = useCallback(
     async (values) => {
       try {
-        setSubmitError('');
+        setSubmitError("");
         await updateInspection({ ...values, id });
-        navigate('/inspections');
+        navigate("/inspections");
       } catch (error) {
         setSubmitError(error.message);
       }
@@ -53,9 +54,9 @@ const InspectionEditPage = () => {
   if (!inspection) return null;
 
   return (
-    <Box sx={{ maxWidth: 900, mx: 'auto', py: 3 }}>
+    <Box sx={{ maxWidth: 900, mx: "auto", py: 3 }}>
       <Typography variant="h5" fontWeight={700} mb={3}>
-        ویرایش معاینه فنی
+        {t("ویرایش معاینه فنی")}
       </Typography>
 
       {submitError && (

@@ -5,20 +5,25 @@ import { TableBody, TableRow, TableCell, Typography, Box } from '@mui/material';
 import Stack from '@mui/material/Stack';
 
 import InboxOutlinedIcon from '@mui/icons-material/InboxOutlined';
+import { useTranslation } from 'react-i18next';
 
 import { GridEmptyPropTypes } from './GridEmpty.types';
 
+// ✅ پیش‌فرض‌ها از انگلیسی ('No Data') به کلید فارسی تغییر کردند — قبلاً در حالت
+// فارسی هم متن انگلیسی نشان داده می‌شد.
 const GridEmpty = ({
   colSpan = 1,
 
-  title = 'No Data',
+  title = 'اطلاعاتی وجود ندارد',
 
-  description = 'There are no records to display.',
+  description = 'هیچ رکوردی یافت نشد.',
 
   icon,
 
   action,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <TableBody>
       <TableRow>
@@ -57,7 +62,7 @@ const GridEmpty = ({
 
               fontWeight={600}
             >
-              {title}
+              {t(title)}
             </Typography>
 
             <Typography
@@ -65,7 +70,7 @@ const GridEmpty = ({
 
               color="text.secondary"
             >
-              {description}
+              {t(description)}
             </Typography>
 
             {action}

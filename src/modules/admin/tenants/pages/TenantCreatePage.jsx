@@ -1,33 +1,34 @@
-import React, { memo, useCallback, useState } from 'react';
+import React, { memo, useCallback, useState } from "react";
 
-import { Box, Typography } from '@mui/material';
+import { Box, Typography } from "@mui/material";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import TenantForm from '../components/TenantForm';
-import useTenant from '../hooks/useTenant';
+import TenantForm from "../components/TenantForm";
+import useTenant from "../hooks/useTenant";
 
-import { AppCard, AppAlert } from '@/components';
-
+import { AppCard, AppAlert } from "@/components";
+import { useTranslation } from "react-i18next";
 const TenantCreatePage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { createTenant } = useTenant();
 
-  const [submitError, setSubmitError] = useState('');
+  const [submitError, setSubmitError] = useState("");
 
   const handleSubmit = useCallback(
     async (values) => {
       try {
-        setSubmitError('');
+        setSubmitError("");
 
         await createTenant(values);
 
-        navigate('/admin/tenants');
+        navigate("/admin/tenants");
       } catch (error) {
-        console.error('Create tenant error:', error);
+        console.error("Create tenant error:", error);
 
-        setSubmitError(error?.message || 'خطا در ایجاد سازمان');
+        setSubmitError(error?.message || "خطا در ایجاد سازمان");
       }
     },
     [createTenant, navigate],
@@ -37,12 +38,12 @@ const TenantCreatePage = () => {
     <Box
       sx={{
         maxWidth: 900,
-        mx: 'auto',
+        mx: "auto",
         py: 3,
       }}
     >
       <Typography variant="h5" fontWeight={700} mb={3}>
-        افزودن سازمان
+        {t("افزودن سازمان")}
       </Typography>
 
       {submitError && (
@@ -50,7 +51,7 @@ const TenantCreatePage = () => {
           open={!!submitError}
           severity="error"
           title="خطا"
-          onClose={() => setSubmitError('')}
+          onClose={() => setSubmitError("")}
         >
           {submitError}
         </AppAlert>

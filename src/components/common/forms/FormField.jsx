@@ -2,14 +2,18 @@ import React, { memo } from 'react';
 
 import { Box, Typography } from '@mui/material';
 
+import useTranslatedField from './useTranslatedField';
+
 import { FormFieldPropTypes, FormFieldDefaultProps } from './FormField.types';
 
 const FormField = ({ label, required, helperText, error, children }) => {
+  const { tr } = useTranslatedField();
+
   return (
     <Box>
       {label && (
         <Typography variant="body2" fontWeight={600} mb={0.5}>
-          {label}
+          {tr(label)}
 
           {required && ' *'}
         </Typography>
@@ -24,7 +28,7 @@ const FormField = ({ label, required, helperText, error, children }) => {
           mt={0.5}
           display="block"
         >
-          {helperText}
+          {tr(helperText)}
         </Typography>
       )}
     </Box>

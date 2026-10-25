@@ -1,24 +1,25 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback } from "react";
 
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 
-import Typography from '@mui/material/Typography';
+import Typography from "@mui/material/Typography";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import ServiceForm from '../components/ServiceForm';
+import ServiceForm from "../components/ServiceForm";
 
-import useService from '../hooks/useService';
-import { AppCard } from '@/components';
-
+import useService from "../hooks/useService";
+import { AppCard } from "@/components";
+import { useTranslation } from "react-i18next";
 const ServiceCreatePage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { createService } = useService();
 
   const handleSubmit = useCallback(
     async (values) => {
-      console.log('Submit clicked');
+      console.log("Submit clicked");
       console.log(values);
       try {
         const createdId = await createService(values);
@@ -31,9 +32,9 @@ const ServiceCreatePage = () => {
   );
 
   return (
-    <Box sx={{ maxWidth: 900, mx: 'auto', py: 3 }}>
+    <Box sx={{ maxWidth: 900, mx: "auto", py: 3 }}>
       <Typography variant="h5" fontWeight={700} mb={3}>
-        سرویس جدید
+        {t("سرویس جدید")}
       </Typography>
 
       <AppCard sx={{ p: 4 }}>

@@ -5,9 +5,10 @@ import { AppDataGrid, StatusChip } from '@/components';
 import useDateRangeFuelCostReport from './hooks/useDateRangeFuelCostReport';
 import { formatJalaliDate } from '@/utils';
 
-const DateRangeFuelCostTable = () => {
-  const { data, loading } = useDateRangeFuelCostReport();
-  const columns = [
+import { useTranslatedColumns } from "@/hooks";
+
+// بیرون از کامپوننت: هویت آرایه ثابت می‌ماند تا memo در useTranslatedColumns کار کند
+const BASE_COLUMNS = [
     {
       field: 'fuelDate',
       headerName: 'تاریخ',
@@ -44,7 +45,13 @@ const DateRangeFuelCostTable = () => {
       headerName: 'نام جایگاه',
       flex: 1,
     },
-  ];
+];
+
+const DateRangeFuelCostTable = () => {
+  const { data, loading } = useDateRangeFuelCostReport();
+
+  // ✅ عنوان ستون‌ها ترجمه می‌شود (متن فارسی خودش کلید ترجمه است)
+  const columns = useTranslatedColumns(BASE_COLUMNS);
 
   return (
     <AppDataGrid

@@ -1,19 +1,20 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from "react";
 
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
 
-import MissionForm from '../components/MissionForm';
-import MissionGpsHistorySection from '../sections/MissionGpsHistorySection'; // ✅ اضافه شد
+import MissionForm from "../components/MissionForm";
+import MissionGpsHistorySection from "../sections/MissionGpsHistorySection"; // ✅ اضافه شد
 
-import { gregorianYearToJalali } from '@/utils';
-import { AppCard } from '@/components';
+import { gregorianYearToJalali } from "@/utils";
+import { AppCard } from "@/components";
 
-import useMission from '../hooks/useMission';
-
+import useMission from "../hooks/useMission";
+import { useTranslation } from "react-i18next";
 const MissionEditPage = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const { getMissionById, updateMission } = useMission();
@@ -38,7 +39,7 @@ const MissionEditPage = () => {
     async (values) => {
       try {
         await updateMission(values);
-        navigate('/missions');
+        navigate("/missions");
       } catch (error) {
         console.error(error);
       }
@@ -51,9 +52,9 @@ const MissionEditPage = () => {
   }
 
   return (
-    <Box sx={{ maxWidth: 900, mx: 'auto', py: 3 }}>
+    <Box sx={{ maxWidth: 900, mx: "auto", py: 3 }}>
       <Typography variant="h5" fontWeight={700} mb={3}>
-        ویرایش ماموریت
+        {t("ویرایش ماموریت")}
       </Typography>
 
       <AppCard sx={{ p: 4, mb: 3 }}>

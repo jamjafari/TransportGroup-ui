@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
-import { Stack, Box } from '@mui/material';
+import { Stack, Box } from "@mui/material";
 
-import { AppAutocomplete, AppDateRangePicker, AppButton } from '@/components';
+import { AppAutocomplete, AppDateRangePicker, AppButton } from "@/components";
 
-import useDashboardSearch from '../../hooks/useDashboardSearch';
+import useDashboardSearch from "../../hooks/useDashboardSearch";
 
 const DashboardSearchShortForm = () => {
   const {
@@ -16,16 +16,16 @@ const DashboardSearchShortForm = () => {
   } = useDashboardSearch();
 
   return (
-    <Stack spacing={3} sx={{ width: '100%' }}>
+    <Stack spacing={3} sx={{ width: "100%" }}>
       <Box
         sx={{
           width: {
-            xs: '100%',
-            md: '40%',
+            xs: "100%",
+            md: "40%",
           },
           maxWidth: {
-            xs: '100%',
-            md: '40%',
+            xs: "100%",
+            md: "40%",
           },
         }}
       >
@@ -61,16 +61,18 @@ const DashboardSearchShortForm = () => {
       <Box
         sx={{
           width: {
-            xs: '100%',
-            md: '40%',
+            xs: "100%",
+            md: "40%",
           },
-          display: 'flex',
-          justifyContent: 'flex-end',
+          display: "flex",
+          justifyContent: "flex-end",
         }}
       >
-        <AppButton variant="outlined" onClick={clearFilters}>
-          پاک کردن فیلترها
-        </AppButton>
+        <AppButton
+          variant="outlined"
+          onClick={clearFilters}
+          labelKey="پاک کردن فیلترها"
+        />
       </Box>
     </Stack>
   );

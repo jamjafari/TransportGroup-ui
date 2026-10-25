@@ -9,6 +9,8 @@ import {
 } from '@mui/material';
 
 
+import useTranslatedField from './useTranslatedField';
+
 import {
   AppSelectPropTypes,
   AppSelectDefaultProps,
@@ -37,6 +39,12 @@ const AppSelectform = ({
   ...rest
 }) => {
   const labelId = `${id || name}-label`;
+
+  const { tr, trOptions } = useTranslatedField();
+
+  const translatedLabel = tr(label);
+  const translatedPlaceholder = tr(placeholder);
+  const translatedOptions = trOptions(options);
 
   return (
     <FormControl
@@ -73,7 +81,7 @@ const AppSelectform = ({
         ...sx, // ← override در سطح یک مورد خاص (برای لیبل/متن انتخاب‌شده/راهنما)
       }}
     >
-      {label && <InputLabel id={labelId}>{label}</InputLabel>}
+      {label && <InputLabel id={labelId}>{translatedLabel}</InputLabel>}
 
       <Select
         id={id}
@@ -81,7 +89,7 @@ const AppSelectform = ({
         fullWidth
         labelId={labelId}
         value={value}
-        label={label}
+        label={translatedLabel}
         displayEmpty
         onChange={(event) => onChange?.(event.target.value, event)}
         onBlur={onBlur}
@@ -93,10 +101,12 @@ const AppSelectform = ({
               selected === null ||
               selected === undefined
             ) {
-              return placeholder;
+              return translatedPlaceholder;
             }
 
-            const option = options.find((item) => item.value === selected);
+            const option = translatedOptions.find(
+              (item) => item.value === selected,
+            );
 
             return option ? option.label : selected;
           })
@@ -116,10 +126,10 @@ const AppSelectform = ({
         }}
         {...rest}
       >
-        {placeholder && <MenuItem value="">{placeholder}</MenuItem>}
+        {placeholder && <MenuItem value="">{translatedPlaceholder}</MenuItem>}
 
         {children ||
-          options.map((option) => (
+          translatedOptions.map((option) => (
             <MenuItem
               key={option.value}
               value={option.value}
@@ -130,7 +140,7 @@ const AppSelectform = ({
           ))}
       </Select>
 
-      {helperText && <FormHelperText>{helperText}</FormHelperText>}
+      {helperText && <FormHelperText>{tr(helperText)}</FormHelperText>}
     </FormControl>
   );
 };

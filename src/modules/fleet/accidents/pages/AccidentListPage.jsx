@@ -11,6 +11,7 @@ import {
 import { formatJalaliDate } from "@/utils";
 
 import useAccident from "../hooks/useAccident";
+import { useTranslation } from "react-i18next";
 import {
   accidentSeverityOptions,
   accidentStatusOptions,
@@ -18,6 +19,7 @@ import {
 } from "../constants";
 
 const AccidentListPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { accidents, loading, getAccidents, deleteAccident } = useAccident();
   const [deleteTarget, setDeleteTarget] = useState(null);
@@ -116,7 +118,10 @@ const AccidentListPage = () => {
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف رکورد تصادف"
-        message={`مطمئن هستید؟ « ${deleteTarget?.plateNumber}» آیا از حذف رکوردتصادف خودرو با`}
+        message={t('آیا از حذف {{entity}} «{{name}}» مطمئن هستید؟', {
+          entity: t('تصادف'),
+          name: deleteTarget?.plateNumber,
+        })}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

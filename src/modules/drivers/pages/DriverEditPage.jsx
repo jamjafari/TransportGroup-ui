@@ -1,20 +1,21 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from "react";
 
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
 
-import DriverForm from '../components/DriverForm';
-import DriverDocumentsSection from '../sections/DriverDocumentsSection';
-import DriverUserAccountSection from '../sections/DriverUserAccountSection'; // ✅ اضافه شد
+import DriverForm from "../components/DriverForm";
+import DriverDocumentsSection from "../sections/DriverDocumentsSection";
+import DriverUserAccountSection from "../sections/DriverUserAccountSection"; // ✅ اضافه شد
 
-import { gregorianYearToJalali } from '@/utils';
-import { AppCard } from '@/components';
+import { gregorianYearToJalali } from "@/utils";
+import { AppCard } from "@/components";
 
-import useDriver from '../hooks/useDriver';
-
+import useDriver from "../hooks/useDriver";
+import { useTranslation } from "react-i18next";
 const DriverEditPage = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const { getDriverById, updateDriver } = useDriver();
@@ -40,7 +41,7 @@ const DriverEditPage = () => {
     async (values) => {
       try {
         await updateDriver(values);
-        navigate('/drivers');
+        navigate("/drivers");
       } catch (error) {
         console.error(error);
       }
@@ -53,9 +54,9 @@ const DriverEditPage = () => {
   }
 
   return (
-    <Box sx={{ maxWidth: 900, mx: 'auto', py: 3 }}>
+    <Box sx={{ maxWidth: 900, mx: "auto", py: 3 }}>
       <Typography variant="h5" fontWeight={700} mb={3}>
-        ویرایش راننده
+        {t("ویرایش راننده")}
       </Typography>
 
       <AppCard sx={{ p: 4, mb: 3 }}>

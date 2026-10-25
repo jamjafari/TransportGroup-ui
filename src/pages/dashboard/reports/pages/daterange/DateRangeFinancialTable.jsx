@@ -5,9 +5,10 @@ import { AppDataGrid, StatusChip } from '@/components';
 import useDateRangeFinancialReport from './hooks/useDateRangeFinancialReport';
 import { formatJalaliDate } from '@/utils';
 
-const DateRangeFinancialTable = () => {
-  const { data, loading } = useDateRangeFinancialReport();
-  const columns = [
+import { useTranslatedColumns } from "@/hooks";
+
+// بیرون از کامپوننت: هویت آرایه ثابت می‌ماند تا memo در useTranslatedColumns کار کند
+const BASE_COLUMNS = [
     {
       field: 'expenseDate',
       headerName: 'تاریخ',
@@ -40,7 +41,13 @@ const DateRangeFinancialTable = () => {
       renderCell: ({ value }) => <StatusChip status={value} />,
       flex: 1,
     },
-  ];
+];
+
+const DateRangeFinancialTable = () => {
+  const { data, loading } = useDateRangeFinancialReport();
+
+  // ✅ عنوان ستون‌ها ترجمه می‌شود (متن فارسی خودش کلید ترجمه است)
+  const columns = useTranslatedColumns(BASE_COLUMNS);
 
   return (
     <AppDataGrid

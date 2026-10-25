@@ -12,7 +12,9 @@ import {
   vehicleStatusChipKey,
 } from "../constants";
 import { gregorianYearToJalali, formatJalaliDate } from "@/utils";
+import { useTranslation } from "react-i18next";
 const VehicleListPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { vehicles, loading, getVehicles, deleteVehicle } = useVehicle();
@@ -129,7 +131,10 @@ const VehicleListPage = () => {
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف خودرو"
-        message={`مطمئن هستید؟ «${deleteTarget?.plateNumber}»  آیا از حذف خودرو`}
+        message={t('آیا از حذف {{entity}} «{{name}}» مطمئن هستید؟', {
+          entity: t('خودرو'),
+          name: deleteTarget?.plateNumber,
+        })}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

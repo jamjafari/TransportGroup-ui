@@ -11,7 +11,9 @@ import { insuranceTypeOptions } from "../constants";
 import { useTranslatedColumns } from "../../../hooks";
 //import { insuranceStatusChipKey } from '../constants';
 import { gregorianYearToJalali, formatJalaliDate } from "@/utils";
+import { useTranslation } from "react-i18next";
 const InsuranceListPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { insurances, loading, getInsurances, deleteInsurance } =
@@ -145,7 +147,10 @@ const InsuranceListPage = () => {
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف بیمه"
-        message={`مطمئن هستید؟ « ${deleteTarget?.policyNumber}» آیا از حذف بیمه `}
+        message={t('آیا از حذف {{entity}} «{{name}}» مطمئن هستید؟', {
+          entity: t('بیمه'),
+          name: deleteTarget?.policyNumber,
+        })}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

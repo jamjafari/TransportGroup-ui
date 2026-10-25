@@ -6,7 +6,10 @@ import { AppDataGrid } from "@/components";
 import { AppButton, ConfirmDialog, StatusChip } from "@/components";
 
 import useLocation from "../hooks/useLocation";
+import { useTranslatedColumns } from "@/hooks";
+import { useTranslation } from "react-i18next";
 const LocationListPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { locations, loading, getLocations, deleteLocation } = useLocation();
@@ -25,7 +28,7 @@ const LocationListPage = () => {
     getLocations();
   }, [deleteTarget, deleteLocation, getLocations]);
 
-  const columns = useMemo(
+  const baseColumns = useMemo(
     () => [
       {
         field: "name",
@@ -85,6 +88,9 @@ const LocationListPage = () => {
     [navigate],
   );
 
+  // ✅ عنوان ستون‌ها ترجمه می‌شود (متن فارسی خودش کلید ترجمه است)
+  const columns = useTranslatedColumns(baseColumns);
+
   return (
     <>
       <AppButton
@@ -106,7 +112,10 @@ const LocationListPage = () => {
       <ConfirmDialog
         open={!!deleteTarget}
         title="حذف مکان"
-        message={`مطمئن هستید؟ «${deleteTarget?.name} »  آیا از حذف مکان`}
+        message={t('آیا از حذف {{entity}} «{{name}}» مطمئن هستید؟', {
+          entity: t('مکان'),
+          name: deleteTarget?.name,
+        })}
         confirmText="حذف"
         cancelText="انصراف"
         severity="error"

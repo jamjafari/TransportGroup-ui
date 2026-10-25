@@ -2,6 +2,8 @@ import React, { memo, useEffect, useRef, useState } from 'react';
 
 import { Box, MenuItem, Select, TextField, Typography } from '@mui/material';
 
+import useTranslatedField from '../useTranslatedField';
+
 const PLATE_LETTERS = [
   'الف',
   'ب',
@@ -59,6 +61,8 @@ const AppPlateNumberField = ({
   const [parts, setParts] = useState(() => parsePlate(value));
   const lastEmitted = useRef(value);
 
+  const { t, tr } = useTranslatedField();
+
   // فقط وقتی مقدار از بیرون تغییر کرده (مثلاً موقع لود فرم ادیت)، state داخلی رو sync کن
   useEffect(() => {
     if (value !== lastEmitted.current) {
@@ -87,7 +91,7 @@ const AppPlateNumberField = ({
     <Box>
       {label && (
         <Typography variant="body2" fontWeight={600} mb={0.5}>
-          {label}{' '}
+          {tr(label)}{' '}
           {required && (
             <Box component="span" sx={{ color: 'error.main' }}>
               *
@@ -129,8 +133,10 @@ const AppPlateNumberField = ({
           displayEmpty
           sx={{ width: 70 }}
         >
+          {/* PLATE_LETTERS ترجمه نمی‌شود: حروف واقعی پلاک ایران است و
+              parsePlate هم با همان‌ها تطبیق می‌دهد — داده است، نه متن رابط. */}
           <MenuItem value="">
-            <em>حرف</em>
+            <em>{t('حرف')}</em>
           </MenuItem>
           {PLATE_LETTERS.map((l) => (
             <MenuItem key={l} value={l}>
@@ -153,7 +159,7 @@ const AppPlateNumberField = ({
         />
 
         <Typography variant="body2" color="text.secondary">
-          ایران
+          {t('ایران')}
         </Typography>
 
         <TextField
@@ -177,7 +183,7 @@ const AppPlateNumberField = ({
           display="block"
           mt={0.5}
         >
-          {helperText}
+          {tr(helperText)}
         </Typography>
       )}
     </Box>
