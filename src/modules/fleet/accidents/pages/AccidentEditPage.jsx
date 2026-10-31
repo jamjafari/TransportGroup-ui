@@ -2,7 +2,6 @@ import React, { memo, useCallback, useEffect, useState } from "react";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Alert from "@mui/material/Alert";
 
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -11,6 +10,7 @@ import AccidentDocumentsSection from "../sections/AccidentDocumentsSection";
 import useAccident from "../hooks/useAccident";
 import { AppCard } from "@/components";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 const AccidentEditPage = () => {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -18,7 +18,7 @@ const AccidentEditPage = () => {
   const { getAccidentById, updateAccident } = useAccident();
 
   const [accident, setAccident] = useState(null);
-  const [submitError, setSubmitError] = useState("");
+  const [submitError, setSubmitError] = useState(null);
 
   useEffect(() => {
     getAccidentById(id).then((data) => {
@@ -32,11 +32,11 @@ const AccidentEditPage = () => {
   const handleSubmit = useCallback(
     async (values) => {
       try {
-        setSubmitError("");
+        setSubmitError(null);
         await updateAccident({ ...values, id });
         navigate("/accidents");
       } catch (error) {
-        setSubmitError(error.message);
+        setSubmitError(error);
       }
     },
     [id, updateAccident, navigate],
@@ -50,14 +50,10 @@ const AccidentEditPage = () => {
         {t("ویرایش تصادف")}
       </Typography>
 
-      {submitError && (
-        <Alert severity="error" sx={{ mb: 2 }}>
-          {submitError}
-        </Alert>
-      )}
-
       <AppCard sx={{ p: 4 }}>
-        <AccidentForm initialValues={accident} onSubmit={handleSubmit} />
+        <FormSaveErrorProvider error={submitError}>
+          <AccidentForm initialValues={accident} onSubmit={handleSubmit} />
+        </FormSaveErrorProvider>
       </AppCard>
       <AppCard sx={{ p: 4 }}>
         <AccidentDocumentsSection accidentId={id} />

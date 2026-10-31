@@ -3,6 +3,7 @@ import useAsyncData from '@/hooks/useAsyncData';
 import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
 
 import { getFleetReport } from '../api/fleetReportApi';
+import toApiError from '@/services/apiError';
 
 const useFleetReport = () => {
   const { appliedFilters } = useDashboardSearch();
@@ -17,7 +18,7 @@ const useFleetReport = () => {
       const response = await getFleetReport(filter);
 
       if (!response.success) {
-        throw new Error(response.errors?.[0] || 'خطا در دریافت گزارش ناوگان');
+        throw toApiError(response, 'خطا در دریافت گزارش ناوگان');
       }
 
       return response.data;

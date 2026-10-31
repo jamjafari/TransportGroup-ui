@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 
 import { useTireContext } from '../context';
 import * as tireApi from '../api/tireApi';
+import toApiError from '@/services/apiError';
 
 const useTire = () => {
   const {
@@ -17,7 +18,7 @@ const useTire = () => {
 
   const unwrap = (response) => {
     if (!response.success) {
-      throw new Error(response.errors?.[0] || 'خطا در ارتباط با سرور');
+      throw toApiError(response, 'خطا در ارتباط با سرور');
     }
     return response.data;
   };

@@ -92,6 +92,24 @@ export const formatDate = (value) => {
 // نام قدیمی — برای سازگاری با محل‌های استفاده‌ی موجود حفظ شده است
 export const formatJalaliDate = formatDate;
 
+/**
+ * مثل formatDate ولی همراه با ساعت: YYYY/MM/DD HH:mm در تقویم و ارقام زبان فعال.
+ * جایگزین new Date(x).toLocaleString('fa-IR') که در حالت انگلیسی هم تقویم شمسی نشان می‌داد.
+ */
+export const formatDateTime = (value) => {
+  if (!value) return '—';
+
+  const { calendar, locale } = getDateLocale();
+
+  const date = new DateObject({
+    date: new Date(value),
+    calendar: SOURCE_CALENDAR,
+    locale: SOURCE_LOCALE,
+  }).convert(calendar, locale);
+
+  return date.format('YYYY/MM/DD HH:mm');
+};
+
 export const getYearMonth = (value = new Date()) => {
   if (!value) return null;
 

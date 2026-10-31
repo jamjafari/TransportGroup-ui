@@ -7,20 +7,21 @@ import { useNavigate } from "react-router-dom";
 import TenantForm from "../components/TenantForm";
 import useTenant from "../hooks/useTenant";
 
-import { AppCard, AppAlert } from "@/components";
+import { AppCard } from "@/components";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 const TenantCreatePage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { createTenant } = useTenant();
 
-  const [submitError, setSubmitError] = useState("");
+  const [submitError, setSubmitError] = useState(null);
 
   const handleSubmit = useCallback(
     async (values) => {
       try {
-        setSubmitError("");
+        setSubmitError(null);
 
         await createTenant(values);
 
@@ -28,7 +29,7 @@ const TenantCreatePage = () => {
       } catch (error) {
         console.error("Create tenant error:", error);
 
-        setSubmitError(error?.message || "خطا در ایجاد سازمان");
+        setSubmitError(error);
       }
     },
     [createTenant, navigate],
@@ -46,19 +47,10 @@ const TenantCreatePage = () => {
         {t("افزودن سازمان")}
       </Typography>
 
-      {submitError && (
-        <AppAlert
-          open={!!submitError}
-          severity="error"
-          title="خطا"
-          onClose={() => setSubmitError("")}
-        >
-          {submitError}
-        </AppAlert>
-      )}
-
       <AppCard sx={{ p: 4 }}>
-        <TenantForm onSubmit={handleSubmit} isEdit={false} />
+        <FormSaveErrorProvider error={submitError}>
+          <TenantForm onSubmit={handleSubmit} isEdit={false} />
+        </FormSaveErrorProvider>
       </AppCard>
     </Box>
   );

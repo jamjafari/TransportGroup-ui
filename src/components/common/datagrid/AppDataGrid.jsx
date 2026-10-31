@@ -18,6 +18,7 @@ import useLocale from '@/context/locale/useLocale';
 import { exportToExcel, exportToPdf } from './export';
 import { normalizeColumns } from './utils/columnManager';
 import useColumnResize from './hooks/useColumnResize';
+import { getTenantDisplayName } from '@/utils/tenantName';
 import {
   AppDataGridPropTypes,
   AppDataGridDefaultProps,
@@ -71,7 +72,7 @@ const AppDataGrid = ({
       rows: grid.visibleRows,
       columns,
       tenant: tenant
-        ? { name: tenant.name, logoUrl: tenant.logoUrl }
+        ? { name: getTenantDisplayName(tenant), logoUrl: tenant.logoUrl }
         : undefined, // ✅ اطلاعات تننت پاس داده شد
     });
   };

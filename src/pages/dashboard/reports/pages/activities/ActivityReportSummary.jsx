@@ -2,6 +2,7 @@ import React, { memo } from "react";
 
 import { DashboardGrid, DashboardColumn, KpiCard } from "@/components";
 import { useTranslation } from "react-i18next";
+import { formatNumber } from '@/utils';
 const ActivityReportSummary = ({ summary = {} }) => {
   const { t } = useTranslation();
   const items = [
@@ -37,7 +38,7 @@ const ActivityReportSummary = ({ summary = {} }) => {
         <DashboardColumn key={item.title} xs={12} md={6} lg={3}>
           <KpiCard
             title={t(item.title)}
-            value={Number(item.value).toLocaleString("fa-IR")}
+            value={formatNumber(item.value)}
             color={item.color}
             icon={item.icon}
           />

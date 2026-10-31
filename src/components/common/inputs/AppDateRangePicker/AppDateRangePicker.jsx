@@ -8,8 +8,11 @@ import {
   AppDateRangePickerPropTypes,
   AppDateRangePickerDefaultProps,
 } from './AppDateRangePicker.types';
+import useTranslatedField from '@/components/common/forms/useTranslatedField';
 
 const AppDateRangePicker = ({ label, value, disabled, onChange }) => {
+  const { tr } = useTranslatedField();
+
   const handleFromDate = (date) => {
     onChange({ ...value, from: date });
   };
@@ -23,7 +26,7 @@ const AppDateRangePicker = ({ label, value, disabled, onChange }) => {
       <Stack spacing={2} sx={{ width: '100%' }}>
         {label && (
           <Typography variant="body2" fontWeight={600}>
-            {label}
+            {tr(label)}
           </Typography>
         )}
 

@@ -4,6 +4,7 @@ import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
 
 import { getVehiclesSummary } from '../api/vehicleReportApi';
 import { mapToVehicleReportFilter } from '../utils/mapFilters';
+import toApiError from '@/services/apiError';
 
 const useVehicleSummary = () => {
   const { appliedFilters } = useDashboardSearch();
@@ -15,7 +16,7 @@ const useVehicleSummary = () => {
       );
 
       if (!response.success) {
-        throw new Error(response.errors?.[0] || 'خطا در دریافت خلاصه خودروها');
+        throw toApiError(response, 'خطا در دریافت خلاصه خودروها');
       }
 
       return response.data;

@@ -44,6 +44,12 @@ const BaseCard = ({
           subheader={subtitle}
 
           action={action}
+
+          // ✅ پیش‌فرض MUI عنوان را h5 (24px، وزن 400) — یا با آیکون body2 (14px) — می‌کرد
+          slotProps={{
+            title: { variant: 'cardTitle' },
+            subheader: { variant: 'cardSubtitle' },
+          }}
         />
       )}
 

@@ -12,6 +12,8 @@ import {
 } from '@/components';
 
 import { fuelTypeOptions } from '../constants';
+import i18n from '@/i18n';
+import { formatNumber } from '@/utils';
 
 const FuelRecordTechnicalSection = ({
   values,
@@ -53,8 +55,8 @@ const FuelRecordTechnicalSection = ({
             helperText={
               errors?.odometerKM ||
               (selectedVehicle
-                ? `کارکرد فعلی ثبت‌شده: ${selectedVehicle.currentKM?.toLocaleString() ?? '—'} کیلومتر`
-                : 'ابتدا خودرو را انتخاب کنید')
+                ? i18n.t('کارکرد فعلی ثبت‌شده: {{km}} کیلومتر', { km: formatNumber(selectedVehicle.currentKM) })
+                : i18n.t('ابتدا خودرو را انتخاب کنید'))
             }
           />
         </Grid>

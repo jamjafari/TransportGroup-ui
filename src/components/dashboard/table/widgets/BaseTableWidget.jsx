@@ -55,11 +55,12 @@ const BaseTableWidget = ({
     >
       <CardHeader
         title={
-          <Typography variant="h6" fontWeight={600}>
+          <Typography variant="cardTitle">
             {t(title)}
           </Typography>
         }
         subheader={t(subtitle)}
+        slotProps={{ subheader: { variant: 'cardSubtitle' } }}
         action={
           <Stack direction="row" spacing={1} alignItems="center">
             {t(actions)}
@@ -97,7 +98,7 @@ const BaseTableWidget = ({
         ) : error ? (
           <Box p={2}>
             <Alert severity="error">
-              {typeof error === "string" ? error : "خطا در دریافت اطلاعات"}
+              {typeof error === "string" ? error : t("خطا در دریافت اطلاعات")}
             </Alert>
           </Box>
         ) : (

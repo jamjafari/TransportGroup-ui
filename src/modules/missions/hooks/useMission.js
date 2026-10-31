@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 
 import { useMissionContext } from '../context';
 import * as missionApi from '../api/missionApi';
+import toApiError from '@/services/apiError';
 
 const useMission = () => {
   const {
@@ -17,7 +18,7 @@ const useMission = () => {
 
   const unwrap = (response) => {
     if (!response.success) {
-      throw new Error(response.errors?.[0] || 'خطا در ارتباط با سرور');
+      throw toApiError(response, 'خطا در ارتباط با سرور');
     }
     return response.data;
   };

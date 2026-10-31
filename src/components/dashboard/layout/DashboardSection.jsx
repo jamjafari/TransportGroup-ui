@@ -15,7 +15,7 @@ const DashboardSection = ({ title, children }) => {
       }}
     >
       {title && (
-        <Typography variant="h6" fontWeight={700} sx={{ mb: 2 }}>
+        <Typography variant="sectionTitle" sx={{ mb: 2 }}>
           {t(title)}
         </Typography>
       )}

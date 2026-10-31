@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 
 import {
   Pagination,
+  PaginationItem,
   FormControl,
   MenuItem,
   Select,
@@ -98,6 +99,14 @@ const AppPagination = ({
         shape="rounded"
         getItemAriaLabel={getItemAriaLabel}
         onChange={(_, value) => onPageChange(value)}
+        // ✅ MUI شماره‌ی صفحه را خودش و همیشه با ارقام لاتین می‌نویسد؛ اینجا با ارقام زبان فعال
+        // نمایش داده می‌شود (فقط متن دکمه — کلیک و aria همان item.page عددی را دارند)
+        renderItem={(item) => (
+          <PaginationItem
+            {...item}
+            page={item.type === 'page' ? formatNumber(item.page) : item.page}
+          />
+        )}
       />
     </Stack>
   );

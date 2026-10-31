@@ -1,4 +1,5 @@
 import { formatJalaliDate } from '@/utils';
+import i18n from '@/i18n';
 
 const getOptionTitle = (id, options = []) => {
   const item = options.find((x) => x.id === id);
@@ -21,17 +22,17 @@ const getDateRangeTitle = (dateRange) => {
 
   // هر دو تاریخ وجود دارند
   if (fromTitle && toTitle) {
-    return `${fromTitle} تا ${toTitle}`;
+    return i18n.t('{{from}} تا {{to}}', { from: fromTitle, to: toTitle });
   }
 
   // فقط تاریخ شروع
   if (fromTitle) {
-    return `از ${fromTitle}`;
+    return i18n.t('از {{from}}', { from: fromTitle });
   }
 
   // فقط تاریخ پایان
   if (toTitle) {
-    return `تا ${toTitle}`;
+    return i18n.t('تا {{to}}', { to: toTitle });
   }
 
   return '';

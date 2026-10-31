@@ -6,6 +6,7 @@ import useDriverReport from "./hooks/useDriverReport";
 import { ATTACHMENT_OWNER_TYPE } from "@/constants/attachmentTypes";
 import { getStatusLabel } from "@/utils/statusLabels"; // ✅ اضافه شد
 import { useTranslatedColumns } from "../../../../../hooks";
+import i18n from '@/i18n';
 const DriverReportTable = () => {
   const { data, loading } = useDriverReport();
 
@@ -51,7 +52,7 @@ const DriverReportTable = () => {
         <AttachmentsButton
           ownerType={ATTACHMENT_OWNER_TYPE.DERIVER}
           ownerId={row.id}
-          title={`مدارک راننده — ${row.fullName}`}
+          title={i18n.t('مدارک راننده — {{name}}', { name: row.fullName })}
         />
       ),
     },

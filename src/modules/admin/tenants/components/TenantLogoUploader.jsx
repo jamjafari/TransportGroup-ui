@@ -15,6 +15,7 @@ import {
   ATTACHMENT_CATEGORY,
 } from '../constants/attachmentOwnerType';
 import { validateAttachmentFile } from '@/constants/attachmentTypes';
+import i18n from '@/i18n';
 
 const LOGO_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.webp', '.gif'];
 
@@ -77,7 +78,7 @@ const TenantLogoUploader = ({ tenantId, tenantName }) => {
 
         await loadLogo();
       } catch (err) {
-        setError(err.response?.data?.message || 'خطا در آپلود لوگو');
+        setError(err.response?.data?.message || i18n.t('خطا در آپلود لوگو'));
       } finally {
         setLoading(false);
       }

@@ -19,6 +19,7 @@ import { validate, hasErrors } from "@/validation";
 
 import useDriver from "../../../drivers/hooks/useDriver";
 import useVehicleAssignments from "../hooks/useVehicleAssignments";
+import i18n from '@/i18n';
 
 const emptyDraft = {
   driverId: "",
@@ -137,7 +138,7 @@ const DriverAssignmentSection = ({ vehicleId }) => {
 
       <Box mt={3}>
         <Typography variant="subtitle2" mb={1}>
-          راننده‌ی فعلی
+          {i18n.t('راننده‌ی فعلی')}
         </Typography>
 
         {currentAssignment ? (
@@ -149,26 +150,26 @@ const DriverAssignmentSection = ({ vehicleId }) => {
                   color="warning"
                   onClick={() => handleFinish(currentAssignment.id)}
                 >
-                  پایان تخصیص
+                  {i18n.t('پایان تخصیص')}
                 </AppButton>
               }
             >
               <ListItemText
                 primary={currentAssignment.driverName}
-                secondary={`از تاریخ ${formatJalaliDate(currentAssignment.fromDate)}`}
+                secondary={i18n.t('از تاریخ {{date}}', { date: formatJalaliDate(currentAssignment.fromDate) })}
               />
             </ListItem>
           </List>
         ) : (
           <Typography variant="body2" color="text.secondary">
-            راننده‌ای به این خودرو تخصیص داده نشده است.
+            {i18n.t('راننده‌ای به این خودرو تخصیص داده نشده است.')}
           </Typography>
         )}
 
         {historyAssignments.length > 0 && (
           <>
             <Typography variant="subtitle2" mt={2} mb={1}>
-              تاریخچه
+              {i18n.t('تاریخچه')}
             </Typography>
 
             <List>
@@ -176,7 +177,7 @@ const DriverAssignmentSection = ({ vehicleId }) => {
                 <ListItem key={a.id}>
                   <ListItemText
                     primary={a.driverName}
-                    secondary={`از ${formatJalaliDate(a.fromDate)} تا ${formatJalaliDate(a.toDate)}`}
+                    secondary={i18n.t('از {{from}} تا {{to}}', { from: formatJalaliDate(a.fromDate), to: formatJalaliDate(a.toDate) })}
                   />
                 </ListItem>
               ))}

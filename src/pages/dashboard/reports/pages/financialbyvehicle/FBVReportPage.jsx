@@ -20,6 +20,7 @@ import FBVVehicleCostChart from './FBVVehicleCostChart';
 import FBVExpenseTypeChart from './FBVExpenseTypeChart';
 import FBVReportTable from './FBVReportTable';
 import FinancialTransactionsTable from './FinancialTransactionsTable';
+import i18n from '@/i18n';
 
 const FBVReportPage = () => {
   const { data, loading, error } = useFinancialByVehicle();
@@ -29,7 +30,7 @@ const FBVReportPage = () => {
   }
 
   if (error) {
-    return <div>خطا در دریافت اطلاعات گزارش مالی</div>;
+    return <div>{i18n.t('خطا در دریافت اطلاعات گزارش مالی')}</div>;
   }
 
   if (!data) {
@@ -67,13 +68,13 @@ const FBVReportPage = () => {
       <DashboardSection title="جداول">
         <DashboardCard
           title="هزینه‌های سرویس و سوخت"
-          subtitle="  مقایسه هزینه سرویس ها به سوخت هر خودرو"
+          subtitle="مقایسه هزینه سرویس ها به سوخت هر خودرو"
         >
           <FBVReportTable rows={data.financialByVehicle} loading={loading} />
         </DashboardCard>
         <DashboardCard
           title="تراکنش ها"
-          subtitle="   هزینه  خودروهای موجود در نقلیه"
+          subtitle="هزینه خودروهای موجود در نقلیه"
         >
           <FinancialTransactionsTable rows={data.table} loading={loading} />
         </DashboardCard>

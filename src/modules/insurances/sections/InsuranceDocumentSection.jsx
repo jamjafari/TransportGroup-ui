@@ -21,6 +21,7 @@ import { formatJalaliDate } from "@/utils";
 import { insuranceTypeOptions } from "../constants";
 import useAttachments from "@/hooks/useAttachments";
 import { ATTACHMENT_OWNER_TYPE } from "@/constants/attachmentTypes";
+import i18n from '@/i18n';
 
 const emptyDraft = {
   category: "",
@@ -124,16 +125,14 @@ const InsuranceDocumentsSection = ({ insuranceId }) => {
           >
             <ListItemText
               primary={item.originalFileName}
-              secondary={`${categoryLabel(item.category)} — انقضاء: ${
-                item.expiryDate ? formatJalaliDate(item.expiryDate) : "—"
-              }`}
+              secondary={i18n.t('{{category}} — انقضاء: {{date}}', { category: i18n.t(categoryLabel(item.category)), date: item.expiryDate ? formatJalaliDate(item.expiryDate) : "—" })}
             />
           </ListItem>
         ))}
 
         {!loading && attachments.length === 0 && (
           <Typography variant="body2" color="text.secondary">
-            هیچ مدرکی ثبت نشده است.
+            {i18n.t('هیچ مدرکی ثبت نشده است.')}
           </Typography>
         )}
       </List>

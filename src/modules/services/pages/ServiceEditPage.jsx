@@ -13,6 +13,7 @@ import { AppCard } from "@/components";
 
 import useService from "../hooks/useService";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 const ServiceEditPage = () => {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -38,13 +39,17 @@ const ServiceEditPage = () => {
     loadService();
   }, [id, getServiceById]);
 
+  const [saveError, setSaveError] = useState(null);
+
   const handleSubmit = useCallback(
     async (values) => {
       try {
+        setSaveError(null);
+
         await updateService(values);
         navigate("/services");
       } catch (error) {
-        console.error(error);
+        setSaveError(error);
       }
     },
     [id, updateService, navigate],
@@ -61,7 +66,9 @@ const ServiceEditPage = () => {
       </Typography>
 
       <AppCard sx={{ p: 4, mb: 3 }}>
-        <ServiceForm initialValues={service} onSubmit={handleSubmit} />
+        <FormSaveErrorProvider error={saveError}>
+          <ServiceForm initialValues={service} onSubmit={handleSubmit} />
+        </FormSaveErrorProvider>
       </AppCard>
 
       <AppCard sx={{ p: 4 }}>

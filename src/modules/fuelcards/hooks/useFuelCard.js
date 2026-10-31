@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 
 import { useFuelCardContext } from '../context';
 import * as fuelCardApi from '../api/fuelCardApi';
+import toApiError from '@/services/apiError';
 
 const useFuelCard = () => {
   const {
@@ -17,7 +18,7 @@ const useFuelCard = () => {
 
   const unwrap = (response) => {
     if (!response.success) {
-      throw new Error(response.errors?.[0] || 'خطا در ارتباط با سرور');
+      throw toApiError(response, 'خطا در ارتباط با سرور');
     }
     return response.data;
   };

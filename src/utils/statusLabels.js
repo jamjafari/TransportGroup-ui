@@ -27,12 +27,18 @@ export const statusLabels = {
   Overdue: 'معوق',
   ServiceCompleted: 'انجام شده',
   Success: 'تایید شده',
+  // شناسه‌های رنگ فیلتر «وضعیت» داشبورد با حروف کوچک می‌آیند (success/warning/error/primary)
+  success: 'تایید شده',
   warning: 'هشدار',
   error: 'هشدار جدی',
   primary: 'در عملیات',
   InRepair: 'در حال تعمیر',
   Sold: 'فروخته‌شده',
   ExpiringSoon: 'نزدیک به انقضا',
+  // گزارش تایر
+  Mounted: 'نصب‌شده روی خودرو',
+  InStock: 'در انبار',
+  Removed: 'خارج‌شده از خودرو',
 };
 
 // برای کد قدیمی که مستقیماً به متن فارسی نیاز دارد (مثلاً خروجی PDF/Excel)

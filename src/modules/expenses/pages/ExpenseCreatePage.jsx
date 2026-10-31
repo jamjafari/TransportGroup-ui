@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from "react";
+import React, { useState, memo, useCallback } from "react";
 
 import Box from "@mui/material/Box";
 
@@ -11,21 +11,26 @@ import ExpenseForm from "../components/ExpenseForm";
 import useExpense from "../hooks/useExpense";
 import { AppCard } from "@/components";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 const ExpenseCreatePage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { createExpense } = useExpense();
 
+  const [saveError, setSaveError] = useState(null);
+
   const handleSubmit = useCallback(
     async (values) => {
       console.log("Submit clicked");
       console.log(values);
       try {
+        setSaveError(null);
+
         const createdId = await createExpense(values);
         navigate(`/expenses/edit/${createdId}`);
       } catch (error) {
-        console.error(error);
+        setSaveError(error);
       }
     },
     [createExpense, navigate],
@@ -38,7 +43,9 @@ const ExpenseCreatePage = () => {
       </Typography>
 
       <AppCard sx={{ p: 4 }}>
-        <ExpenseForm onSubmit={handleSubmit} />
+        <FormSaveErrorProvider error={saveError}>
+          <ExpenseForm onSubmit={handleSubmit} />
+        </FormSaveErrorProvider>
       </AppCard>
     </Box>
   );

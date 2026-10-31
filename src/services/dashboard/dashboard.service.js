@@ -1,8 +1,11 @@
+import i18n from '@/i18n';
+
 import * as dashboardApi from './dashboardApi';
 
 const unwrap = (response, defaultMessage) => {
   if (!response?.success) {
-    throw new Error(response?.errors?.[0] || defaultMessage);
+    // پیام پیش‌فرض فارسی همین‌جا ترجمه می‌شود (پیام سرور از قبل به زبان صفحه است)
+    throw new Error(response?.errors?.[0] || i18n.t(defaultMessage));
   }
 
   return response.data;

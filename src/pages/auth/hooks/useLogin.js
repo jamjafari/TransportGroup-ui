@@ -33,9 +33,8 @@ const useLogin = () => {
     } catch (err) {
       if (err.response?.status === 429) {
         // ✅ قفل موقت بعد از تلاش‌های ناموفق متعدد.
-        // پیام err.response.data?.message از سرور می‌آید و هنوز فقط فارسی است
-        // (بخش بعدی — Accept-Language سمت بک‌اند — آن را هم ترجمه می‌کند)؛
-        // پیام‌های fallback زیر که فقط سمت کلاینت هستند از همین حالا ترجمه می‌شوند.
+        // پیام err.response.data?.message از سرور می‌آید و به زبان صفحه است
+        // (هدر Accept-Language در requestInterceptor)؛ پیام‌های fallback زیر فقط سمت کلاینت‌اند.
         setError(
           err.response.data?.message ||
             t('تعداد تلاش‌ها زیاد است. لطفاً چند دقیقه‌ی دیگر دوباره تلاش کنید.'),

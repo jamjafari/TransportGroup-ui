@@ -12,6 +12,7 @@ import { AppCard } from "@/components";
 
 import useFuelCard from "../hooks/useFuelCard";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 const FuelCardEditPage = () => {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -34,13 +35,17 @@ const FuelCardEditPage = () => {
     loadFuelCard();
   }, [id, getFuelCardById]);
 
+  const [saveError, setSaveError] = useState(null);
+
   const handleSubmit = useCallback(
     async (values) => {
       try {
+        setSaveError(null);
+
         await updateFuelCard(values);
         navigate("/fuelCards");
       } catch (error) {
-        console.error(error);
+        setSaveError(error);
       }
     },
     [id, updateFuelCard, navigate],
@@ -57,7 +62,9 @@ const FuelCardEditPage = () => {
       </Typography>
 
       <AppCard sx={{ p: 4, mb: 3 }}>
-        <FuelCardForm initialValues={fuelCard} onSubmit={handleSubmit} />
+        <FormSaveErrorProvider error={saveError}>
+          <FuelCardForm initialValues={fuelCard} onSubmit={handleSubmit} />
+        </FormSaveErrorProvider>
       </AppCard>
     </Box>
   );

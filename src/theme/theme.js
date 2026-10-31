@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material/styles';
+import { faIR, enUS } from '@mui/material/locale';
 
 import tokens from './tokens';
 import typography from './typography';
@@ -18,7 +19,12 @@ import radius from './radius';
 //
 // جهت و فونت به زبان وابسته‌اند، پس تم به‌جای یک شیء ثابت، از یک سازنده می‌آید.
 // تغییر زبان صفحه را بازگذاری می‌کند، بنابراین این سازنده یک‌بار در هر بارگذاری اجرا می‌شود.
-export const createAppTheme = ({ direction = 'rtl', fontFamily } = {}) =>
+//
+// ✅ بسته‌ی زبان MUI: متن‌های داخلی کامپوننت‌ها (مثل «No options» و «Loading…» در Autocomplete)
+// بدون آن در حالت فارسی هم انگلیسی می‌ماندند.
+const MUI_LOCALES = { fa: faIR, en: enUS };
+
+export const createAppTheme = ({ direction = 'rtl', fontFamily, localeCode = 'fa' } = {}) =>
   createTheme({
     direction,
 
@@ -44,6 +50,6 @@ export const createAppTheme = ({ direction = 'rtl', fontFamily } = {}) =>
     },
 
     components,
-  });
+  }, MUI_LOCALES[localeCode] ?? faIR);
 
 export default createAppTheme;

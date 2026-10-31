@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 
 import { useDriverContext } from '../context';
 import * as driverApi from '../api/driverApi';
+import toApiError from '@/services/apiError';
 
 const useDriver = () => {
   const {
@@ -17,7 +18,7 @@ const useDriver = () => {
 
   const unwrap = (response) => {
     if (!response.success) {
-      throw new Error(response.errors?.[0] || 'خطا در ارتباط با سرور');
+      throw toApiError(response, 'خطا در ارتباط با سرور');
     }
     return response.data;
   };

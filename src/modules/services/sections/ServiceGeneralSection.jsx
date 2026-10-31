@@ -1,6 +1,8 @@
 import React, { memo, useMemo } from 'react';
 
 import Grid from '@mui/material/Grid';
+import i18n from '@/i18n';
+import { formatNumber } from '@/utils';
 
 import {
   AppFormSection,
@@ -27,8 +29,8 @@ const ServiceGeneralSection = ({
   );
 
   const currentKmHint = selectedVehicle
-    ? `کارکرد فعلی ثبت‌شده: ${selectedVehicle.currentKM?.toLocaleString() ?? '—'} کیلومتر`
-    : 'ابتدا خودرو را از بخش اطلاعات پایه انتخاب کنید';
+    ? i18n.t('کارکرد فعلی ثبت‌شده: {{km}} کیلومتر', { km: formatNumber(selectedVehicle.currentKM) })
+    : i18n.t('ابتدا خودرو را از بخش اطلاعات پایه انتخاب کنید');
   return (
     <AppFormSection title="اطلاعات  سرویس">
       <Grid container spacing={2}>

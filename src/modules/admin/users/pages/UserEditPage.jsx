@@ -9,6 +9,7 @@ import UserForm from "../components/UserForm";
 import useUser from "../hooks/useUser";
 import { AppCard } from "@/components";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 
 const UserEditPage = () => {
   const { t } = useTranslation();
@@ -31,13 +32,17 @@ const UserEditPage = () => {
     loadUser();
   }, [id, getUserById]);
 
+  const [saveError, setSaveError] = useState(null);
+
   const handleSubmit = useCallback(
     async (values) => {
       try {
+        setSaveError(null);
+
         await updateUser({ ...values, id });
         navigate("/admin/users");
       } catch (error) {
-        console.error(error);
+        setSaveError(error);
       }
     },
     [id, updateUser, navigate],
@@ -52,7 +57,9 @@ const UserEditPage = () => {
       </Typography>
 
       <AppCard sx={{ p: 4 }}>
-        <UserForm initialValues={user} onSubmit={handleSubmit} isEdit={true} />
+        <FormSaveErrorProvider error={saveError}>
+          <UserForm initialValues={user} onSubmit={handleSubmit} isEdit={true} />
+        </FormSaveErrorProvider>
       </AppCard>
     </Box>
   );

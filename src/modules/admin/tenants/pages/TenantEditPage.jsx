@@ -9,6 +9,7 @@ import TenantForm from "../components/TenantForm";
 import useTenant from "../hooks/useTenant";
 import { AppCard } from "@/components";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 const TenantEditPage = () => {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -29,13 +30,17 @@ const TenantEditPage = () => {
     loadTenant();
   }, [id, getTenantById]);
 
+  const [saveError, setSaveError] = useState(null);
+
   const handleSubmit = useCallback(
     async (values) => {
       try {
+        setSaveError(null);
+
         await updateTenant({ ...values, id });
         navigate("/admin/tenants");
       } catch (error) {
-        console.error(error);
+        setSaveError(error);
       }
     },
     [id, updateTenant, navigate],
@@ -50,11 +55,13 @@ const TenantEditPage = () => {
       </Typography>
 
       <AppCard sx={{ p: 4 }}>
-        <TenantForm
-          initialValues={tenant}
-          onSubmit={handleSubmit}
-          isEdit={true}
-        />
+        <FormSaveErrorProvider error={saveError}>
+          <TenantForm
+            initialValues={tenant}
+            onSubmit={handleSubmit}
+            isEdit={true}
+          />
+        </FormSaveErrorProvider>
       </AppCard>
     </Box>
   );

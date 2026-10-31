@@ -13,6 +13,7 @@ import { AppCard } from "@/components";
 
 import useExpense from "../hooks/useExpense";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 const ExpenseEditPage = () => {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -36,13 +37,17 @@ const ExpenseEditPage = () => {
     loadExpense();
   }, [id, getExpenseById]);
 
+  const [saveError, setSaveError] = useState(null);
+
   const handleSubmit = useCallback(
     async (values) => {
       try {
+        setSaveError(null);
+
         await updateExpense(values);
         navigate("/expenses");
       } catch (error) {
-        console.error(error);
+        setSaveError(error);
       }
     },
     [id, updateExpense, navigate],
@@ -59,7 +64,9 @@ const ExpenseEditPage = () => {
       </Typography>
 
       <AppCard sx={{ p: 4, mb: 3 }}>
-        <ExpenseForm initialValues={expense} onSubmit={handleSubmit} />
+        <FormSaveErrorProvider error={saveError}>
+          <ExpenseForm initialValues={expense} onSubmit={handleSubmit} />
+        </FormSaveErrorProvider>
       </AppCard>
 
       <AppCard sx={{ p: 4 }}>

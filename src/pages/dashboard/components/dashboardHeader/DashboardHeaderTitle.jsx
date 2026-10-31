@@ -5,7 +5,7 @@ const DashboardHeaderTitle = () => {
   const { t } = useTranslation();
   return (
     <Stack spacing={0.5}>
-      <Typography variant="h3" fontWeight={700}>
+      <Typography variant="pageTitle">
         {t("داشبورد")}
       </Typography>
 

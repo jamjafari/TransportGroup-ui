@@ -17,6 +17,7 @@ import ReportLayout from '../../components/ReportLayout';
 import FuelCostShareChart from './FuelCostShareChart';
 import FuelEfficiencyChart from './FuelEfficiencyChart';
 import FuelCostReportTable from './FuelCostReportTable';
+import i18n from '@/i18n';
 
 const FuelCostReportPage = () => {
   const { data, loading, error } = useFuelCostReport();
@@ -29,7 +30,7 @@ const FuelCostReportPage = () => {
 
       {loading && <AppLoader />}
 
-      {!loading && error && <div>خطا در دریافت اطلاعات گزارش مالی</div>}
+      {!loading && error && <div>{i18n.t('خطا در دریافت اطلاعات گزارش مالی')}</div>}
 
       {!loading && !error && data && (
         <>

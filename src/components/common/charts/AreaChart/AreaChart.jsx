@@ -15,6 +15,8 @@ import {
 } from 'recharts';
 
 import { AreaChartPropTypes, AreaChartDefaultProps } from './AreaChart.types';
+import useChartLabel from '../hooks/useChartLabel';
+import useChartDirection from '../hooks/useChartDirection';
 
 const DEFAULT_COLORS = [
   '#1976d2',
@@ -43,6 +45,9 @@ const AreaChart = ({
 
   tooltip,
 }) => {
+  const label = useChartLabel();
+  const direction = useChartDirection();
+
   const chartData = useMemo(
     () =>
       categories
@@ -74,21 +79,37 @@ const AreaChart = ({
           <XAxis
             dataKey="category"
             interval={2}
-            tick={{ fontSize: 16, fontWeight: 600 }}
+            tick={{ fontSize: 16, fontWeight: 400 }}
+            tickFormatter={label}
+            reversed={direction.xReversed}
           />
 
-          <YAxis tick={{ fontSize: 16, fontWeight: 600 }} />
+          <YAxis
+            tick={{ fontSize: 16, fontWeight: 400 }}
+            orientation={direction.yOrientation}
+          />
 
           {tooltip && (
             <Tooltip
-              contentStyle={{ fontSize: 14, fontWeight: 600 }}
+              labelFormatter={label}
+              contentStyle={{
+                fontSize: 14,
+                fontWeight: 400,
+                direction: direction.textDirection,
+              }}
               labelStyle={{ fontSize: 14 }}
               itemStyle={{ fontSize: 14 }}
             />
           )}
 
           {legend && (
-            <Legend wrapperStyle={{ fontSize: 16, fontWeight: 600 }} />
+            <Legend
+              wrapperStyle={{
+                fontSize: 16,
+                fontWeight: 400,
+                direction: direction.textDirection,
+              }}
+            />
           )}
 
           {series.map((item, index) => (
@@ -98,6 +119,8 @@ const AreaChart = ({
               type="monotone"
 
               dataKey={item.name}
+
+              name={label(item.name)}
 
               stroke={
                 item.color || DEFAULT_COLORS[index % DEFAULT_COLORS.length]

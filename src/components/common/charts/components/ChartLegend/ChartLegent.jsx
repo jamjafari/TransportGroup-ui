@@ -8,8 +8,11 @@ import {
   ChartLegendPropTypes,
   ChartLegendDefaultProps,
 } from './ChartLegend.types';
+import useChartLabel from '../../hooks/useChartLabel';
 
 const ChartLegend = ({ items }) => {
+  const label = useChartLabel();
+
   return (
     <Stack spacing={1}>
       {items.map((item) => (
@@ -41,7 +44,7 @@ const ChartLegend = ({ items }) => {
               }}
             />
 
-            <Typography variant="body2">{item.label}</Typography>
+            <Typography variant="body2">{label(item.label)}</Typography>
           </Box>
 
           <Box

@@ -5,6 +5,7 @@ import useAsyncData from '@/hooks/useAsyncData';
 import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
 
 import { getServiceReport } from '../api/serviceReportApi';
+import toApiError from '@/services/apiError';
 
 const useServiceReport = () => {
   const { appliedFilters } = useDashboardSearch();
@@ -20,7 +21,7 @@ const useServiceReport = () => {
       const response = await getServiceReport(filter);
 
       if (!response.success) {
-        throw new Error(response.errors?.[0] || 'خطا در دریافت گزارش سرویس');
+        throw toApiError(response, 'خطا در دریافت گزارش سرویس');
       }
 
       return response.data;

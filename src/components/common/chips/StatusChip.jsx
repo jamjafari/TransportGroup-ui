@@ -43,23 +43,41 @@ const statusMap = {
   Overdue: { color: 'error', icon: <MiscellaneousServicesIcon /> },
   ServiceCompleted: { color: 'success', icon: <CheckCircleIcon /> },
   Success: { color: 'success', icon: <CheckCircleIcon /> },
+  success: { color: 'success', icon: <CheckCircleIcon /> },
   warning: { color: 'warning', icon: <BuildCircleIcon /> },
   error: { color: 'error', icon: <HighlightOffIcon /> },
   primary: { color: 'primary', icon: <LocalShippingIcon /> },
   InRepair: { color: 'warning', icon: <EngineeringIcon /> },
   Sold: { color: 'default', icon: <HighlightOffIcon /> },
   ExpiringSoon: { color: 'warning', icon: <WarningAmberIcon /> },
+  Mounted: { color: 'success', icon: <CheckCircleIcon /> },
+  InStock: { color: 'info', icon: <PendingActionsIcon /> },
+  Removed: { color: 'default', icon: <HighlightOffIcon /> },
+};
+
+// ✅ مقدار وضعیت گاهی با حرف اول کوچک می‌آید (مثلاً active در ستون‌های status جدول)،
+// ولی کلیدهای این‌جا PascalCase هستند؛ اگر کلید دقیق نبود، شکل با حرف اول بزرگ امتحان می‌شود.
+const resolveStatusKey = (status) => {
+  if (typeof status !== 'string' || status in statusLabels || status in statusMap) {
+    return status;
+  }
+
+  const capitalized = status.charAt(0).toUpperCase() + status.slice(1);
+
+  return capitalized in statusLabels || capitalized in statusMap ? capitalized : status;
 };
 
 const StatusChip = ({ status, size = 'small' }) => {
   const { t } = useTranslation();
 
-  const meta = statusMap[status] ?? {
+  const key = resolveStatusKey(status);
+
+  const meta = statusMap[key] ?? {
     color: 'info',
     icon: <HelpOutlineIcon />,
   };
 
-  const label = t(statusLabels[status] ?? status);
+  const label = t(statusLabels[key] ?? status);
 
   return (
     <Chip

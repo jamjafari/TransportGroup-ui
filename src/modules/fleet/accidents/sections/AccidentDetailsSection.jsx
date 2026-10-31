@@ -10,6 +10,8 @@ import {
 } from '@/components';
 
 import { accidentSeverityOptions } from '../constants';
+import i18n from '@/i18n';
+import { formatNumber } from '@/utils';
 
 const AccidentDetailsSection = ({
   values,
@@ -50,8 +52,8 @@ const AccidentDetailsSection = ({
             helperText={
               errors?.odometerKm ||
               (selectedVehicle
-                ? `کارکرد فعلی ثبت‌شده: ${selectedVehicle.currentKM?.toLocaleString() ?? '—'} کیلومتر`
-                : 'ابتدا خودرو را انتخاب کنید')
+                ? i18n.t('کارکرد فعلی ثبت‌شده: {{km}} کیلومتر', { km: formatNumber(selectedVehicle.currentKM) })
+                : i18n.t('ابتدا خودرو را انتخاب کنید'))
             }
           />
         </Grid>

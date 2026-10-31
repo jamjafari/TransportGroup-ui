@@ -2,6 +2,7 @@ import React, { memo } from "react";
 
 import { DashboardGrid, DashboardColumn, KpiCard } from "@/components";
 import { useTranslation } from "react-i18next";
+import { formatNumber } from '@/utils';
 
 const FBVReportKPI = ({ kpi = {} }) => {
   const { t } = useTranslation();
@@ -9,7 +10,7 @@ const FBVReportKPI = ({ kpi = {} }) => {
     {
       title: "میانگین هزینه برای هر خودرو",
 
-      value: Number(kpi.averageCostPerVehicle ?? 0).toLocaleString(),
+      value: formatNumber(kpi.averageCostPerVehicle ?? 0),
 
       color: "primary",
 
@@ -19,7 +20,7 @@ const FBVReportKPI = ({ kpi = {} }) => {
     {
       title: "میانگین هزینه در هر مأموریت",
 
-      value: Number(kpi.averageCostPerMission ?? 0).toLocaleString(),
+      value: formatNumber(kpi.averageCostPerMission ?? 0),
 
       color: "info",
 
@@ -39,7 +40,7 @@ const FBVReportKPI = ({ kpi = {} }) => {
     {
       title: "هزینه پرهزینه‌ترین خودرو",
 
-      value: Number(kpi.mostExpensiveVehicleCost ?? 0).toLocaleString(),
+      value: formatNumber(kpi.mostExpensiveVehicleCost ?? 0),
 
       color: "error",
 

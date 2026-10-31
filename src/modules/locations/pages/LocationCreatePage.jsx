@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from "react";
+import React, { useState, memo, useCallback } from "react";
 
 import Box from "@mui/material/Box";
 
@@ -11,21 +11,26 @@ import LocationForm from "../components/LocationForm";
 import useLocation from "../hooks/useLocation";
 import { AppCard } from "@/components";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 const LocationCreatePage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { createLocation } = useLocation();
 
+  const [saveError, setSaveError] = useState(null);
+
   const handleSubmit = useCallback(
     async (values) => {
       console.log("Submit clicked");
       console.log(values);
       try {
+        setSaveError(null);
+
         const createdId = await createLocation(values);
         navigate(`/locations`);
       } catch (error) {
-        console.error(error);
+        setSaveError(error);
       }
     },
     [createLocation, navigate],
@@ -38,7 +43,9 @@ const LocationCreatePage = () => {
       </Typography>
 
       <AppCard sx={{ p: 4 }}>
-        <LocationForm onSubmit={handleSubmit} />
+        <FormSaveErrorProvider error={saveError}>
+          <LocationForm onSubmit={handleSubmit} />
+        </FormSaveErrorProvider>
       </AppCard>
     </Box>
   );

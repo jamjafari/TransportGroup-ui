@@ -40,10 +40,10 @@ const DashboardEmpty = ({ title, description }) => {
           }}
         />
 
-        <Typography variant="h6">{t(title)}</Typography>
+        <Typography variant="cardTitle">{t(title)}</Typography>
 
         <Typography
-          variant="body2"
+          variant="cardSubtitle"
 
           color="text.secondary"
         >

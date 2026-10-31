@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   Card,
@@ -22,6 +23,8 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import SecurityIcon from '@mui/icons-material/Security';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
+
+import { formatNumber } from '@/utils';
 
 const ICONS = {
   check: CheckCircleIcon,
@@ -55,6 +58,11 @@ const KpiCard = ({
   trend, // ✅ جدید — { direction: 'up' | 'down', label: '۱۲٪ نسبت به ماه قبل' }
   onClick, // ✅ جدید — اگه بدی کارت کلیک‌پذیر میشه
 }) => {
+  // ✅ متن‌های رشته‌ای کارت همین‌جا ترجمه می‌شوند؛ صدازننده‌هایی که خودشان t() زده‌اند
+  // بی‌تغییر می‌مانند (متن ترجمه‌شده کلید en.json نیست و دست‌نخورده برمی‌گردد)
+  const { t } = useTranslation();
+  const tr = (text) => (typeof text === 'string' && text ? t(text) : text);
+
   const IconComponent =
     icon && ICONS[icon] ? ICONS[icon] : ICON_BY_COLOR[color] || AssignmentIcon;
 
@@ -84,38 +92,30 @@ const KpiCard = ({
           alignItems="flex-start"
         >
           <Box flex={1}>
-            <Typography
-              variant="body2"
-              fontSize={16}
-              fontWeight={700}
-              color="text.secondary"
-            >
-              {title}
+            <Typography variant="statLabel" color="text.secondary">
+              {tr(title)}
             </Typography>
 
-            <Typography variant="h4" fontWeight={700} sx={{ mt: 0.5 }}>
+            <Typography variant="statValue" sx={{ mt: 0.5 }}>
               {value}
             </Typography>
 
             {subtitle && (
               <Typography
-                variant="caption"
+                variant="meta"
                 color="text.secondary"
                 display="block"
                 mt={0.5}
               >
-                {subtitle}
+                {tr(subtitle)}
               </Typography>
             )}
 
             {trend && (
               <Stack direction="row" alignItems="center" spacing={0.5} mt={0.5}>
                 <TrendIcon sx={{ fontSize: 16, color: trendColor }} />
-                <Typography
-                  variant="caption"
-                  sx={{ color: trendColor, fontWeight: 600 }}
-                >
-                  {trend.label}
+                <Typography variant="meta" sx={{ color: trendColor }}>
+                  {tr(trend.label)}
                 </Typography>
               </Stack>
             )}
@@ -142,12 +142,14 @@ const KpiCard = ({
               sx={{ height: 6, borderRadius: 3 }}
             />
             <Typography
-              variant="caption"
+              variant="meta"
               color="text.secondary"
               mt={0.5}
               display="block"
             >
-              {percent.toFixed(0)}٪ از کل
+              {t('{{percent}}٪ از کل', {
+                percent: formatNumber(percent, { maximumFractionDigits: 0 }),
+              })}
             </Typography>
           </Box>
         )}

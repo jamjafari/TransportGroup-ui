@@ -39,6 +39,22 @@ const TenantGeneralSection = ({
           />
         </Grid>
 
+        {/* ✅ نام انگلیسی (اختیاری) — در محیط انگلیسی به‌جای نام فارسی نمایش داده می‌شود */}
+        <Grid size={{ xs: 12, md: 6 }}>
+          <AppTextField
+            fullWidth
+            label="نام انگلیسی سازمان"
+            name="nameEn"
+            value={values.nameEn ?? ''}
+            onChange={onChange}
+            error={!!errors?.nameEn}
+            helperText={
+              errors?.nameEn ||
+              'اختیاری؛ اگر خالی بماند، در حالت انگلیسی هم نام فارسی نمایش داده می‌شود'
+            }
+          />
+        </Grid>
+
         <Grid size={{ xs: 12, md: 6 }}>
           <AppTextField
             fullWidth
@@ -109,6 +125,27 @@ const TenantGeneralSection = ({
             />
           </Grid>
         )}
+
+        {/* ✅ قابلیت «درخواست خودرو» برای همین سازمان (فقط سوپرادمین این فرم را می‌بیند) */}
+        <Grid size={{ xs: 12, md: 6 }}>
+          <AppSwitch
+            label="درخواست خودرو فعال است"
+            name="vehicleRequestsEnabled"
+            checked={!!values.vehicleRequestsEnabled}
+            onChange={(e) => setFieldValue('vehicleRequestsEnabled', e.target.checked)}
+          />
+        </Grid>
+
+        {/* ✅ دستیار اسناد: اگر خواندن محلی مطمئن نباشد، تصویر سند برای هوش مصنوعی ابری فرستاده شود؟ */}
+        <Grid size={{ xs: 12, md: 6 }}>
+          <AppSwitch
+            label="خواندن ابری اسناد فعال است"
+            name="documentCloudReadingEnabled"
+            checked={!!values.documentCloudReadingEnabled}
+            onChange={(e) => setFieldValue('documentCloudReadingEnabled', e.target.checked)}
+            helperText="تصویر سندهایی که دستیار به‌تنهایی مطمئن نیست برای خواندن دقیق‌تر به سرویس ابری فرستاده می‌شود"
+          />
+        </Grid>
       </Grid>
     </AppFormSection>
   );

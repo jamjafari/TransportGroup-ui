@@ -5,6 +5,7 @@ import DashboardRepository from "../../../../repositories/dashboard/dashboard.re
 import useDashboardWidget from "@/pages/dashboard/hooks/useDashboardWidget";
 import useDashboardSearch from "@/pages/dashboard/hooks/useDashboardSearch";
 import { useTranslatedColumns } from "../../../../hooks";
+import { formatNumber } from '@/utils';
 const useVehicleTable = () => {
   const { filters } = useDashboardSearch();
 
@@ -47,7 +48,7 @@ const useVehicleTable = () => {
         headerName: "هزینه کل",
         flex: 1,
         align: "right",
-        renderCell: ({ value }) => Number(value ?? 0).toLocaleString("fa-IR"),
+        renderCell: ({ value }) => formatNumber(value ?? 0),
       },
       {
         field: "status",

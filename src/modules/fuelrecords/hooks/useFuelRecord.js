@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 
 import { useFuelRecordContext } from '../context';
 import * as fuelRecordApi from '../api/fuelRecordApi';
+import toApiError from '@/services/apiError';
 
 const useFuelRecord = () => {
   const {
@@ -17,7 +18,7 @@ const useFuelRecord = () => {
 
   const unwrap = (response) => {
     if (!response.success) {
-      throw new Error(response.errors?.[0] || 'خطا در ارتباط با سرور');
+      throw toApiError(response, 'خطا در ارتباط با سرور');
     }
     return response.data;
   };

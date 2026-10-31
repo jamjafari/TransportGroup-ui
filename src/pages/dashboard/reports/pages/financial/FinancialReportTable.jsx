@@ -2,8 +2,9 @@ import React from "react";
 
 import { AppDataGrid, AttachmentsButton } from "@/components";
 import { ATTACHMENT_OWNER_TYPE } from "@/constants/attachmentTypes";
-import { formatJalaliDate } from "@/utils";
+import { formatJalaliDate, formatNumber } from "@/utils";
 import { useTranslatedColumns } from "../../../../../hooks";
+import i18n from '@/i18n';
 const FinancialReportTable = ({ rows = [], loading }) => {
   const baseColumns = [
     {
@@ -18,7 +19,7 @@ const FinancialReportTable = ({ rows = [], loading }) => {
       field: "amount",
       headerName: "مبلغ",
       flex: 1,
-      renderCell: ({ value }) => Number(value).toLocaleString("fa-IR"),
+      renderCell: ({ value }) => formatNumber(value),
     },
     { field: "description", headerName: "توضیحات", flex: 1 },
     {
@@ -29,7 +30,7 @@ const FinancialReportTable = ({ rows = [], loading }) => {
         <AttachmentsButton
           ownerType={ATTACHMENT_OWNER_TYPE.EXPENSE}
           ownerId={row.id}
-          title={`مدارک هزینه — ${row.expenseType}`}
+          title={i18n.t('مدارک هزینه — {{name}}', { name: row.expenseType })}
         />
       ),
     },

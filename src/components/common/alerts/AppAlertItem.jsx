@@ -9,10 +9,10 @@ const AppAlertItem = ({ severity, title, description }) => {
   const { t } = useTranslation();
   return (
     <Alert
-      sx={{ width: "100%", fontSize: 16, fontWeight: 700 }}
+      sx={{ width: "100%", typography: "bodyText" }}
       severity={severity}
     >
-      <AlertTitle sx={{ fontSize: 18, fontWeight: 800 }}>{t(title)}</AlertTitle>
+      <AlertTitle sx={{ typography: "alertTitle" }}>{t(title)}</AlertTitle>
 
       {description}
     </Alert>

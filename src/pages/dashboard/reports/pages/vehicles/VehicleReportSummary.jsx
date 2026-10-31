@@ -4,6 +4,7 @@ import { DashboardGrid, DashboardColumn, KpiCard } from "@/components";
 
 import useVehicleSummary from "./hooks/useVehicleSummary";
 import { useTranslation } from "react-i18next";
+import { formatNumber } from '@/utils';
 
 const VehicleReportSummary = () => {
   const { t } = useTranslation();
@@ -15,35 +16,35 @@ const VehicleReportSummary = () => {
   const summaryItems = [
     {
       title: "کل خودروها",
-      value: Number(total).toLocaleString("en-US"),
+      value: formatNumber(total),
       color: "primary",
       icon: "vehicle",
       subtitle: "ثبت‌شده در سیستم",
     },
     {
       title: "فعال",
-      value: Number(data.active ?? 0).toLocaleString("en-US"),
+      value: formatNumber(data.active ?? 0),
       color: "success",
       icon: "check",
       percent: pct(data.active ?? 0),
     },
     {
       title: "در حال تعمیر",
-      value: Number(data.inRepair ?? 0).toLocaleString("en-US"),
+      value: formatNumber(data.inRepair ?? 0),
       color: "warning",
       icon: "service",
       percent: pct(data.inRepair ?? 0),
     },
     {
       title: "غیرفعال",
-      value: Number(data.inactive ?? 0).toLocaleString("en-US"),
+      value: formatNumber(data.inactive ?? 0),
       color: "secondary",
       icon: "expired",
       percent: pct(data.inactive ?? 0),
     },
     {
       title: "فروخته‌شده",
-      value: Number(data.sold ?? 0).toLocaleString("en-US"),
+      value: formatNumber(data.sold ?? 0),
       color: "error",
       icon: "warning",
       percent: pct(data.sold ?? 0),

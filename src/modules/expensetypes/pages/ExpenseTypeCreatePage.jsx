@@ -9,20 +9,21 @@ import { useNavigate } from "react-router-dom";
 import ExpenseTypeForm from "../components/ExpenseTypeForm";
 
 import useExpenseType from "../hooks/useExpenseType";
-import { AppCard, AppAlert } from "@/components";
+import { AppCard } from "@/components";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 const ExpenseTypeCreatePage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { createExpenseType } = useExpenseType();
 
-  const [submitError, setSubmitError] = useState("");
+  const [submitError, setSubmitError] = useState(null);
 
   const handleSubmit = useCallback(
     async (values) => {
       try {
-        setSubmitError("");
+        setSubmitError(null);
 
         const createdId = await createExpenseType(values);
 
@@ -30,7 +31,7 @@ const ExpenseTypeCreatePage = () => {
       } catch (error) {
         console.error("Create user error:", error);
 
-        setSubmitError(error?.message || "خطا در ایجاد کاربر");
+        setSubmitError(error);
       }
     },
     [createExpenseType, navigate],
@@ -40,18 +41,10 @@ const ExpenseTypeCreatePage = () => {
       <Typography variant="h5" fontWeight={700} mb={3}>
         {t("افزودن نوع هزینه")}
       </Typography>
-      {submitError && (
-        <AppAlert
-          open={!!submitError}
-          severity="error"
-          title="خطا"
-          onClose={() => setSubmitError("")}
-        >
-          {submitError}
-        </AppAlert>
-      )}
       <AppCard sx={{ p: 4 }}>
-        <ExpenseTypeForm onSubmit={handleSubmit} />
+        <FormSaveErrorProvider error={submitError}>
+          <ExpenseTypeForm onSubmit={handleSubmit} />
+        </FormSaveErrorProvider>
       </AppCard>
     </Box>
   );

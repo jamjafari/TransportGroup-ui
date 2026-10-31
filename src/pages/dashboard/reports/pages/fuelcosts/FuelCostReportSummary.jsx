@@ -2,13 +2,14 @@ import React, { memo } from "react";
 
 import { DashboardGrid, DashboardColumn, KpiCard } from "@/components";
 import { useTranslation } from "react-i18next";
+import { formatNumber } from '@/utils';
 const FuelCostReportSummary = ({ summary = {} }) => {
   const { t } = useTranslation();
   const items = [
     {
       title: "کل سوخت مصرف شده",
 
-      value: Number(summary.totalFuel ?? 0).toLocaleString("en-US"),
+      value: formatNumber(summary.totalFuel ?? 0),
 
       color: "primary",
 
@@ -18,7 +19,7 @@ const FuelCostReportSummary = ({ summary = {} }) => {
     {
       title: "کل پرداختی‌های سوخت",
 
-      value: Number(summary.totalFuelCost ?? 0).toLocaleString("en-US"),
+      value: formatNumber(summary.totalFuelCost ?? 0),
 
       color: "warning",
 
@@ -38,7 +39,7 @@ const FuelCostReportSummary = ({ summary = {} }) => {
     {
       title: "میانگین هزینه سوخت در هر ماه",
 
-      value: Number(summary.averageCost ?? 0).toLocaleString("en-US"),
+      value: formatNumber(summary.averageCost ?? 0),
 
       color: "secondary",
 
@@ -48,7 +49,7 @@ const FuelCostReportSummary = ({ summary = {} }) => {
     {
       title: "تعداد تراکنش‌های سوخت",
 
-      value: Number(summary.transactionCount ?? 0).toLocaleString("en-US"),
+      value: formatNumber(summary.transactionCount ?? 0),
 
       color: "success",
 

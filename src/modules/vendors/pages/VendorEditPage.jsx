@@ -13,6 +13,7 @@ import { AppCard } from "@/components";
 
 import useVendor from "../hooks/useVendor";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 const VendorEditPage = () => {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -35,13 +36,17 @@ const VendorEditPage = () => {
     loadVendor();
   }, [id, getVendorById]);
 
+  const [saveError, setSaveError] = useState(null);
+
   const handleSubmit = useCallback(
     async (values) => {
       try {
+        setSaveError(null);
+
         await updateVendor(values);
         navigate("/vendors");
       } catch (error) {
-        console.error(error);
+        setSaveError(error);
       }
     },
     [id, updateVendor, navigate],
@@ -58,7 +63,9 @@ const VendorEditPage = () => {
       </Typography>
 
       <AppCard sx={{ p: 4, mb: 3 }}>
-        <VendorForm initialValues={vendor} onSubmit={handleSubmit} />
+        <FormSaveErrorProvider error={saveError}>
+          <VendorForm initialValues={vendor} onSubmit={handleSubmit} />
+        </FormSaveErrorProvider>
       </AppCard>
 
       <AppCard sx={{ p: 4 }}>

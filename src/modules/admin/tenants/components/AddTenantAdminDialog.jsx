@@ -1,4 +1,5 @@
 import React, { memo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Alert, Stack } from "@mui/material";
 
@@ -6,8 +7,10 @@ import AppDialog from "@/components/common/dialogs/AppDialog";
 import { AppTextField, AppButton } from "@/components";
 
 import useTenant from "../hooks/useTenant";
+import { getTenantDisplayName } from '@/utils/tenantName';
 
 const AddTenantAdminDialog = ({ open, tenant, onClose }) => {
+  const { t } = useTranslation();
   const { createTenantAdmin } = useTenant();
 
   const [userName, setUserName] = useState("");
@@ -18,7 +21,7 @@ const AddTenantAdminDialog = ({ open, tenant, onClose }) => {
 
   const handleSubmit = async () => {
     if (!userName || !fullName || password.length < 6) {
-      setError("همه‌ی فیلدها الزامی هستند و رمز باید حداقل ۶ کاراکتر باشد");
+      setError(t("همه‌ی فیلدها الزامی هستند و رمز باید حداقل ۶ کاراکتر باشد"));
       return;
     }
 
@@ -41,17 +44,17 @@ const AddTenantAdminDialog = ({ open, tenant, onClose }) => {
   return (
     <AppDialog
       open={open}
-      title={`افزودن ادمین — ${tenant?.name || ""}`}
+      title={t('افزودن ادمین — {{name}}', { name: getTenantDisplayName(tenant) })}
       onClose={onClose}
       maxWidth="xs"
       actions={
         <Stack direction="row" spacing={2}>
-          <AppButton variant="outlined" onClick={onClose} lableKey="انصراف" />
+          <AppButton variant="outlined" onClick={onClose} labelKey="انصراف" />
 
           <AppButton
             loading={submitting}
             onClick={handleSubmit}
-            lableKey="ثبت"
+            labelKey="ثبت"
           />
         </Stack>
       }

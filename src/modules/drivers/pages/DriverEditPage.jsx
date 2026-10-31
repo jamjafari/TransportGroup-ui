@@ -14,6 +14,7 @@ import { AppCard } from "@/components";
 
 import useDriver from "../hooks/useDriver";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 const DriverEditPage = () => {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -37,13 +38,17 @@ const DriverEditPage = () => {
     loadDriver();
   }, [id, getDriverById]);
 
+  const [saveError, setSaveError] = useState(null);
+
   const handleSubmit = useCallback(
     async (values) => {
       try {
+        setSaveError(null);
+
         await updateDriver(values);
         navigate("/drivers");
       } catch (error) {
-        console.error(error);
+        setSaveError(error);
       }
     },
     [id, updateDriver, navigate],
@@ -60,7 +65,9 @@ const DriverEditPage = () => {
       </Typography>
 
       <AppCard sx={{ p: 4, mb: 3 }}>
-        <DriverForm initialValues={driver} onSubmit={handleSubmit} />
+        <FormSaveErrorProvider error={saveError}>
+          <DriverForm initialValues={driver} onSubmit={handleSubmit} />
+        </FormSaveErrorProvider>
       </AppCard>
 
       <Box sx={{ mb: 3 }}>

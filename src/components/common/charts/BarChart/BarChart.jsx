@@ -15,6 +15,8 @@ import {
 } from 'recharts';
 
 import { BarChartPropTypes, BarChartDefaultProps } from './BarChart.types';
+import useChartLabel from '../hooks/useChartLabel';
+import useChartDirection from '../hooks/useChartDirection';
 
 const DEFAULT_COLORS = [
   '#1976d2',
@@ -43,6 +45,9 @@ const BarChart = ({
 
   tooltip,
 }) => {
+  const label = useChartLabel();
+  const direction = useChartDirection();
+
   const chartData = useMemo(
     () =>
       categories
@@ -70,20 +75,34 @@ const BarChart = ({
           <XAxis
             dataKey="category"
             interval={2}
-            tick={{ fontSize: 16, fontWeight: 600 }}
+            tick={{ fontSize: 16, fontWeight: 400 }}
+            tickFormatter={label}
+            reversed={direction.xReversed}
           />
 
-          <YAxis tick={{ fontSize: 16, fontWeight: 600 }} />
+          <YAxis
+            tick={{ fontSize: 16, fontWeight: 400 }}
+            orientation={direction.yOrientation}
+          />
 
-          {tooltip && <Tooltip />}
+          {tooltip && (
+            <Tooltip
+              labelFormatter={label}
+              contentStyle={{ direction: direction.textDirection }}
+            />
+          )}
 
-          {legend && <Legend />}
+          {legend && (
+            <Legend wrapperStyle={{ direction: direction.textDirection }} />
+          )}
 
           {series.map((item, index) => (
             <Bar
               key={item.name}
 
               dataKey={item.name}
+
+              name={label(item.name)}
 
               fill={item.color || DEFAULT_COLORS[index % DEFAULT_COLORS.length]}
 

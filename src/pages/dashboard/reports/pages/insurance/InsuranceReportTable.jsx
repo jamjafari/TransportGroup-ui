@@ -7,6 +7,7 @@ import { insuranceTypeOptions } from "@/modules";
 import { ATTACHMENT_OWNER_TYPE } from "@/constants/attachmentTypes";
 import { getStatusLabel } from "@/utils/statusLabels"; // ✅ اضافه شد
 import { useTranslatedColumns } from "../../../../../hooks";
+import i18n from '@/i18n';
 const InsuranceReportTable = ({ rows = [], loading }) => {
   const insuranceLabel = useCallback(
     (value) =>
@@ -35,7 +36,7 @@ const InsuranceReportTable = ({ rows = [], loading }) => {
       headerName: "روز باقی‌مانده",
       flex: 1,
       renderCell: ({ value }) =>
-        value < 0 ? `${Math.abs(value)} روز پیش` : `${value} روز`,
+        value < 0 ? i18n.t('{{count}} روز پیش', { count: Math.abs(value) }) : i18n.t('{{count}} روز', { count: value }),
     },
     {
       field: "computedStatus",
@@ -58,7 +59,7 @@ const InsuranceReportTable = ({ rows = [], loading }) => {
         <AttachmentsButton
           ownerType={ATTACHMENT_OWNER_TYPE.INSURANCE}
           ownerId={row.id}
-          title={`مدارک بیمه — ${row.insuranceType}`}
+          title={i18n.t('مدارک بیمه — {{name}}', { name: row.insuranceType })}
         />
       ),
     },

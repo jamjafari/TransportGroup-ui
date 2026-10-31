@@ -3,6 +3,7 @@ import useAsyncData from '@/hooks/useAsyncData';
 import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
 
 import { getInsuranceReport } from '../api/insuranceReportApi';
+import toApiError from '@/services/apiError';
 
 const useInsuranceReport = () => {
   const { appliedFilters } = useDashboardSearch();
@@ -17,7 +18,7 @@ const useInsuranceReport = () => {
       const response = await getInsuranceReport(filter);
 
       if (!response.success) {
-        throw new Error(response.errors?.[0] || 'خطا در دریافت گزارش بیمه');
+        throw toApiError(response, 'خطا در دریافت گزارش بیمه');
       }
 
       return response.data;

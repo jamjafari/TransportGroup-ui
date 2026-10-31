@@ -7,20 +7,21 @@ import { useNavigate } from "react-router-dom";
 import UserForm from "../components/UserForm";
 import useUser from "../hooks/useUser";
 
-import { AppCard, AppAlert } from "@/components";
+import { AppCard } from "@/components";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 const UserCreatePage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { createUser } = useUser();
 
-  const [submitError, setSubmitError] = useState("");
+  const [submitError, setSubmitError] = useState(null);
 
   const handleSubmit = useCallback(
     async (values) => {
       try {
-        setSubmitError("");
+        setSubmitError(null);
 
         await createUser(values);
 
@@ -28,7 +29,7 @@ const UserCreatePage = () => {
       } catch (error) {
         console.error("Create user error:", error);
 
-        setSubmitError(error?.message || "خطا در ایجاد کاربر");
+        setSubmitError(error);
       }
     },
     [createUser, navigate],
@@ -46,19 +47,10 @@ const UserCreatePage = () => {
         {t("افزودن کاربر")}
       </Typography>
 
-      {submitError && (
-        <AppAlert
-          open={!!submitError}
-          severity="error"
-          title="خطا"
-          onClose={() => setSubmitError("")}
-        >
-          {submitError}
-        </AppAlert>
-      )}
-
       <AppCard sx={{ p: 4 }}>
-        <UserForm onSubmit={handleSubmit} isEdit={false} />
+        <FormSaveErrorProvider error={submitError}>
+          <UserForm onSubmit={handleSubmit} isEdit={false} />
+        </FormSaveErrorProvider>
       </AppCard>
     </Box>
   );

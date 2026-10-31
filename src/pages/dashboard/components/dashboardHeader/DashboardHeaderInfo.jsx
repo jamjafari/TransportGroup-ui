@@ -9,12 +9,12 @@ const DashboardHeaderInfo = ({ lastUpdate }) => {
     : "--:--:--";
   const { t } = useTranslation();
   return (
-    <Stack fontWeight={700} alignItems="center" spacing={0.5}>
-      <Typography variant="h4" fontWeight={700} color="text.secondary">
+    <Stack alignItems="center" spacing={0.5}>
+      <Typography variant="statLabel" color="text.secondary">
         {t("آخرین بروزرسانی")}
       </Typography>
 
-      <Typography variant="body2" fontWeight={600}>
+      <Typography variant="bodyText">
         {formattedTime}
       </Typography>
     </Stack>

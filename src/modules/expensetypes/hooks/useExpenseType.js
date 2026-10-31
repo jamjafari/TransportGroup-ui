@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 
 import { useExpenseTypeContext } from '../context';
 import * as expenseTypeApi from '../api/expenseTypeApi';
+import toApiError from '@/services/apiError';
 
 const useExpenseType = () => {
   const {
@@ -17,7 +18,7 @@ const useExpenseType = () => {
 
   const unwrap = (response) => {
     if (!response.success) {
-      throw new Error(response.errors?.[0] || 'خطا در ارتباط با سرور');
+      throw toApiError(response, 'خطا در ارتباط با سرور');
     }
     return response.data;
   };

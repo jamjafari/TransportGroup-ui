@@ -4,3 +4,4 @@ export { getFileUrl } from './fileUrl';
 export { filterMenuByPermission } from './filterMenuByPermission';
 export { statusLabels } from './statusLabels';
 export { persianMonthNames } from './persianMonthNames';
+export { getTenantDisplayName } from './tenantName';

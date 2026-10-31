@@ -2,10 +2,11 @@ import { useCallback } from 'react';
 
 import { useAccidentContext } from '../context';
 import * as accidentApi from '../api/accidentApi';
+import toApiError from '@/services/apiError';
 
 const unwrap = (response) => {
   if (!response.success) {
-    throw new Error(response.errors?.[0] || 'خطا در ارتباط با سرور');
+    throw toApiError(response, 'خطا در ارتباط با سرور');
   }
   return response.data;
 };

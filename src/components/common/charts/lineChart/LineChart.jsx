@@ -15,6 +15,8 @@ import {
 import { Box } from '@mui/material';
 
 import { LineChartPropTypes, LineChartDefaultProps } from './LineChart.types';
+import useChartLabel from '../hooks/useChartLabel';
+import useChartDirection from '../hooks/useChartDirection';
 
 const LineChart = ({
   categories = [],
@@ -29,17 +31,23 @@ const LineChart = ({
 
   tooltip,
 }) => {
-  const data = categories.map((category, index) => {
-    const item = {
-      category,
-    };
+  const label = useChartLabel();
+  const direction = useChartDirection();
 
-    series.forEach((s) => {
-      item[s.name] = s.data[index];
-    });
+  // ✅ مثل BarChart و AreaChart: داده‌ها «جدیدترین اول» می‌رسند و برای نمایش زمانی برگردانده می‌شوند
+  const data = categories
+    .map((category, index) => {
+      const item = {
+        category,
+      };
 
-    return item;
-  });
+      series.forEach((s) => {
+        item[s.name] = s.data[index];
+      });
+
+      return item;
+    })
+    .reverse();
 
   return (
     <LtrScope width="100%" height={380}>
@@ -50,21 +58,30 @@ const LineChart = ({
           <XAxis
             dataKey="category"
             interval={2}
-            tick={{ fontSize: 16, fontWeight: 600 }}
+            tick={{ fontSize: 16, fontWeight: 400 }}
+            tickFormatter={label}
+            reversed={direction.xReversed}
           />
 
           <YAxis
-            tick={{ fontSize: 16, fontWeight: 600 }}
-            orientation="right"
+            tick={{ fontSize: 16, fontWeight: 400 }}
+            orientation={direction.yOrientation}
             mirror={false}
             width={60}
             tickMargin={15}
             axisLine={true}
             tickLine={true}
           />
-          {tooltip && <Tooltip />}
+          {tooltip && (
+            <Tooltip
+              labelFormatter={label}
+              contentStyle={{ direction: direction.textDirection }}
+            />
+          )}
 
-          {legend && <Legend />}
+          {legend && (
+            <Legend wrapperStyle={{ direction: direction.textDirection }} />
+          )}
 
           {series.map((item, index) => (
             <Line
@@ -73,6 +90,8 @@ const LineChart = ({
               type="monotone"
 
               dataKey={item.name}
+
+              name={label(item.name)}
 
               stroke={
                 item.color ||

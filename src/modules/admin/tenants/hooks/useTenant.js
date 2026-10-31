@@ -2,10 +2,11 @@ import { useCallback, useState } from 'react';
 
 import { useTenantContext } from '../context';
 import * as tenantApi from '../api/tenantApi';
+import toApiError from '@/services/apiError';
 
 const unwrap = (response) => {
   if (!response.success) {
-    throw new Error(response.errors?.[0] || 'خطا در ارتباط با سرور');
+    throw toApiError(response, 'خطا در ارتباط با سرور');
   }
   return response.data;
 };

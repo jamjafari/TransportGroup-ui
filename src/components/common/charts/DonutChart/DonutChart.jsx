@@ -16,6 +16,8 @@ import {
   DonutChartPropTypes,
   DonutChartDefaultProps,
 } from './DonutChart.types';
+import useChartLabel from '../hooks/useChartLabel';
+import useChartDirection from '../hooks/useChartDirection';
 
 const COLORS = [
   '#1976d2',
@@ -44,16 +46,29 @@ const DonutChart = ({
 
   tooltip,
 }) => {
+  const label = useChartLabel();
+  const direction = useChartDirection();
+
+  const chartData = data.map((entry) => ({
+    ...entry,
+
+    label: label(entry.label),
+  }));
+
   return (
     <LtrScope width="100%" height={380}>
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie
-            data={data}
+            data={chartData}
 
             dataKey="value"
 
             nameKey="label"
+
+            startAngle={direction.startAngle}
+
+            endAngle={direction.endAngle}
 
             innerRadius={70}
 
@@ -61,7 +76,7 @@ const DonutChart = ({
 
             paddingAngle={2}
           >
-            {data.map((entry, index) => (
+            {chartData.map((entry, index) => (
               <Cell
                 key={entry.label}
 
@@ -70,9 +85,13 @@ const DonutChart = ({
             ))}
           </Pie>
 
-          {tooltip && <Tooltip />}
+          {tooltip && (
+            <Tooltip contentStyle={{ direction: direction.textDirection }} />
+          )}
 
-          {legend && <Legend />}
+          {legend && (
+            <Legend wrapperStyle={{ direction: direction.textDirection }} />
+          )}
         </PieChart>
       </ResponsiveContainer>
     </LtrScope>

@@ -20,6 +20,8 @@ import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
 import useActiveVehiclesLocations from './useActiveVehiclesLocations';
+import i18n from '@/i18n';
+import { formatDateTime } from '@/utils';
 
 // ✅ رفع یک مشکل شناخته‌شده: آیکون پیش‌فرض Leaflet با Vite/Bundlerها درست لود نمی‌شود
 delete L.Icon.Default.prototype._getIconUrl;
@@ -102,17 +104,19 @@ const MissionPopup = ({ mission, title }) => (
     </Typography>
     <Typography variant="body2">{mission.vehicleName}</Typography>
     {mission.driverName && (
-      <Typography variant="body2">راننده: {mission.driverName}</Typography>
+      <Typography variant="body2">
+        {i18n.t('راننده: {{name}}', { name: mission.driverName })}
+      </Typography>
     )}
     <Typography variant="body2">
-      {mission.originLocationName || '—'} ←{' '}
+      {/* فلش از مبدأ به مقصد: در فارسی (راست‌به‌چپ) ← و در انگلیسی → */}
+      {mission.originLocationName || '—'} {i18n.dir() === 'rtl' ? '←' : '→'}{' '}
       {mission.destinationLocationName || '—'}
     </Typography>
     <Typography variant="caption" color="text.secondary">
-      آخرین به‌روزرسانی:{' '}
-      {mission.recordedAt
-        ? new Date(mission.recordedAt).toLocaleString('fa-IR')
-        : '—'}
+      {i18n.t('آخرین به‌روزرسانی: {{time}}', {
+        time: mission.recordedAt ? formatDateTime(mission.recordedAt) : '—',
+      })}
     </Typography>
   </Popup>
 );
@@ -219,18 +223,18 @@ const ActiveVehiclesMapPanel = ({ open, onClose }) => {
         alignItems="center"
         sx={{ px: 3, py: 2, borderBottom: '1px solid', borderColor: 'divider' }}
       >
-        <Typography variant="h6" fontWeight={700}>
-          نقشه‌ی خودروهای در مأموریت
+        <Typography variant="cardTitle">
+          {i18n.t('نقشه‌ی خودروهای در مأموریت')}
         </Typography>
 
-        <IconButton onClick={onClose}>
+        <IconButton onClick={onClose} aria-label={i18n.t('بستن')}>
           <CloseIcon />
         </IconButton>
       </Stack>
 
       {!loading && missions.length === 0 && (
         <Alert severity="info" sx={{ m: 2 }}>
-          هیچ موقعیت مکانی ثبت‌شده‌ای برای خودروهای در مأموریت وجود ندارد.
+          {i18n.t('هیچ موقعیت مکانی ثبت‌شده‌ای برای خودروهای در مأموریت وجود ندارد.')}
         </Alert>
       )}
 
@@ -264,7 +268,7 @@ const ActiveVehiclesMapPanel = ({ open, onClose }) => {
                 <Marker position={mission.origin} icon={mission.icons.origin}>
                   <MissionPopup
                     mission={mission}
-                    title={`مبدا: ${mission.originLocationName || ''}`}
+                    title={i18n.t('مبدا: {{name}}', { name: mission.originLocationName || '' })}
                   />
                 </Marker>
               )}
@@ -276,7 +280,7 @@ const ActiveVehiclesMapPanel = ({ open, onClose }) => {
                 >
                   <MissionPopup
                     mission={mission}
-                    title={`مقصد: ${mission.destinationLocationName || ''}`}
+                    title={i18n.t('مقصد: {{name}}', { name: mission.destinationLocationName || '' })}
                   />
                 </Marker>
               )}
@@ -306,7 +310,7 @@ const ActiveVehiclesMapPanel = ({ open, onClose }) => {
                       {mission.missionCode}
                     </Typography>
                     <Typography variant="caption" color="text.secondary">
-                      {new Date(point.recordedAt).toLocaleString('fa-IR')}
+                      {formatDateTime(point.recordedAt)}
                     </Typography>
                   </Popup>
                 </CircleMarker>
@@ -318,7 +322,7 @@ const ActiveVehiclesMapPanel = ({ open, onClose }) => {
                   icon={mission.icons.vehicle}
                   zIndexOffset={1000}
                 >
-                  <MissionPopup mission={mission} title="موقعیت فعلی" />
+                  <MissionPopup mission={mission} title={i18n.t('موقعیت فعلی')} />
                 </Marker>
               )}
             </React.Fragment>
@@ -363,7 +367,7 @@ const ActiveVehiclesMapPanel = ({ open, onClose }) => {
                   </Typography>
                   {!mission.current && (
                     <Typography variant="caption" color="text.secondary">
-                      (بدون موقعیت)
+                      {i18n.t('(بدون موقعیت)')}
                     </Typography>
                   )}
                 </Stack>
@@ -392,7 +396,7 @@ const ActiveVehiclesMapPanel = ({ open, onClose }) => {
                   spacing={1}
                 >
                   <LegendShape type={type} />
-                  <Typography variant="caption">{label}</Typography>
+                  <Typography variant="caption">{i18n.t(label)}</Typography>
                 </Stack>
               ))}
             </Stack>

@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from "react";
+import React, { useState, memo, useCallback } from "react";
 
 import Box from "@mui/material/Box";
 
@@ -11,21 +11,26 @@ import FuelCardForm from "../components/FuelCardForm";
 import useFuelCard from "../hooks/useFuelCard";
 import { AppCard } from "@/components";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 const FuelCardCreatePage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { createFuelCard } = useFuelCard();
 
+  const [saveError, setSaveError] = useState(null);
+
   const handleSubmit = useCallback(
     async (values) => {
       console.log("Submit clicked");
       console.log(values);
       try {
+        setSaveError(null);
+
         const createdId = await createFuelCard(values);
         navigate(`/fuelCards`);
       } catch (error) {
-        console.error(error);
+        setSaveError(error);
       }
     },
     [createFuelCard, navigate],
@@ -38,7 +43,9 @@ const FuelCardCreatePage = () => {
       </Typography>
 
       <AppCard sx={{ p: 4 }}>
-        <FuelCardForm onSubmit={handleSubmit} />
+        <FormSaveErrorProvider error={saveError}>
+          <FuelCardForm onSubmit={handleSubmit} />
+        </FormSaveErrorProvider>
       </AppCard>
     </Box>
   );

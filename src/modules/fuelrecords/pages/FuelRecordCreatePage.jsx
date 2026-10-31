@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from "react";
+import React, { useState, memo, useCallback } from "react";
 
 import Box from "@mui/material/Box";
 
@@ -11,21 +11,26 @@ import FuelRecordForm from "../components/FuelRecordForm";
 import useFuelRecord from "../hooks/useFuelRecord";
 import { AppCard } from "@/components";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 const FuelRecordCreatePage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { createFuelRecord } = useFuelRecord();
 
+  const [saveError, setSaveError] = useState(null);
+
   const handleSubmit = useCallback(
     async (values) => {
       console.log("Submit clicked");
       console.log(values);
       try {
+        setSaveError(null);
+
         const createdId = await createFuelRecord(values);
         navigate(`/fuelRecords/edit/${createdId}`);
       } catch (error) {
-        console.error(error);
+        setSaveError(error);
       }
     },
     [createFuelRecord, navigate],
@@ -38,7 +43,9 @@ const FuelRecordCreatePage = () => {
       </Typography>
 
       <AppCard sx={{ p: 4 }}>
-        <FuelRecordForm onSubmit={handleSubmit} />
+        <FormSaveErrorProvider error={saveError}>
+          <FuelRecordForm onSubmit={handleSubmit} />
+        </FormSaveErrorProvider>
       </AppCard>
     </Box>
   );

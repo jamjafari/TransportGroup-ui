@@ -1,6 +1,9 @@
 import React, { memo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-import { Box, Typography, Alert } from '@mui/material';
+import { Box, Typography, Alert, Stack } from '@mui/material';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -9,8 +12,50 @@ import { getPostLoginRedirect } from '@/utils/authRedirect'; // ✅ اضافه �
 
 import { apiClient } from '@/services';
 import { useAuth } from '@/hooks';
+import toApiError from '@/services/apiError';
+import i18n from '@/i18n';
+import { STRONG_PASSWORD_RULES, isStrongPassword } from '@/validation';
+
+// پیام خطای سرور: هم { message } و هم خطای اعتبارسنجی { errors: { NewPassword: [...] } }
+// (مسیر تغییر اجباری مستقیم از axios می‌آید و پیام‌هایش در errors است، نه message)
+const serverErrorText = (err) => {
+  const data = err?.response?.data;
+  if (data?.message) return data.message;
+  if (data?.errors && typeof data.errors === 'object') {
+    return Object.values(data.errors).flat().filter(Boolean).join(' — ');
+  }
+  return err?.message;
+};
+
+// ✅ فهرست زنده‌ی شرط‌های رمز قوی زیر فیلد رمز جدید
+const PasswordChecklist = ({ password, confirmPassword }) => {
+  const { t } = useTranslation();
+
+  const items = [
+    ...STRONG_PASSWORD_RULES.map((rule) => ({ key: rule.key, label: rule.label, ok: rule.test(password) })),
+    { key: 'match', label: 'تکرار رمز با رمز جدید یکسان است', ok: !!password && password === confirmPassword },
+  ];
+
+  return (
+    <Stack spacing={0.5} sx={{ mt: -1 }} aria-live="polite">
+      {items.map((item) => (
+        <Stack key={item.key} direction="row" spacing={1} alignItems="center">
+          {item.ok ? (
+            <CheckCircleIcon fontSize="small" color="success" />
+          ) : (
+            <RadioButtonUncheckedIcon fontSize="small" color="disabled" />
+          )}
+          <Typography variant="bodyText" color={item.ok ? 'success.main' : 'text.secondary'}>
+            {t(item.label)}
+          </Typography>
+        </Stack>
+      ))}
+    </Stack>
+  );
+};
 
 const ChangePasswordPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const { forceChangePassword } = useAuth();
@@ -29,13 +74,13 @@ const ChangePasswordPage = () => {
   const handleSubmit = async () => {
     setError('');
 
-    if (newPassword.length < 6) {
-      setError('رمز عبور جدید باید حداقل ۶ کاراکتر باشد');
+    if (!isStrongPassword(newPassword)) {
+      setError(t('رمز عبور جدید شرایط لازم را ندارد؛ فهرست زیر فیلد را ببینید.'));
       return;
     }
 
     if (newPassword !== confirmPassword) {
-      setError('رمز عبور جدید و تکرار آن یکسان نیستند');
+      setError(t('رمز عبور جدید و تکرار آن یکسان نیستند'));
       return;
     }
 
@@ -62,7 +107,7 @@ const ChangePasswordPage = () => {
       });
 
       if (!response.success) {
-        throw new Error(response.errors?.[0] || 'خطا در تغییر رمز عبور');
+        throw toApiError(response, 'خطا در تغییر رمز عبور');
       }
 
       setSuccess(true);
@@ -70,7 +115,7 @@ const ChangePasswordPage = () => {
       setNewPassword('');
       setConfirmPassword('');
     } catch (err) {
-      setError(err.response?.data?.message || err.message);
+      setError(serverErrorText(err));
     } finally {
       setSubmitting(false);
     }
@@ -79,7 +124,7 @@ const ChangePasswordPage = () => {
   return (
     <Box sx={{ maxWidth: 480, mx: 'auto', py: 3 }}>
       <Typography variant="h5" fontWeight={700} mb={3}>
-        {isForced ? 'برای ادامه، رمز عبور خود را تغییر دهید' : 'تغییر رمز عبور'}
+        {t(isForced ? 'برای ادامه، رمز عبور خود را تغییر دهید' : 'تغییر رمز عبور')}
       </Typography>
 
       <AppCard sx={{ p: 4 }}>
@@ -90,7 +135,7 @@ const ChangePasswordPage = () => {
         )}
         {success && (
           <Alert severity="success" sx={{ mb: 2 }}>
-            رمز عبور با موفقیت تغییر کرد.
+            {i18n.t('رمز عبور با موفقیت تغییر کرد.')}
           </Alert>
         )}
 
@@ -119,15 +164,25 @@ const ChangePasswordPage = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
 
+          <PasswordChecklist password={newPassword} confirmPassword={confirmPassword} />
+
           <Box display="flex" justifyContent="flex-end" gap={2} mt={2}>
             {!isForced && (
               <AppButton variant="outlined" onClick={() => navigate(-1)}>
-                انصراف
+                {i18n.t('انصراف')}
               </AppButton>
             )}
 
-            <AppButton onClick={handleSubmit} loading={submitting}>
-              ثبت
+            <AppButton
+              onClick={handleSubmit}
+              loading={submitting}
+              disabled={
+                !currentPassword ||
+                !isStrongPassword(newPassword) ||
+                newPassword !== confirmPassword
+              }
+            >
+              {i18n.t('ثبت')}
             </AppButton>
           </Box>
         </Box>

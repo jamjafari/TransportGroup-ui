@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   Dialog,
@@ -34,6 +35,8 @@ const AppDialog = ({
 
   onClose,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <Dialog
       open={open}
@@ -58,11 +61,12 @@ const AppDialog = ({
 
               fontWeight={600}
             >
-              {title}
+              {/* ✅ عنوان رشته‌ای ترجمه می‌شود؛ عنوان‌هایی که صدازننده از قبل ترجمه کرده بی‌تغییر می‌مانند */}
+              {typeof title === 'string' ? t(title) : title}
             </Typography>
 
             {onClose && (
-              <IconButton onClick={onClose}>
+              <IconButton onClick={onClose} aria-label={t('بستن')}>
                 <CloseIcon />
               </IconButton>
             )}

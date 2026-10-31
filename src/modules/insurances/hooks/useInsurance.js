@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 
 import { useInsuranceContext } from '../context';
 import * as insuranceApi from '../api/insuranceApi';
+import toApiError from '@/services/apiError';
 
 const useInsurance = () => {
   const {
@@ -17,7 +18,7 @@ const useInsurance = () => {
 
   const unwrap = (response) => {
     if (!response.success) {
-      throw new Error(response.errors?.[0] || 'خطا در ارتباط با سرور');
+      throw toApiError(response, 'خطا در ارتباط با سرور');
     }
     return response.data;
   };

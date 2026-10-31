@@ -12,6 +12,7 @@ import { AppCard } from "@/components";
 
 import useLocation from "../hooks/useLocation";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 const LocationEditPage = () => {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -34,13 +35,17 @@ const LocationEditPage = () => {
     loadLocation();
   }, [id, getLocationById]);
 
+  const [saveError, setSaveError] = useState(null);
+
   const handleSubmit = useCallback(
     async (values) => {
       try {
+        setSaveError(null);
+
         await updateLocation(values);
         navigate("/locations");
       } catch (error) {
-        console.error(error);
+        setSaveError(error);
       }
     },
     [id, updateLocation, navigate],
@@ -57,7 +62,9 @@ const LocationEditPage = () => {
       </Typography>
 
       <AppCard sx={{ p: 4, mb: 3 }}>
-        <LocationForm initialValues={location} onSubmit={handleSubmit} />
+        <FormSaveErrorProvider error={saveError}>
+          <LocationForm initialValues={location} onSubmit={handleSubmit} />
+        </FormSaveErrorProvider>
       </AppCard>
     </Box>
   );

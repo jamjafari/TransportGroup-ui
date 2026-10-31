@@ -1,3 +1,5 @@
+import translateMessage from './translateMessage';
+
 export const validate = (schema, values) => {
   const errors = {};
 
@@ -9,7 +11,7 @@ export const validate = (schema, values) => {
       const error = rule(value, values);
 
       if (error) {
-        errors[field] = error;
+        errors[field] = translateMessage(error);
         break;
       }
     }

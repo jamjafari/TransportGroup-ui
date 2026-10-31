@@ -4,6 +4,7 @@ import { AppDataGrid, StatusChip } from "@/components";
 
 import { formatJalaliDate } from "@/utils";
 import { getStatusLabel } from "@/utils/statusLabels"; // ✅ اضافه شد
+import i18n from "@/i18n";
 import { useTranslatedColumns } from "../../../../../hooks";
 import {
   activityActionChipKey,
@@ -26,7 +27,7 @@ const ActivityReportTable = ({ rows = [], loading }) => {
       field: "type",
       headerName: "دسته",
       width: 130,
-      renderCell: ({ value }) => ACTIVITY_TYPE_LABELS[value] ?? value,
+      renderCell: ({ value }) => i18n.t(ACTIVITY_TYPE_LABELS[value] ?? value),
     },
     { field: "activity", headerName: "شرح فعالیت", flex: 1 },
     { field: "user", headerName: "کاربر", width: 160 },

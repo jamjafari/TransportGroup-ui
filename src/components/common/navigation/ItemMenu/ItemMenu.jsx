@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 
 import {
   Collapse,
@@ -61,14 +61,31 @@ const isDescendantActive = (item, pathname) => {
   );
 };
 
-const ItemMenu = ({ item, collapsed, level = 0 }) => {
+const ItemMenu = ({ item, collapsed, level = 0, open: openProp, onToggle }) => {
   // ✅ یک نقطه‌ی ترجمه برای کل منو: برچسب‌های menuItems فارسی‌اند و خودشان
   // کلید ترجمه هستند، پس همین t() هر ۳۰ آیتم منو را پوشش می‌دهد.
   const { t } = useTranslation();
 
   const location = useLocation();
-  const [open, setOpen] = useState(false);
   const [pressed, setPressed] = useState(false);
+
+  // ✅ باز/بسته بودن را والد کنترل می‌کند (AppMenu برای سطح اول، همین کامپوننت برای زیرمنوها)
+  // تا در هر سطح فقط یک منو باز باشد. اگر والد کنترل نکند، مثل قبل حالت محلی دارد.
+  const [localOpen, setLocalOpen] = useState(false);
+  const isControlled = typeof onToggle === 'function';
+  const open = isControlled ? Boolean(openProp) : localOpen;
+
+  const toggle = () => {
+    if (isControlled) onToggle(item.id);
+    else setLocalOpen((prev) => !prev);
+  };
+
+  // زیرمنوهای همین آیتم: باز شدن یکی، خواهرهایش را می‌بندد
+  const [openChildId, setOpenChildId] = useState(null);
+  const handleChildToggle = useCallback(
+    (id) => setOpenChildId((prev) => (prev === id ? null : id)),
+    [],
+  );
 
   const triggerPressEffect = () => {
     setPressed(true);
@@ -85,7 +102,7 @@ const ItemMenu = ({ item, collapsed, level = 0 }) => {
         <ListItemButton
           onClick={() => {
             triggerPressEffect();
-            setOpen((prev) => !prev);
+            toggle();
           }}
           disabled={item.disabled}
           sx={{
@@ -119,6 +136,8 @@ const ItemMenu = ({ item, collapsed, level = 0 }) => {
                   item={child}
                   collapsed={collapsed}
                   level={level + 1}
+                  open={openChildId === child.id}
+                  onToggle={handleChildToggle}
                 />
               ))}
             </List>

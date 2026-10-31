@@ -4,6 +4,7 @@ import { DashboardGrid, DashboardColumn, KpiCard } from "@/components";
 
 import useLatestActivitiesSummary from "./hooks/useLatestActivitiesSummary";
 import { useTranslation } from "react-i18next";
+import { formatNumber } from '@/utils';
 
 const LatestActivitiesReportSummary = () => {
   const { t } = useTranslation();
@@ -12,42 +13,42 @@ const LatestActivitiesReportSummary = () => {
   const summaryItems = [
     {
       title: "کل فعالیت‌ها",
-      value: Number(data.total ?? 0).toLocaleString("en-US"),
+      value: formatNumber(data.total ?? 0),
       color: "primary",
       icon: "report",
     },
 
     {
       title: "فعالیت‌های مأموریت",
-      value: Number(data.mission ?? 0).toLocaleString("en-US"),
+      value: formatNumber(data.mission ?? 0),
       color: "info",
       icon: "report",
     },
 
     {
       title: "فعالیت‌های سوخت",
-      value: Number(data.fuel ?? 0).toLocaleString("en-US"),
+      value: formatNumber(data.fuel ?? 0),
       color: "warning",
       icon: "fuel",
     },
 
     {
       title: "فعالیت‌های هزینه",
-      value: Number(data.expense ?? 0).toLocaleString("en-US"),
+      value: formatNumber(data.expense ?? 0),
       color: "secondary",
       icon: "money",
     },
 
     {
       title: "فعالیت‌های بیمه",
-      value: Number(data.insurance ?? 0).toLocaleString("en-US"),
+      value: formatNumber(data.insurance ?? 0),
       color: "success",
       icon: "insurance",
     },
 
     {
       title: "فعالیت‌های سرویس",
-      value: Number(data.service ?? 0).toLocaleString("en-US"),
+      value: formatNumber(data.service ?? 0),
       color: "error",
       icon: "service",
     },

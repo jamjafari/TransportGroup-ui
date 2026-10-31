@@ -9,6 +9,25 @@ const palette = (theme) => (theme.vars || theme).palette;
 // نکته: برای body نیازی به override نیست — خودِ CssBaseline رنگ پس‌زمینه و متن را
 // از background.default و text.primary می‌خواند و با تغییر حالت خودکار عوض می‌شود.
 const components = {
+  // ✅ عنصر HTML گونه‌های معنایی typography.js (بدون این، MUI همه را <span> می‌کرد)
+  MuiTypography: {
+    defaultProps: {
+      variantMapping: {
+        pageTitle: 'h1',
+        pageSubtitle: 'p',
+        sectionTitle: 'h2',
+        cardTitle: 'h3',
+        cardSubtitle: 'p',
+        statValue: 'p',
+        statLabel: 'p',
+        alertTitle: 'p',
+        tableHeader: 'span',
+        bodyText: 'p',
+        meta: 'span',
+      },
+    },
+  },
+
   MuiPaper: {
     styleOverrides: {
       root: {

@@ -14,6 +14,7 @@ import ResetPasswordDialog from '../components/ResetPasswordDialog';
 
 import { useTranslatedColumns } from "@/hooks";
 import { useTranslation } from "react-i18next";
+import i18n from '@/i18n';
 const UserListPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -41,7 +42,9 @@ const UserListPage = () => {
         field: 'roles',
         headerName: 'نقش‌ها',
         width: 200,
-        renderCell: ({ row }) => (row.roles || []).join('، '),
+        // نام نقش‌ها ترجمه و با ویرگولِ زبان فعال جدا می‌شوند
+        renderCell: ({ row }) =>
+          (row.roles || []).map((role) => i18n.t(role)).join(i18n.dir() === 'rtl' ? '، ' : ', '),
       },
       {
         field: 'isActive',
@@ -72,7 +75,7 @@ const UserListPage = () => {
                 navigate(`/admin/users/edit/${row.id}`);
               }}
             >
-              ویرایش
+              {i18n.t('ویرایش')}
             </AppButton>
 
             <AppButton
@@ -83,7 +86,7 @@ const UserListPage = () => {
                 setResetTarget(row);
               }}
             >
-              ریست رمز
+              {i18n.t('ریست رمز')}
             </AppButton>
 
             <AppButton
@@ -94,7 +97,7 @@ const UserListPage = () => {
                 setDeleteTarget(row);
               }}
             >
-              حذف
+              {i18n.t('حذف')}
             </AppButton>
           </>
         ),
@@ -109,7 +112,7 @@ const UserListPage = () => {
   return (
     <>
       <AppButton onClick={() => navigate('/admin/users/create')} sx={{ mb: 2 }}>
-        افزودن کاربر
+        {i18n.t('افزودن کاربر')}
       </AppButton>
 
       <AppDataGrid

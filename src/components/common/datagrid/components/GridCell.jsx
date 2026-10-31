@@ -2,8 +2,11 @@ import React, { memo } from 'react';
 
 import { TableCell, Typography } from '@mui/material';
 
-import StatusChip from '../../status/StatusChip';
+// ✅ همان StatusChip اصلی برنامه (با برچسب ترجمه‌شده از statusLabels)، نه نسخه‌ی قدیمی status/
+import StatusChip from '../../chips/StatusChip';
 import { ActionMenu } from '@/components';
+import { formatNumber, formatDate, formatDateTime } from '@/utils';
+import i18n from '@/i18n';
 
 const GridCell = ({ row, column }) => {
   const value = row[column.field];
@@ -25,28 +28,23 @@ const GridCell = ({ row, column }) => {
         return <ActionMenu row={row} actions={column.actions ?? []} />;
 
       case 'currency':
-        return Number(value ?? 0).toLocaleString();
+        return formatNumber(value ?? 0);
 
       case 'number':
-        return Number(value ?? 0).toLocaleString();
+        return formatNumber(value ?? 0);
 
       case 'date':
-        return value ? new Date(value).toLocaleDateString() : '-';
+        return value ? formatDate(value) : '-';
 
       case 'datetime':
-        return value ? new Date(value).toLocaleString() : '-';
+        return value ? formatDateTime(value) : '-';
 
       case 'boolean':
-        return value ? 'بله' : 'خیر';
+        return value ? i18n.t('بله') : i18n.t('خیر');
 
       default:
         return (
-          <Typography
-            sx={{ fontSize: '1rem', fontWeight: 600 }}
-            fontWeight={700}
-            variant="body2"
-            noWrap
-          >
+          <Typography variant="bodyText" noWrap>
             {value ?? '-'}
           </Typography>
         );
@@ -67,8 +65,8 @@ const GridCell = ({ row, column }) => {
         whiteSpace: 'nowrap',
 
         overflow: 'auto',
-        fontSize: '0.95rem',
-        fontWeight: 700,
+        // ✅ مقیاس مشترک: متن جدول 16px و وزن معمولی (قبلاً 15px پررنگ، هم‌وزن عنوان‌ها)
+        typography: 'bodyText',
         textOverflow: 'ellipsis',
 
         px: 2,

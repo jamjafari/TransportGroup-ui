@@ -1,4 +1,5 @@
 import { Paper, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 import { PieChart } from '@/components';
 
@@ -8,10 +9,12 @@ const FinancialExpenseChart = ({
     series: [],
   },
 }) => {
+  const { t } = useTranslation();
+
   return (
     <Paper sx={{ p: 2 }}>
-      <Typography variant="h4" mb={2}>
-        وضعیت هزینه ها
+      <Typography variant="cardTitle" mb={2}>
+        {t('وضعیت هزینه ها')}
       </Typography>
 
       <PieChart labels={data.labels} series={data.series} tooltip legend />

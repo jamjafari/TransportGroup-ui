@@ -5,6 +5,7 @@ import { Box, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 import { AppButton } from '@/components';
+import i18n from '@/i18n';
 
 const Forbidden = () => {
   const navigate = useNavigate();
@@ -21,15 +22,15 @@ const Forbidden = () => {
       }}
     >
       <Typography variant="h3" fontWeight={700} color="error">
-        ۴۰۳
+        {i18n.t('۴۰۳')}
       </Typography>
 
       <Typography variant="h6">
-        شما دسترسی لازم برای مشاهده‌ی این صفحه را ندارید
+        {i18n.t('شما دسترسی لازم برای مشاهده‌ی این صفحه را ندارید')}
       </Typography>
 
       <AppButton onClick={() => navigate('/dashboard')}>
-        بازگشت به داشبورد
+        {i18n.t('بازگشت به داشبورد')}
       </AppButton>
     </Box>
   );

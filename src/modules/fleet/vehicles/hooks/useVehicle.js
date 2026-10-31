@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 
 import { useVehicleContext } from '../context';
 import * as vehicleApi from '../api/vehicleApi';
+import toApiError from '@/services/apiError';
 
 const useVehicle = () => {
   const {
@@ -17,7 +18,7 @@ const useVehicle = () => {
 
   const unwrap = (response) => {
     if (!response.success) {
-      throw new Error(response.errors?.[0] || 'خطا در ارتباط با سرور');
+      throw toApiError(response, 'خطا در ارتباط با سرور');
     }
     return response.data;
   };

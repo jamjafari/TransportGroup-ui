@@ -1,5 +1,5 @@
 const phone =
-  (message = 'Invalid phone number') =>
+  (message = 'شماره تماس معتبر نیست') =>
   (value) => {
     if (!value) return null;
 

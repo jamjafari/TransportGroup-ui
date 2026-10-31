@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from "react";
+import React, { useState, memo, useCallback } from "react";
 
 import Box from "@mui/material/Box";
 
@@ -11,21 +11,26 @@ import ServiceForm from "../components/ServiceForm";
 import useService from "../hooks/useService";
 import { AppCard } from "@/components";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 const ServiceCreatePage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { createService } = useService();
 
+  const [saveError, setSaveError] = useState(null);
+
   const handleSubmit = useCallback(
     async (values) => {
       console.log("Submit clicked");
       console.log(values);
       try {
+        setSaveError(null);
+
         const createdId = await createService(values);
         navigate(`/services/edit/${createdId}`);
       } catch (error) {
-        console.error(error);
+        setSaveError(error);
       }
     },
     [createService, navigate],
@@ -38,7 +43,9 @@ const ServiceCreatePage = () => {
       </Typography>
 
       <AppCard sx={{ p: 4 }}>
-        <ServiceForm onSubmit={handleSubmit} />
+        <FormSaveErrorProvider error={saveError}>
+          <ServiceForm onSubmit={handleSubmit} />
+        </FormSaveErrorProvider>
       </AppCard>
     </Box>
   );

@@ -1,4 +1,5 @@
 import { Paper, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 import { AreaChart } from '@/components';
 
@@ -8,10 +9,12 @@ const FinancialMonthlyChart = ({
     series: [],
   },
 }) => {
+  const { t } = useTranslation();
+
   return (
     <Paper sx={{ p: 2 }}>
-      <Typography variant="h4" mb={2}>
-        هزینه های ماهانه
+      <Typography variant="cardTitle" mb={2}>
+        {t('هزینه های ماهانه')}
       </Typography>
 
       <AreaChart

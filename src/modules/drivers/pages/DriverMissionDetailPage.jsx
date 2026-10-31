@@ -12,6 +12,8 @@ import { AppCard, AppButton, StatusChip, AppSelect } from "@/components";
 import useDriverMissions from "../hooks/useDriverMissions";
 import useGeolocation from "../hooks/useGeolocation";
 import useAutoGpsTracking from "../hooks/useAutoGpsTracking";
+import i18n from '@/i18n';
+import { formatDateTime, formatNumber, getDateLocale } from '@/utils';
 const ENDED_STATUSES = [3, 4]; // Completed, Canceled
 
 const INTERVAL_OPTIONS = [
@@ -39,7 +41,9 @@ const DriverMissionDetailPage = () => {
   } = useGeolocation();
 
   const [submitting, setSubmitting] = useState(false);
-  const [message, setMessage] = useState("");
+  // ✅ نوع پیام جدا از متن نگه داشته می‌شود؛ قبلاً رنگ از وجود کلمه‌ی «موفقیت» در متن
+  // حدس زده می‌شد که با ترجمه‌ی پیام‌ها در انگلیسی پیام موفقیت را قرمز نشان می‌داد.
+  const [message, setMessage] = useState(null); // { severity: 'success' | 'error', text }
   const [intervalMinutes, setIntervalMinutes] = useState(5); // ✅ اضافه شد
 
   const mission = missions.find((m) => String(m.id) === String(id));
@@ -67,7 +71,7 @@ const DriverMissionDetailPage = () => {
   // ✅ اضافه شد — هشدار قبل از بستن/ترک صفحه وقتی ثبت خودکار فعال است
   useEffect(() => {
     if (!isTracking && autoError) {
-      setMessage(autoError);
+      setMessage({ severity: "error", text: autoError });
     }
   }, [isTracking, autoError]);
 
@@ -95,16 +99,16 @@ const DriverMissionDetailPage = () => {
   }, [lastRecordedAt, id, getGpsPoints]);
 
   const handleRecord = useCallback(async () => {
-    setMessage("");
+    setMessage(null);
     setSubmitting(true);
 
     try {
       const coords = await getCurrentPosition();
       await recordGpsPoint(id, coords);
-      setMessage("موقعیت با موفقیت ثبت شد.");
+      setMessage({ severity: "success", text: i18n.t("موقعیت با موفقیت ثبت شد.") });
       getGpsPoints(id);
     } catch (err) {
-      setMessage(err.message || "خطا در ثبت موقعیت");
+      setMessage({ severity: "error", text: err.message || i18n.t("خطا در ثبت موقعیت") });
     } finally {
       setSubmitting(false);
     }
@@ -114,25 +118,25 @@ const DriverMissionDetailPage = () => {
   return (
     <Box sx={{ maxWidth: 480, mx: "auto", p: 2 }}>
       <Typography variant="h6" fontWeight={700} mb={2}>
-        {mission?.missionCode || "مأموریت"}
+        {mission?.missionCode || i18n.t("مأموریت")}
       </Typography>
 
       {mission && (
         <AppCard sx={{ p: 2, mb: 2 }}>
           <Stack direction="row" justifyContent="space-between" mb={1}>
-            <Typography variant="body2">مبدا</Typography>
+            <Typography variant="body2">{i18n.t('مبدا')}</Typography>
             <Typography variant="body2" fontWeight={600}>
               {mission.originLocationName}
             </Typography>
           </Stack>
           <Stack direction="row" justifyContent="space-between" mb={1}>
-            <Typography variant="body2">مقصد</Typography>
+            <Typography variant="body2">{i18n.t('مقصد')}</Typography>
             <Typography variant="body2" fontWeight={600}>
               {mission.destinationLocationName}
             </Typography>
           </Stack>
           <Stack direction="row" justifyContent="space-between">
-            <Typography variant="body2">وضعیت</Typography>
+            <Typography variant="body2">{i18n.t('وضعیت')}</Typography>
             <StatusChip status={missionLabel(mission.status)} />
           </Stack>
         </AppCard>
@@ -140,17 +144,13 @@ const DriverMissionDetailPage = () => {
 
       {isEnded ? (
         <Alert severity="info" sx={{ mb: 3 }}>
-          این مأموریت به پایان رسیده است. امکان ثبت موقعیت جدید برای آن وجود
-          ندارد.
+          {i18n.t('این مأموریت به پایان رسیده است. امکان ثبت موقعیت جدید برای آن وجود ندارد.')}
         </Alert>
       ) : (
         <>
           {message && (
-            <Alert
-              severity={message.includes("موفقیت") ? "success" : "error"}
-              sx={{ mb: 2 }}
-            >
-              {message}
+            <Alert severity={message.severity} sx={{ mb: 2 }}>
+              {message.text}
             </Alert>
           )}
           {geoError && !message && (
@@ -172,19 +172,21 @@ const DriverMissionDetailPage = () => {
           {/* ✅ بخش جدید: ثبت خودکار */}
           <AppCard sx={{ p: 2, mb: 3 }}>
             <Typography variant="subtitle2" fontWeight={700} mb={2}>
-              ثبت خودکار موقعیت
+              {i18n.t('ثبت خودکار موقعیت')}
             </Typography>
 
             {isTracking ? (
               <Stack spacing={1.5}>
                 <Chip
                   color="success"
-                  label={`ثبت خودکار فعال — ${intervalMinutes} دقیقه یک‌بار`}
+                  label={i18n.t('ثبت خودکار فعال — {{minutes}} دقیقه یک‌بار', { minutes: intervalMinutes })}
                 />
 
                 {lastRecordedAt && (
                   <Typography variant="caption" color="text.secondary">
-                    آخرین ثبت: {lastRecordedAt.toLocaleTimeString("fa-IR")}
+                    {i18n.t("آخرین ثبت: {{time}}", {
+                      time: lastRecordedAt.toLocaleTimeString(getDateLocale().numberLocale),
+                    })}
                   </Typography>
                 )}
 
@@ -200,8 +202,7 @@ const DriverMissionDetailPage = () => {
                 ></AppButton>
 
                 <Alert severity="info" sx={{ fontSize: 12 }}>
-                  توجه: تا وقتی این صفحه باز و روشن باشد، ثبت خودکار ادامه دارد.
-                  با قفل کردن صفحه‌ی گوشی، ممکن است متوقف شود.
+                  {i18n.t('توجه: تا وقتی این صفحه باز و روشن باشد، ثبت خودکار ادامه دارد. با قفل کردن صفحه‌ی گوشی، ممکن است متوقف شود.')}
                 </Alert>
               </Stack>
             ) : (
@@ -227,14 +228,14 @@ const DriverMissionDetailPage = () => {
         </>
       )}
       <Typography variant="subtitle2" fontWeight={700} mb={1}>
-        تاریخچه‌ی موقعیت‌های ثبت‌شده ({points.length})
+        {i18n.t("تاریخچه‌ی موقعیت‌های ثبت‌شده ({{total}})", { total: formatNumber(points.length) })}
       </Typography>
 
       <Stack spacing={1}>
         {points.map((point) => (
           <AppCard key={point.id} sx={{ p: 1.5 }}>
             <Typography variant="caption" color="text.secondary">
-              {new Date(point.recordedAt).toLocaleString("fa-IR")}
+              {formatDateTime(point.recordedAt)}
             </Typography>
             <Typography variant="body2">
               {point.latitude.toFixed(5)}, {point.longitude.toFixed(5)}

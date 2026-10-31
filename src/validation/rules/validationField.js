@@ -1,3 +1,5 @@
+import translateMessage from './translateMessage';
+
 const validateField = (
   value,
 
@@ -7,7 +9,7 @@ const validateField = (
     const error = rule(value);
 
     if (error) {
-      return error;
+      return translateMessage(error);
     }
   }
 

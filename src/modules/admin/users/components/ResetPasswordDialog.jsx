@@ -1,4 +1,5 @@
 import React, { memo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Alert, Stack } from "@mui/material";
 
@@ -8,6 +9,7 @@ import { AppTextField, AppSwitch, AppButton } from "@/components";
 import useUser from "../hooks/useUser";
 
 const ResetPasswordDialog = ({ open, user, onClose }) => {
+  const { t } = useTranslation();
   const { resetPassword } = useUser();
 
   const [newPassword, setNewPassword] = useState("");
@@ -17,7 +19,7 @@ const ResetPasswordDialog = ({ open, user, onClose }) => {
 
   const handleSubmit = async () => {
     if (newPassword.length < 6) {
-      setError("رمز عبور باید حداقل ۶ کاراکتر باشد");
+      setError(t("رمز عبور باید حداقل ۶ کاراکتر باشد"));
       return;
     }
 
@@ -38,7 +40,7 @@ const ResetPasswordDialog = ({ open, user, onClose }) => {
   return (
     <AppDialog
       open={open}
-      title={`ریست رمز عبور — ${user?.userName || ""}`}
+      title={t('ریست رمز عبور — {{name}}', { name: user?.userName || "" })}
       onClose={onClose}
       maxWidth="xs"
       actions={

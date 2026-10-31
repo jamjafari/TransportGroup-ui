@@ -9,20 +9,21 @@ import { useNavigate } from "react-router-dom";
 import VendorForm from "../components/VendorForm";
 
 import useVendor from "../hooks/useVendor";
-import { AppCard, AppAlert } from "@/components";
+import { AppCard } from "@/components";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 const VendorCreatePage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { createVendor } = useVendor();
 
-  const [submitError, setSubmitError] = useState("");
+  const [submitError, setSubmitError] = useState(null);
 
   const handleSubmit = useCallback(
     async (values) => {
       try {
-        setSubmitError("");
+        setSubmitError(null);
 
         const createdId = await createVendor(values);
 
@@ -30,7 +31,7 @@ const VendorCreatePage = () => {
       } catch (error) {
         console.error("Create user error:", error);
 
-        setSubmitError(error?.message || "خطا در ایجاد کاربر");
+        setSubmitError(error);
       }
     },
     [createVendor, navigate],
@@ -41,18 +42,10 @@ const VendorCreatePage = () => {
       <Typography variant="h5" fontWeight={700} mb={3}>
         {t("افزودن تامین کننده")}
       </Typography>
-      {submitError && (
-        <AppAlert
-          open={!!submitError}
-          severity="error"
-          title="خطا"
-          onClose={() => setSubmitError("")}
-        >
-          {submitError}
-        </AppAlert>
-      )}
       <AppCard sx={{ p: 4 }}>
-        <VendorForm onSubmit={handleSubmit} />
+        <FormSaveErrorProvider error={submitError}>
+          <VendorForm onSubmit={handleSubmit} />
+        </FormSaveErrorProvider>
       </AppCard>
     </Box>
   );

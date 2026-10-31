@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 
 import { useVendorContext } from '../context';
 import * as vendorApi from '../api/vendorApi';
+import toApiError from '@/services/apiError';
 
 const useVendor = () => {
   const {
@@ -17,7 +18,7 @@ const useVendor = () => {
 
   const unwrap = (response) => {
     if (!response.success) {
-      throw new Error(response.errors?.[0] || 'خطا در ارتباط با سرور');
+      throw toApiError(response, 'خطا در ارتباط با سرور');
     }
     return response.data;
   };

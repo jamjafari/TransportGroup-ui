@@ -42,10 +42,10 @@ const DashboardError = ({ title, description, onRetry }) => {
           }}
         />
 
-        <Typography variant="h6">{t(title)}</Typography>
+        <Typography variant="cardTitle">{t(title)}</Typography>
 
         <Typography
-          variant="body2"
+          variant="cardSubtitle"
 
           color="text.secondary"
 

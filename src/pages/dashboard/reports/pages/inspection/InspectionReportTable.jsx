@@ -7,6 +7,7 @@ import { INSPECTION_RESULT_OPTIONS } from "@/modules";
 import { ATTACHMENT_OWNER_TYPE } from "@/constants/attachmentTypes";
 import { getStatusLabel } from "@/utils/statusLabels"; // ✅ اضافه شد
 import { useTranslatedColumns } from "../../../../../hooks";
+import i18n from '@/i18n';
 const InspectionReportTable = ({ rows = [], loading }) => {
   const inspectionStatus = useCallback((value) => {
     switch (Number(value)) {
@@ -43,7 +44,7 @@ const InspectionReportTable = ({ rows = [], loading }) => {
       headerName: "روز باقی‌مانده",
       flex: 1,
       renderCell: ({ value }) =>
-        value < 0 ? `${Math.abs(value)} روز پیش` : `${value} روز`,
+        value < 0 ? i18n.t('{{count}} روز پیش', { count: Math.abs(value) }) : i18n.t('{{count}} روز', { count: value }),
     },
 
     {
@@ -70,7 +71,7 @@ const InspectionReportTable = ({ rows = [], loading }) => {
         <AttachmentsButton
           ownerType={ATTACHMENT_OWNER_TYPE.INSPECTION}
           ownerId={row.id}
-          title={`مدارک معاینه فنی — ${row.plateNumber}`}
+          title={i18n.t('مدارک معاینه فنی — {{name}}', { name: row.plateNumber })}
         />
       ),
     },

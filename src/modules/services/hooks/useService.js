@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 
 import { useServiceContext } from '../context';
 import * as serviceApi from '../api/serviceApi';
+import toApiError from '@/services/apiError';
 
 const useService = () => {
   const {
@@ -17,7 +18,7 @@ const useService = () => {
 
   const unwrap = (response) => {
     if (!response.success) {
-      throw new Error(response.errors?.[0] || 'خطا در ارتباط با سرور');
+      throw toApiError(response, 'خطا در ارتباط با سرور');
     }
     return response.data;
   };

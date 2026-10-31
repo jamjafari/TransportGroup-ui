@@ -20,6 +20,7 @@ import FleetAlerts from './components/FleetAlerts';
 import FleetStatusChart from './charts/FleetStatusChart';
 import FleetFuelChart from './charts/FleetFuelChart';
 import FleetExpenseChart from './charts/FleetExpenseChart';
+import i18n from '@/i18n';
 
 const FleetReportPage = () => {
   const { data, loading, error } = useFleetReport();
@@ -32,7 +33,7 @@ const FleetReportPage = () => {
 
       {loading && <AppLoader />}
 
-      {!loading && error && <div>خطا در دریافت اطلاعات گزارش ناوگان</div>}
+      {!loading && error && <div>{i18n.t('خطا در دریافت اطلاعات گزارش ناوگان')}</div>}
 
       {!loading && !error && data && (
         <>

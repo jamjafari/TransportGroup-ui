@@ -2,6 +2,7 @@ import React, { memo } from "react";
 
 import { DashboardGrid, DashboardColumn, KpiCard } from "@/components";
 import { useTranslation } from "react-i18next";
+import { formatNumber } from '@/utils';
 
 const FleetKPI = ({ kpi = {} }) => {
   const { t } = useTranslation();
@@ -39,7 +40,7 @@ const FleetKPI = ({ kpi = {} }) => {
     {
       title: "میانگین کارکرد",
 
-      value: `${Number(kpi.averageKm ?? 0).toLocaleString("en-US")} Km`,
+      value: t("{{km}} کیلومتر", { km: formatNumber(kpi.averageKm ?? 0) }),
 
       color: "info",
 
@@ -49,7 +50,7 @@ const FleetKPI = ({ kpi = {} }) => {
     {
       title: "هزینه در هر 1000 کیلومتر",
 
-      value: Number(kpi.costPerKm ?? 0).toLocaleString("en-US"),
+      value: formatNumber(kpi.costPerKm ?? 0),
 
       color: "error",
 

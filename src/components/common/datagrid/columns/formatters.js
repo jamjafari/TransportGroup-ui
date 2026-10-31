@@ -1,3 +1,7 @@
+import i18n from '@/i18n';
+import { formatNumber, formatDate } from '@/utils';
+
+// ✅ عدد و تاریخ با زبان فعال (نه زبان مرورگر)؛ بله/خیر هم ترجمه می‌شود
 export const formatValue = (value, type) => {
   if (value === null || value === undefined) {
     return '-';
@@ -5,13 +9,13 @@ export const formatValue = (value, type) => {
 
   switch (type) {
     case 'number':
-      return new Intl.NumberFormat().format(value);
+      return formatNumber(value);
 
     case 'date':
-      return new Date(value).toLocaleDateString();
+      return formatDate(value);
 
     case 'boolean':
-      return value ? 'Yes' : 'No';
+      return value ? i18n.t('بله') : i18n.t('خیر');
 
     default:
       return value;

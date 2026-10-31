@@ -9,6 +9,7 @@ import useInspectionReport from './hooks/useInspectionReport';
 import InspectionReportSummary from './InspectionReportSummary';
 import InspectionReportTable from './InspectionReportTable';
 import ReportLayout from '../../components/ReportLayout';
+import i18n from '@/i18n';
 
 const InspectionReportPage = () => {
   const { data, loading, error } = useInspectionReport();
@@ -21,7 +22,7 @@ const InspectionReportPage = () => {
 
       {loading && <AppLoader />}
 
-      {!loading && error && <div>خطا در دریافت اطلاعات گزارش بیمه</div>}
+      {!loading && error && <div>{i18n.t('خطا در دریافت اطلاعات گزارش بیمه')}</div>}
 
       {!loading && !error && data && (
         <>

@@ -3,6 +3,8 @@ import React, { memo, useMemo } from 'react';
 import Grid from '@mui/material/Grid';
 
 import { AppFormSection, AppTextField } from '@/components';
+import i18n from '@/i18n';
+import { formatNumber } from '@/utils';
 
 const InspectionDetailsSection = ({ values, errors, onChange, vehicles }) => {
   const selectedVehicle = useMemo(
@@ -35,8 +37,8 @@ const InspectionDetailsSection = ({ values, errors, onChange, vehicles }) => {
             helperText={
               errors?.odometerKM ||
               (selectedVehicle
-                ? `کارکرد فعلی ثبت‌شده: ${selectedVehicle.currentKM?.toLocaleString() ?? '—'} کیلومتر`
-                : 'ابتدا خودرو را انتخاب کنید')
+                ? i18n.t('کارکرد فعلی ثبت‌شده: {{km}} کیلومتر', { km: formatNumber(selectedVehicle.currentKM) })
+                : i18n.t('ابتدا خودرو را انتخاب کنید'))
             }
           />
         </Grid>

@@ -1,10 +1,11 @@
 import React, { memo } from "react";
 
 import { StatusChip, AppDataGrid, AttachmentsButton } from "@/components";
-import { formatJalaliDate } from "@/utils";
+import { formatJalaliDate, formatNumber } from "@/utils";
 import { ATTACHMENT_OWNER_TYPE } from "@/constants/attachmentTypes";
 import { getStatusLabel } from "@/utils/statusLabels"; // ✅ اضافه شد
 import { useTranslatedColumns } from "../../../../../hooks";
+import i18n from '@/i18n';
 const baseColumns = [
   { field: "plateNumber", headerName: "پلاک", flex: 1 },
   { field: "vehicleName", headerName: "نام خودرو", flex: 1.5 },
@@ -28,7 +29,7 @@ const baseColumns = [
     headerName: "هزینه",
     flex: 1.2,
     renderCell: ({ value }) =>
-      value != null ? Number(value).toLocaleString("fa-IR") : "—",
+      value != null ? formatNumber(value) : "—",
   },
   {
     field: "status",
@@ -45,7 +46,7 @@ const baseColumns = [
       <AttachmentsButton
         ownerType={ATTACHMENT_OWNER_TYPE.VEHICLE_SERVICE}
         ownerId={row.id}
-        title={`مدارک سرویس — ${row.serviceType}`}
+        title={i18n.t('مدارک سرویس — {{name}}', { name: row.serviceType })}
       />
     ),
   },

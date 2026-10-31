@@ -8,6 +8,7 @@ import { missionStatusOptions } from '../constants';
 import { AppCard, StatusChip, AppLoader } from '@/components';
 
 import useDriverMissions from '../hooks/useDriverMissions';
+import i18n from '@/i18n';
 
 const ENDED_STATUSES = [3, 4]; // Completed, Canceled — ✅ اگه اسم Enum فرق داشت این اعداد را هم اصلاح کنید
 
@@ -30,12 +31,12 @@ const DriverMissionsPage = () => {
   return (
     <Box sx={{ maxWidth: 480, mx: 'auto', p: 2 }}>
       <Typography variant="h6" fontWeight={700} mb={2}>
-        مأموریت‌های من
+        {i18n.t('مأموریت‌های من')}
       </Typography>
 
       {missions.length === 0 && (
         <Typography variant="body2" color="text.secondary">
-          هیچ مأموریتی برای شما ثبت نشده است.
+          {i18n.t('هیچ مأموریتی برای شما ثبت نشده است.')}
         </Typography>
       )}
 

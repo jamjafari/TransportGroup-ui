@@ -13,6 +13,7 @@ import { AppCard } from "@/components";
 
 import useInsurance from "../hooks/useInsurance";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 const InsuranceEditPage = () => {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -43,13 +44,17 @@ const InsuranceEditPage = () => {
     loadInsurance();
   }, [id, getInsuranceById]);
 
+  const [saveError, setSaveError] = useState(null);
+
   const handleSubmit = useCallback(
     async (values) => {
       try {
+        setSaveError(null);
+
         await updateInsurance(values);
         navigate("/insurances");
       } catch (error) {
-        console.error(error);
+        setSaveError(error);
       }
     },
     [id, updateInsurance, navigate],
@@ -66,7 +71,9 @@ const InsuranceEditPage = () => {
       </Typography>
 
       <AppCard sx={{ p: 4, mb: 3 }}>
-        <InsuranceForm initialValues={insurance} onSubmit={handleSubmit} />
+        <FormSaveErrorProvider error={saveError}>
+          <InsuranceForm initialValues={insurance} onSubmit={handleSubmit} />
+        </FormSaveErrorProvider>
       </AppCard>
 
       <AppCard sx={{ p: 4 }}>

@@ -4,6 +4,7 @@ import { DashboardGrid, DashboardColumn, KpiCard } from "@/components";
 
 import useMissionSummary from "./hooks/useMissionSummary";
 import { useTranslation } from "react-i18next";
+import { formatNumber } from '@/utils';
 
 const MissionReportSummary = () => {
   const { t } = useTranslation();
@@ -12,28 +13,28 @@ const MissionReportSummary = () => {
   const summaryItems = [
     {
       title: "کل مأموریت‌ها",
-      value: Number(data.total ?? 0).toLocaleString("en-US"),
+      value: formatNumber(data.total ?? 0),
       color: "primary",
       icon: "report",
       subtitle: "در بازه‌ی انتخاب‌شده",
     },
     {
       title: "انجام شده",
-      value: Number(data.completed ?? 0).toLocaleString("en-US"),
+      value: formatNumber(data.completed ?? 0),
       color: "success",
       icon: "check",
       percent: data.total ? (data.completed / data.total) * 100 : 0,
     },
     {
       title: "در حال انجام",
-      value: Number(data.running ?? 0).toLocaleString("en-US"),
+      value: formatNumber(data.running ?? 0),
       color: "info",
       icon: "vehicle",
       percent: data.total ? (data.running / data.total) * 100 : 0,
     },
     {
       title: "لغو شده",
-      value: Number(data.cancelled ?? 0).toLocaleString("en-US"),
+      value: formatNumber(data.cancelled ?? 0),
       color: "error",
       icon: "expired",
       percent: data.total ? (data.cancelled / data.total) * 100 : 0,

@@ -1,5 +1,17 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import i18n from '@/i18n';
+
+// ✅ پیام‌های سرور که یعنی «دیگر ثبت نکن» (مأموریت پایان یافته / به این راننده تخصیص ندارد).
+// پاسخ سرور کد خطای جدا ندارد، پس متن هر دو زبان بررسی می‌شود؛ پیام‌های بک‌اند از
+// Localized.Text در MissionService می‌آیند و با تغییر آن‌ها این فهرست هم باید به‌روز شود.
+const STOP_TRACKING_MESSAGES = [
+  'پایان رسیده',
+  'تخصیص داده نشده',
+  'has ended',
+  'not assigned to you',
+];
+
 const useAutoGpsTracking = ({
   missionId,
   intervalMinutes,
@@ -27,11 +39,11 @@ const useAutoGpsTracking = ({
       setLastRecordedAt(new Date());
       setError('');
     } catch (err) {
-      const msg = err.message || 'خطا در ثبت خودکار موقعیت';
+      const msg = err.message || i18n.t('خطا در ثبت خودکار موقعیت');
       setError(msg);
 
       // ✅ اضافه شد — اگر مأموریت در همین حین توسط دفتردار پایان‌یافته/لغو شده، ثبت خودکار را متوقف کن
-      if (msg.includes('پایان رسیده') || msg.includes('تخصیص داده نشده')) {
+      if (STOP_TRACKING_MESSAGES.some((part) => msg.includes(part))) {
         stop();
       }
     }

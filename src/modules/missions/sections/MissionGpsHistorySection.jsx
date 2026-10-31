@@ -8,6 +8,7 @@ import { AppFormSection, AppButton } from '@/components';
 import { formatJalaliDate } from '@/utils';
 
 import useMissionGps from '../hooks/useMissionGps';
+import i18n from '@/i18n';
 
 const MissionGpsHistorySection = ({ missionId }) => {
   const { points, loading, getGpsPoints } = useMissionGps();
@@ -26,13 +27,13 @@ const MissionGpsHistorySection = ({ missionId }) => {
     <AppFormSection title="تاریخچه‌ی موقعیت مکانی (GPS)" divider>
       {loading && (
         <Typography variant="body2" color="text.secondary">
-          در حال بارگذاری...
+          {i18n.t('در حال بارگذاری...')}
         </Typography>
       )}
 
       {!loading && points.length === 0 && (
         <Typography variant="body2" color="text.secondary">
-          هیچ موقعیتی برای این مأموریت ثبت نشده است.
+          {i18n.t('هیچ موقعیتی برای این مأموریت ثبت نشده است.')}
         </Typography>
       )}
 
@@ -53,7 +54,7 @@ const MissionGpsHistorySection = ({ missionId }) => {
             <Stack direction="row" alignItems="center" spacing={1}>
               <Chip
                 size="small"
-                label={`نقطه ${index + 1}`}
+                label={i18n.t('نقطه {{number}}', { number: index + 1 })}
                 icon={<RoomIcon />}
               />
 
@@ -72,7 +73,7 @@ const MissionGpsHistorySection = ({ missionId }) => {
               startIcon={<OpenInNewIcon />}
               onClick={() => openInMap(point.latitude, point.longitude)}
             >
-              نقشه
+              {i18n.t('نقشه')}
             </AppButton>
           </Box>
         ))}

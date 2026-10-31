@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 
 import { AppSelectPropTypes, AppSelectDefaultProps } from './AppSelect.types';
+import useTranslatedField from '@/components/common/forms/useTranslatedField';
 
 const AppSelect = ({
   label,
@@ -22,6 +23,11 @@ const AppSelect = ({
   onChange,
   renderAsStatus = false,
 }) => {
+  // ✅ مثل AppSelectform: برچسب و عنوان گزینه‌ها ترجمه می‌شوند (StatusChip خودش ترجمه می‌کند)
+  const { tr } = useTranslatedField();
+
+  const translatedLabel = tr(label);
+
   return (
     <Box
       sx={{
@@ -36,17 +42,17 @@ const AppSelect = ({
         required={required}
         disabled={disabled || loading}
       >
-        <InputLabel>{label}</InputLabel>
+        <InputLabel>{translatedLabel}</InputLabel>
 
         <Select
           value={value ?? ''}
-          label={label}
+          label={translatedLabel}
           onChange={(event) => onChange(event.target.value)}
           renderValue={(selected) => {
             if (!renderAsStatus) {
               const item = items.find((x) => x.id === selected);
 
-              return item?.title ?? '';
+              return tr(item?.title) ?? '';
             }
 
             return <StatusChip status={selected} />;
@@ -59,7 +65,7 @@ const AppSelect = ({
           ) : (
             items.map((item) => (
               <MenuItem key={item.id} value={item.id}>
-                {renderAsStatus ? <StatusChip status={item.id} /> : item.title}
+                {renderAsStatus ? <StatusChip status={item.id} /> : tr(item.title)}
               </MenuItem>
             ))
           )}

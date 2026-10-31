@@ -6,6 +6,7 @@ import {
   AppAutocompletePropTypes,
   AppAutocompleteDefaultProps,
 } from './AppAutoComplete.types';
+import useTranslatedField from '@/components/common/forms/useTranslatedField';
 
 const AppAutoComplete = ({
   label,
@@ -17,6 +18,10 @@ const AppAutoComplete = ({
 
   onChange,
 }) => {
+  // ✅ مثل AppAutocompleteform: ترجمه در getOptionLabel، نه با ساختن آرایه‌ی تازه‌ی options
+  // (Autocomplete گزینه‌ها را با هویت شیء مقایسه می‌کند)
+  const { tr } = useTranslatedField();
+
   const selectedItem = options.find((item) => item.id === value) ?? null;
 
   return (
@@ -33,13 +38,13 @@ const AppAutoComplete = ({
         loading={loading}
         options={options}
         value={selectedItem}
-        getOptionLabel={(option) => option.title}
+        getOptionLabel={(option) => tr(option?.title) ?? ''}
         onChange={(_, option) => onChange(option?.id ?? null)}
         renderInput={(params) => (
           <TextField
             {...params}
 
-            label={label}
+            label={tr(label)}
             required={required}
             InputProps={{
               ...params.InputProps,

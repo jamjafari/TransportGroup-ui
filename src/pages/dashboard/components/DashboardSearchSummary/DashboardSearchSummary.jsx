@@ -5,6 +5,7 @@ import { Stack, Chip, Typography } from '@mui/material';
 import useDashboardSearch from '../../hooks/useDashboardSearch';
 
 import { buildDashboardSearchSummary } from '../../utils/DashboardSearchSummary.utils';
+import i18n from '@/i18n';
 
 const DashboardSearchSummary = () => {
   const {
@@ -42,14 +43,14 @@ const DashboardSearchSummary = () => {
   return (
     <Stack spacing={1}>
       <Typography variant="subtitle2" fontWeight={600}>
-        فیلترهای فعال
+        {i18n.t('فیلترهای فعال')}
       </Typography>
 
       <Stack direction="row" spacing={1} flexWrap="wrap">
         {summary.map((item) => (
           <Chip
             key={item.label}
-            label={`${item.label} : ${item.value}`}
+            label={`${i18n.t(item.label)} : ${typeof item.value === 'string' ? i18n.t(item.value) : item.value}`}
             size="small"
           />
         ))}

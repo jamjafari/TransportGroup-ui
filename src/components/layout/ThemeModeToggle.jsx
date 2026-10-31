@@ -4,6 +4,8 @@ import { useColorScheme } from '@mui/material/styles';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 
+import i18n from '@/i18n';
+
 // ✅ تغییر حالت روشن/تیره.
 // حالت انتخاب‌شده را MUI خودش در localStorage ذخیره می‌کند (کلید mui-mode)،
 // پس نیازی به نگه‌داری دستی آن نیست.
@@ -19,7 +21,7 @@ const ThemeModeToggle = () => {
   // وقتی mode برابر 'system' است، حالت واقعی را systemMode مشخص می‌کند
   const isDark = (mode === 'system' ? systemMode : mode) === 'dark';
 
-  const label = isDark ? 'حالت روشن' : 'حالت تیره';
+  const label = i18n.t(isDark ? 'حالت روشن' : 'حالت تیره');
 
   return (
     <Tooltip title={label}>

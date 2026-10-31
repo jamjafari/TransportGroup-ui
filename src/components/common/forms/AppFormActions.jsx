@@ -8,11 +8,14 @@ import {
   AppFormActionsPropTypes,
   AppFormActionsDefaultProps,
 } from './AppFormActions.types';
+import FormSaveErrorAlert from './FormSaveError';
 
 const AppFormActions = ({ children, align, spacing, divider }) => {
   return (
     <Box>
       {divider && <Box borderTop="1px solid" borderColor="divider" mb={2} />}
+
+      <FormSaveErrorAlert />
 
       <Stack direction="row" spacing={spacing} justifyContent={align}>
         {children}

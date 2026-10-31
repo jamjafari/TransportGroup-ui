@@ -2,7 +2,6 @@ import React, { memo, useCallback } from "react";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Alert from "@mui/material/Alert";
 
 import { useNavigate } from "react-router-dom";
 
@@ -11,21 +10,22 @@ import useAccident from "../hooks/useAccident";
 import { AppCard } from "@/components";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 const AccidentCreatePage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { createAccident } = useAccident();
-  const [submitError, setSubmitError] = useState("");
+  const [submitError, setSubmitError] = useState(null);
 
   const handleSubmit = useCallback(
     async (values) => {
       try {
-        setSubmitError("");
+        setSubmitError(null);
 
         const createdId = await createAccident(values);
         navigate(`/accidents/edit/${createdId}`);
       } catch (error) {
-        setSubmitError(error.message);
+        setSubmitError(error);
       }
     },
     [createAccident, navigate],
@@ -37,14 +37,10 @@ const AccidentCreatePage = () => {
         {t("ثبت تصادف")}
       </Typography>
 
-      {submitError && (
-        <Alert severity="error" sx={{ mb: 2 }}>
-          {submitError}
-        </Alert>
-      )}
-
       <AppCard sx={{ p: 4 }}>
-        <AccidentForm onSubmit={handleSubmit} />
+        <FormSaveErrorProvider error={submitError}>
+          <AccidentForm onSubmit={handleSubmit} />
+        </FormSaveErrorProvider>
       </AppCard>
     </Box>
   );

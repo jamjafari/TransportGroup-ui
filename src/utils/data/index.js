@@ -3,6 +3,7 @@ export {
   gregorianYearToJalali,
   formatJalaliDate,
   formatDate,
+  formatDateTime,
   getRollingJalaliMonths,
   getRollingMonths,
   getJalaliYearMonth,

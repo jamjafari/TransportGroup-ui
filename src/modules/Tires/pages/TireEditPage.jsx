@@ -12,6 +12,7 @@ import { AppCard } from "@/components";
 
 import useTire from "../hooks/useTire";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 const TireEditPage = () => {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -36,13 +37,17 @@ const TireEditPage = () => {
     loadTire();
   }, [id, getTireById]);
 
+  const [saveError, setSaveError] = useState(null);
+
   const handleSubmit = useCallback(
     async (values) => {
       try {
+        setSaveError(null);
+
         await updateTire(values);
         navigate("/tires");
       } catch (error) {
-        console.error(error);
+        setSaveError(error);
       }
     },
     [id, updateTire, navigate],
@@ -59,7 +64,9 @@ const TireEditPage = () => {
       </Typography>
 
       <AppCard sx={{ p: 4, mb: 3 }}>
-        <TireForm initialValues={tire} onSubmit={handleSubmit} />
+        <FormSaveErrorProvider error={saveError}>
+          <TireForm initialValues={tire} onSubmit={handleSubmit} />
+        </FormSaveErrorProvider>
       </AppCard>
     </Box>
   );

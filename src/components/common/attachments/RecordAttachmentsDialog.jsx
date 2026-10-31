@@ -1,4 +1,5 @@
 import React, { memo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   Stack,
@@ -30,6 +31,7 @@ const RecordAttachmentsDialog = ({
   ownerId,
   title = 'مدارک',
 }) => {
+  const { t } = useTranslation();
   const { attachments, loading } = useAttachments(
     ownerType,
     open ? ownerId : null,
@@ -61,15 +63,16 @@ const RecordAttachmentsDialog = ({
 
   return (
     <>
-      <AppDialog open={open} title={title} onClose={onClose} maxWidth="sm">
+      {/* عنوان صفحه‌های گزارش از قبل ترجمه شده است؛ t() روی آن بی‌اثر است و فقط پیش‌فرض «مدارک» را ترجمه می‌کند */}
+      <AppDialog open={open} title={t(title)} onClose={onClose} maxWidth="sm">
         <Stack spacing={1}>
           {loading && (
-            <Typography variant="body2">در حال بارگذاری...</Typography>
+            <Typography variant="body2">{t('در حال بارگذاری...')}</Typography>
           )}
 
           {!loading && attachments.length === 0 && (
             <Typography variant="body2" color="text.secondary">
-              مدرکی برای این رکورد ثبت نشده است.
+              {t('مدرکی برای این رکورد ثبت نشده است.')}
             </Typography>
           )}
 
@@ -90,7 +93,8 @@ const RecordAttachmentsDialog = ({
                         <IconButton
                           size="small"
                           onClick={() => handlePreview(item)}
-                          aria-label="پیش‌نمایش فایل"
+                          aria-label={t('پیش‌نمایش فایل')}
+                          title={t('پیش‌نمایش فایل')}
                         >
                           <VisibilityIcon fontSize="small" />
                         </IconButton>
@@ -105,7 +109,8 @@ const RecordAttachmentsDialog = ({
 
                             handleDownload(item);
                           }}
-                          aria-label="دانلود فایل"
+                          aria-label={t('دانلود فایل')}
+                          title={t('دانلود فایل')}
                         >
                           <DownloadIcon fontSize="small" />
                         </IconButton>

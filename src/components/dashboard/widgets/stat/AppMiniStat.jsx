@@ -29,14 +29,14 @@ const AppMiniStat = ({ title, value, icon, loading }) => {
         justifyContent="space-between"
       >
         <Box>
-          <Typography fontWeight={800} variant="h4" color="text.secondary">
+          <Typography variant="statLabel" color="text.secondary">
             {t(title)}
           </Typography>
 
           {loading ? (
             <Skeleton width={45} />
           ) : (
-            <Typography variant="h4" fontWeight={700}>
+            <Typography variant="statValue">
               {t(value)}
             </Typography>
           )}

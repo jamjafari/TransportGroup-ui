@@ -17,12 +17,15 @@ import Box from "@mui/material/Box";
 import TenantLogoUploader from "./TenantLogoUploader";
 const defaultValues = {
   name: "",
+  nameEn: "",
   slug: "",
   subscriptionPlan: "",
   subscriptionExpiresAt: null,
   maxVehicles: "",
   maxUsers: "",
   isActive: true,
+  vehicleRequestsEnabled: false,
+  documentCloudReadingEnabled: false,
 };
 
 const TenantForm = ({

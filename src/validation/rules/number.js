@@ -1,5 +1,5 @@
 const number =
-  (message = 'Must be a number') =>
+  (message = 'باید یک عدد باشد') =>
   (value) => {
     if (value === undefined || value === null) return null;
 

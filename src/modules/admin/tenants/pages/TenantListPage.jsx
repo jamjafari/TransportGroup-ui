@@ -14,6 +14,7 @@ import AddTenantAdminDialog from "../components/AddTenantAdminDialog";
 
 import { useTranslatedColumns } from "@/hooks";
 import { useTranslation } from "react-i18next";
+import i18n from '@/i18n';
 const TenantListPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -36,6 +37,12 @@ const TenantListPage = () => {
   const baseColumns = useMemo(
     () => [
       { field: "name", headerName: "نام سازمان", width: 200 },
+      {
+        field: "nameEn",
+        headerName: "نام انگلیسی سازمان",
+        width: 200,
+        renderCell: ({ value }) => value || "—",
+      },
       { field: "slug", headerName: "Slug", width: 130 },
       { field: "subscriptionPlan", headerName: "پلن", width: 110 },
       {
@@ -98,14 +105,14 @@ const TenantListPage = () => {
     <>
       <Box sx={{ display: "flex", gap: 1, mb: 2 }}>
         <AppButton onClick={() => navigate("/admin/tenants/create")}>
-          افزودن سازمان
+          {i18n.t('افزودن سازمان')}
         </AppButton>
 
         <AppButton
           variant="outlined"
           onClick={() => navigate("/admin/tenants/admins")}
         >
-          مشاهده‌ی ادمین‌های سازمان‌ها
+          {i18n.t('مشاهده‌ی ادمین‌های سازمان‌ها')}
         </AppButton>
       </Box>
 

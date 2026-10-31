@@ -1,8 +1,9 @@
+// ✅ قبلاً value.length بررسی می‌شد، که برای اعداد منفی هم همیشه رد نمی‌شد
 const nonNegative =
-  (message = 'Must be a nonNegative') =>
+  (message = 'نباید منفی باشد') =>
   (value) => {
-    if (!value) return null;
+    if (value === undefined || value === null || value === '') return null;
 
-    return value.length >= 0 ? null : message || `number is less then ${0}`;
+    return Number(value) >= 0 ? null : message;
   };
 export default nonNegative;

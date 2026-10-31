@@ -11,6 +11,7 @@ import BuildIcon from '@mui/icons-material/Build';
 import PlaceIcon from '@mui/icons-material/Place';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import AssessmentIcon from '@mui/icons-material/Assessment';
+import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import CarCrashIcon from '@mui/icons-material/CarCrash';
 import FactCheckIcon from '@mui/icons-material/FactCheck';
@@ -24,6 +25,8 @@ import LocalGasStationOutlinedIcon from '@mui/icons-material/LocalGasStationOutl
 import SecurityIcon from '@mui/icons-material/Security';
 import BuildCircleIcon from '@mui/icons-material/BuildCircle';
 import HistoryIcon from '@mui/icons-material/History';
+import CarRentalIcon from '@mui/icons-material/CarRental';
+import TireRepairIcon from '@mui/icons-material/TireRepair';
 
 export const menuItems = [
   {
@@ -226,9 +229,10 @@ export const menuItems = [
   // گزارش‌ها
   // =========================================================
 
+  // ✅ گزارش‌ها در دو گروه، تا با باز شدن یکی (آکاردئون) سایدبار بلند و اسکرول‌دار نشود
   {
-    id: 'reports',
-    label: 'گزارش‌ها',
+    id: 'reports-fleet-group',
+    label: 'گزارش‌های ناوگان',
     icon: <AssessmentIcon />,
     permission: 'Report.View',
 
@@ -255,12 +259,52 @@ export const menuItems = [
       },
 
       {
+        id: 'reports-tires',
+        label: 'تایرها',
+        icon: <TireRepairIcon fontSize="small" />,
+        path: '/reports/tires',
+      },
+
+      {
         id: 'reports-fleet',
         label: 'ناوگان',
         icon: <DirectionsCarIcon fontSize="small" />,
         path: '/reports/fleet',
       },
 
+      {
+        id: 'reports-inspection',
+        label: 'معاینه فنی',
+        icon: <FactCheckIcon fontSize="small" />,
+        path: '/reports/inspection',
+      },
+
+      {
+        id: 'reports-latest',
+        label: 'آخرین فعالیت‌ها',
+        icon: <HistoryIcon fontSize="small" />,
+        path: '/reports/latest-activities',
+      },
+
+      {
+        id: 'reports-vehicle-requests',
+        label: 'درخواست‌های خودرو',
+        icon: <CarRentalIcon fontSize="small" />,
+        path: '/reports/vehicle-requests',
+        // درخواست‌های همه‌ی کاربران ⇐ فقط مدیر نقلیه؛ و فقط وقتی قابلیت برای سازمان فعال است
+        permission: 'VehicleRequest.Manage',
+        feature: 'vehicleRequests',
+      },
+    ],
+  },
+
+  {
+    id: 'reports-financial-group',
+    label: 'گزارش‌های مالی',
+    icon: <RequestQuoteIcon />,
+    permission: 'Report.View',
+
+    children: [
       {
         id: 'reports-financial',
         label: 'مالی',
@@ -283,24 +327,10 @@ export const menuItems = [
       },
 
       {
-        id: 'reports-inspection',
-        label: 'معاینه فنی',
-        icon: <FactCheckIcon fontSize="small" />,
-        path: '/reports/inspection',
-      },
-
-      {
         id: 'reports-service',
         label: 'سرویس‌ها',
         icon: <BuildCircleIcon fontSize="small" />,
         path: '/reports/service',
-      },
-
-      {
-        id: 'reports-latest',
-        label: 'آخرین فعالیت‌ها',
-        icon: <HistoryIcon fontSize="small" />,
-        path: '/reports/latest-activities',
       },
     ],
   },

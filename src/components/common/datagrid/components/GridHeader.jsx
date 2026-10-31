@@ -12,6 +12,11 @@ import {
 
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
+
+import useTranslatedField from '@/components/common/forms/useTranslatedField';
+
+import GridHeaderLabel from './GridHeaderLabel';
+
 const GridHeader = ({
   columns,
 
@@ -35,6 +40,9 @@ const GridHeader = ({
 
   onColumnMenu,
 }) => {
+  // ✅ عنوان ستون‌ها (headerName) در تعریف ستون‌ها متن فارسی خام است؛ همین‌جا یک‌بار ترجمه می‌شود
+  const { tr } = useTranslatedField();
+
   return (
     <TableHead>
       <TableRow>
@@ -88,8 +96,8 @@ const GridHeader = ({
                 overflowWrap: 'break-word',
 
                 px: 1.5,
-                fontSize: '1.3rem',
-                fontWeight: 800,
+                // ✅ مقیاس مشترک theme/typography.js (اندازه‌ی قبلی 1.3rem ≈ 21px حفظ شده)
+                typography: 'tableHeader',
 
                 position: stickyHeader ? 'sticky' : 'static',
 
@@ -108,8 +116,10 @@ const GridHeader = ({
                 }}
               >
                 <Box
+                  data-header-slot
                   sx={{
                     flex: 1,
+                    minWidth: 0,
                     display: 'flex',
                     justifyContent: 'center',
                   }}
@@ -118,8 +128,10 @@ const GridHeader = ({
                     active={active}
                     direction={active ? sortDirection : 'asc'}
                     onClick={() => onSort?.(column.field)}
+                    sx={{ minWidth: 0, maxWidth: '100%' }}
                   >
-                    {column.headerName}
+                    {/* ✅ عنوان بلند ⇐ حروف اول در یک خط + عنوان کامل در tooltip */}
+                    <GridHeaderLabel text={tr(column.headerName)} />
                   </TableSortLabel>
                 </Box>
 

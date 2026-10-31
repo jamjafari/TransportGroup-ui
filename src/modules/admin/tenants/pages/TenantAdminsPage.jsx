@@ -11,6 +11,7 @@ import useTenant from "../hooks/useTenant";
 
 import { useTranslatedColumns } from "@/hooks";
 import { useTranslation } from "react-i18next";
+import i18n from "@/i18n";
 const TenantAdminsPage = () => {
   const { t } = useTranslation();
   const { admins, loading, getTenantAdmins, setAdminStatus, deleteAdmin } =
@@ -71,7 +72,7 @@ const TenantAdminsPage = () => {
                 handleToggleActive(row);
               }}
             >
-              {row.isActive ? "غیرفعال کردن" : "فعال کردن"}
+              {i18n.t(row.isActive ? "غیرفعال کردن" : "فعال کردن")}
             </AppButton>
 
             <AppButton

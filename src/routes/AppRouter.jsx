@@ -18,6 +18,8 @@ import DateRangeFinancialReportPage from '@/pages/dashboard/reports/pages/datera
 import DateRangeFuelCostReportPage from '@/pages/dashboard/reports/pages/fuelcosts-date';
 import InspectionReportPage from '@/pages/dashboard/reports/pages/inspection';
 import ActivityReportPage from '@/pages/dashboard/reports/pages/activities';
+import VehicleRequestReportPage from '@/pages/dashboard/reports/pages/vehicle-requests';
+import TireReportPage from '@/pages/dashboard/reports/pages/tires';
 
 import DashboardSearchProvider from '@/pages/dashboard/context/DashboardSearchProvider';
 
@@ -135,6 +137,7 @@ const AppRouter = () => {
                   element={<MissionReportPage />}
                 />
                 <Route path="/reports/drivers" element={<DriverReportPage />} />
+                <Route path="/reports/tires" element={<TireReportPage />} />
                 <Route
                   path="/reports/vehicles"
                   element={<VehicleReportPage />}
@@ -206,6 +209,15 @@ const AppRouter = () => {
                       <ServiceReportPage />
                     </DashboardSearchProvider>
                   }
+                />
+              </Route>
+              {/* ===== گزارش درخواست خودرو (درخواست‌های همه‌ی کاربران ⇐ مجوز مدیر نقلیه) ===== */}
+              <Route
+                element={<PermissionRoute permission="VehicleRequest.Manage" />}
+              >
+                <Route
+                  path="/reports/vehicle-requests"
+                  element={<VehicleRequestReportPage />}
                 />
               </Route>
               {/* ===== خودروها ===== */}

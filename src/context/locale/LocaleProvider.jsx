@@ -45,8 +45,9 @@ const LocaleProvider = ({ children }) => {
       createAppTheme({
         direction: locale.dir,
         fontFamily: locale.fontFamily,
+        localeCode: locale.code,
       }),
-    [locale.dir, locale.fontFamily],
+    [locale.dir, locale.fontFamily, locale.code],
   );
 
   const value = useMemo(

@@ -1,3 +1,4 @@
+import toApiError from '@/services/apiError';
 import useAsyncData from '@/hooks/useAsyncData';
 
 import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
@@ -17,9 +18,7 @@ const useInspectionReport = () => {
       const response = await getInspectionReport(filter);
 
       if (!response.success) {
-        throw new Error(
-          response.errors?.[0] || 'خطا در دریافت گزارش معاینه فنی',
-        );
+        throw toApiError(response, 'خطا در دریافت گزارش معاینه فنی');
       }
 
       return response.data;

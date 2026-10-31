@@ -9,6 +9,7 @@ import useInsuranceReport from './hooks/useInsuranceReport';
 import InsuranceReportSummary from './InsuranceReportSummary';
 import InsuranceReportTable from './InsuranceReportTable';
 import ReportLayout from '../../components/ReportLayout';
+import i18n from '@/i18n';
 
 const InsuranceReportPage = () => {
   const { data, loading, error } = useInsuranceReport();
@@ -21,7 +22,7 @@ const InsuranceReportPage = () => {
 
       {loading && <AppLoader />}
 
-      {!loading && error && <div>خطا در دریافت اطلاعات گزارش بیمه</div>}
+      {!loading && error && <div>{i18n.t('خطا در دریافت اطلاعات گزارش بیمه')}</div>}
 
       {!loading && !error && data && (
         <>

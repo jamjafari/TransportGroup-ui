@@ -33,13 +33,10 @@ const AppChartCard = ({
   footer,
 }) => {
   return (
-    // ✅ dir به‌جای sx={{ direction: 'ltr' }}: cssjanus مقدار direction را
-    // برمی‌گرداند، پس آن اعلان در عمل کارت را RTL می‌کرد. صفت dir هیچ‌وقت
-    // توسط افزونه تغییر نمی‌کند. (نمودارها به LTR نیاز دارند.)
+    // ✅ کارت جهت صفحه را می‌گیرد (عنوان و منو در فارسی سمت راست).
+    // نمودارهای داخل کارت خودشان LtrScope دارند و جهتشان با useChartDirection آینه می‌شود.
     <Card
       elevation={0}
-
-      dir="ltr"
 
       sx={{
         height,
@@ -51,16 +48,14 @@ const AppChartCard = ({
     >
       <CardHeader
         title={
-          <Typography
-            variant="h6"
-
-            fontWeight={700}
-          >
+          <Typography variant="cardTitle">
             {title}
           </Typography>
         }
 
         subheader={subheader}
+
+        slotProps={{ subheader: { variant: 'cardSubtitle' } }}
 
         action={
           action ||

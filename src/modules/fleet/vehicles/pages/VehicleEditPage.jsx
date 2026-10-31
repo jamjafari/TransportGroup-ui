@@ -17,6 +17,7 @@ import { AppCard } from "@/components";
 
 import useVehicle from "../hooks/useVehicle";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 const VehicleEditPage = () => {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -41,13 +42,17 @@ const VehicleEditPage = () => {
     loadVehicle();
   }, [id, getVehicleById]);
 
+  const [saveError, setSaveError] = useState(null);
+
   const handleSubmit = useCallback(
     async (values) => {
       try {
+        setSaveError(null);
+
         await updateVehicle(id, values);
         navigate("/fleet/vehicles");
       } catch (error) {
-        console.error(error);
+        setSaveError(error);
       }
     },
     [id, updateVehicle, navigate],
@@ -64,7 +69,9 @@ const VehicleEditPage = () => {
       </Typography>
 
       <AppCard sx={{ p: 4, mb: 3 }}>
-        <VehicleForm initialValues={vehicle} onSubmit={handleSubmit} />
+        <FormSaveErrorProvider error={saveError}>
+          <VehicleForm initialValues={vehicle} onSubmit={handleSubmit} />
+        </FormSaveErrorProvider>
       </AppCard>
       <AppCard sx={{ p: 4, mb: 3 }}>
         <DriverProvider>

@@ -12,6 +12,8 @@ import {
 
 // ⚠️ فعلاً placeholder — باید با missionStatusOptions واقعی (بر اساس enum MissionStatus) جایگزین بشه
 import { missionStatusOptions } from '../constants';
+import i18n from '@/i18n';
+import { formatNumber } from '@/utils';
 
 const MissionStartEndSection = ({
   values,
@@ -26,8 +28,8 @@ const MissionStartEndSection = ({
   );
 
   const currentKmHint = selectedVehicle
-    ? `کارکرد فعلی ثبت‌شده: ${selectedVehicle.currentKM?.toLocaleString() ?? '—'} کیلومتر`
-    : 'ابتدا خودرو را از بخش اطلاعات پایه انتخاب کنید';
+    ? i18n.t('کارکرد فعلی ثبت‌شده: {{km}} کیلومتر', { km: formatNumber(selectedVehicle.currentKM) })
+    : i18n.t('ابتدا خودرو را از بخش اطلاعات پایه انتخاب کنید');
 
   return (
     <AppFormSection title="اطلاعات شروع و پایان">

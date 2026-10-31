@@ -7,6 +7,7 @@ import useVehicleReport from "./hooks/useVehicleReport";
 import { vehicleStatusChipKey } from "@/modules/fleet/vehicles/constants";
 import { ATTACHMENT_OWNER_TYPE } from "@/constants/attachmentTypes";
 import { useTranslatedColumns } from "../../../../../hooks";
+import i18n from '@/i18n';
 const VehicleReportTable = () => {
   const { data, loading } = useVehicleReport();
 
@@ -35,7 +36,7 @@ const VehicleReportTable = () => {
         <AttachmentsButton
           ownerType={ATTACHMENT_OWNER_TYPE.VEHICLE}
           ownerId={row.id}
-          title={`مدارک خودرو — ${row.vehicleName}`}
+          title={i18n.t('مدارک خودرو — {{name}}', { name: row.vehicleName })}
         />
       ),
     },

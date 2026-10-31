@@ -1,3 +1,4 @@
+import toApiError from '@/services/apiError';
 import useAsyncData from '@/hooks/useAsyncData';
 
 import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
@@ -18,9 +19,7 @@ const useFuelCostReport = () => {
       const response = await getFuelCostReport(filter);
 
       if (!response.success) {
-        throw new Error(
-          response.errors?.[0] || 'خطا در دریافت گزارش هزینه سوخت',
-        );
+        throw toApiError(response, 'خطا در دریافت گزارش هزینه سوخت');
       }
 
       return response.data;

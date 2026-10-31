@@ -8,3 +8,4 @@ export { validate, hasErrors } from './validator';
 export { default as nonNegative } from './nonNegative';
 
 export { default as validationField } from './validationField';
+export { STRONG_PASSWORD_RULES, STRONG_PASSWORD_MIN_LENGTH, isStrongPassword } from './strongPassword';

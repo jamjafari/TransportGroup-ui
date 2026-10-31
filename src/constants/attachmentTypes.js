@@ -1,4 +1,5 @@
 // src/constants/attachmentTypes.js
+import i18n from '@/i18n';
 
 export const ATTACHMENT_OWNER_TYPE = {
   VEHICLE: 1,
@@ -31,7 +32,7 @@ export const ALLOWED_ATTACHMENT_EXTENSIONS = [
 
 export const MAX_ATTACHMENT_SIZE_MB = 10;
 
-// پیام خطا برمی‌گرداند، یا null اگر فایل مجاز باشد
+// پیام خطا (به زبان صفحه) برمی‌گرداند، یا null اگر فایل مجاز باشد
 export const validateAttachmentFile = (
   file,
   allowedExtensions = ALLOWED_ATTACHMENT_EXTENSIONS,
@@ -40,11 +41,15 @@ export const validateAttachmentFile = (
   const extension = name.includes('.') ? name.slice(name.lastIndexOf('.')) : '';
 
   if (!allowedExtensions.includes(extension)) {
-    return `نوع فایل مجاز نیست. پسوندهای مجاز: ${allowedExtensions.join(' ')}`;
+    return i18n.t('نوع فایل مجاز نیست. پسوندهای مجاز: {{extensions}}', {
+      extensions: allowedExtensions.join(' '),
+    });
   }
 
   if (file.size > MAX_ATTACHMENT_SIZE_MB * 1024 * 1024) {
-    return `حجم فایل نباید بیشتر از ${MAX_ATTACHMENT_SIZE_MB} مگابایت باشد.`;
+    return i18n.t('حجم فایل نباید بیشتر از {{size}} مگابایت باشد.', {
+      size: MAX_ATTACHMENT_SIZE_MB,
+    });
   }
 
   return null;

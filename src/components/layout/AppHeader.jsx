@@ -16,6 +16,7 @@ import LanguageToggle from './LanguageToggle';
 import { useTenantContext } from '@/context/tenant';
 import { AppAvatar } from '@/components';
 import { getFileUrl } from '@/utils';
+import { getTenantDisplayName } from '@/utils/tenantName';
 
 function AppHeader({ sidebarOpen, setSidebarOpen }) {
   const { tenant, loading } = useTenantContext();
@@ -54,13 +55,13 @@ function AppHeader({ sidebarOpen, setSidebarOpen }) {
           >
             <AppAvatar
               src={tenant?.logoUrl ? getFileUrl(tenant.logoUrl) : undefined}
-              name={tenant?.name}
+              name={getTenantDisplayName(tenant)}
               sx={{ marginLeft: 30 }}
               size={64}
             />
 
             <Typography variant="h2">
-              {tenant?.name || t('گروه حمل‌ونقل')}
+              {getTenantDisplayName(tenant) || t('گروه حمل‌ونقل')}
             </Typography>
           </Box>
         )}

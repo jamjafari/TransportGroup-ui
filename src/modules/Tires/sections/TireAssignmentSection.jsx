@@ -20,6 +20,7 @@ import { validate, hasErrors } from "@/validation";
 import useTire from "../hooks/useTire";
 import useTireAssignments from "../hooks/useTireAssignments";
 import { tirePositionOptions } from "../constants";
+import i18n from '@/i18n';
 
 const assignmentSchema = {};
 
@@ -91,7 +92,7 @@ const TireAssignmentSection = ({ vehicleId }) => {
 
   const handleUnassign = async (assignmentId) => {
     const removeKM = window.prompt(
-      "کارکرد فعلی خودرو در لحظه‌ی خارج کردن (کیلومتر):",
+      i18n.t('کارکرد فعلی خودرو در لحظه‌ی خارج کردن (کیلومتر):'),
     );
     if (removeKM === null) return;
 
@@ -175,7 +176,7 @@ const TireAssignmentSection = ({ vehicleId }) => {
 
       <Box mt={3}>
         <Typography variant="subtitle2" mb={1}>
-          لاستیک‌های نصب‌شده
+          {i18n.t('لاستیک‌های نصب‌شده')}
         </Typography>
 
         <List>
@@ -188,20 +189,20 @@ const TireAssignmentSection = ({ vehicleId }) => {
                   color="warning"
                   onClick={() => handleUnassign(a.id)}
                 >
-                  خارج کردن
+                  {i18n.t('خارج کردن')}
                 </AppButton>
               }
             >
               <ListItemText
                 primary={`${a.tireBrand} — ${a.tireSerialNumber} (${positionLabel(a.position)})`}
-                secondary={`نصب در KM ${a.installKM}`}
+                secondary={i18n.t('نصب در KM {{km}}', { km: a.installKM })}
               />
             </ListItem>
           ))}
 
           {currentAssignments.length === 0 && (
             <Typography variant="body2" color="text.secondary">
-              لاستیکی روی این خودرو نصب نیست.
+              {i18n.t('لاستیکی روی این خودرو نصب نیست.')}
             </Typography>
           )}
         </List>
@@ -209,7 +210,7 @@ const TireAssignmentSection = ({ vehicleId }) => {
         {historyAssignments.length > 0 && (
           <>
             <Typography variant="subtitle2" mt={2} mb={1}>
-              تاریخچه
+              {i18n.t('تاریخچه')}
             </Typography>
 
             <List>
@@ -217,7 +218,7 @@ const TireAssignmentSection = ({ vehicleId }) => {
                 <ListItem key={a.id}>
                   <ListItemText
                     primary={`${a.tireBrand} — ${a.tireSerialNumber} (${positionLabel(a.position)})`}
-                    secondary={`از KM ${a.installKM} تا KM ${a.removeKM} — خارج شده`}
+                    secondary={i18n.t('از KM {{from}} تا KM {{to}} — خارج شده', { from: a.installKM, to: a.removeKM })}
                   />
                 </ListItem>
               ))}

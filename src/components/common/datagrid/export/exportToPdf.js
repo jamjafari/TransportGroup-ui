@@ -6,6 +6,7 @@ import { VazirFontBase64 } from '@/assets/fonts/vazirFont';
 import { VazirFontBoldBase64 } from '@/assets/fonts/vazirFontBold';
 import { formatJalaliDate } from '@/utils';
 import { getFileUrl } from '@/utils';
+import i18n from '@/i18n';
 
 const isDateLike = (value) => {
   if (value instanceof Date) return true;
@@ -18,8 +19,12 @@ const isDateLike = (value) => {
   return false;
 };
 
-const formatCellValue = (value) =>
-  isDateLike(value) ? formatJalaliDate(value) : value;
+// ✅ تاریخ با تقویم زبان فعال؛ متن (مثلاً برچسب وضعیت فارسی از valueFormatter) به زبان صفحه.
+// داده‌ی واقعی (پلاک، نام و ...) کلید ترجمه نیست و دست‌نخورده برمی‌گردد.
+const formatCellValue = (value) => {
+  if (isDateLike(value)) return formatJalaliDate(value);
+  return typeof value === 'string' && value ? i18n.t(value) : value;
+};
 
 const toPersianDisplay = (text, doc) => {
   if (text == null) return '';
@@ -75,10 +80,18 @@ export const exportToPdf = async ({
     console.log('tenant.logoUrl خالی/موجود نیست. مقدار tenant:', tenant); // ✅ اضافه شد
   }
 
-  const rtlColumns = [...columns].reverse();
-  const data = prepareExportData({ rows, columns: rtlColumns });
+  // ✅ جهت گزارش از زبان فعال: در فارسی ستون اول سمت راست است (ترتیب برعکس، تراز راست)،
+  // در انگلیسی ترتیب عادی و تراز چپ. فونت وزیر حروف لاتین را هم دارد و برای داده‌ی فارسی
+  // درون گزارش انگلیسی هم لازم است؛ jsPDF متن مختلط را درست می‌چیند (بخش لاتین به ترتیب خودش).
+  const isRtl = i18n.dir() === 'rtl';
+  const halign = isRtl ? 'right' : 'left';
+
+  const orderedColumns = (isRtl ? [...columns].reverse() : columns).map((c) =>
+    typeof c.headerName === 'string' ? { ...c, headerName: i18n.t(c.headerName) } : c,
+  );
+  const data = prepareExportData({ rows, columns: orderedColumns });
   const tableHead = [
-    rtlColumns.map((c) => toPersianDisplay(c.headerName, doc)),
+    orderedColumns.map((c) => toPersianDisplay(c.headerName, doc)),
   ];
   const tableBody = data.map((row) =>
     Object.values(row).map((value) =>
@@ -115,7 +128,10 @@ export const exportToPdf = async ({
   };
 
   const drawFooter = () => {
-    const footerRaw = `توجه: این گزارش متعلق به سازمان/شرکت "${tenant?.name || ''}" است و هر گونه سوء استفاده از آن پیگرد قانونی دارد`;
+    const footerRaw = i18n.t(
+      'توجه: این گزارش متعلق به سازمان/شرکت "{{name}}" است و هر گونه سوء استفاده از آن پیگرد قانونی دارد',
+      { name: tenant?.name || '' },
+    );
     doc.setFont('Vazir', 'normal');
     doc.setFontSize(7);
     doc.text(toPersianDisplay(footerRaw, doc), pageWidth / 2, pageHeight - 8, {
@@ -128,8 +144,8 @@ export const exportToPdf = async ({
     body: tableBody,
     theme: 'grid',
     startY: tenant ? 35 : undefined, // فضای کافی برای هدر (لوگو + نام) در صفحه‌ی اول
-    styles: { font: 'Vazir', halign: 'right' },
-    headStyles: { font: 'Vazir', fontStyle: 'bold', halign: 'right' },
+    styles: { font: 'Vazir', halign },
+    headStyles: { font: 'Vazir', fontStyle: 'bold', halign },
     didDrawPage: () => {
       // ✅ روی هر صفحه (نه فقط صفحه‌ی اول) تکرار می‌شود
       drawHeader();

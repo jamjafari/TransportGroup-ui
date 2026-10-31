@@ -9,20 +9,21 @@ import { useNavigate } from "react-router-dom";
 import ServiceTypeForm from "../components/ServiceTypeForm";
 
 import useServiceType from "../hooks/useServiceType";
-import { AppCard, AppAlert } from "@/components";
+import { AppCard } from "@/components";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 const ServiceTypeCreatePage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { createServiceType } = useServiceType();
 
-  const [submitError, setSubmitError] = useState("");
+  const [submitError, setSubmitError] = useState(null);
 
   const handleSubmit = useCallback(
     async (values) => {
       try {
-        setSubmitError("");
+        setSubmitError(null);
 
         const createdId = await createServiceType(values);
 
@@ -30,7 +31,7 @@ const ServiceTypeCreatePage = () => {
       } catch (error) {
         console.error("Create user error:", error);
 
-        setSubmitError(error?.message || "خطا در ایجاد کاربر");
+        setSubmitError(error);
       }
     },
     [createServiceType, navigate],
@@ -41,18 +42,10 @@ const ServiceTypeCreatePage = () => {
       <Typography variant="h5" fontWeight={700} mb={3}>
         {t("افزودن نوع سرویس")}
       </Typography>
-      {submitError && (
-        <AppAlert
-          open={!!submitError}
-          severity="error"
-          title="خطا"
-          onClose={() => setSubmitError("")}
-        >
-          {submitError}
-        </AppAlert>
-      )}
       <AppCard sx={{ p: 4 }}>
-        <ServiceTypeForm onSubmit={handleSubmit} />
+        <FormSaveErrorProvider error={submitError}>
+          <ServiceTypeForm onSubmit={handleSubmit} />
+        </FormSaveErrorProvider>
       </AppCard>
     </Box>
   );

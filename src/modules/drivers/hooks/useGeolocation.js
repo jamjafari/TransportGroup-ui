@@ -1,5 +1,7 @@
 import { useCallback, useState } from 'react';
 
+import i18n from '@/i18n';
+
 const useGeolocation = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -7,7 +9,7 @@ const useGeolocation = () => {
   const getCurrentPosition = useCallback(() => {
     return new Promise((resolve, reject) => {
       if (!navigator.geolocation) {
-        const err = 'مرورگر شما از موقعیت‌یابی پشتیبانی نمی‌کند';
+        const err = i18n.t('مرورگر شما از موقعیت‌یابی پشتیبانی نمی‌کند');
         setError(err);
         reject(new Error(err));
         return;
@@ -26,10 +28,11 @@ const useGeolocation = () => {
         },
         (geoError) => {
           setLoading(false);
-          const message =
+          const message = i18n.t(
             geoError.code === geoError.PERMISSION_DENIED
               ? 'اجازه‌ی دسترسی به موقعیت مکانی داده نشد'
-              : 'خطا در دریافت موقعیت مکانی';
+              : 'خطا در دریافت موقعیت مکانی',
+          );
           setError(message);
           reject(new Error(message));
         },

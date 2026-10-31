@@ -20,13 +20,13 @@ const DashboardCard = ({ title, subtitle, children, height = "100%" }) => {
           <CardContent sx={{ pb: 1 }}>
             <Stack spacing={0.5}>
               {title && (
-                <Typography variant="h6" fontWeight={600}>
+                <Typography variant="cardTitle">
                   {t(title)}
                 </Typography>
               )}
 
               {subtitle && (
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="cardSubtitle" color="text.secondary">
                   {t(subtitle)}
                 </Typography>
               )}

@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Box, Typography } from '@mui/material';
 
@@ -10,6 +11,8 @@ const isImage = (contentType) => contentType?.startsWith('image/');
 const isPdf = (contentType) => contentType === 'application/pdf';
 
 const AttachmentPreviewDialog = ({ open, onClose, attachment }) => {
+  const { t } = useTranslation();
+
   if (!attachment) return null;
 
   const fileUrl = getFileUrl(attachment.url);
@@ -56,8 +59,7 @@ const AttachmentPreviewDialog = ({ open, onClose, attachment }) => {
 
         {!isImage(attachment.contentType) && !isPdf(attachment.contentType) && (
           <Typography variant="body2" color="text.secondary" sx={{ py: 6 }}>
-            پیش‌نمایش این نوع فایل پشتیبانی نمی‌شود. لطفاً از دکمه‌ی دانلود
-            استفاده کنید.
+            {t('پیش‌نمایش این نوع فایل پشتیبانی نمی‌شود. لطفاً از دکمه‌ی دانلود استفاده کنید.')}
           </Typography>
         )}
       </Box>

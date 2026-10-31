@@ -9,8 +9,9 @@ import { useNavigate } from "react-router-dom";
 import DriverForm from "../components/DriverForm";
 
 import useDriver from "../hooks/useDriver";
-import { AppCard, AppAlert } from "@/components";
+import { AppCard } from "@/components";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 
 const DriverCreatePage = () => {
   const { t } = useTranslation();
@@ -18,11 +19,11 @@ const DriverCreatePage = () => {
 
   const { createDriver } = useDriver();
 
-  const [submitError, setSubmitError] = useState("");
+  const [submitError, setSubmitError] = useState(null);
   const handleSubmit = useCallback(
     async (values) => {
       try {
-        setSubmitError("");
+        setSubmitError(null);
 
         const createdId = await createDriver(values);
 
@@ -30,7 +31,7 @@ const DriverCreatePage = () => {
       } catch (error) {
         console.error("Create user error:", error);
 
-        setSubmitError(error?.message || "خطا در ایجاد کاربر");
+        setSubmitError(error);
       }
     },
     [createDriver, navigate],
@@ -40,19 +41,11 @@ const DriverCreatePage = () => {
       <Typography variant="h5" fontWeight={700} mb={3}>
         {t("افزودن راننده")}
       </Typography>
-      {submitError && (
-        <AppAlert
-          open={!!submitError}
-          severity="error"
-          title="خطا"
-          onClose={() => setSubmitError("")}
-        >
-          {submitError}
-        </AppAlert>
-      )}
 
       <AppCard sx={{ p: 4 }}>
-        <DriverForm onSubmit={handleSubmit} />
+        <FormSaveErrorProvider error={submitError}>
+          <DriverForm onSubmit={handleSubmit} />
+        </FormSaveErrorProvider>
       </AppCard>
     </Box>
   );

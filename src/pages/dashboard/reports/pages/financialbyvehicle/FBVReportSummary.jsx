@@ -37,9 +37,9 @@ const FBVReportSummary = ({ summary = {} }) => {
             }}
           >
             <Stack spacing={1}>
-              <Typography variant="body2">{t(item.title)}</Typography>
+              <Typography variant="statLabel" color="text.secondary">{t(item.title)}</Typography>
 
-              <Typography variant="h4" fontWeight={700}>
+              <Typography variant="statValue">
                 {item.value}
               </Typography>
             </Stack>

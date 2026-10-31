@@ -47,6 +47,8 @@ export const applyDocumentLocale = (code = i18next.language) => {
 
   document.documentElement.lang = config.code;
   document.documentElement.dir = config.dir;
+  // عنوان تب مرورگر: «باتورو» / «Batoro»
+  document.title = i18next.t('باتورو', { lng: config.code });
 
   return config;
 };

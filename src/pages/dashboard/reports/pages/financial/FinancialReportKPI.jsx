@@ -2,6 +2,7 @@ import React, { memo } from "react";
 
 import { DashboardGrid, DashboardColumn, KpiCard } from "@/components";
 import { useTranslation } from "react-i18next";
+import { formatNumber } from '@/utils';
 
 const FinancialReportKPI = ({ kpi = {} }) => {
   const { t } = useTranslation();
@@ -9,7 +10,7 @@ const FinancialReportKPI = ({ kpi = {} }) => {
     {
       title: "میانگین هزینه برای هر خودرو",
 
-      value: Number(kpi.costPerVehicle ?? 0).toLocaleString("en-US"),
+      value: formatNumber(kpi.costPerVehicle ?? 0),
 
       color: "primary",
 
@@ -19,7 +20,7 @@ const FinancialReportKPI = ({ kpi = {} }) => {
     {
       title: "میانگین هزینه ماهانه",
 
-      value: Number(kpi.monthlyAverage ?? 0).toLocaleString("en-US"),
+      value: formatNumber(kpi.monthlyAverage ?? 0),
 
       color: "info",
 

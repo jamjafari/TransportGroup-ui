@@ -3,6 +3,7 @@ import useAsyncData from '@/hooks/useAsyncData';
 import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
 
 import { getFinancialReport } from '../api/financialReportApi';
+import toApiError from '@/services/apiError';
 
 const useFinancialReport = () => {
   const { appliedFilters } = useDashboardSearch();
@@ -18,7 +19,7 @@ const useFinancialReport = () => {
       const response = await getFinancialReport(filter);
 
       if (!response.success) {
-        throw new Error(response.errors?.[0] || 'خطا در دریافت گزارش مالی');
+        throw toApiError(response, 'خطا در دریافت گزارش مالی');
       }
 
       return response.data;

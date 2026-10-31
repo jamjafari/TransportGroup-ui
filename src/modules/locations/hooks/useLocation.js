@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 
 import { useLocationContext } from '../context';
 import * as locationApi from '../api/locationApi';
+import toApiError from '@/services/apiError';
 
 const useLocation = () => {
   const {
@@ -17,7 +18,7 @@ const useLocation = () => {
 
   const unwrap = (response) => {
     if (!response.success) {
-      throw new Error(response.errors?.[0] || 'خطا در ارتباط با سرور');
+      throw toApiError(response, 'خطا در ارتباط با سرور');
     }
     return response.data;
   };

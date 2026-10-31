@@ -13,6 +13,7 @@ import { AppCard } from "@/components";
 
 import useMission from "../hooks/useMission";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 const MissionEditPage = () => {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -35,13 +36,17 @@ const MissionEditPage = () => {
     loadMission();
   }, [id, getMissionById]);
 
+  const [saveError, setSaveError] = useState(null);
+
   const handleSubmit = useCallback(
     async (values) => {
       try {
+        setSaveError(null);
+
         await updateMission(values);
         navigate("/missions");
       } catch (error) {
-        console.error(error);
+        setSaveError(error);
       }
     },
     [id, updateMission, navigate],
@@ -58,7 +63,9 @@ const MissionEditPage = () => {
       </Typography>
 
       <AppCard sx={{ p: 4, mb: 3 }}>
-        <MissionForm initialValues={mission} onSubmit={handleSubmit} />
+        <FormSaveErrorProvider error={saveError}>
+          <MissionForm initialValues={mission} onSubmit={handleSubmit} />
+        </FormSaveErrorProvider>
       </AppCard>
 
       <AppCard sx={{ p: 4 }}>

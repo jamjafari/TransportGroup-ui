@@ -22,6 +22,7 @@ import ServiceTypeCostChart from './ServiceTypeCostChart';
 import ServiceCostByMonthChart from './ServiceCostByMonthChart';
 
 import ServiceReportTable from './ServiceReportTable';
+import i18n from '@/i18n';
 
 const ServiceReportPage = () => {
   const { data, loading, error } = useServiceReport();
@@ -34,7 +35,7 @@ const ServiceReportPage = () => {
 
       {loading && <AppLoader />}
 
-      {!loading && error && <div>خطا در دریافت اطلاعات سرویس</div>}
+      {!loading && error && <div>{i18n.t('خطا در دریافت اطلاعات سرویس')}</div>}
 
       {!loading && !error && data && (
         <>

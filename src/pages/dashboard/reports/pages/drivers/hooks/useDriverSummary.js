@@ -4,6 +4,7 @@ import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
 
 import { getDriversSummary } from '../api/driverReportApi';
 import { mapToDriverReportFilter } from '../utils/mapFilters';
+import toApiError from '@/services/apiError';
 
 const useDriverSummary = () => {
   const { appliedFilters } = useDashboardSearch();
@@ -15,7 +16,7 @@ const useDriverSummary = () => {
       );
 
       if (!response.success) {
-        throw new Error(response.errors?.[0] || 'خطا در دریافت خلاصه رانندگان');
+        throw toApiError(response, 'خطا در دریافت خلاصه رانندگان');
       }
 
       return response.data;

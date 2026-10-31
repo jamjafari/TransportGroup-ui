@@ -1,12 +1,16 @@
 import React, { memo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Alert, Stack, Typography } from "@mui/material";
 
 import { AppTextField, AppButton, AppCard } from "@/components";
 
 import * as driverApi from "../api/driverApi";
+import toApiError from '@/services/apiError';
+import i18n from '@/i18n';
 
 const DriverUserAccountSection = ({ driverId, hasUserAccount }) => {
+  const { t } = useTranslation();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -15,7 +19,7 @@ const DriverUserAccountSection = ({ driverId, hasUserAccount }) => {
 
   const handleSubmit = async () => {
     if (!userName || password.length < 6) {
-      setError("نام کاربری الزامی و رمز عبور باید حداقل ۶ کاراکتر باشد");
+      setError(t("نام کاربری الزامی و رمز عبور باید حداقل ۶ کاراکتر باشد"));
       return;
     }
 
@@ -29,7 +33,7 @@ const DriverUserAccountSection = ({ driverId, hasUserAccount }) => {
       });
 
       if (!response.success) {
-        throw new Error(response.errors?.[0] || "خطا در ساخت حساب کاربری");
+        throw toApiError(response, "خطا در ساخت حساب کاربری");
       }
 
       setSuccess(true);
@@ -46,10 +50,10 @@ const DriverUserAccountSection = ({ driverId, hasUserAccount }) => {
     return (
       <AppCard sx={{ p: 4 }}>
         <Typography variant="subtitle1" fontWeight={700} mb={1}>
-          حساب کاربری موبایل
+          {i18n.t('حساب کاربری موبایل')}
         </Typography>
         <Alert severity="success">
-          این راننده از قبل حساب کاربری برای ورود از موبایل دارد.
+          {i18n.t('این راننده از قبل حساب کاربری برای ورود از موبایل دارد.')}
         </Alert>
       </AppCard>
     );
@@ -58,18 +62,17 @@ const DriverUserAccountSection = ({ driverId, hasUserAccount }) => {
   return (
     <AppCard sx={{ p: 4 }}>
       <Typography variant="subtitle1" fontWeight={700} mb={2}>
-        ساخت حساب کاربری موبایل برای راننده
+        {i18n.t('ساخت حساب کاربری موبایل برای راننده')}
       </Typography>
 
       <Typography variant="body1" color="text.secondary" mb={2}>
-        با ساخت این حساب، راننده می‌تواند از طریق موبایل خودش وارد سیستم شده و
-        موقعیت مأموریت‌های خود را ثبت کند.
+        {i18n.t('با ساخت این حساب، راننده می‌تواند از طریق موبایل خودش وارد سیستم شده و موقعیت مأموریت‌های خود را ثبت کند.')}
       </Typography>
 
       <Stack spacing={2}>
         {error && <Alert severity="error">{error}</Alert>}
         {success && (
-          <Alert severity="success">حساب کاربری با موفقیت ساخته شد.</Alert>
+          <Alert severity="success">{i18n.t('حساب کاربری با موفقیت ساخته شد.')}</Alert>
         )}
 
         <AppTextField

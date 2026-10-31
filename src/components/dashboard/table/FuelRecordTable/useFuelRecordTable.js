@@ -4,7 +4,7 @@ import DashboardRepository from "../../../../repositories/dashboard/dashboard.re
 
 import useDashboardWidget from "@/pages/dashboard/hooks/useDashboardWidget";
 import useDashboardSearch from "@/pages/dashboard/hooks/useDashboardSearch";
-import { formatJalaliDate } from "@/utils";
+import { formatJalaliDate, formatNumber } from "@/utils";
 import { useTranslatedColumns } from "../../../../hooks";
 
 const useFuelRecordTable = () => {
@@ -50,7 +50,7 @@ const useFuelRecordTable = () => {
         headerName: "هزینه واحد",
         flex: 1,
         align: "right",
-        renderCell: ({ value }) => Number(value ?? 0).toLocaleString("fa-IR"),
+        renderCell: ({ value }) => formatNumber(value ?? 0),
       },
 
       {
@@ -58,7 +58,7 @@ const useFuelRecordTable = () => {
         headerName: "مبلغ (تومان)",
         flex: 1,
         align: "right",
-        renderCell: ({ value }) => Number(value ?? 0).toLocaleString("fa-IR"),
+        renderCell: ({ value }) => formatNumber(value ?? 0),
       },
     ],
     [],

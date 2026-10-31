@@ -16,11 +16,11 @@ const ReportLayout = ({ title, subtitle, children }) => {
     >
       <Stack spacing={2}>
         <Stack spacing={0.5}>
-          <Typography variant="h5" fontWeight={700}>
+          <Typography variant="pageTitle">
             {t(title)}
           </Typography>
 
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="pageSubtitle" color="text.secondary">
             {t(subtitle)}
           </Typography>
         </Stack>

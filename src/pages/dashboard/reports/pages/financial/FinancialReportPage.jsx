@@ -18,6 +18,7 @@ import FinancialMonthlyChart from './FinancialMonthlyChart';
 import FinancialVehicleChart from './FinancialVehicleChart';
 import FinancialExpenseChart from './FinancialExpenseChart';
 import FinancialReportTable from './FinancialReportTable';
+import i18n from '@/i18n';
 
 const FinancialReportPage = () => {
   const { data, loading, error } = useFinancialReport();
@@ -30,7 +31,7 @@ const FinancialReportPage = () => {
 
       {loading && <AppLoader />}
 
-      {!loading && error && <div>خطا در دریافت اطلاعات گزارش مالی</div>}
+      {!loading && error && <div>{i18n.t('خطا در دریافت اطلاعات گزارش مالی')}</div>}
 
       {!loading && !error && data && (
         <>

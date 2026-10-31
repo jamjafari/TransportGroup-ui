@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from "react";
+import React, { useState, memo, useCallback } from "react";
 
 import Box from "@mui/material/Box";
 
@@ -11,21 +11,26 @@ import MissionForm from "../components/MissionForm";
 import useMission from "../hooks/useMission";
 import { AppCard } from "@/components";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 const MissionCreatePage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { createMission } = useMission();
 
+  const [saveError, setSaveError] = useState(null);
+
   const handleSubmit = useCallback(
     async (values) => {
       console.log("Submit clicked");
       console.log(values);
       try {
+        setSaveError(null);
+
         const createdId = await createMission(values);
         navigate(`/missions`);
       } catch (error) {
-        console.error(error);
+        setSaveError(error);
       }
     },
     [createMission, navigate],
@@ -38,7 +43,9 @@ const MissionCreatePage = () => {
       </Typography>
 
       <AppCard sx={{ p: 4 }}>
-        <MissionForm onSubmit={handleSubmit} />
+        <FormSaveErrorProvider error={saveError}>
+          <MissionForm onSubmit={handleSubmit} />
+        </FormSaveErrorProvider>
       </AppCard>
     </Box>
   );

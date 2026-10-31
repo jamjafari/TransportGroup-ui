@@ -5,6 +5,7 @@ import { Box, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 import { AppButton } from '@/components';
+import i18n from '@/i18n';
 
 const SubscriptionExpired = () => {
   const navigate = useNavigate();
@@ -21,15 +22,15 @@ const SubscriptionExpired = () => {
       }}
     >
       <Typography variant="h3" fontWeight={700} color="warning.main">
-        اشتراک شما منقضی شده است
+        {i18n.t('اشتراک شما منقضی شده است')}
       </Typography>
 
       <Typography variant="body1" color="text.secondary">
-        برای ادامه‌ی استفاده از سامانه، لطفاً اشتراک خود را تمدید یا ارتقا دهید.
+        {i18n.t('برای ادامه‌ی استفاده از سامانه، لطفاً اشتراک خود را تمدید یا ارتقا دهید.')}
       </Typography>
 
       <AppButton onClick={() => navigate('/login')}>
-        بازگشت به صفحه ورود
+        {i18n.t('بازگشت به صفحه ورود')}
       </AppButton>
     </Box>
   );

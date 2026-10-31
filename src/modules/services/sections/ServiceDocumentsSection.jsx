@@ -21,6 +21,7 @@ import { formatJalaliDate } from "@/utils";
 import { attachmentCategoryOptions } from "../constants";
 import useAttachments from "@/hooks/useAttachments";
 import { ATTACHMENT_OWNER_TYPE } from "@/constants/attachmentTypes";
+import i18n from '@/i18n';
 
 const emptyDraft = {
   category: "",
@@ -115,16 +116,14 @@ const ServiceDocumentsSection = ({ serviceId }) => {
           >
             <ListItemText
               primary={item.originalFileName}
-              secondary={`${categoryLabel(item.category)} — صدور: ${
-                item.issueDate ? formatJalaliDate(item.issueDate) : "—"
-              }`}
+              secondary={i18n.t('{{category}} — صدور: {{date}}', { category: i18n.t(categoryLabel(item.category)), date: item.issueDate ? formatJalaliDate(item.issueDate) : "—" })}
             />
           </ListItem>
         ))}
 
         {!loading && attachments.length === 0 && (
           <Typography variant="body2" color="text.secondary">
-            هیچ مدرکی ثبت نشده است.
+            {i18n.t('هیچ مدرکی ثبت نشده است.')}
           </Typography>
         )}
       </List>

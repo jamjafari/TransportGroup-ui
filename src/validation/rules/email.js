@@ -1,5 +1,5 @@
 const email =
-  (message = 'Invalid email') =>
+  (message = 'ایمیل معتبر نیست') =>
   (value) => {
     if (!value) return null;
 

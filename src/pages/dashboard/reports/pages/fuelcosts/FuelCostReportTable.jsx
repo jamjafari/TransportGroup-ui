@@ -5,6 +5,7 @@ import { AppDataGrid, AttachmentsButton } from "@/components";
 import { formatJalaliDate } from "@/utils";
 import { ATTACHMENT_OWNER_TYPE } from "@/constants/attachmentTypes";
 import { useTranslatedColumns } from "../../../../../hooks";
+import i18n from '@/i18n';
 const FuelCostReportTable = ({ rows = [], loading }) => {
   const baseColumns = [
     {
@@ -65,7 +66,7 @@ const FuelCostReportTable = ({ rows = [], loading }) => {
         <AttachmentsButton
           ownerType={ATTACHMENT_OWNER_TYPE.FUEL_RECORD}
           ownerId={row.id}
-          title={`مدارک سوختگیری — ${row.vehicleName}`}
+          title={i18n.t('مدارک سوختگیری — {{name}}', { name: row.vehicleName })}
         />
       ),
     },

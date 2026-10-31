@@ -2,7 +2,6 @@ import React, { memo, useCallback, useEffect, useState } from "react";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Alert from "@mui/material/Alert";
 
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -12,6 +11,7 @@ import InspectionDocumentsSection from "../sections/InspectionDocumentsSection";
 import useInspection from "../hooks/useInspection";
 import { AppCard } from "@/components";
 import { useTranslation } from "react-i18next";
+import { FormSaveErrorProvider } from "@/components/common/forms/FormSaveError";
 const InspectionEditPage = () => {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -19,7 +19,7 @@ const InspectionEditPage = () => {
   const { getInspectionById, updateInspection } = useInspection();
 
   const [inspection, setInspection] = useState(null);
-  const [submitError, setSubmitError] = useState("");
+  const [submitError, setSubmitError] = useState(null);
 
   useEffect(() => {
     getInspectionById(id).then((data) => {
@@ -41,11 +41,11 @@ const InspectionEditPage = () => {
   const handleSubmit = useCallback(
     async (values) => {
       try {
-        setSubmitError("");
+        setSubmitError(null);
         await updateInspection({ ...values, id });
         navigate("/inspections");
       } catch (error) {
-        setSubmitError(error.message);
+        setSubmitError(error);
       }
     },
     [id, updateInspection, navigate],
@@ -59,14 +59,10 @@ const InspectionEditPage = () => {
         {t("ویرایش معاینه فنی")}
       </Typography>
 
-      {submitError && (
-        <Alert severity="error" sx={{ mb: 2 }}>
-          {submitError}
-        </Alert>
-      )}
-
       <AppCard sx={{ p: 4 }}>
-        <InspectionForm initialValues={inspection} onSubmit={handleSubmit} />
+        <FormSaveErrorProvider error={submitError}>
+          <InspectionForm initialValues={inspection} onSubmit={handleSubmit} />
+        </FormSaveErrorProvider>
       </AppCard>
       <AppCard sx={{ p: 4 }}>
         <InspectionDocumentsSection inspectionId={id} />

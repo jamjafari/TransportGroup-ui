@@ -2,6 +2,7 @@ import React, { memo } from "react";
 
 import { DashboardGrid, DashboardColumn, KpiCard } from "@/components";
 import { useTranslation } from "react-i18next";
+import { formatNumber } from '@/utils';
 
 const ServiceReportKPI = ({ kpi = {} }) => {
   const { t } = useTranslation();
@@ -19,7 +20,7 @@ const ServiceReportKPI = ({ kpi = {} }) => {
     {
       title: "هزینه پرهزینه‌ترین خودرو",
 
-      value: Number(kpi.mostExpensiveCost ?? 0).toLocaleString("en-US"),
+      value: formatNumber(kpi.mostExpensiveCost ?? 0),
 
       color: "warning",
 
@@ -29,7 +30,7 @@ const ServiceReportKPI = ({ kpi = {} }) => {
     {
       title: "میانگین هزینه هر خودرو",
 
-      value: Number(kpi.averageCostPerVehicle ?? 0).toLocaleString("en-US"),
+      value: formatNumber(kpi.averageCostPerVehicle ?? 0),
 
       color: "primary",
 
@@ -39,7 +40,7 @@ const ServiceReportKPI = ({ kpi = {} }) => {
     {
       title: "میانگین هزینه هر سرویس",
 
-      value: Number(kpi.averageCostPerService ?? 0).toLocaleString("en-US"),
+      value: formatNumber(kpi.averageCostPerService ?? 0),
 
       color: "info",
 

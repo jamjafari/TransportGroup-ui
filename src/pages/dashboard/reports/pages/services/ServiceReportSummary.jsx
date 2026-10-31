@@ -2,6 +2,7 @@ import React, { memo } from "react";
 
 import { DashboardGrid, DashboardColumn, KpiCard } from "@/components";
 import { useTranslation } from "react-i18next";
+import { formatNumber } from '@/utils';
 
 const ServiceReportSummary = ({ summary = {} }) => {
   const { t } = useTranslation();
@@ -9,7 +10,7 @@ const ServiceReportSummary = ({ summary = {} }) => {
     {
       title: "کل سرویس‌ها",
 
-      value: Number(summary.totalServices ?? 0).toLocaleString("en-US"),
+      value: formatNumber(summary.totalServices ?? 0),
 
       color: "primary",
 
@@ -19,7 +20,7 @@ const ServiceReportSummary = ({ summary = {} }) => {
     {
       title: "کل هزینه سرویس‌ها",
 
-      value: Number(summary.totalServiceCost ?? 0).toLocaleString("en-US"),
+      value: formatNumber(summary.totalServiceCost ?? 0),
 
       color: "warning",
 
@@ -39,7 +40,7 @@ const ServiceReportSummary = ({ summary = {} }) => {
     {
       title: "سرویس‌های فعال",
 
-      value: Number(summary.activeCount ?? 0).toLocaleString("en-US"),
+      value: formatNumber(summary.activeCount ?? 0),
 
       color: "success",
 
@@ -49,7 +50,7 @@ const ServiceReportSummary = ({ summary = {} }) => {
     {
       title: "سرویس‌های معوق",
 
-      value: Number(summary.overdueCount ?? 0).toLocaleString("en-US"),
+      value: formatNumber(summary.overdueCount ?? 0),
 
       color: "error",
 

@@ -4,6 +4,7 @@ import useDashboardSearch from '@/pages/dashboard/hooks/useDashboardSearch';
 
 import { getDriversReport } from '../api/driverReportApi';
 import { mapToDriverReportFilter } from '../utils/mapFilters';
+import toApiError from '@/services/apiError';
 
 const useDriverReport = () => {
   const { appliedFilters } = useDashboardSearch();
@@ -15,7 +16,7 @@ const useDriverReport = () => {
       );
 
       if (!response.success) {
-        throw new Error(response.errors?.[0] || 'خطا در دریافت گزارش رانندگان');
+        throw toApiError(response, 'خطا در دریافت گزارش رانندگان');
       }
 
       return response.data;

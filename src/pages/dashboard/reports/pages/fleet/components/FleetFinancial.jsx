@@ -2,6 +2,7 @@ import React, { memo } from "react";
 
 import { DashboardGrid, DashboardColumn, KpiCard } from "@/components";
 import { useTranslation } from "react-i18next";
+import { formatNumber } from '@/utils';
 const FleetFinancial = ({
   financial = {
     totalFuel: 0,
@@ -16,7 +17,7 @@ const FleetFinancial = ({
     {
       title: "هزینه سوخت",
 
-      value: Number(financial.totalFuel ?? 0).toLocaleString("en-US"),
+      value: formatNumber(financial.totalFuel ?? 0),
 
       color: "warning",
 
@@ -26,7 +27,7 @@ const FleetFinancial = ({
     {
       title: "هزینه‌های جاری",
 
-      value: Number(financial.totalExpense ?? 0).toLocaleString("en-US"),
+      value: formatNumber(financial.totalExpense ?? 0),
 
       color: "info",
 
@@ -36,7 +37,7 @@ const FleetFinancial = ({
     {
       title: "هزینه هر خودرو",
 
-      value: Number(financial.costPerVehicle ?? 0).toLocaleString("en-US"),
+      value: formatNumber(financial.costPerVehicle ?? 0),
 
       color: "primary",
 

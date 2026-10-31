@@ -10,6 +10,7 @@ import useActivityReport from './hooks/useActivityReport';
 import ActivityReportSummary from './ActivityReportSummary';
 import ActivityReportTable from './ActivityReportTable';
 import ReportLayout from '../../components/ReportLayout';
+import i18n from '@/i18n';
 
 const ActivityReportContent = () => {
   const { data, loading, error } = useActivityReport();
@@ -25,7 +26,7 @@ const ActivityReportContent = () => {
 
       {loading && <AppLoader />}
 
-      {!loading && error && <div>خطا در دریافت اطلاعات گزارش فعالیت‌ها</div>}
+      {!loading && error && <div>{i18n.t('خطا در دریافت اطلاعات گزارش فعالیت‌ها')}</div>}
 
       {!loading && !error && data && (
         <>
